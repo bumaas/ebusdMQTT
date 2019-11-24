@@ -1,0 +1,14 @@
+{
+  "translations": {
+    "de": {
+      "Connection Data": "Verbindungseinstellungen",
+      "Host": "Host",
+      "Port": "Port",
+      "Update Interval": "Aktualisierungsintervall",
+      "Minutes": "Minuten",
+      "IP address can not be empty.": "IP Adresse darf nicht leer sein.",
+      "IP address is not valid.": "IP Adresse ist nicht gültig.",
+      "MQTT Topic is not valid.": "MQTT Topic ist nicht gültig."
+    }
+  }
+}

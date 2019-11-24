@@ -1,0 +1,12 @@
+{
+  "id":            "{DC92DD97-3918-7F7A-5E2A-C7D863CD1014}",
+  "author":        "bumaas",
+  "name":          "ebusd",
+  "compatibility": {
+    "version": "5.3"
+  },
+  "url":           "",
+  "version":       "0.1",
+  "build":         0,
+  "date":          0
+}

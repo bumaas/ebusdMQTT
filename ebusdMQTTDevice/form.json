@@ -1,0 +1,126 @@
+{
+  "elements": [
+    {
+      "type":  "ExpansionPanel", "caption": "Connection Data",
+      "items": [
+        {
+          "type":  "RowLayout",
+          "items": [
+            {"type": "ValidationTextBox", "name": "Host", "caption": "Host"},
+            {"type": "ValidationTextBox", "name": "Port", "caption": "Port"}
+          ]
+        },
+        {"type": "ValidationTextBox", "name": "MQTTTopic", "caption": "MQTT Topic"},
+        {"type": "NumberSpinner", "name": "UpdateInterval", "caption": "Update Interval", "suffix": "Minutes"}
+      ]
+    }
+  ],
+  "actions":  [
+    {
+      "type":    "List",
+      "name":    "VariableList",
+      "caption": "List of Variables",
+      "columns": [
+        {
+          "name":    "messagename",
+          "width":   "200px",
+          "caption": "MQTT Message",
+          "save":    true
+        },
+        {
+          "name":    "variablename",
+          "width":   "300px",
+          "caption": "Status Variable(s)",
+          "save":    true
+        },
+        {
+          "name":    "identname",
+          "width":   "200px",
+          "caption": "Column 3",
+          "visible": false,
+          "save":    true
+        },
+        {
+          "name":    "readable",
+          "width":   "75px",
+          "caption": "Readable",
+          "save":    true
+        },
+        {
+          "name":    "writable",
+          "width":   "75px",
+          "caption": "Writeable",
+          "save":    true
+        },
+        {
+          "name":    "value",
+          "width":   "auto",
+          "caption": "Value",
+          "save":    false
+        },
+        {
+          "name":    "keep",
+          "width":   "75px",
+          "caption": "Active",
+          "edit":    {
+            "type": "CheckBox"
+          }
+        },
+        {
+          "name":    "pollpriority",
+          "width":   "75px",
+          "caption": "Poll Priority",
+          "edit":    {
+            "type": "NumberSpinner",
+            "minimum": 0,
+            "maximum": 9
+          }
+        }
+      ]
+     },
+    {
+      "type":  "RowLayout",
+      "items": [
+        {
+          "type":    "Button",
+          "caption": "Read Configuration",
+          "onClick": "$module = new IPSModule($id); $ret = EBM_ReadConfiguration($id); if ($ret === null) {echo 'Fehler';} else {echo count($ret) . ' Einträge gefunden';}"
+        },
+        {
+          "type":    "Button",
+          "caption": "Read Values",
+          "onClick": "$module = new IPSModule($id); $ret = EBM_ReadCurrentValues($id); echo $ret . ' Werte gelesen';"
+        },
+        {
+          "type":    "Button",
+          "caption": "CreateVariables",
+          "onClick": "$module = new IPSModule($id); $ret = EBM_CreateVariables($id, $VariableList); echo $ret . ' Variablen angelegt/aktualisiert';"
+        }
+      ]
+    },
+    {
+      "type":    "ProgressBar",
+      "name":    "ProgressBar",
+      "caption": "ProgressBar",
+      "width":   "222px",
+      "visible": false
+    }
+  ],
+  "status":   [
+    {
+      "code":    202,
+      "icon":    "error",
+      "caption": "IP address can not be empty."
+    },
+    {
+      "code":    203,
+      "icon":    "error",
+      "caption": "MQTT Topic is not valid."
+    },
+    {
+      "code":    204,
+      "icon":    "error",
+      "caption": "IP address is not valid."
+    }
+  ]
+}
