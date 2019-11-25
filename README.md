@@ -15,7 +15,7 @@
    
 ## 1. Voraussetzungen
 
-* lauffähiger eBUS Daemon (ebusd) mit entsprechender Hardwareanbindung 
+* lauffähiger eBUS Daemon (ebusd (ab V3.4)) mit entsprechender Hardwareanbindung 
 * mindestens IPS Version 5.3
 * MQTT Server (IPS built-in Modul) 
 
@@ -38,42 +38,50 @@ uname -a
 Wichtig: es ist ein Paket mit **MQTT Support** zu wählen!
 
 Das passende Paket ist herunterzuladen, z.B.:
+```
 wget https://github.com/john30/ebusd/releases/download/v3.4/ebusd-3.4_armhf-jessie_mqtt1.deb
+```
 
 und zu installieren:
-sudo dpkg -i --force-overwrite ebusd-3.4_armhf-jessie_mqtt1.deb
+```
+sudo dpkg -i ebusd-3.4_armhf-jessie_mqtt1.deb
+```
+
 
 <br>
-Nach der Installation sind die folgenden Punkte zu erledigen:
+Nach der Installation erfolgt der folgende Hinweis:
 
+```
 1. Edit /etc/default/ebusd
    (especially if your device is not /dev/ttyUSB0)
 2. Start the daemon with 'systemctl start ebusd'
 3. Check the log file /var/log/ebusd.log
 4. Make the daemon autostart with 'systemctl enable ebusd'
+```
 
-zu 1.): Es empfiehlt sich, mit nur zwei Einstellungen zu beginnen:
+zu 1.): Es empfiehlt sich mit nur zwei Einstellungen zu beginnen:
+```
 EBUSD_OPTS="--device /dev/ttyebus --scanconfig"
+```
 
 Der erste Parameter besagt, wo der Buskoppler angeschlossen ist.
 Beispiele: 
-/dev/ttyebus (aufgesteckt und über ttyebus Treiber angesprochen)
-tcp:10.0.0.25:5000 (über Ethernet verbunden)
-
-Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll
+[LIST]
+[*]/dev/ttyebus (aufgesteckt und über ttyebus Treiber angesprochen)
+[*]tcp:10.0.0.25:5000 (über Ethernet verbunden)
+[LIST]
+Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
 
 zu 3.)
-Im Logfile muss erkennbar sein, dass er den Adapter gefunden hat und dass ein automatischer Scan durchgeführt wurde
+Im Logfile muss erkennbar sein, dass er den Adapter gefunden hat und dass ein automatischer Scan durchgeführt wurde.
 
 
 Wenn diese Dinge geschafft sind, ist im nächsten Schritt zu prüfen, ob ebusd die angeschlossenen eBUS Geräte findet.
 
-Das wird überprüft mit ebusctl i:
-
-Die der Ausgabe sind folgende Informationen wichtig:
+Das wird überprüft mit 'ebusctl i'. Hier ein Auszug:
 
 ```
-version: ebusd 3.3.v3.3
+version:  ebusd 3.4.v3.3-51-g57eae05
 signal: acquired
 address 03: master #11
 address 08: slave #11, scanned "MF=Vaillant;ID=**BAI**00;SW=0603;HW=9102", loaded "vaillant/bai.0010015600.inc" ([PROD='0010014917']), "vaillant/08.bai.csv"
