@@ -4,10 +4,10 @@
   "name":          "ebusd",
   "compatibility": {
     "version": "5.3",
-    "date": 1574380800
+    "date": 1574788209
   },
   "url":           "",
-  "version":       "0.1",
-  "build":         2,
+  "version":       "0.2",
+  "build":         1,
   "date":          0
 }

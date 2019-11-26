@@ -10,7 +10,7 @@
             {"type": "ValidationTextBox", "name": "Port", "caption": "Port"}
           ]
         },
-        {"type": "ValidationTextBox", "name": "MQTTTopic", "caption": "MQTT Topic"},
+        {"type": "ValidationTextBox", "name": "CircuitName", "caption": "Circuit Name"},
         {"type": "NumberSpinner", "name": "UpdateInterval", "caption": "Update Interval", "suffix": "Minutes"}
       ]
     }
@@ -93,7 +93,7 @@
         },
         {
           "type":    "Button",
-          "caption": "CreateVariables",
+          "caption": "Create/Update Variables",
           "onClick": "$module = new IPSModule($id); $ret = EBM_CreateVariables($id, $VariableList); echo $ret . ' Variablen angelegt/aktualisiert';"
         }
       ]
@@ -115,7 +115,7 @@
     {
       "code":    203,
       "icon":    "error",
-      "caption": "MQTT Topic is not valid."
+      "caption": "Circuit name is not valid."
     },
     {
       "code":    204,
