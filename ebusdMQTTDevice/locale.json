@@ -7,6 +7,7 @@
       "Circuit Name": "Schaltkreis Name",
       "Update Interval": "Aktualisierungsintervall",
       "Minutes": "Minuten",
+      "Configuration of the eBUS messages to be integrated as status variables": "Konfiguration der als Statusvariablen einzubindenen eBUS Meldungen",
       "IP address can not be empty.": "IP Adresse darf nicht leer sein.",
       "IP address is not valid.": "IP Adresse ist nicht gültig.",
       "Circuit name is not valid.": "Schaltkreis Name ist nicht gültig."

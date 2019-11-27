@@ -17,6 +17,10 @@
   ],
   "actions":  [
     {
+      "type":    "Label",
+      "caption": "Configuration of the eBUS messages to be integrated as status variables"
+    },
+    {
       "type":    "List",
       "name":    "VariableList",
       "caption": "List of Variables",
@@ -71,13 +75,13 @@
           "width":   "75px",
           "caption": "Poll Priority",
           "edit":    {
-            "type": "NumberSpinner",
+            "type":    "NumberSpinner",
             "minimum": 0,
             "maximum": 9
           }
         }
       ]
-     },
+    },
     {
       "type":  "RowLayout",
       "items": [
