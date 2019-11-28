@@ -18,17 +18,16 @@
   "actions":  [
     {
       "type":    "Label",
-      "caption": "Configuration of the eBUS messages to be integrated as status variables"
+      "caption": "Selection and configuration of the eBUS messages to be included as status variables"
     },
     {
       "type":    "List",
       "name":    "VariableList",
-      "caption": "List of Variables",
       "columns": [
         {
           "name":    "messagename",
           "width":   "200px",
-          "caption": "MQTT Message",
+          "caption": "Message",
           "save":    true
         },
         {
@@ -40,7 +39,7 @@
         {
           "name":    "identname",
           "width":   "200px",
-          "caption": "Column 3",
+          "caption": "Ident",
           "visible": false,
           "save":    true
         },
@@ -59,7 +58,7 @@
         {
           "name":    "value",
           "width":   "auto",
-          "caption": "Value",
+          "caption": "read value",
           "save":    false
         },
         {
@@ -72,10 +71,11 @@
         },
         {
           "name":    "pollpriority",
-          "width":   "75px",
+          "width":   "90px",
           "caption": "Poll Priority",
           "edit":    {
             "type":    "NumberSpinner",
+            "value":   0,
             "minimum": 0,
             "maximum": 9
           }
@@ -93,12 +93,12 @@
         {
           "type":    "Button",
           "caption": "Read Values",
-          "onClick": "$module = new IPSModule($id); $ret = EBM_ReadCurrentValues($id); echo $ret . ' Werte gelesen';"
+          "onClick": "$module = new IPSModule($id); $ret = EBM_UpdateCurrentValues($id, $VariableList); echo $ret . ' Werte gelesen';"
         },
         {
           "type":    "Button",
           "caption": "Create/Update Variables",
-          "onClick": "$module = new IPSModule($id); $ret = EBM_CreateVariables($id, $VariableList); echo $ret . ' Variablen angelegt/aktualisiert';"
+          "onClick": "$module = new IPSModule($id); $ret = EBM_CreateAndUpdateVariables($id, $VariableList); echo $ret . ' Variablen angelegt/aktualisiert';"
         }
       ]
     },

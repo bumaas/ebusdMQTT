@@ -15,6 +15,8 @@ Es gibt zahlreiche Wege, ebusd zu installieren. Da die Installation nicht ganz t
 
 Je nach eingesetzter Hardware und installiertem Betriebssystem ist das passende Packet von der Seite [ebusd releases](https://github.com/john30/ebusd/releases) zu installieren.
 
+Hinweis: für Debian 10 ("Buster") ist das Paket für Debian 9 ("Stretch) gültig.
+
 Tipp: die Hardware und die OS Version findet man heraus mit 
 cat /etc/os-release
 und
@@ -22,14 +24,26 @@ uname -a
 
 Wichtig: es ist ein Paket mit **MQTT Support** zu wählen!
 
-Wenn das passende Paket (z.B. ebusd-3.4_armhf-jessie_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren:
+Wenn das passende Paket (z.B. ebusd-3.4_armhf-jessie_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren.:
 ```
 wget https://github.com/john30/ebusd/releases/download/v3.4/ebusd-3.4_armhf-jessie_mqtt1.deb
 ```
 ```
 sudo dpkg -i ebusd-3.4_armhf-jessie_mqtt1.deb
 ```
+Falls es bei der Installation des ebusd Paketes zu einer Fehlermeldung kommen sollte wie:
 
+```
+dpkg: Abhängigkeitsprobleme verhindern Konfiguration von ebusd:
+ebusd hängt ab von libmosquitto1; aber:
+Paket libmosquitto1 ist nicht installiert.
+```
+
+Dann ist vorab die passende libmosquitto[0/1] zu installieren:
+```
+sudo apt-get update
+sudo apt-get install libmosquitto1
+```
 
 ## 2. Abschluss der Installation
 
