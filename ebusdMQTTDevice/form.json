@@ -87,16 +87,19 @@
       "items": [
         {
           "type":    "Button",
+          "name":    "BtnReadConfiguration",
           "caption": "Read Configuration",
           "onClick": "$module = new IPSModule($id); $ret = EBM_ReadConfiguration($id); if ($ret === null) {echo 'Fehler';} else {echo count($ret) . ' Einträge gefunden';}"
         },
         {
           "type":    "Button",
+          "name":    "BtnReadValues",
           "caption": "Read Values",
           "onClick": "$module = new IPSModule($id); $ret = EBM_UpdateCurrentValues($id, $VariableList); echo $ret . ' Werte gelesen';"
         },
         {
           "type":    "Button",
+          "name":    "BtnCreateUpdateVariables",
           "caption": "Create/Update Variables",
           "onClick": "$module = new IPSModule($id); $ret = EBM_CreateAndUpdateVariables($id, $VariableList); echo $ret . ' Variablen angelegt/aktualisiert';"
         }

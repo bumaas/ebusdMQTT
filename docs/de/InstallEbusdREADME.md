@@ -59,14 +59,14 @@ Zum Abschluss der Installation erfolgen folgende Hinweise, die auszuführen sind
 
 zu 1.) Es empfiehlt sich mit nur drei Einstellungen zu beginnen:
 ```
-EBUSD_OPTS="--device /dev/ttyebus --scanconfig --configpath=http://ebusd.eu/config/"
+EBUSD_OPTS="--device=/dev/ttyebus --scanconfig --configpath=http://ebusd.eu/config/"
 ```
 
 Der erste Parameter besagt, wo der Buskoppler angeschlossen ist.
 Beispiele: 
 
-- /dev/ttyebus (aufgesteckt und über ttyebus Treiber angesprochen)
-- tcp:10.0.0.25:5000 (über Ethernet verbunden)
+- --device=/dev/ttyebus (aufgesteckt und über ttyebus Treiber angesprochen)
+- --device=192.168.2.20:5000 (über Ethernet und TCP verbunden)
 
 Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
 

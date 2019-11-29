@@ -54,7 +54,8 @@ Adresse unter der der ebusd Dienst erreichbar ist. Hierbei kann es sich um eine 
 Portnummer auf dem der ebusd Dienst http-Anfragen entgegennimmt.
 
 - Schaltkreis Name:<br>
-Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit').
+Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit'). Beispiele sind 'bai', '700' etc.
+**todo: "Wie ermittele ich den Schaltkreisnamen?"**
 
 - Aktualisierungsintervall:<br>
 Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
