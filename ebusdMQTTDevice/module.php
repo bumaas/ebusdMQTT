@@ -30,7 +30,6 @@ class ebusdMQTTDevice extends IPSModule
 
     // die von ebusd unterstützen Datentypen
     //siehe https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types
-    //die Liste ist noch nicht vollständig! :todo
 
     private const DataTypes = [
         // VARIABLETYPE_BOOLEAN
@@ -44,7 +43,9 @@ class ebusdMQTTDevice extends IPSModule
         'BI7'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
         // VARIABLETYPE_INTEGER
         'BDY'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 7, 'StepSize' => 1],
+        'HDY'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 7, 'StepSize' => 1],
         'BCD'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99, 'StepSize' => 1],
+        'BCD:2' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
         'BCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
         'BCD:4' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
         'HCD'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
@@ -52,32 +53,48 @@ class ebusdMQTTDevice extends IPSModule
         'HCD:2' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
         'HCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
         'PIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
+        'UCH'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 256, 'StepSize' => 1],
         'SCH'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -127, 'MaxValue' => 127, 'StepSize' => 1],
         'D1B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -127, 'MaxValue' => 127, 'StepSize' => 1],
         'UIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65534, 'StepSize' => 1],
         'UIR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65534, 'StepSize' => 1],
         'SIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 32767, 'StepSize' => 1],
+        'SIR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 32767, 'StepSize' => 1],
+        'U3N'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 16777214, 'StepSize' => 1],
+        'U3R'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 16777214, 'StepSize' => 1],
+        'S3N'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -8388607, 'MaxValue' => 8388607, 'StepSize' => 1],
+        'S3R'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -8388607, 'MaxValue' => 8388607, 'StepSize' => 1],
         'ULG'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967294 ist zu groß
+        'ULR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967294 ist zu groß
+        'SLG'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2147483647, 'MaxValue' => 2147483647, 'StepSize' => 1],
+        'SLR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2147483647, 'MaxValue' => 2147483647, 'StepSize' => 1],
         // VARIABLETYPE_FLOAT
         'D1C'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => 0, 'MaxValue' => 100, 'StepSize' => 0.5, 'Digits' => 1],
         'D2B'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -127.99, 'MaxValue' => 127.99, 'StepSize' => 0.01, 'Digits' => 2],
         'D2C'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -2047.9, 'MaxValue' => 2047.9, 'StepSize' => 0.1, 'Digits' => 1],
         'FLT'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -32.767, 'MaxValue' => 32.767, 'StepSize' => 0.001, 'Digits' => 3],
+        'FLR'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -32.767, 'MaxValue' => 32.767, 'StepSize' => 0.001, 'Digits' => 3],
         'EXP'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -3.0e38, 'MaxValue' => 3.0e38, 'StepSize' => 0.001, 'Digits' => 3],
+        'EXR'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -3.0e38, 'MaxValue' => 3.0e38, 'StepSize' => 0.001, 'Digits' => 3],
         // VARIABLETYPE_STRING
         'STR'   => ['VariableType' => VARIABLETYPE_STRING],
+        'NTS'   => ['VariableType' => VARIABLETYPE_STRING],
         'HEX'   => ['VariableType' => VARIABLETYPE_STRING],
         'BDA'   => ['VariableType' => VARIABLETYPE_STRING],
+        'BDA:3'   => ['VariableType' => VARIABLETYPE_STRING],
         'HDA'   => ['VariableType' => VARIABLETYPE_STRING],
         'HDA:3' => ['VariableType' => VARIABLETYPE_STRING],
+        'DAY'   => ['VariableType' => VARIABLETYPE_STRING],
         'BTI'   => ['VariableType' => VARIABLETYPE_STRING],
         'HTI'   => ['VariableType' => VARIABLETYPE_STRING],
         'VTI'   => ['VariableType' => VARIABLETYPE_STRING],
+        'BTM'   => ['VariableType' => VARIABLETYPE_STRING],
         'HTM'   => ['VariableType' => VARIABLETYPE_STRING],
         'VTM'   => ['VariableType' => VARIABLETYPE_STRING],
         'MIN'   => ['VariableType' => VARIABLETYPE_STRING],
         'TTM'   => ['VariableType' => VARIABLETYPE_STRING],
-        'TTH'   => ['VariableType' => VARIABLETYPE_STRING]
+        'TTH'   => ['VariableType' => VARIABLETYPE_STRING],
+        'TTQ'   => ['VariableType' => VARIABLETYPE_STRING]
     ];
 
     //ok-Zeichen für die Auswahlliste
@@ -140,7 +157,19 @@ class ebusdMQTTDevice extends IPSModule
         //prüfen, ob Payload gefüllt ist
         $this->SendDebug('MQTT Topic/Payload', sprintf('Topic: %s -- Payload: %s', $Buffer->Topic, $Buffer->Payload), 0);
 
-        $Payload = json_decode($Buffer->Payload, true, 512, JSON_THROW_ON_ERROR);
+        /** @noinspection JsonEncodingApiUsageInspection */
+        $Payload = json_decode($Buffer->Payload, true);
+
+        /* ebusd schickt LF im json String!
+        try {
+            //$Buffer->Payload = str_replace("\n", '', $Buffer->Payload);
+            $Payload = json_decode($Buffer->Payload, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e){
+            $this->SendDebug(__FUNCTION__, 'json_decode failed: ' .  $Buffer->Payload, 0);
+            $Payload = json_decode($Buffer->Payload);
+        }
+        */
+
         if (($Payload === false) || ($Payload === null)) {
             return;
         }
@@ -204,7 +233,8 @@ class ebusdMQTTDevice extends IPSModule
     {
         $Form                                      = json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
         $Form['actions'][1]['values']              = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
-        $Form['actions'][1]['enabled']             = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][1]['columns'][6]['edit']['enabled']             = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][1]['columns'][7]['edit']['enabled']             = ($this->GetStatus() === IS_ACTIVE);
         $Form['actions'][2]['items'][0]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
         $Form['actions'][2]['items'][1]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
         $Form['actions'][2]['items'][2]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
