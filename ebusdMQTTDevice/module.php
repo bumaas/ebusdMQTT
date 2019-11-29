@@ -34,35 +34,50 @@ class ebusdMQTTDevice extends IPSModule
 
     private const DataTypes = [
         // VARIABLETYPE_BOOLEAN
-        'BI0' => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI1' => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI2' => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI3' => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI4' => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI5' => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI6' => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI7' => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI0'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI1'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI2'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI3'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI4'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI5'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI6'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
+        'BI7'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
         // VARIABLETYPE_INTEGER
-        'UCH' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 254, 'StepSize' => 1],
-        'UIN' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65534, 'StepSize' => 1],
-        'SIN' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 32767, 'StepSize' => 1],
-        'ULG' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967294 ist zu groß
+        'BDY'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 7, 'StepSize' => 1],
+        'BCD'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99, 'StepSize' => 1],
+        'BCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
+        'BCD:4' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
+        'HCD'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
+        'HCD:1' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99, 'StepSize' => 1],
+        'HCD:2' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
+        'HCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
+        'PIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
+        'SCH'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -127, 'MaxValue' => 127, 'StepSize' => 1],
+        'D1B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -127, 'MaxValue' => 127, 'StepSize' => 1],
+        'UIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65534, 'StepSize' => 1],
+        'UIR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65534, 'StepSize' => 1],
+        'SIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 32767, 'StepSize' => 1],
+        'ULG'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967294 ist zu groß
         // VARIABLETYPE_FLOAT
-        'D1C' => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => 0, 'MaxValue' => 100, 'StepSize' => 0.5, 'Digits' => 1],
-        'D2B' => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -127.99, 'MaxValue' => 127.99, 'StepSize' => 0.01, 'Digits' => 2],
-        'D2C' => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -2047.9, 'MaxValue' => 2047.9, 'StepSize' => 0.1, 'Digits' => 1],
-        'FLT' => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -32.767, 'MaxValue' => 32.767, 'StepSize' => 0.001, 'Digits' => 3],
-        'EXP' => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -3.0e38, 'MaxValue' => 3.0e38, 'StepSize' => 0.001, 'Digits' => 3],
+        'D1C'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => 0, 'MaxValue' => 100, 'StepSize' => 0.5, 'Digits' => 1],
+        'D2B'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -127.99, 'MaxValue' => 127.99, 'StepSize' => 0.01, 'Digits' => 2],
+        'D2C'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -2047.9, 'MaxValue' => 2047.9, 'StepSize' => 0.1, 'Digits' => 1],
+        'FLT'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -32.767, 'MaxValue' => 32.767, 'StepSize' => 0.001, 'Digits' => 3],
+        'EXP'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -3.0e38, 'MaxValue' => 3.0e38, 'StepSize' => 0.001, 'Digits' => 3],
         // VARIABLETYPE_STRING
-        'STR' => ['VariableType' => VARIABLETYPE_STRING],
-        'HEX' => ['VariableType' => VARIABLETYPE_STRING],
-        'BDA' => ['VariableType' => VARIABLETYPE_STRING],
-        'HDA' => ['VariableType' => VARIABLETYPE_STRING],
-        'BTI' => ['VariableType' => VARIABLETYPE_STRING],
-        'HTI' => ['VariableType' => VARIABLETYPE_STRING],
-        'VTI' => ['VariableType' => VARIABLETYPE_STRING],
-        'VTM' => ['VariableType' => VARIABLETYPE_STRING],
-        'TTM' => ['VariableType' => VARIABLETYPE_STRING]
+        'STR'   => ['VariableType' => VARIABLETYPE_STRING],
+        'HEX'   => ['VariableType' => VARIABLETYPE_STRING],
+        'BDA'   => ['VariableType' => VARIABLETYPE_STRING],
+        'HDA'   => ['VariableType' => VARIABLETYPE_STRING],
+        'HDA:3' => ['VariableType' => VARIABLETYPE_STRING],
+        'BTI'   => ['VariableType' => VARIABLETYPE_STRING],
+        'HTI'   => ['VariableType' => VARIABLETYPE_STRING],
+        'VTI'   => ['VariableType' => VARIABLETYPE_STRING],
+        'HTM'   => ['VariableType' => VARIABLETYPE_STRING],
+        'VTM'   => ['VariableType' => VARIABLETYPE_STRING],
+        'MIN'   => ['VariableType' => VARIABLETYPE_STRING],
+        'TTM'   => ['VariableType' => VARIABLETYPE_STRING],
+        'TTH'   => ['VariableType' => VARIABLETYPE_STRING]
     ];
 
     //ok-Zeichen für die Auswahlliste
@@ -187,9 +202,9 @@ class ebusdMQTTDevice extends IPSModule
 
     public function GetConfigurationForm()
     {
-        $Form                         = json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
-        $Form['actions'][1]['values'] = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
-        $Form['actions'][1]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
+        $Form                                      = json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
+        $Form['actions'][1]['values']              = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
+        $Form['actions'][1]['enabled']             = ($this->GetStatus() === IS_ACTIVE);
         $Form['actions'][2]['items'][0]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
         $Form['actions'][2]['items'][1]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
         $Form['actions'][2]['items'][2]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
@@ -220,7 +235,7 @@ class ebusdMQTTDevice extends IPSModule
         return parent::SetValue($Ident, $Value);
     }
 
-    protected function SetStatus($Status):bool
+    protected function SetStatus($Status): bool
     {
         $this->UpdateFormField('BtnReadConfiguration', 'enabled', $Status === IS_ACTIVE);
         $this->UpdateFormField('BtnReadValues', 'enabled', $Status === IS_ACTIVE);
@@ -682,8 +697,11 @@ class ebusdMQTTDevice extends IPSModule
             if ($this->trace) {
                 $this->SendDebug(
                     __FUNCTION__,
-                    sprintf('Message: %s, Field: %s: %s', $configurationMessage['name'], $fielddefkey,
-                            json_encode($fielddef, JSON_THROW_ON_ERROR)
+                    sprintf(
+                        'Message: %s, Field: %s: %s',
+                        $configurationMessage['name'],
+                        $fielddefkey,
+                        json_encode($fielddef, JSON_THROW_ON_ERROR)
                     ),
                     0
                 );
