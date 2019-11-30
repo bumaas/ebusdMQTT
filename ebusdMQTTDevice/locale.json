@@ -5,6 +5,7 @@
       "Host": "Host",
       "Port": "Port",
       "Circuit Name": "Schaltkreis Name",
+      "Read Circuits": "Ermittle Schaltkreis Namen",
       "Update Interval": "Aktualisierungsintervall",
       "Minutes": "Minuten",
       "Selection and configuration of the eBUS messages to be included as status variables": "Auswahl und Konfiguration der als Statusvariablen einzubindenen eBUS Meldungen",

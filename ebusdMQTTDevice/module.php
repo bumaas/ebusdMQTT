@@ -22,6 +22,7 @@ class ebusdMQTTDevice extends IPSModule
     private const ATTR_EBUSD_CONFIGURATION_MESSAGES = 'ebusdConfigurationMessages';
     private const ATTR_VARIABLELIST                 = 'VariableList';
     private const ATTR_POLLPRIORITIES               = 'PollPriorities';
+    private const ATTR_CIRCUITOPTIONLIST            = 'CircuitOptionList';
 
     //timer names
     private const TIMER_REFRESH_ALL_MESSAGES = 'refreshAllMessages';
@@ -116,6 +117,7 @@ class ebusdMQTTDevice extends IPSModule
 
         $this->RegisterAttributeString(self::ATTR_VARIABLELIST, json_encode([], JSON_THROW_ON_ERROR));
         $this->RegisterAttributeString(self::ATTR_POLLPRIORITIES, json_encode([], JSON_THROW_ON_ERROR));
+        $this->RegisterAttributeString(self::ATTR_CIRCUITOPTIONLIST, json_encode([], JSON_THROW_ON_ERROR));
         $this->RegisterAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES, json_encode([], JSON_THROW_ON_ERROR));
 
         $this->RegisterTimer(self::TIMER_REFRESH_ALL_MESSAGES, 0, 'EBM_refreshAllMessages(' . $this->InstanceID . ');');
@@ -143,7 +145,7 @@ class ebusdMQTTDevice extends IPSModule
         $this->SendDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)), 0);
 
         switch ($Ident) {
-            case 'ident':
+            case 'btnReadCircuits':
                 $this->setCircuitOptions();
                 return;
         }
@@ -247,14 +249,17 @@ class ebusdMQTTDevice extends IPSModule
 
     public function GetConfigurationForm()
     {
-        $Form                                                = json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
-        $Form['actions'][1]['values']                        =
+        $Form                                                   =
+            json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
+        $Form['elements'][0]['items'][1]['items'][0]['options'] =
+            json_decode($this->ReadAttributeString(self::ATTR_CIRCUITOPTIONLIST), true, 3, JSON_THROW_ON_ERROR);
+        $Form['actions'][1]['values']                           =
             json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
-        $Form['actions'][1]['columns'][6]['edit']['enabled'] = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][1]['columns'][7]['edit']['enabled'] = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][0]['enabled']           = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][1]['enabled']           = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][2]['enabled']           = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][1]['columns'][6]['edit']['enabled']    = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][1]['columns'][7]['edit']['enabled']    = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][2]['items'][0]['enabled']              = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][2]['items'][1]['enabled']              = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][2]['items'][2]['enabled']              = ($this->GetStatus() === IS_ACTIVE);
 
         // if ($this->trace) {
         $this->SendDebug(__FUNCTION__, json_encode($Form['actions'][1]['values'], JSON_THROW_ON_ERROR), 0);
@@ -418,9 +423,9 @@ class ebusdMQTTDevice extends IPSModule
         return $ret;
     }
 
-    private function setCircuitOptions()
+    private function setCircuitOptions(): void
     {
-        $url    = sprintf(
+        $url = sprintf(
             'http://%s:%s/data',
             $this->ReadPropertyString(self::PROP_HOST),
             $this->ReadPropertyString(self::PROP_PORT)
@@ -428,16 +433,21 @@ class ebusdMQTTDevice extends IPSModule
 
         $result = $this->readURL($url);
 
-        $circuitNames = '';
-        foreach ($result as $circuitname=>$circuit){
-            if (!in_array($circuitname, ['global', 'broadcast']) && strpos((string) $circuitname, 'scan.')!== 0){
-                $circuitNames .=  $circuitname . PHP_EOL;
+        if ($result === null) {
+            return;
+        }
+
+        $options = [];
+
+        foreach ($result as $circuitname => $circuit) {
+            if (!in_array($circuitname, ['global', 'broadcast']) && strpos((string)$circuitname, 'scan.') !== 0) {
+                $options[] = ['caption' => $circuitname, 'value' => (string)$circuitname];
             }
         }
-        if ($circuitNames){
-            echo PHP_EOL . $circuitNames . PHP_EOL;
 
-        }
+        $optionVaulue = json_encode($options, JSON_THROW_ON_ERROR);
+        $this->UpdateFormField(self::PROP_CIRCUITNAME, 'options', $optionVaulue);
+        $this->WriteAttributeString(self::ATTR_CIRCUITOPTIONLIST, $optionVaulue);
     }
 
     private function getPollPriorities(array $variableList): array
