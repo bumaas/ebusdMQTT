@@ -76,6 +76,10 @@ Der dritte Parameter beinhaltet den Pfad zu den Konfigurationsdeteien.
 zu 3.)
 Im Logfile muss erkennbar sein, dass der Adapter gefunden wurde und dass ein automatischer Scan durchgeführt wurde. Wenn es beim Scan zu Timeouts kommt, kann versucht werden, mit der zusätzlichen Option --receivetimeout=100000 das Limit zu erhöhen. 
 
+Tipp: wenn der Dienst neu gestartet werden soll, geht das am einfachsten über
+```
+sudo systemctl restart ebusd
+```
 ### 3. Überprüfung der Konfiguration
 Wenn diese Dinge geschafft sind, ist im nächsten Schritt zu prüfen, ob ebusd die angeschlossenen eBUS Geräte korrekt findet.
 

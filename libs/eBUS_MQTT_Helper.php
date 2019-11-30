@@ -5,16 +5,6 @@ define('MQTT_GROUP_TOPIC', 'ebusd');
 
 trait ebusd2MQTTHelper
 {
-    public function RequestAction($Ident, $Value)
-    {
-        $this->SendDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value)), 0);
-
-        $message = $Ident;
-
-        $topic   = sprintf('%s/%s/%s/set', MQTT_GROUP_TOPIC, $this->ReadPropertyString(self::PROP_MQTTTOPIC), $Ident);
-        $payload = $this->getPayload($message, $Value);
-        $this->publish($topic, $payload);
-    }
 
     public function publish(string $topic, string $payload)
     {

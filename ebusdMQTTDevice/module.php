@@ -81,7 +81,7 @@ class ebusdMQTTDevice extends IPSModule
         'NTS'   => ['VariableType' => VARIABLETYPE_STRING],
         'HEX'   => ['VariableType' => VARIABLETYPE_STRING],
         'BDA'   => ['VariableType' => VARIABLETYPE_STRING],
-        'BDA:3'   => ['VariableType' => VARIABLETYPE_STRING],
+        'BDA:3' => ['VariableType' => VARIABLETYPE_STRING],
         'HDA'   => ['VariableType' => VARIABLETYPE_STRING],
         'HDA:3' => ['VariableType' => VARIABLETYPE_STRING],
         'DAY'   => ['VariableType' => VARIABLETYPE_STRING],
@@ -136,6 +136,22 @@ class ebusdMQTTDevice extends IPSModule
         $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000);
 
         $this->SetInstanceStatus();
+    }
+
+    public function RequestAction($Ident, $Value)
+    {
+        $this->SendDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)), 0);
+
+        switch ($Ident) {
+            case 'ident':
+                $this->setCircuitOptions();
+                return;
+        }
+        $message = $Ident;
+
+        $topic   = sprintf('%s/%s/%s/set', MQTT_GROUP_TOPIC, $this->ReadPropertyString(self::PROP_CIRCUITNAME), $Ident);
+        $payload = $this->getPayload($message, $Value);
+        $this->publish($topic, $payload);
     }
 
     public function ReceiveData($JSONString)
@@ -231,13 +247,14 @@ class ebusdMQTTDevice extends IPSModule
 
     public function GetConfigurationForm()
     {
-        $Form                                      = json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
-        $Form['actions'][1]['values']              = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
-        $Form['actions'][1]['columns'][6]['edit']['enabled']             = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][1]['columns'][7]['edit']['enabled']             = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][0]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][1]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][2]['enabled'] = ($this->GetStatus() === IS_ACTIVE);
+        $Form                                                = json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
+        $Form['actions'][1]['values']                        =
+            json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
+        $Form['actions'][1]['columns'][6]['edit']['enabled'] = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][1]['columns'][7]['edit']['enabled'] = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][2]['items'][0]['enabled']           = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][2]['items'][1]['enabled']           = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][2]['items'][2]['enabled']           = ($this->GetStatus() === IS_ACTIVE);
 
         // if ($this->trace) {
         $this->SendDebug(__FUNCTION__, json_encode($Form['actions'][1]['values'], JSON_THROW_ON_ERROR), 0);
@@ -401,6 +418,28 @@ class ebusdMQTTDevice extends IPSModule
         return $ret;
     }
 
+    private function setCircuitOptions()
+    {
+        $url    = sprintf(
+            'http://%s:%s/data',
+            $this->ReadPropertyString(self::PROP_HOST),
+            $this->ReadPropertyString(self::PROP_PORT)
+        );
+
+        $result = $this->readURL($url);
+
+        $circuitNames = '';
+        foreach ($result as $circuitname=>$circuit){
+            if (!in_array($circuitname, ['global', 'broadcast']) && strpos((string) $circuitname, 'scan.')!== 0){
+                $circuitNames .=  $circuitname . PHP_EOL;
+            }
+        }
+        if ($circuitNames){
+            echo PHP_EOL . $circuitNames . PHP_EOL;
+
+        }
+    }
+
     private function getPollPriorities(array $variableList): array
     {
         $ret = [];
@@ -541,8 +580,9 @@ class ebusdMQTTDevice extends IPSModule
 
         //wenn die Meldung kommentiert ist, aber aus mehreren Einträgen besteht
         if (!empty($message['comment'])) {
-            $labels = explode('/', $message['comment']);
-            if (count($labels) > 1) {
+            $labels      = explode('/', $message['comment']);
+            $countLabels = count($labels);
+            if (($countLabels > 1) && ($fieldId < $countLabels)) {
                 return $labels[$fieldId];
             }
         }

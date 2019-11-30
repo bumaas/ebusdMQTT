@@ -6,11 +6,26 @@
         {
           "type":  "RowLayout",
           "items": [
-            {"type": "ValidationTextBox", "name": "Host", "caption": "Host"},
+            {"type": "ValidationTextBox", "name": "Host", "caption": "Host", "onChange": "echo 'change';"},
             {"type": "ValidationTextBox", "name": "Port", "caption": "Port"}
           ]
         },
-        {"type": "ValidationTextBox", "name": "CircuitName", "caption": "Circuit Name"},
+        {
+          "type":  "RowLayout",
+          "items": [
+            {"type": "ValidationTextBox", "name": "CircuitName", "caption": "Circuit Name"},
+            {"type": "Button", "name": "btn", "caption": "Read Circuits", "onClick": "IPS_RequestAction($id, 'ident', 'value');"}
+          ]
+        },
+        {
+          "type":    "Select", "name": "CircuitName2", "caption": "Circuit Name", "visible": false,
+          "options": [
+            {"caption": "Bit (1Bit)", "value": 0},
+            {"caption": "Bits (2Bit)", "value": 1},
+            {"caption": "Bits (4Bit)", "value": 2},
+            {"caption": "Byte (8Bit)", "value": 3}
+          ]
+        },
         {"type": "NumberSpinner", "name": "UpdateInterval", "caption": "Update Interval", "suffix": "Minutes"}
       ]
     }
