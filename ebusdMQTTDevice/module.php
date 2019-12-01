@@ -103,6 +103,7 @@ class ebusdMQTTDevice extends IPSModule
 
     //global
     private const MODEL_GLOBAL_NAME = 'global';
+    private const EMPTY_OPTION_VALUE = ['caption'=>'-', 'value'=>''];
 
     public function Create()
     {
@@ -117,7 +118,7 @@ class ebusdMQTTDevice extends IPSModule
 
         $this->RegisterAttributeString(self::ATTR_VARIABLELIST, json_encode([], JSON_THROW_ON_ERROR));
         $this->RegisterAttributeString(self::ATTR_POLLPRIORITIES, json_encode([], JSON_THROW_ON_ERROR));
-        $this->RegisterAttributeString(self::ATTR_CIRCUITOPTIONLIST, json_encode([], JSON_THROW_ON_ERROR));
+        $this->RegisterAttributeString(self::ATTR_CIRCUITOPTIONLIST, json_encode([self::EMPTY_OPTION_VALUE], JSON_THROW_ON_ERROR));
         $this->RegisterAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES, json_encode([], JSON_THROW_ON_ERROR));
 
         $this->RegisterTimer(self::TIMER_REFRESH_ALL_MESSAGES, 0, 'EBM_refreshAllMessages(' . $this->InstanceID . ');');
@@ -433,11 +434,11 @@ class ebusdMQTTDevice extends IPSModule
 
         $result = $this->readURL($url);
 
-        if ($result === null) {
-            return;
-        }
+        if ($result === null) { //z.B. wenn Verbindungsdaten falsch oder leer
+            $result = [];
+;        }
 
-        $options = [];
+        $options = [self::EMPTY_OPTION_VALUE];
 
         foreach ($result as $circuitname => $circuit) {
             if (!in_array($circuitname, ['global', 'broadcast']) && strpos((string)$circuitname, 'scan.') !== 0) {

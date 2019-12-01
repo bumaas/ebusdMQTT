@@ -59,8 +59,8 @@ Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit
 
 - Aktualisierungsintervall:<br>
 Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
-
 Wenn die Einstellungen geändert werden, müssen sie erst gespeichert werden, bevor im Konfigurationsbereich die Konfiguration gelesen und die Statusvariablen angelegt werden können.
+**todo: "Optimale Polleinstellungen/Maximallast Bus. Bedeutung Intervall? Für Werte lesen muss der Wert <> 0 sein"**
 
 
 
