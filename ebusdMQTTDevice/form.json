@@ -48,7 +48,7 @@
           "name":    "identnames",
           "width":   "200px",
           "caption": "Ident",
-          "visible": true,
+          "visible": false,
           "save":    false
         },
         {
