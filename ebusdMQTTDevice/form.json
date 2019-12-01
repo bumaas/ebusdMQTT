@@ -14,7 +14,7 @@
           "type":  "RowLayout",
           "items": [
             {
-              "type":    "Select", "name": "CircuitName", "caption": "Circuit Name", "visible": true, "options": []
+              "type": "Select", "name": "CircuitName", "caption": "Circuit Name", "visible": true, "options": []
             },
             {"type": "Button", "name": "btnReadCircuits", "caption": "Read Circuits", "onClick": "IPS_RequestAction($id, 'btnReadCircuits', '');"}
           ]
@@ -36,32 +36,32 @@
           "name":    "messagename",
           "width":   "200px",
           "caption": "Message",
-          "save":    true
+          "save":    false
         },
         {
           "name":    "variablename",
           "width":   "300px",
           "caption": "Status Variable(s)",
-          "save":    true
+          "save":    false
         },
         {
-          "name":    "identname",
+          "name":    "identnames",
           "width":   "200px",
           "caption": "Ident",
-          "visible": false,
-          "save":    true
+          "visible": true,
+          "save":    false
         },
         {
           "name":    "readable",
           "width":   "75px",
           "caption": "Readable",
-          "save":    true
+          "save":    false
         },
         {
           "name":    "writable",
           "width":   "75px",
           "caption": "Writeable",
-          "save":    true
+          "save":    false
         },
         {
           "name":    "value",
@@ -73,6 +73,7 @@
           "name":    "keep",
           "width":   "75px",
           "caption": "Active",
+          "save":    false,
           "edit":    {
             "type": "CheckBox"
           }
@@ -81,12 +82,19 @@
           "name":    "pollpriority",
           "width":   "90px",
           "caption": "Poll Priority",
+          "save":    false,
           "edit":    {
             "type":    "NumberSpinner",
             "value":   0,
             "minimum": 0,
             "maximum": 9
           }
+        },
+        {
+          "name":    "objectid",
+          "width":   "200px",
+          "caption": "ID(s)",
+          "save":    false
         }
       ]
     },
