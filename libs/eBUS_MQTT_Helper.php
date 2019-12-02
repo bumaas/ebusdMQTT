@@ -6,18 +6,11 @@ define('MQTT_GROUP_TOPIC', 'ebusd');
 trait ebusd2MQTTHelper
 {
 
-    public function publish(string $topic, string $payload)
+    protected function GetParent($instanceID)
     {
-        $Data['DataID']           = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
-        $Data['PacketType']       = 3;
-        $Data['QualityOfService'] = 0;
-        $Data['Retain']           = false;
-        $Data['Topic']            = $topic;
-        $Data['Payload']          = $payload;
+        $instance = IPS_GetInstance($instanceID);
 
-        $DataJSON = json_encode($Data, JSON_UNESCAPED_SLASHES);
-        $ret      = $this->SendDataToParent($DataJSON);
-        $this->SendDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret), 0);
+        return ($instance['ConnectionID'] > 0) ? $instance['ConnectionID'] : 0;
     }
 
     protected function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize): bool
