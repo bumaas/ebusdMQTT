@@ -17,10 +17,10 @@ Je nach eingesetzter Hardware und installiertem Betriebssystem ist das passende 
 
 Hinweis: für Debian 10 ("Buster") ist das Paket für Debian 9 ("Stretch) gültig.
 
-Tipp: die Hardware und die OS Version findet man heraus mit 
-cat /etc/os-release
+Tipp: die Architektur (amd64, armhf oder i386) und die OS Version findet man heraus mit 
+dpkg --print-architecture
 und
-uname -a
+cat /etc/os-release
 
 Wichtig: es ist ein Paket mit **MQTT Support** zu wählen!
 

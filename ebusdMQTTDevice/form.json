@@ -105,7 +105,7 @@
           "type":    "Button",
           "name":    "BtnReadConfiguration",
           "caption": "Read Configuration",
-          "onClick": "$module = new IPSModule($id); $ret = EBM_ReadConfiguration($id); if ($ret === null) {echo 'Fehler';} else {echo count($ret) . ' Einträge gefunden';}"
+          "onClick": "IPS_RequestAction($id, 'btnReadConfiguration', '');"
         },
         {
           "type":    "Button",
@@ -127,6 +127,25 @@
       "caption": "ProgressBar",
       "width":   "222px",
       "visible": false
+    },
+    {
+      "name": "MsgBox",
+      "type": "PopupAlert",
+      "visible": false,
+      "popup": {
+        "items": [
+          {
+            "name": "MsgTitle",
+            "type": "Label",
+            "caption": ""
+          },
+          {
+            "name": "MsgText",
+            "type": "Label",
+            "caption": ""
+          }
+        ]
+      }
     }
   ],
   "status":   [

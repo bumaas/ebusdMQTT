@@ -10,6 +10,7 @@
    2. [Voraussetzungen](#2-voraussetzungen)
    3. [Installation](#3-installation)
    4. [Konfiguration](#4-konfiguration)
+   5. [Funktionsreferenz](#5-funktionsreferenz)
     
 ## 1. Funktionsumfang
 
@@ -45,7 +46,7 @@ Danach ist es möglich ein neues _ebusd MQTT Device_ zu erstellen:<br><br>
 <br><br>
 
 ## 4. Konfiguration
-Für jedes erkannte eBUS Gerät wird eine Instanz angelegt.<br><br>
+Für jedes erkannte Gerät/Schaltkreis muss eine Instanz angelegt werden..<br><br>
 ![Instanz konfigurieren](imgs/InstanzKonfigurieren.png?raw=true "Instanz konfigurieren")
 -  Host:<br>
 Adresse unter der der ebusd Dienst erreichbar ist. Hierbei kann es sich um eine IP Adresse oder einen Hostnamen handeln.  
@@ -62,6 +63,12 @@ Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert we
 
 Wenn die Einstellungen geändert werden, müssen sie erst gespeichert werden, bevor im Konfigurationsbereich die Konfiguration gelesen und die Statusvariablen angelegt werden können.
 
+## 4. Funktionsreferenz
+
+```php
+EBM_publish(string $topic, string $payload): void
+```
+Published den Wert $payload zum $topic.
 
 
 

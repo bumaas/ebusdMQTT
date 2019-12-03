@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection AutoloadingIssuesInspection */
 
 declare(strict_types=1);
 define('MQTT_GROUP_TOPIC', 'ebusd');
@@ -6,6 +6,12 @@ define('MQTT_GROUP_TOPIC', 'ebusd');
 trait ebusd2MQTTHelper
 {
 
+    protected function MsgBox(string $Message)
+    {
+        $this->UpdateFormField('MsgText', 'caption', $Message);
+
+        $this->UpdateFormField('MsgBox', 'visible', true);
+    }
     protected function GetParent($instanceID)
     {
         $instance = IPS_GetInstance($instanceID);
@@ -84,7 +90,7 @@ trait ebusd2MQTTHelper
 
     private function getPayload(string $messageId, $Value): string
     {
-        $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true);
+        $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true, 512, JSON_THROW_ON_ERROR);
         $messageDef            = $configurationMessages[$messageId];
 
         //einige messages (z.B z1ActualRoomTempDesired) haben mehr als nur ein Feld, aber nur ein Feld ist relevant
@@ -92,6 +98,11 @@ trait ebusd2MQTTHelper
             if ($fieldDef['type'] !== 'IGN') {
                 break;
             }
+        }
+
+        if (!isset($fieldDef)){
+            trigger_error('no valid fielDef found', E_USER_NOTICE);
+            return '';
         }
 
         $dataTypeDef = self::DataTypes[$fieldDef['type']];
