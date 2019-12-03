@@ -91,7 +91,7 @@
           }
         },
         {
-          "name":    "objectid",
+          "name":    "objectidents",
           "width":   "200px",
           "caption": "ID(s)",
           "save":    false

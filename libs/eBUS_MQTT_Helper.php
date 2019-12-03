@@ -30,7 +30,7 @@ trait ebusd2MQTTHelper
         return true;
     }
 
-    protected function RegisterProfileIntegerEx($Name, $Icon, $Prefix, $Suffix, $Associations)
+    protected function RegisterProfileIntegerEx($Name, $Icon, $Prefix, $Suffix, $Associations): void
     {
         if (count($Associations) === 0) {
             $MinValue = 0;
@@ -65,7 +65,7 @@ trait ebusd2MQTTHelper
         return true;
     }
 
-    protected function RegisterProfileFloatEx($Name, $Icon, $Prefix, $Suffix, $Associations)
+    protected function RegisterProfileFloatEx($Name, $Icon, $Prefix, $Suffix, $Associations): void
     {
         if (count($Associations) === 0) {
             $MinValue = 0;
@@ -80,7 +80,6 @@ trait ebusd2MQTTHelper
         foreach ($Associations as $Association) {
             IPS_SetVariableProfileAssociation($Name, $Association[0], $Association[1], $Association[2], $Association[3]);
         }
-
     }
 
     private function getPayload(string $messageId, $Value): string
@@ -98,7 +97,7 @@ trait ebusd2MQTTHelper
         $dataTypeDef = self::DataTypes[$fieldDef['type']];
         switch ($dataTypeDef['VariableType']) {
             case VARIABLETYPE_INTEGER:
-                $ret = (string) $Value;
+                $ret = (string)$Value;
                 break;
             case VARIABLETYPE_FLOAT:
                 $ret = number_format($Value, $dataTypeDef['Digits'], '.', '');
@@ -107,7 +106,7 @@ trait ebusd2MQTTHelper
                 $ret = $Value;
                 break;
             case VARIABLETYPE_BOOLEAN:
-                $ret = (string) ((int) $Value); //todo
+                $ret = (string)((int)$Value); //todo
                 break;
             default:
                 $ret = '';
@@ -115,5 +114,12 @@ trait ebusd2MQTTHelper
         }
 
         return $ret;
+    }
+
+    private function isArchived(string $ident): bool
+    {
+        $ahID  = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0]; // Archive Handler
+        $varID = $this->GetIDForIdent($ident);
+        return AC_GetLoggingStatus($ahID, $varID);
     }
 }
