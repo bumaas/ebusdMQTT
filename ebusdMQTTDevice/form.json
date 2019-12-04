@@ -111,13 +111,13 @@
           "type":    "Button",
           "name":    "BtnReadValues",
           "caption": "Read Values",
-          "onClick": "$module = new IPSModule($id); $ret = EBM_UpdateCurrentValues($id, $VariableList); echo $ret . ' Werte gelesen';"
+          "onClick": "set_time_limit(60); IPS_RequestAction($id, 'btnReadValues', json_encode((array_values((array)$VariableList))[2], JSON_THROW_ON_ERROR));"
         },
         {
           "type":    "Button",
           "name":    "BtnCreateUpdateVariables",
           "caption": "Create/Update Variables",
-          "onClick": "$module = new IPSModule($id); $ret = EBM_CreateAndUpdateVariables($id, $VariableList); echo $ret . ' Variablen angelegt/aktualisiert';"
+          "onClick": "IPS_RequestAction($id, 'btnCreateUpdateVariables', json_encode((array_values((array)$VariableList))[2], JSON_THROW_ON_ERROR));"
         }
       ]
     },

@@ -10,7 +10,9 @@
    2. [Voraussetzungen](#2-voraussetzungen)
    3. [Installation](#3-installation)
    4. [Konfiguration](#4-konfiguration)
-   5. [Funktionsreferenz](#5-funktionsreferenz)
+   5. [Einbindung ins Webfront](#5-einbindung-ins-webfront)
+   6. [Schreiben von Werten](#6-schreiben-von-werten)
+   7. [Funktionsreferenz](#7-funktionsreferenz)
     
 ## 1. Funktionsumfang
 
@@ -63,12 +65,27 @@ Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert we
 
 Wenn die Einstellungen geändert werden, müssen sie erst gespeichert werden, bevor im Konfigurationsbereich die Konfiguration gelesen und die Statusvariablen angelegt werden können.
 
-## 4. Funktionsreferenz
+## 5. Einbindung ins Webfront
+Alle Statusvariablen sind für eine Anzeige und (sofern vom ebusd ein Schreiben unterstützt wird) zum Ändern im Webfront vorbereitet. Sie haben alle ein Profil, das der ebusd Definition entspricht.
+Zur Verwendung im Webfront sollten sie jedoch überprüft werden. Insbesondere der Wertebereich (min/max) ist zu kontrollieren und auf reelle bzw. anlagenspezifische Werte zu setzen.
+
+## 6. Schreiben von Werten
+Sofern die Statusvariablen ein Schreiben zulassen, können die Werte direkt über das Webfront oder per Skript über [RequestAction](https://www.symcon.de/service/dokumentation/befehlsreferenz/variablenzugriff/requestaction/) verändert werden.
+
+## 7. Funktionsreferenz
 
 ```php
-EBM_publish(string $topic, string $payload): void
+EBM_publish(int $InstanceID, string $topic, string $payload): void
 ```
-Published den Wert $payload zum $topic.
+Published den Wert $payload zum $topic. Kann für "Sonderthemen" genutzt werden, siehe [MQTT client Beschreibung](https://github.com/john30/ebusd/wiki/3.3.-MQTT-client).
+Ein Beispiel zum Schreiben eines Topics:
+``` php
+$temp = 75;
+$inst_id = 12345;
+$circuit_name = "bai";
+$topic = "ebusd/" . $circuit_name . "/FlowsetHcMax/set";
+$payload = number_format($temp, 2, ".", "");
 
-
+EBM_publish($inst_id, $topic, $payload);
+```
 

@@ -218,6 +218,16 @@ class ebusdMQTTDevice extends IPSModule
                 }
                 return;
 
+            case 'btnReadValues':
+                $ret = $this->UpdateCurrentValues(json_decode($Value, true, 512, JSON_THROW_ON_ERROR));
+                $this->MsgBox($ret . ' Werte gelesen');
+                return;
+
+            case 'btnCreateUpdateVariables':
+                $ret = $this->CreateAndUpdateVariables(json_decode($Value, true, 512, JSON_THROW_ON_ERROR));
+                $this->MsgBox($ret . ' Variablen angelegt/aktualisiert');
+                return;
+
             case 'timerCheckConnection':
                 $this->checkConnection();
                 return;
@@ -278,9 +288,9 @@ class ebusdMQTTDevice extends IPSModule
                 json_last_error_msg(),
                 $Buffer->Payload
             );
-            $this->SendDebug(__FUNCTION__, $txtError, 0);
-            trigger_error($txtError, E_USER_NOTICE);
-            //   $Payload = json_decode($Buffer->Payload, true);
+            $this->SendDebug(__FUNCTION__ . ' (ERROR)', $txtError, 0);
+            // trigger_error($txtError, E_USER_NOTICE);
+            // $Payload = json_decode($Buffer->Payload, true);
         }
         //
 
@@ -409,14 +419,14 @@ class ebusdMQTTDevice extends IPSModule
         $this->SendDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret), 0);
     }
 
-    /** @noinspection PhpUndefinedClassInspection */
-    public function UpdateCurrentValues(IPSList $variableList): int
+    //------------------------------------------------------------------------------------------------------------------------
+    // my private functions
+    private function UpdateCurrentValues(array $variableList): int
     {
         $mqttTopic = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
         $readCounter        = 0;
         $progressBarCounter = 0;
-        $variableList       = (array_values((array)$variableList))[2];
 
         $formField = null;
         $this->UpdateFormField('ProgressBar', 'maximum', count($variableList));
@@ -438,12 +448,8 @@ class ebusdMQTTDevice extends IPSModule
         return $readCounter;
     }
 
-    /** @noinspection PhpUndefinedClassInspection */
-    public function CreateAndUpdateVariables(IPSList $variableList): int
+    private function CreateAndUpdateVariables(array $variableList): int
     {
-        $this->SendDebug(__FUNCTION__, 'start', 0);
-        $variableList = (array_values((array)$variableList))[2];
-
         $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true, 512, JSON_THROW_ON_ERROR);
         $count                 = 0;
         foreach ($variableList as $item) {
@@ -467,8 +473,6 @@ class ebusdMQTTDevice extends IPSModule
         return $count;
     }
 
-    //------------------------------------------------------------------------------------------------------------------------
-    // my private functions
     private function ReadConfiguration(): ?array
     {
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
