@@ -6,7 +6,7 @@ define('MQTT_GROUP_TOPIC', 'ebusd');
 trait ebusd2MQTTHelper
 {
 
-    protected function MsgBox(string $Message)
+    protected function MsgBox(string $Message): void
     {
         $this->UpdateFormField('MsgText', 'caption', $Message);
 
@@ -91,6 +91,11 @@ trait ebusd2MQTTHelper
     private function getPayload(string $messageId, $Value): string
     {
         $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true, 512, JSON_THROW_ON_ERROR);
+        if (!isset($configurationMessages[$messageId])){
+            debug_print_backtrace();
+            trigger_error('Unexpected messageId: ' . $messageId, E_USER_ERROR);
+            return '';
+        }
         $messageDef            = $configurationMessages[$messageId];
 
         //einige messages (z.B z1ActualRoomTempDesired) haben mehr als nur ein Feld, aber nur ein Feld ist relevant

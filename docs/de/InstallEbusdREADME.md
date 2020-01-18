@@ -45,6 +45,7 @@ sudo apt-get update
 sudo apt-get install libmosquitto1
 ```
 
+
 ## 2. Abschluss der Installation
 
 Zum Abschluss der Installation erfolgen folgende Hinweise, die auszuführen sind:
@@ -66,7 +67,7 @@ Der erste Parameter besagt, wo der Buskoppler angeschlossen ist.
 Beispiele: 
 
 - --device=/dev/ttyebus (aufgesteckt und über ttyebus Treiber angesprochen)
-- --device=192.168.2.20:5000 (über Ethernet und TCP verbunden)
+- --device=192.168.2.20:5000 (über Ethernet und TCP verbunden - die Adresse ist ein Beispiel. Bei dem LAN-Gateway von Esera werden die Daten (Ip-Adresse, Port und Operation-Mode 'TCP-Server') im configtool gesetzt.)
 
 Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
 
@@ -80,6 +81,14 @@ Tipp: wenn der Dienst neu gestartet werden soll, geht das am einfachsten über
 ```
 sudo systemctl restart ebusd
 ```
+
+### Installation als Docker Container
+
+Wenn man ebusd als Docker laufen lässt, empfiehlt es sich diesen mit Bridge und eigener IP zu erstellen, da sonst Port-Konflikte (8080) auftreten können.
+```
+ebusd -f --scanconfig --port=8888 --device=<IP LANGateway>:<Port LANGateway>
+```
+
 ### 3. Überprüfung der Konfiguration
 Wenn diese Dinge geschafft sind, ist im nächsten Schritt zu prüfen, ob ebusd die angeschlossenen eBUS Geräte korrekt findet.
 
@@ -129,6 +138,7 @@ done
 localhost: r -c 700 Hc1HeatCurve
 0.5
 ```
+Die Beschreibung aller Befehle findet sich im Kapitel [3.1 TCP client commands](https://github.com/john30/ebusd/wiki/3.1.-TCP-client-commands). 
 
 Soweit zur Installation und zum Einstieg in ebusd.
 
@@ -142,4 +152,4 @@ Für die Integration von ebusd in IP-Symcon werden die Daten von ebusd über htt
 - \<USER> - der in der MQTT Server Instanz eingetragene Benutzername
 - \<PASSWORT> - das in der MQTT Server Instanz eingetragene Passwort
 
-Eine nähere Beschreibung der Optionen findet sich im Kapitel [2. Run](https://github.com/john30/ebusd/wiki/2.-Run) des Wikis.  
+Eine nähere Beschreibung der Optionen findet sich im Kapitel [2. Run](https://github.com/john30/ebusd/wiki/2.-Run) des Wikis. Die MQTT Parameter müssen den Werten entsprechen, die auf IP-Symcon Seite in der MQTT Server Instanz gesetzt wurden. 

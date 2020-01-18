@@ -39,7 +39,7 @@
           "save":    false
         },
         {
-          "name":    "variablename",
+          "name":    "variablenames",
           "width":   "300px",
           "caption": "Status Variable(s)",
           "save":    false
@@ -64,7 +64,7 @@
           "save":    false
         },
         {
-          "name":    "value",
+          "name":    "readvalues",
           "width":   "auto",
           "caption": "read value",
           "save":    false
@@ -92,7 +92,7 @@
         },
         {
           "name":    "objectidents",
-          "width":   "200px",
+          "width":   "250px",
           "caption": "ID(s)",
           "save":    false
         }
@@ -118,6 +118,12 @@
           "name":    "BtnCreateUpdateVariables",
           "caption": "Create/Update Variables",
           "onClick": "IPS_RequestAction($id, 'btnCreateUpdateVariables', json_encode((array_values((array)$VariableList))[2], JSON_THROW_ON_ERROR));"
+        },
+        {
+          "type":    "Button",
+          "name":    "BtnPublishPollPriorities",
+          "caption": "Publish Poll Priorities",
+          "onClick": "IPS_RequestAction($id, 'btnPublishPollPriorities', '');"
         }
       ]
     },
