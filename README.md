@@ -1,6 +1,5 @@
 [![Version](https://img.shields.io/badge/Symcon-PHPModul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
 ![Version](https://img.shields.io/badge/Symcon%20Version-5.3%20%3E-blue.svg)
-[![StyleCI](https://styleci.io/repos/175384837/shield?style=flat)](https://styleci.io/repos/175384837)
 
 # ebusdMQTT
    Anbindung von https://github.com/john30/ebusd an IP-Symcon.
@@ -18,7 +17,7 @@
 
 Das Modul dient zur Einbindung von eBUS Geräten in IP-Symcon. eBUS ('Energie Bus') ist ein Bussystem, das von verschiedenen Herstellern von Heizungs-, Lüftungs- und Solaranlagen genutzt wird.
 
-Die Anbindung erfolgt über den Kommunikationsdienst **ebusd**.
+Die Anbindung erfolgt über den Kommunikationsdienst **ebusd** in Verbindung mit einem [geeigneten Hardwareadapter](https://github.com/john30/ebusd/wiki/6.-Hardware).
 
 Über das Modul werden die von ebusd zur Verfügung gestellten Parameter zum Auslesen und Schreiben in IP-Symcon als Statusvariablen eingebunden. Die Auswahl der einzubindenden Parameter wird vom Anwender festgelegt.
 
@@ -27,6 +26,7 @@ Die Anbindung erfolgt über den Kommunikationsdienst **ebusd**.
  
 ## 2. Voraussetzungen
 
+* Hardware Adapter zur Verbindung mit dem eBUS
 * lauffähiger eBUS Daemon (ebusd (ab V3.4)) mit entsprechender Hardwareanbindung (siehe auch [Installationskurzanleitung ebusd](docs/de/InstallEbusdREADME.md))
 * mindestens IPS Version 5.3
 * MQTT Server (IPS built-in Modul) 

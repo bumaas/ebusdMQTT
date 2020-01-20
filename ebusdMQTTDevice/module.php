@@ -317,7 +317,7 @@ class ebusdMQTTDevice extends IPSModule
 
         try {
             $Payload = json_decode($Buffer->Payload, true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $e) {
+        } /** @noinspection PhpRedundantCatchClauseInspection */ catch (JsonException $e) {
             $txtError = sprintf(
                 'ERROR! (will be solved with ebusd > 3.4) - JSON Error (%s) at Topic "%s": %s, json: %s',
                 json_last_error(),
@@ -573,10 +573,6 @@ class ebusdMQTTDevice extends IPSModule
                 $ret = true;
             }
         }
-
-        //zur Sicherheit werden die Pollprioritäten neu gesetzt. todo: dies ist noch eine Fehlerumgehung, da das Setzen manchmal verloren geht.
-        $pollPriorities = json_decode($this->ReadAttributeString(self::ATTR_POLLPRIORITIES), true, 512, JSON_THROW_ON_ERROR);
-        //$this->publishPollPriorities([], $pollPriorities);
 
         return $ret;
     }

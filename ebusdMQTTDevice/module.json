@@ -2,7 +2,7 @@
 	"id": "{0A243F27-C31D-A389-5357-B8D000901D78}",
 	"name": "ebusd MQTT Device",
 	"type": 3,
-	"vendor": "",
+	"vendor": "Vaillant",
 	"aliases": ["ebusd MQTT Device"],
 	"parentRequirements": ["{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}"],
 	"childRequirements": [],
