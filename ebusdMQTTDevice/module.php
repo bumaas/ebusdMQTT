@@ -31,6 +31,8 @@ class ebusdMQTTDevice extends IPSModule
     private const TIMER_CHECK_CONNECTION     = 'checkConnection';
 
     //form element names
+    private const FORM_LIST_VARIABLELIST     = 'VariableList';
+    private const FORM_ELEMENT_READABLE      = 'readable';
     private const FORM_ELEMENT_POLLPRIORITY  = 'pollpriority';
     private const FORM_ELEMENT_MESSAGENAME   = 'messagename';
     private const FORM_ELEMENT_VARIABLENAMES = 'variablenames';
@@ -39,7 +41,8 @@ class ebusdMQTTDevice extends IPSModule
     private const FORM_ELEMENT_KEEP          = 'keep';
     private const FORM_ELEMENT_OBJECTIDENTS  = 'objectidents';
 
-    private $trace = false;
+    private $trace               = false;
+
     private $testFunctionsActive = false;
 
     // die von ebusd unterstützen Datentypen
@@ -173,17 +176,26 @@ class ebusdMQTTDevice extends IPSModule
             //wenn die Instanz aktiv ist, dann werden die Pollprioritäten gesetzt
             //zur Entkoppelung wird RunScriptText aufgerufen
             $pollPriorities = json_decode($this->ReadAttributeString(self::ATTR_POLLPRIORITIES), true, 512, JSON_THROW_ON_ERROR);
-            $scriptText = sprintf('IPS_RequestAction(%s, \'%s\', \'%s\');', $this->InstanceID, 'publishPollPriorities',
-                                  json_encode(['old' => [], 'new' => $pollPriorities], JSON_THROW_ON_ERROR, 512)
+            $scriptText     = sprintf(
+                'IPS_RequestAction(%s, \'%s\', \'%s\');',
+                $this->InstanceID,
+                'publishPollPriorities',
+                json_encode(['old' => [], 'new' => $pollPriorities], JSON_THROW_ON_ERROR, 512)
             );
             IPS_RunScriptText($scriptText);
-
             //$this->publishPollPriorities([], $pollPriorities); todo
         } else {
             $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, 0);
         }
 
-        $this->SetSummary(sprintf('%s:%s(%s)', $this->ReadPropertyString(self::PROP_HOST), $this->ReadPropertyString(self::PROP_PORT), $this->ReadPropertyString(self::PROP_CIRCUITNAME)));
+        $this->SetSummary(
+            sprintf(
+                '%s:%s(%s)',
+                $this->ReadPropertyString(self::PROP_HOST),
+                $this->ReadPropertyString(self::PROP_PORT),
+                $this->ReadPropertyString(self::PROP_CIRCUITNAME)
+            )
+        );
         //we will set the instance status when the parent status changes
         $instIDMQTTServer = $this->GetParent($this->InstanceID);
         if ($this->trace) {
@@ -273,6 +285,11 @@ class ebusdMQTTDevice extends IPSModule
             case 'publishPollPriorities':
                 $priorities = json_decode($Value, true, 512, JSON_THROW_ON_ERROR);
                 $this->publishPollPriorities($priorities['old'], $priorities['new']);
+                return;
+
+            case 'VariableList_onEdit':
+                $parameter = json_decode($Value, true, 512, JSON_THROW_ON_ERROR);
+                $this->MsgBox(sprintf('Die Variable "%s" ist nicht lesbar. Die Änderungen werden nicht gespeichert.', $parameter['messagename']));
                 return;
         }
 
@@ -453,7 +470,7 @@ class ebusdMQTTDevice extends IPSModule
         $this->SendDebug(__FUNCTION__, sprintf('Call: %s', $DataJSON), 0);
 
         set_time_limit(15);
-        $ret      = $this->SendDataToParent($DataJSON);
+        $ret = $this->SendDataToParent($DataJSON);
         $this->SendDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret), 0);
     }
 
@@ -473,16 +490,17 @@ class ebusdMQTTDevice extends IPSModule
             $this->UpdateFormField('ProgressBar', 'current', $progressBarCounter++);
             $this->UpdateFormField('ProgressBar', 'caption', $entry[self::FORM_ELEMENT_MESSAGENAME]);
             //alle lesbaren Werte holen
-            if ($entry['readable'] === self::OK_SIGN) {
+            if ($entry[self::FORM_ELEMENT_READABLE] === self::OK_SIGN) {
                 $readCounter++;
                 $entry[self::FORM_ELEMENT_READVALUES] = '' . $this->getCurrentValue($mqttTopic, $entry[self::FORM_ELEMENT_MESSAGENAME]);
             }
             $formField[] = $entry;
         }
 
-        $this->SendDebug(__FUNCTION__, 'formField: ' . json_encode($formField, JSON_THROW_ON_ERROR), 0);
+        $jsonFormField = json_encode($formField, JSON_THROW_ON_ERROR);
+        $this->SendDebug(__FUNCTION__, 'formField: ' . $jsonFormField, 0);
         $this->UpdateFormField('ProgressBar', 'visible', false);
-        $this->UpdateFormField(self::ATTR_VARIABLELIST, 'values', json_encode($formField, JSON_THROW_ON_ERROR));
+        $this->UpdateFormField(self::FORM_LIST_VARIABLELIST, 'values', $jsonFormField);
         return $readCounter;
     }
 
@@ -490,14 +508,18 @@ class ebusdMQTTDevice extends IPSModule
     {
         $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true, 512, JSON_THROW_ON_ERROR);
         $count                 = 0;
-        foreach ($variableList as $item) {
-            if ($item[self::FORM_ELEMENT_KEEP] === true) {
+        foreach ($variableList as $key => $item) {
+            if (($item[self::FORM_ELEMENT_READABLE] === self::OK_SIGN) && $item[self::FORM_ELEMENT_KEEP]) {
                 $count += $this->RegisterVariablesOfMessage($configurationMessages[$item[self::FORM_ELEMENT_MESSAGENAME]]);
             }
         }
 
         //VariableList aktualisieren bzgl. der Idents
-        $this->UpdateFormField('VariableList', 'values', json_encode($this->getUpdatedVariableList($variableList), JSON_THROW_ON_ERROR));
+        $this->UpdateFormField(
+            self::FORM_LIST_VARIABLELIST,
+            'values',
+            json_encode($this->getUpdatedVariableList($variableList), JSON_THROW_ON_ERROR)
+        );
 
         //Pollprioritäten aktualisieren
         $oldPollPriorities = json_decode($this->ReadAttributeString(self::ATTR_POLLPRIORITIES), true, 512, JSON_THROW_ON_ERROR);
@@ -548,7 +570,7 @@ class ebusdMQTTDevice extends IPSModule
 
         //Ausgabeliste aufbereiten und als Attribut speichern
         $variableList = $this->getVariableList(json_encode($configurationMessages, JSON_THROW_ON_ERROR));
-        $this->UpdateFormField(self::ATTR_VARIABLELIST, 'values', json_encode($variableList, JSON_THROW_ON_ERROR, 3));
+        $this->UpdateFormField(self::FORM_LIST_VARIABLELIST, 'values', json_encode($variableList, JSON_THROW_ON_ERROR, 3));
         $this->SaveVariableList($variableList);
 
         return $configurationMessages;
@@ -560,7 +582,7 @@ class ebusdMQTTDevice extends IPSModule
 
         $ret = true;
         foreach (json_decode($jsonVariableList, true, 512, JSON_THROW_ON_ERROR) as $entry) {
-            if ($entry[self::FORM_ELEMENT_KEEP] && ($entry['readable'] === self::OK_SIGN)) {
+            if ($entry[self::FORM_ELEMENT_KEEP] && ($entry[self::FORM_ELEMENT_READABLE] === self::OK_SIGN)) {
                 $this->publish(
                     sprintf(
                         '%s/%s/%s/get',
@@ -606,7 +628,7 @@ class ebusdMQTTDevice extends IPSModule
             //$this->SendDebug(__FUNCTION__, json_encode($item), 0);
             $identList     = [];
             $variableFound = false;
-            if (!empty($item[self::FORM_ELEMENT_IDENTNAMES])){
+            if (!empty($item[self::FORM_ELEMENT_IDENTNAMES])) {
                 foreach (explode('/', $item[self::FORM_ELEMENT_IDENTNAMES]) as $ident) {
                     if (@$this->GetIDForIdent($ident)) {
                         if ($this->isArchived($ident)) {
@@ -624,6 +646,12 @@ class ebusdMQTTDevice extends IPSModule
                 $item[self::FORM_ELEMENT_OBJECTIDENTS] = implode(', ', $identList);
             } else {
                 $item[self::FORM_ELEMENT_OBJECTIDENTS] = '';
+            }
+
+            //wenn die Variable nicht lesbar ist, dann werden keep und pollpriority verworfen
+            if ($item[self::FORM_ELEMENT_READABLE] !== self::OK_SIGN) {
+                $item[self::FORM_ELEMENT_KEEP]         = false;
+                $item[self::FORM_ELEMENT_POLLPRIORITY] = 0;
             }
 
             $variableListUpdated[] = $item;
@@ -1000,17 +1028,21 @@ class ebusdMQTTDevice extends IPSModule
                 $pollpriority = 0;
             }
 
-            $elements[] = [
+            $element = [
                 self::FORM_ELEMENT_MESSAGENAME   => $message['name'],
                 self::FORM_ELEMENT_VARIABLENAMES => implode('/', $variableNames),
                 self::FORM_ELEMENT_IDENTNAMES    => implode('/', $identNames),
-                'readable'                       => ($message['passive'] === false) ? self::OK_SIGN : '',
+                self::FORM_ELEMENT_READABLE      => ($message['read'] === true) ? self::OK_SIGN : '',
                 'writable'                       => ($message['write'] === true) ? self::OK_SIGN : '',
                 self::FORM_ELEMENT_READVALUES    => '',
                 self::FORM_ELEMENT_KEEP          => $keep,
                 self::FORM_ELEMENT_OBJECTIDENTS  => implode('/', $identNamesExisting),
                 self::FORM_ELEMENT_POLLPRIORITY  => $pollpriority
             ];
+            if ($element[self::FORM_ELEMENT_READABLE] !== self::OK_SIGN) {
+                $element['rowColor'] = '#DFDFDF';
+            }
+            $elements[] = $element;
         }
         return $elements;
     }
@@ -1097,7 +1129,7 @@ class ebusdMQTTDevice extends IPSModule
                 }
             } else {
                 $TypeDef = self::DataTypes[$fielddef['type']];
-                switch ($fielddef['unit']){
+                switch ($fielddef['unit']) {
                     case '%':
                         $unit = self::ZERO_WIDTH_SPACE . '%';
                         break;
@@ -1234,13 +1266,15 @@ class ebusdMQTTDevice extends IPSModule
         $ret = [];
 
         foreach ($configurationMessages as $key => $message) {
+
             if (strpos($key, '-w') === false) {
                 /** @noinspection MissingOrEmptyGroupStatementInspection */
                 /** @noinspection PhpStatementHasEmptyBodyInspection */
                 if ($message['passive'] || $message['write']) {
                     // continue;
                 }
-                $message['write']  = array_key_exists($key . '-w', $configurationMessages);
+                $message['read']   = !$message['write'] || $message['passive'];
+                $message['write']  = $message['write'] || array_key_exists($key . '-w', $configurationMessages);
                 $message['lastup'] = 0;
                 $ret[$key]         = $message;
             }
