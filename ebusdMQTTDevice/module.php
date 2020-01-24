@@ -288,8 +288,10 @@ class ebusdMQTTDevice extends IPSModule
                 return;
 
             case 'VariableList_onEdit':
-                $parameter = json_decode($Value, true, 512, JSON_THROW_ON_ERROR);
-                $this->MsgBox(sprintf('Die Variable "%s" ist nicht lesbar. Die Änderungen werden nicht gespeichert.', $parameter['messagename']));
+                $parameter = json_decode($Value, true);
+                if ($parameter['readable'] !== self::OK_SIGN){
+                    $this->MsgBox(sprintf('Die Variable "%s" ist nicht lesbar. Die Änderungen werden nicht gespeichert.', $parameter['messagename']));
+                }
                 return;
         }
 
