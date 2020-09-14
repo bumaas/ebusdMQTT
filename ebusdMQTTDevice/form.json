@@ -21,7 +21,14 @@
         },
         {"type": "NumberSpinner", "name": "UpdateInterval", "caption": "Update Interval", "suffix": "Minutes"}
       ]
+    },
+    {
+      "type":  "ExpansionPanel", "caption": "Expert Parameters",
+      "items": [
+        {"type": "CheckBox", "name": "WriteDebugInformationToIPSLogger", "caption": "Debug information are written additionally to the logfile of IPSLibrary"}
+      ]
     }
+
   ],
   "actions":  [
     {
@@ -112,7 +119,7 @@
           "type":    "Button",
           "name":    "BtnReadValues",
           "caption": "Read Values",
-          "onClick": "set_time_limit(60); IPS_RequestAction($id, 'btnReadValues', json_encode((array_values((array)$VariableList))[2], JSON_THROW_ON_ERROR));"
+          "onClick": "set_time_limit(120); IPS_RequestAction($id, 'btnReadValues', json_encode((array_values((array)$VariableList))[2], JSON_THROW_ON_ERROR));"
         },
         {
           "type":    "Button",

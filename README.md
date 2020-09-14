@@ -1,5 +1,7 @@
 [![Version](https://img.shields.io/badge/Symcon-PHPModul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
 ![Version](https://img.shields.io/badge/Symcon%20Version-5.3%20%3E-blue.svg)
+[![Donate](https://img.shields.io/badge/Donate-Paypal-009cde.svg)](https://www.paypal.me/bumaas)
+
 
 # ebusdMQTT
    Anbindung von https://github.com/john30/ebusd an IP-Symcon.
@@ -12,6 +14,7 @@
    5. [Einbindung ins Webfront](#5-einbindung-ins-webfront)
    6. [Schreiben von Werten](#6-schreiben-von-werten)
    7. [Funktionsreferenz](#7-funktionsreferenz)
+   8. [Anhang](#8-anhang)
     
 ## 1. Funktionsumfang
 
@@ -61,13 +64,24 @@ Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit
 
 - Aktualisierungsintervall:<br>
 Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
-**todo: "Optimale Polleinstellungen/Maximallast Bus. Bedeutung Intervall? Für Werte lesen muss der Wert <> 0 sein"**
 
-Wenn die Einstellungen geändert werden, müssen sie erst gespeichert werden, bevor im Konfigurationsbereich die Konfiguration gelesen und die Statusvariablen angelegt werden können.
+Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden.
+Bei Bedarf kann für eine Statusvariable eine Poll Priorität angegeben werden, die von ebusd verwendet werden soll. Die Poll Prioriät besagt, in welchem Intervallzyklus eine Meldung von ebusd gepollt werden soll.
+Meldungen mit Priorität 1 werden in jedem Pollzyklus abgefragt, Meldungen mit Priorität 2 werden in jedem zweiten Zyklus abgefragt usw.. Die Pollpriorität kann gesetzt werden, wenn das Abfrageintervall, das im Minutenbereich liegt, für einzelne Meldungen nicht fein genug ist.
 
 ## 5. Einbindung ins Webfront
 Alle Statusvariablen sind für eine Anzeige und (sofern vom ebusd ein Schreiben unterstützt wird) zum Ändern im Webfront vorbereitet. Sie haben alle ein Profil, das der ebusd Definition entspricht.
 Zur Verwendung im Webfront sollten sie jedoch überprüft werden. Insbesondere der Wertebereich (min/max) ist zu kontrollieren und auf reelle bzw. anlagenspezifische Werte zu setzen.
+
+Besonderheit:
+
+Schreibbare Mehrfachfelder können nicht direkt aus dem Webfront heraus geändert werden. Sie lassen sich aber über EBM_publish schreiben.
+
+Beispiel:
+```php
+EBM_publish(47111, 'ebusd/700/hwctimer.monday/set', '07:00;22:00;00:00;00:00;00:00;00:00');
+```
+ 
 
 ## 6. Schreiben von Werten
 Sofern die Statusvariablen ein Schreiben zulassen, können die Werte direkt über das Webfront oder per Skript über [RequestAction](https://www.symcon.de/service/dokumentation/befehlsreferenz/variablenzugriff/requestaction/) verändert werden.
@@ -80,12 +94,25 @@ EBM_publish(int $InstanceID, string $topic, string $payload): void
 Published den Wert $payload zum $topic. Kann für "Sonderthemen" genutzt werden, siehe [MQTT client Beschreibung](https://github.com/john30/ebusd/wiki/3.3.-MQTT-client).
 Ein Beispiel zum Schreiben eines Topics:
 ``` php
-$temp = 75;
-$inst_id = 12345;
-$circuit_name = "bai";
-$topic = "ebusd/" . $circuit_name . "/FlowsetHcMax/set";
-$payload = number_format($temp, 2, ".", "");
+// der Wert des Parameters 'FlowsetHCMax' des Schaltkreises 'bai' wird auf 75 gesetzt
 
-EBM_publish($inst_id, $topic, $payload);
+$InstanceID = 12345;                                  // die Instanz ID des "ebusd MQTT Device"
+$topic      = 'ebusd/<Schaltkreis>/<Parameter>/set';  // <Schaltkreis> und <Parameter> sind entsprechend zu ersetzen ('ebusd/bai/FlowsetHCMax')
+$payload    = '75';                                   // der Wert ist als String zu übergeben
+
+EBM_publish($InstanceID, $topic, $payload);
 ```
 
+## 8. Anhang
+
+###  GUIDs der Module
+
+|                Modul                |     Typ      |                  GUID                  |
+| :---------------------------------: | :----------: | :------------------------------------: |
+|        ebusd MQTT Device         |    Device    | {0A243F27-C31D-A389-5357-B8D000901D78} |
+
+### Spenden  
+  
+  Die Nutzung des Moduls ist kostenfrei. Niemand sollte sich verpflichtet fühlen, aber wenn das Modul gefällt, dann freue ich mich über eine Spende.
+
+<a href="https://www.paypal.me/bumaas" target="_blank"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_LG.gif" border="0" /></a>

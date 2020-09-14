@@ -24,12 +24,12 @@ cat /etc/os-release
 
 Wichtig: es ist ein Paket mit **MQTT Support** zu wählen!
 
-Wenn das passende Paket (z.B. ebusd-3.4_armhf-jessie_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren.:
+Wenn das passende Paket (z.B. ebusd-3.4_armhf-stretch_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren.:
 ```
-wget https://github.com/john30/ebusd/releases/download/v3.4/ebusd-3.4_armhf-jessie_mqtt1.deb
+wget https://github.com/john30/ebusd/releases/download/v3.4/ebusd-3.4_armhf-stretch_mqtt1.deb
 ```
 ```
-sudo dpkg -i ebusd-3.4_armhf-jessie_mqtt1.deb
+sudo dpkg -i ebusd-3.4_armhf-stretch_mqtt1.deb
 ```
 Falls es bei der Installation des ebusd Paketes zu einer Fehlermeldung kommen sollte wie:
 
@@ -66,7 +66,7 @@ EBUSD_OPTS="--device=/dev/ttyebus --scanconfig --configpath=http://ebusd.eu/conf
 Der erste Parameter besagt, wo der Buskoppler angeschlossen ist.
 Beispiele: 
 
-- --device=/dev/ttyebus (aufgesteckt und über ttyebus Treiber angesprochen)
+- --device=/dev/ttyebus (aufgesteckt und über [ttyebus](https://github.com/ebus/ttyebus) Treiber angesprochen)
 - --device=192.168.2.20:5000 (über Ethernet und TCP verbunden - die Adresse ist ein Beispiel. Bei dem LAN-Gateway von Esera werden die Daten (Ip-Adresse, Port und Operation-Mode 'TCP-Server') im configtool gesetzt.)
 
 Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
@@ -76,6 +76,16 @@ Der dritte Parameter beinhaltet den Pfad zu den Konfigurationsdeteien.
 <br>
 zu 3.)
 Im Logfile muss erkennbar sein, dass der Adapter gefunden wurde und dass ein automatischer Scan durchgeführt wurde. Wenn es beim Scan zu Timeouts kommt, kann versucht werden, mit der zusätzlichen Option --receivetimeout=100000 das Limit zu erhöhen. 
+
+Ein erfolgreicher Star sieht so aus:
+```
+2020-09-14 10:15:07.029 [main notice] ebusd 3.4.v3.3-51-g57eae05 started with auto scan
+2020-09-14 10:15:07.040 [bus notice] bus started with own address 31/36
+2020-09-14 10:15:07.053 [mqtt notice] connection established
+2020-09-14 10:15:07.062 [bus notice] signal acquired
+2020-09-14 10:15:13.923 [bus notice] new master 10, master count 2
+2020-09-14 10:15:13.986 [bus notice] new master 03, master count 3
+```
 
 Tipp: wenn der Dienst neu gestartet werden soll, geht das am einfachsten über
 ```
@@ -145,7 +155,7 @@ Soweit zur Installation und zum Einstieg in ebusd.
 ## 5. IP-Symcon relevante Konfigurationsparameter
 Für die Integration von ebusd in IP-Symcon werden die Daten von ebusd über http und MQTT zur Vefügung gestellt. Dazu sind die Konfigurationsparameter in der _/etc/default/ebusd_ um folgende Optionen zu erweitern:
 ```
- --pollinterval 5  --accesslevel=* --httpport=8080 --mqtthost=<IP> --mqttport=<Port> --mqttuser <USER> --mqttpass <PASSWORT> --mqttjson
+ --pollinterval 5  --accesslevel=* --httpport=8080 --mqtthost=<IP> --mqttport=<Port> --mqttuser=<USER> --mqttpass=<PASSWORT> --mqttjson
 ```
 - \<IP> - IP-Adresse des IP-Symcon Systems
 - \<PORT> - die in der MQTT Server Instanz eingetragene Portnummer
