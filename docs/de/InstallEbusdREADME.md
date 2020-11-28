@@ -71,8 +71,22 @@ Beispiele:
 
 Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
 
-Der dritte Parameter beinhaltet den Pfad zu den Konfigurationsdeteien.
+Der dritte Parameter beinhaltet den Pfad zu den Konfigurationsdeteien. Im Beispiel werden die aktuellen Konfigurationsdateien beim Start von der Webadresse http://ebusd.eu/config/ geholt.
+
+Alternativ bietet sich an, die benötigten Dateien lokal zu speichern und den Parameter auf den lokalen Pfad zu setzen.
+
+Dazu wählt man sich ein passendes Verzeichnis aus (z.B. /home/pi/) und führt in dem Verzeichnis den folgenden Befehle aus:
+```
+git clone https://github.com/john30/ebusd-configuration.git
+```
+Dadurch werden die Konfigurationsdateien im Unterverzeichnis /home/pi/ebusd-configuration gespeichert, so dass die Einstellung für configpath auf das lokale Verzeichnis umgestellt werden kann:
+```
+--configpath=/home/pi/ebusd-configuration/ebusd-2.1.x/de"
+```
+
+
 <br>
+
 <br>
 zu 3.)
 Im Logfile muss erkennbar sein, dass der Adapter gefunden wurde und dass ein automatischer Scan durchgeführt wurde. Wenn es beim Scan zu Timeouts kommt, kann versucht werden, mit der zusätzlichen Option --receivetimeout=100000 das Limit zu erhöhen. 
