@@ -75,7 +75,7 @@ Der dritte Parameter beinhaltet den Pfad zu den Konfigurationsdeteien. Im Beispi
 
 Alternativ bietet sich an, die benötigten Dateien lokal zu speichern und den Parameter auf den lokalen Pfad zu setzen.
 
-Dazu wählt man sich ein passendes Verzeichnis aus (z.B. /home/pi/) und führt in dem Verzeichnis den folgenden Befehle aus:
+Dazu wählt man sich ein passendes Verzeichnis aus (z.B. /home/pi/) und führt in dem Verzeichnis den folgenden Befehl aus:
 ```
 git clone https://github.com/john30/ebusd-configuration.git
 ```

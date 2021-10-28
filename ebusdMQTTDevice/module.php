@@ -49,7 +49,7 @@ class ebusdMQTTDevice extends IPSModule
 
     private $trace               = false;
 
-    private $testFunctionsActive = false;
+    private $testFunctionsActive = false; //button "Publish Poll Priorities" aktivieren
 
     // die von ebusd unterstützen Datentypen
     //siehe https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types
@@ -480,7 +480,6 @@ class ebusdMQTTDevice extends IPSModule
         $DataJSON = json_encode($Data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
         $this->Logger_Dbg(__FUNCTION__, sprintf('Call: %s', $DataJSON));
 
-        set_time_limit(15);
         $ret = $this->SendDataToParent($DataJSON);
         $this->Logger_Dbg(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret));
     }
@@ -740,7 +739,6 @@ class ebusdMQTTDevice extends IPSModule
 
     private function getCurrentValue(string $mqttTopic, string $messageId): ?string
     {
-        set_time_limit(10);
 
         $url    = sprintf(
             'http://%s:%s/data/%s/%s?def&verbose&exact&required&maxage=600',
@@ -752,7 +750,7 @@ class ebusdMQTTDevice extends IPSModule
         $result = $this->readURL($url);
 
         //alle Felder auswerten
-        if ((!array_key_exists($mqttTopic, $result)) || (!array_key_exists($messageId, $result[$mqttTopic]['messages']))) {
+        if ((is_null($result) || !array_key_exists($mqttTopic, $result)) || (!array_key_exists($messageId, $result[$mqttTopic]['messages']))) {
             $this->Logger_Dbg(__FUNCTION__, sprintf('current values of message \'%s\' not found (URL: %s)', $messageId, $url));
             return null;
         }
@@ -934,12 +932,20 @@ class ebusdMQTTDevice extends IPSModule
                     $this->Logger_Dbg(
                         __FUNCTION__,
                         sprintf(
-                            'Value %s of field %s not defined in associations %s',
+                            'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
                             $fieldValues[$key]['value'],
                             $key,
+                            $fieldValues[$key]['name'],
                             json_encode($associations, JSON_THROW_ON_ERROR)
                         )
                     );
+                    trigger_error(__FUNCTION__ . ': ' .  sprintf(
+                                      'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
+                                      $fieldValues[$key]['value'],
+                                      $key,
+                                      $fieldValues[$key]['name'],
+                                      json_encode($associations, JSON_THROW_ON_ERROR)
+                                  ));
                 }
             } else {
                 $value = $fieldValues[$key]['value'];
@@ -975,7 +981,7 @@ class ebusdMQTTDevice extends IPSModule
         return $ret;
     }
 
-    private function getValueOfAssoziation(string $value, $associations): ?int
+    private function getValueOfAssoziation(string $value, array $associations): ?int
     {
         if ($this->trace) {
             $this->Logger_Dbg(__FUNCTION__, sprintf('Value: %s, Associations: %s', $value, json_encode($associations, JSON_THROW_ON_ERROR)));
@@ -986,7 +992,6 @@ class ebusdMQTTDevice extends IPSModule
                 return $assValue[0];
             }
         }
-        trigger_error(__FUNCTION__ . ': association value not found: ' . $value);
         return null;
     }
 
@@ -1102,7 +1107,7 @@ class ebusdMQTTDevice extends IPSModule
                 continue;
             }
 
-            $variableTyp = $this->getIPSVariableType($fielddef['type']);
+            $variableTyp = $this->getIPSVariableType($fielddef);
 
             //Assoziationen vorhanden
             if (isset($fielddef['values'])) {
@@ -1151,28 +1156,53 @@ class ebusdMQTTDevice extends IPSModule
                 }
                 switch ($variableTyp) {
                     case VARIABLETYPE_INTEGER:
-                        $this->RegisterProfileInteger(
-                            $profileName,
-                            '',
-                            '',
-                            $unit,
-                            $TypeDef['MinValue'],
-                            $TypeDef['MaxValue'],
-                            $TypeDef['StepSize']
-                        );
+                        if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)){
+                            $this->RegisterProfileFloat(
+                                $profileName,
+                                '',
+                                '',
+                                $unit,
+                                $TypeDef['MinValue']/$fielddef['divisor'],
+                                $TypeDef['MaxValue']/$fielddef['divisor'],
+                                $TypeDef['StepSize']/$fielddef['divisor']
+                            );
+                        } else {
+                            $this->RegisterProfileInteger(
+                                $profileName,
+                                '',
+                                '',
+                                $unit,
+                                $TypeDef['MinValue'],
+                                $TypeDef['MaxValue'],
+                                $TypeDef['StepSize']
+                            );
+                        }
                         break;
 
                     case VARIABLETYPE_FLOAT:
-                        $this->RegisterProfileFloat(
-                            $profileName,
-                            '',
-                            '',
-                            $fielddef['unit'],
-                            $TypeDef['MinValue'],
-                            $TypeDef['MaxValue'],
-                            $TypeDef['StepSize'],
-                            $TypeDef['Digits']
-                        );
+                        if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)) {
+                            $this->RegisterProfileFloat(
+                                $profileName,
+                                '',
+                                '',
+                                $fielddef['unit'],
+                                $TypeDef['MinValue']/$fielddef['divisor'],
+                                $TypeDef['MaxValue']/$fielddef['divisor'],
+                                $TypeDef['StepSize']/$fielddef['divisor'],
+                                (int) log($fielddef['divisor'], 10)
+                            );
+                        } else {
+                            $this->RegisterProfileFloat(
+                                $profileName,
+                                '',
+                                '',
+                                $fielddef['unit'],
+                                $TypeDef['MinValue'],
+                                $TypeDef['MaxValue'],
+                                $TypeDef['StepSize'],
+                                $TypeDef['Digits']
+                            );
+                        }
                 }
             }
 
@@ -1215,19 +1245,36 @@ class ebusdMQTTDevice extends IPSModule
                     break;
 
                 case VARIABLETYPE_INTEGER:
-                    $id = $this->RegisterVariableInteger($ident, $objectName, $profileName);
-                    if ($id > 0) {
-                        $countOfVariables++;
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf('Integer Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
-                        );
+                    if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)){
+                        $id = $this->RegisterVariableFloat($ident, $objectName, $profileName);
+                        if ($id > 0) {
+                            $countOfVariables++;
+                            $this->Logger_Dbg(
+                                __FUNCTION__,
+                                sprintf('Float Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
+                            );
+                        } else {
+                            $this->Logger_Dbg(
+                                __FUNCTION__,
+                                sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName)
+                            );
+                        }
                     } else {
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf('Integer Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName)
-                        );
+                        $id = $this->RegisterVariableInteger($ident, $objectName, $profileName);
+                        if ($id > 0) {
+                            $countOfVariables++;
+                            $this->Logger_Dbg(
+                                __FUNCTION__,
+                                sprintf('Integer Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
+                            );
+                        } else {
+                            $this->Logger_Dbg(
+                                __FUNCTION__,
+                                sprintf('Integer Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName)
+                            );
+                        }
                     }
+
                     break;
 
                 case VARIABLETYPE_FLOAT:
@@ -1303,7 +1350,7 @@ class ebusdMQTTDevice extends IPSModule
                 continue;
             }
 
-            $variableType = $this->getIPSVariableType($fielddef['type']);
+            $variableType = $this->getIPSVariableType($fielddef);
 
             //Assoziationen vorhanden
             if (isset($fielddef['values'])) {
@@ -1336,10 +1383,13 @@ class ebusdMQTTDevice extends IPSModule
         return $ret;
     }
 
-    private function getIPSVariableType(string $type): int
+    private function getIPSVariableType(array $fielddef): int
     {
-        if (array_key_exists($type, self::DataTypes)) {
-            return self::DataTypes[$type]['VariableType'];
+        if (array_key_exists($fielddef['type'], self::DataTypes)) {
+            if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)){
+                return VARIABLETYPE_FLOAT;
+            }
+            return self::DataTypes[$fielddef['type']]['VariableType'];
         }
 
         trigger_error('Unsupported type: ' . $type, E_USER_ERROR);
