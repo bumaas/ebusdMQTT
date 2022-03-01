@@ -1208,7 +1208,7 @@ class ebusdMQTTDevice extends IPSModule
 
             switch ($variableTyp) {
                 case VARIABLETYPE_BOOLEAN:
-                    $id = $this->RegisterVariableBoolean($ident, $objectName, '~Switch');
+                    $id = @$this->RegisterVariableBoolean($ident, $objectName, '~Switch');
                     if ($id > 0) {
                         $countOfVariables++;
                         $this->Logger_Dbg(
@@ -1216,20 +1216,14 @@ class ebusdMQTTDevice extends IPSModule
                             sprintf('Boolean Variable angelegt. Ident: %s, Label: %s, Profil: %s', $ident, $objectName, '~Switch')
                         );
                     } else {
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf(
-                                'Boolean Variable konnte nicht angelegt werden. Ident: %s, Label: %s, Profil: %s',
-                                $ident,
-                                $objectName,
-                                '~Switch'
-                            )
+                        trigger_error(
+                            sprintf('Boolean Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident,  '~Switch'), E_USER_WARNING
                         );
                     }
                     break;
 
                 case VARIABLETYPE_STRING:
-                    $id = $this->RegisterVariableString($ident, $objectName);
+                    $id = @$this->RegisterVariableString($ident, $objectName);
                     if ($id > 0) {
                         $countOfVariables++;
                         $this->Logger_Dbg(
@@ -1237,16 +1231,15 @@ class ebusdMQTTDevice extends IPSModule
                             sprintf('String Variable angelegt. Ident: %s, Label: %s', $ident, $objectName)
                         );
                     } else {
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf('String Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $objectName)
+                        trigger_error(
+                            sprintf('String Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
                         );
                     }
                     break;
 
                 case VARIABLETYPE_INTEGER:
                     if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)){
-                        $id = $this->RegisterVariableFloat($ident, $objectName, $profileName);
+                        $id = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
                         if ($id > 0) {
                             $countOfVariables++;
                             $this->Logger_Dbg(
@@ -1254,13 +1247,12 @@ class ebusdMQTTDevice extends IPSModule
                                 sprintf('Float Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
                             );
                         } else {
-                            $this->Logger_Dbg(
-                                __FUNCTION__,
-                                sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName)
+                            trigger_error(
+                                sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
                             );
                         }
                     } else {
-                        $id = $this->RegisterVariableInteger($ident, $objectName, $profileName);
+                        $id = @$this->RegisterVariableInteger($ident, $objectName, $profileName);
                         if ($id > 0) {
                             $countOfVariables++;
                             $this->Logger_Dbg(
@@ -1268,9 +1260,8 @@ class ebusdMQTTDevice extends IPSModule
                                 sprintf('Integer Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
                             );
                         } else {
-                            $this->Logger_Dbg(
-                                __FUNCTION__,
-                                sprintf('Integer Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName)
+                            trigger_error(
+                                sprintf('Integer Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
                             );
                         }
                     }
@@ -1278,7 +1269,7 @@ class ebusdMQTTDevice extends IPSModule
                     break;
 
                 case VARIABLETYPE_FLOAT:
-                    $id = $this->RegisterVariableFloat($ident, $objectName, $profileName);
+                    $id = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
                     if ($id > 0) {
                         $countOfVariables++;
                         $this->Logger_Dbg(
@@ -1286,9 +1277,8 @@ class ebusdMQTTDevice extends IPSModule
                             sprintf('Float Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
                         );
                     } else {
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName)
+                        trigger_error(
+                            sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
                         );
                     }
                     break;

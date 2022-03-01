@@ -5,7 +5,8 @@
    2. [Abschluss der Installation](#2-abschluss-der-installation)
    3. [Überprüfung der Konfiguration](#3-berprfung-der-konfiguration)
    4. [Mit ebusctl Daten lesen und schreiben](#4-mit-ebusctl-daten-lesen-und-schreiben)
-   5. [IP-Symcon relevante Konfigurationsparameter](#5-ip-symcon-relevante-konfigurationsparameter)
+   5. [Über http ebusd Daten abfragen](#5-ber-http-ebusd-daten-abfragen)
+   6. [IP-Symcon relevante Konfigurationsparameter](#6-ip-symcon-relevante-konfigurationsparameter)
     
 Die detaillierte Installationsbeschreibung des eBUS Daemon ist im [ebusd Wiki](https://github.com/john30/ebusd/wiki) zu finden.
 
@@ -163,6 +164,53 @@ localhost: r -c 700 Hc1HeatCurve
 0.5
 ```
 Die Beschreibung aller Befehle findet sich im Kapitel [3.1 TCP client commands](https://github.com/john30/ebusd/wiki/3.1.-TCP-client-commands). 
+
+## 5. Über http ebusd Daten abfragen
+
+Als letztes sollte man prüfen, ob sich in einem Browser die ebusd Daten abfragen lassen:
+
+```
+http://raspberrypi:8080/data
+```
+
+Es sollten die Daten der erkannten Geräte geliefert werden:
+
+```
+{
+ "700": {
+  "messages": {   "AdaptHeatCurve": {
+    "name": "AdaptHeatCurve",
+    "passive": false,
+    "write": false,
+    "lastup": 1646136520,
+    "zz": 21,
+    "fields": {
+     "yesno": {"value": "nein"}
+    }
+   },
+   "BankHolidayEndPeriod": {
+    "name": "BankHolidayEndPeriod",
+    "passive": false,
+    "write": false,
+    "lastup": 1643318788,
+    "zz": 21,
+    "fields": {
+     "hto": {"value": "01.01.2015"}
+    }
+   },
+   "BankHolidayStartPeriod": {
+    "name": "BankHolidayStartPeriod",
+    "passive": false,
+    "write": false,
+    "lastup": 1643318788,
+    "zz": 21,
+    "fields": {
+     "hfrom": {"value": "01.01.2015"}
+    }
+   }, ...
+```
+
+Standardmäßig horcht der ebusd Service auf den Port 8080. Ist der Port bereits anderweitig belegt, dann ist in der ebusd Konfiguration ein alternativer Port zu setzen.
 
 Soweit zur Installation und zum Einstieg in ebusd.
 
