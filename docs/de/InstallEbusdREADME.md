@@ -214,13 +214,13 @@ Standardmäßig horcht der ebusd Service auf den Port 8080. Ist der Port bereits
 
 Soweit zur Installation und zum Einstieg in ebusd.
 
-## 5. IP-Symcon relevante Konfigurationsparameter
+## 6. IP-Symcon relevante Konfigurationsparameter
 Für die Integration von ebusd in IP-Symcon werden die Daten von ebusd über http und MQTT zur Vefügung gestellt. Dazu sind die Konfigurationsparameter in der _/etc/default/ebusd_ um folgende Optionen zu erweitern:
 ```
  --pollinterval 5  --accesslevel=* --httpport=8080 --mqtthost=<IP> --mqttport=<Port> --mqttuser=<USER> --mqttpass=<PASSWORT> --mqttjson
 ```
 - \<IP> - IP-Adresse des IP-Symcon Systems
-- \<PORT> - die in der MQTT Server Instanz eingetragene Portnummer
+- \<PORT> - die im Server Socket der MQTT Server Instanz eingetragene Portnummer
 - \<USER> - der in der MQTT Server Instanz eingetragene Benutzername
 - \<PASSWORT> - das in der MQTT Server Instanz eingetragene Passwort
 
