@@ -576,6 +576,7 @@ class ebusdMQTTDevice extends IPSModule
 
         //ebusd Konfiguration aufbereiten und als Attribut speichern
         $configurationMessages = $this->selectAndPrepareConfigurationMessages($configurationMessages);
+        ksort($configurationMessages);
         $this->WriteAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES, json_encode($configurationMessages, JSON_THROW_ON_ERROR));
 
         //Ausgabeliste aufbereiten und als Attribut speichern
@@ -1305,21 +1306,28 @@ class ebusdMQTTDevice extends IPSModule
     {
         $ret = [];
 
-        foreach ($configurationMessages as $key => $message) {
-            if (strpos($key, '-w') === false) {
-                /** @noinspection MissingOrEmptyGroupStatementInspection */
-                /** @noinspection PhpStatementHasEmptyBodyInspection */
-                if ($message['passive'] || $message['write']) {
-                    // continue;
-                }
-                $message['read']   = !$message['write'] || $message['passive'];
-                $message['write']  = $message['write'] || array_key_exists($key . '-w', $configurationMessages);
+        foreach ($configurationMessages as $message) {
+            $name = $message['name'];
+            if (!$message['write'] && !$message['passive']) { //nur lesbar
+                $message['read']   = true;
+                $message['write']  = $this->searchWritableMessage($name, $configurationMessages);
                 $message['lastup'] = 0;
-                $ret[$key]         = $message;
+                $ret[$name]         = $message;
             }
         }
         return $ret;
     }
+
+    private function searchWritableMessage($name, array $configurationMessages): bool
+    {
+        foreach ($configurationMessages as $message){
+            if (($name === $message['name']) && $message['write']){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private function getFieldValues(array $message, array $Payload, bool $numericValues = false): array
     {
@@ -1382,7 +1390,7 @@ class ebusdMQTTDevice extends IPSModule
             return self::DataTypes[$fielddef['type']]['VariableType'];
         }
 
-        trigger_error('Unsupported type: ' . $type, E_USER_ERROR);
+        trigger_error('Unsupported type: ' . $fielddef['type'], E_USER_ERROR);
         //return -1;
     }
 

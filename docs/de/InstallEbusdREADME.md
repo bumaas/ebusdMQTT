@@ -10,13 +10,11 @@
     
 Die detaillierte Installationsbeschreibung des eBUS Daemon ist im [ebusd Wiki](https://github.com/john30/ebusd/wiki) zu finden.
 
-Es gibt zahlreiche Wege, ebusd zu installieren. Da die Installation nicht ganz trivial ist, fasse ich hier einmal zusammen, wie sich ebusd auf einem Raspberry Pi 1 Mod.B unter Jessie installieren lässt.
+Es gibt zahlreiche Wege, ebusd zu installieren. Da die Installation nicht ganz trivial ist, fasse ich hier einmal zusammen, wie sich ebusd auf einem Raspberry Pi 1 Mod.B unter Buster installieren lässt.
 
 ## 1. Installation des richtigen Pakets
 
 Je nach eingesetzter Hardware und installiertem Betriebssystem ist das passende Packet von der Seite [ebusd releases](https://github.com/john30/ebusd/releases) zu installieren.
-
-Hinweis: für Debian 10 ("Buster") ist das Paket für Debian 9 ("Stretch) gültig.
 
 Tipp: die Architektur (amd64, armhf oder i386) und die OS Version findet man heraus mit 
 dpkg --print-architecture
@@ -25,12 +23,12 @@ cat /etc/os-release
 
 Wichtig: es ist ein Paket mit **MQTT Support** zu wählen!
 
-Wenn das passende Paket (z.B. ebusd-3.4_armhf-stretch_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren.:
+Wenn das passende Paket (z.B. ebusd-22.4_armv7-buster_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren.:
 ```
-wget https://github.com/john30/ebusd/releases/download/v3.4/ebusd-3.4_armhf-stretch_mqtt1.deb
+wget https://github.com/john30/ebusd/releases/download/v22.4/ebusd-22.4_armv7-buster_mqtt1.deb
 ```
 ```
-sudo dpkg -i ebusd-3.4_armhf-stretch_mqtt1.deb
+sudo dpkg -i ebusd-22.4_armv7-buster_mqtt1.deb
 ```
 Falls es bei der Installation des ebusd Paketes zu einer Fehlermeldung kommen sollte wie:
 
@@ -90,16 +88,16 @@ Dadurch werden die Konfigurationsdateien im Unterverzeichnis /home/pi/ebusd-conf
 
 <br>
 zu 3.)
-Im Logfile muss erkennbar sein, dass der Adapter gefunden wurde und dass ein automatischer Scan durchgeführt wurde. Wenn es beim Scan zu Timeouts kommt, kann versucht werden, mit der zusätzlichen Option --receivetimeout=100000 das Limit zu erhöhen. 
+Im Logfile /var/log/ebusd.log muss erkennbar sein, dass der Adapter gefunden wurde und dass ein automatischer Scan durchgeführt wurde. Wenn es beim Scan zu Timeouts kommt, kann versucht werden, mit der zusätzlichen Option --receivetimeout=100000 das Limit zu erhöhen. 
 
 Ein erfolgreicher Star sieht so aus:
 ```
-2020-09-14 10:15:07.029 [main notice] ebusd 3.4.v3.3-51-g57eae05 started with auto scan
-2020-09-14 10:15:07.040 [bus notice] bus started with own address 31/36
-2020-09-14 10:15:07.053 [mqtt notice] connection established
-2020-09-14 10:15:07.062 [bus notice] signal acquired
-2020-09-14 10:15:13.923 [bus notice] new master 10, master count 2
-2020-09-14 10:15:13.986 [bus notice] new master 03, master count 3
+2022-11-11 17:08:44.010 [main notice] ebusd 22.4.v22.4 started with auto scan on device /dev/ttyebus
+2022-11-11 17:08:44.029 [bus notice] bus started with own address 31/36
+2022-11-11 17:08:44.033 [mqtt notice] connection established
+2022-11-11 17:08:44.040 [bus notice] signal acquired
+2022-11-11 17:08:46.003 [bus notice] new master 71, master count 2
+2022-11-11 17:08:46.062 [bus notice] new master 03, master count 3
 ```
 
 Tipp: wenn der Dienst neu gestartet werden soll, geht das am einfachsten über
@@ -120,7 +118,7 @@ Wenn diese Dinge geschafft sind, ist im nächsten Schritt zu prüfen, ob ebusd d
 Das wird überprüft mit 'ebusctl i'. Hier ein Auszug:
 
 ```
-version:  ebusd 3.4.v3.3-51-g57eae05
+version: ebusd 22.4.v22.4
 ...
 signal: acquired
 ...
