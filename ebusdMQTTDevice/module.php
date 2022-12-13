@@ -577,6 +577,7 @@ class ebusdMQTTDevice extends IPSModule
         //ebusd Konfiguration aufbereiten und als Attribut speichern
         $configurationMessages = $this->selectAndPrepareConfigurationMessages($configurationMessages);
         ksort($configurationMessages);
+        $this->Logger_Dbg(__FUNCTION__, 'configurationMessages: ' . json_encode($configurationMessages, JSON_THROW_ON_ERROR));
         $this->WriteAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES, json_encode($configurationMessages, JSON_THROW_ON_ERROR));
 
         //Ausgabeliste aufbereiten und als Attribut speichern
@@ -1306,13 +1307,13 @@ class ebusdMQTTDevice extends IPSModule
     {
         $ret = [];
 
-        foreach ($configurationMessages as $message) {
-            $name = $message['name'];
-            if (!$message['write'] && !$message['passive']) { //nur lesbar
-                $message['read']   = true;
-                $message['write']  = $this->searchWritableMessage($name, $configurationMessages);
+        foreach ($configurationMessages as $key => $message) {
+            if (strpos($key, '-w') === false) {
+                $name = $message['name'];
+                $message['read']   = !$message['write'] || $message['passive'];
+                $message['write']  = $message['write'] || $this->searchWritableMessage($name, $configurationMessages);
                 $message['lastup'] = 0;
-                $ret[$name]         = $message;
+                $ret[$name]        = $message;
             }
         }
         return $ret;
