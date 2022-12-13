@@ -14,7 +14,7 @@ class ebusdMQTTDevice extends IPSModule
     use ebusd2MQTTHelper;
 
     private const STATUS_INST_IP_IS_EMPTY      = 202;
-    private const STATUS_INST_IP_IS_INVALID    = 204; //IP Adresse ist ungültig
+    private const STATUS_INST_IP_IS_INVALID    = 204; //IP-Adresse ist ungültig
     private const STATUS_INST_TOPIC_IS_INVALID = 203;
 
     //property names
@@ -188,7 +188,7 @@ class ebusdMQTTDevice extends IPSModule
                 'IPS_RequestAction(%s, \'%s\', \'%s\');',
                 $this->InstanceID,
                 'publishPollPriorities',
-                json_encode(['old' => [], 'new' => $pollPriorities], JSON_THROW_ON_ERROR, 512)
+                json_encode(['old' => [], 'new' => $pollPriorities], JSON_THROW_ON_ERROR)
             );
             IPS_RunScriptText($scriptText);
             //$this->publishPollPriorities([], $pollPriorities); todo
@@ -295,7 +295,7 @@ class ebusdMQTTDevice extends IPSModule
                 return;
 
             case 'VariableList_onEdit':
-                $parameter = json_decode($Value, true);
+                $parameter = json_decode($Value, true, 512,JSON_THROW_ON_ERROR);
                 if ($parameter['readable'] !== self::OK_SIGN) {
                     $this->MsgBox(sprintf('Die Variable "%s" ist nicht lesbar. Die Änderungen werden nicht gespeichert.', $parameter['messagename']));
                 }
@@ -518,7 +518,7 @@ class ebusdMQTTDevice extends IPSModule
     {
         $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true, 512, JSON_THROW_ON_ERROR);
         $count                 = 0;
-        foreach ($variableList as $key => $item) {
+        foreach ($variableList as $item) {
             if (($item[self::FORM_ELEMENT_READABLE] === self::OK_SIGN) && $item[self::FORM_ELEMENT_KEEP]) {
                 $count += $this->RegisterVariablesOfMessage($configurationMessages[$item[self::FORM_ELEMENT_MESSAGENAME]]);
             }
@@ -631,7 +631,7 @@ class ebusdMQTTDevice extends IPSModule
 
     private function getUpdatedVariableList(array $variableList): array
     {
-        //Die VariablenListe wird aktualisiert: alle Messages werden daraufhin überprüft, ob die zugehörigen Variablen existieren
+        //Die VariablenListe wird aktualisiert: Alle Messages werden daraufhin überprüft, ob die zugehörigen Variablen existieren
         $variableListUpdated = [];
         foreach ($variableList as $item) {
             //$this->Logger_Dbg(__FUNCTION__, json_encode($item));
@@ -927,30 +927,26 @@ class ebusdMQTTDevice extends IPSModule
 
         $value = $fieldValues[$key]['value'];
 
-        if (!$numericValues && count($associations)) {
-            if (is_string($fieldValues[$key]['value'])) {
-                $value = $this->getValueOfAssoziation($fieldValues[$key]['value'], $associations);
-                if ($value === null) {
-                    $this->Logger_Dbg(
-                        __FUNCTION__,
-                        sprintf(
-                            'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
-                            $fieldValues[$key]['value'],
-                            $key,
-                            $fieldValues[$key]['name'],
-                            json_encode($associations, JSON_THROW_ON_ERROR)
-                        )
-                    );
-                    trigger_error(__FUNCTION__ . ': ' .  sprintf(
-                                      'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
-                                      $fieldValues[$key]['value'],
-                                      $key,
-                                      $fieldValues[$key]['name'],
-                                      json_encode($associations, JSON_THROW_ON_ERROR)
-                                  ));
-                }
-            } else {
-                $value = $fieldValues[$key]['value'];
+        if (!$numericValues && is_string($value) && count($associations)) {
+            $value = $this->getValueOfAssoziation($fieldValues[$key]['value'], $associations);
+            if ($value === null) {
+                $this->Logger_Dbg(
+                    __FUNCTION__,
+                    sprintf(
+                        'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
+                        $fieldValues[$key]['value'],
+                        $key,
+                        $fieldValues[$key]['name'],
+                        json_encode($associations, JSON_THROW_ON_ERROR)
+                    )
+                );
+                trigger_error(__FUNCTION__ . ': ' .  sprintf(
+                                  'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
+                                  $fieldValues[$key]['value'],
+                                  $key,
+                                  $fieldValues[$key]['name'],
+                                  json_encode($associations, JSON_THROW_ON_ERROR)
+                              ));
             }
         }
 
@@ -1408,7 +1404,7 @@ class ebusdMQTTDevice extends IPSModule
         }
 
         if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
-            $this->SetStatus(self::STATUS_INST_IP_IS_INVALID); //IP Adresse ist ungültig
+            $this->SetStatus(self::STATUS_INST_IP_IS_INVALID); //IP-Adresse ist ungültig
             $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid IP'));
             return;
         }
