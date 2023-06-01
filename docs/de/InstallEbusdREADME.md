@@ -62,11 +62,12 @@ zu 1.) Es empfiehlt sich mit nur drei Einstellungen zu beginnen:
 EBUSD_OPTS="--device=/dev/ttyebus --scanconfig --configpath=http://ebusd.eu/config/"
 ```
 
-Der erste Parameter besagt, wo der Buskoppler angeschlossen ist.
+Der erste Parameter besagt, um welchen Typen es sich beim Buskoppler handelt und wo er angeschlossen ist.
 Beispiele: 
 
 - --device=/dev/ttyebus (aufgesteckt und über [ttyebus](https://github.com/ebus/ttyebus) Treiber angesprochen)
 - --device=192.168.2.20:5000 (über Ethernet und TCP verbunden - die Adresse ist ein Beispiel. Bei dem LAN-Gateway von Esera werden die Daten (Ip-Adresse, Port und Operation-Mode 'TCP-Server') im configtool gesetzt.)
+- --device=ens:/dev/ttyUSB0 (enhanced high speed Adapter an USB0)
 
 Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
 
