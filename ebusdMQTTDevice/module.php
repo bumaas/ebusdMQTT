@@ -1272,11 +1272,11 @@ class ebusdMQTTDevice extends IPSModule
                         $countOfVariables++;
                         $this->Logger_Dbg(
                             __FUNCTION__,
-                            sprintf('Float Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
+                            sprintf('Float Variable angelegt. Ident: %s, Name: %s, Label: %s', $ident, $objectName, $profileName)
                         );
                     } else {
                         trigger_error(
-                            sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
+                            sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Name: %s, Profile: %s', $ident, $objectName, $profileName), E_USER_WARNING
                         );
                     }
                     break;

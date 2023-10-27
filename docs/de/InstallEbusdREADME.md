@@ -57,9 +57,9 @@ Zum Abschluss der Installation erfolgen folgende Hinweise, die auszuführen sind
 4. Make the daemon autostart with 'systemctl enable ebusd'
 ```
 
-zu 1.) Es empfiehlt sich mit nur drei Einstellungen zu beginnen:
+zu 1.) Es empfiehlt sich mit nur vier Einstellungen zu beginnen:
 ```
-EBUSD_OPTS="--device=/dev/ttyebus --scanconfig --configpath=http://ebusd.eu/config/"
+EBUSD_OPTS="--device=/dev/ttyebus --scanconfig --configpath=http://ebusd.eu/config/ --accesslevel=*"
 ```
 
 Der erste Parameter besagt, um welchen Typen es sich beim Buskoppler handelt und wo er angeschlossen ist.
@@ -72,6 +72,8 @@ Beispiele:
 Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
 
 Der dritte Parameter beinhaltet den Pfad zu den Konfigurationsdeteien. Im Beispiel werden die aktuellen Konfigurationsdateien beim Start von der Webadresse http://ebusd.eu/config/ geholt.
+
+Der vierte Parameter besagt, dass es keine Zugriffsbeschränkungen geben soll.
 
 Alternativ bietet sich an, die benötigten Dateien lokal zu speichern und den Parameter auf den lokalen Pfad zu setzen.
 
