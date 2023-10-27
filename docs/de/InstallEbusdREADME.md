@@ -115,7 +115,7 @@ Wenn man ebusd als Docker laufen lässt, empfiehlt es sich diesen mit Bridge und
 ebusd -f --scanconfig --port=8888 --device=<IP LANGateway>:<Port LANGateway>
 ```
 
-### 3. Überprüfung der Konfiguration
+## 3. Überprüfung der Konfiguration
 Wenn diese Dinge geschafft sind, ist im nächsten Schritt zu prüfen, ob ebusd die angeschlossenen eBUS Geräte korrekt findet.
 
 Das wird überprüft mit 'ebusctl i'. Hier ein Auszug:
