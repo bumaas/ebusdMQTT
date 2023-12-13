@@ -47,9 +47,9 @@ class ebusdMQTTDevice extends IPSModule
     private const FORM_ELEMENT_KEEP          = 'keep';
     private const FORM_ELEMENT_OBJECTIDENTS  = 'objectidents';
 
-    private $trace               = false;
+    private bool $trace               = false;
 
-    private $testFunctionsActive = false; //button "Publish Poll Priorities" aktivieren
+    private bool $testFunctionsActive = false; //button "Publish Poll Priorities" aktivieren
 
     // die von ebusd unterstützen Datentypen
     //siehe https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types
@@ -343,7 +343,7 @@ class ebusdMQTTDevice extends IPSModule
 
         try {
             $Payload = json_decode($Buffer->Payload, true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             $txtError = sprintf(
                 'ERROR! (will be solved with ebusd > 3.4) - JSON Error (%s) at Topic "%s": %s, json: %s',
                 json_last_error(),
@@ -360,13 +360,13 @@ class ebusdMQTTDevice extends IPSModule
         }
 
         //Globale Meldungen werden extra behandelt
-        if (strpos($Buffer->Topic, MQTT_GROUP_TOPIC . '/global/') === 0) {
+        if (str_starts_with($Buffer->Topic, MQTT_GROUP_TOPIC . '/global/')) {
             $this->checkGlobalMessage($Buffer->Topic, $Buffer->Payload);
             return;
         }
 
         //prüfen, ob der Topic korrekt ist
-        if (strpos($Buffer->Topic, sprintf('%s/%s/', MQTT_GROUP_TOPIC, $mqttTopic)) === false) {
+        if (!str_contains($Buffer->Topic, sprintf('%s/%s/', MQTT_GROUP_TOPIC, $mqttTopic))) {
             $this->Logger_Dbg('MQTT Topic invalid', $Buffer->Topic);
             return;
         }
@@ -685,7 +685,7 @@ class ebusdMQTTDevice extends IPSModule
         $options = [self::EMPTY_OPTION_VALUE];
 
         foreach ($result as $circuitname => $circuit) {
-            if (!in_array($circuitname, ['global', 'broadcast']) && strpos((string)$circuitname, 'scan.') !== 0) {
+            if (!in_array($circuitname, ['global', 'broadcast']) && !str_starts_with((string)$circuitname, 'scan.')) {
                 $options[] = ['caption' => $circuitname, 'value' => (string)$circuitname];
             }
         }
@@ -776,7 +776,7 @@ class ebusdMQTTDevice extends IPSModule
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5); //max 5 Sekunden für Verbindungsaufbau
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5); //max. 5 Sekunden für Verbindungsaufbau
 
         $result_json = curl_exec($ch);
         curl_close($ch);
@@ -1304,7 +1304,7 @@ class ebusdMQTTDevice extends IPSModule
         $ret = [];
 
         foreach ($configurationMessages as $key => $message) {
-            if (strpos($key, '-w') === false) {
+            if (!str_contains($key, '-w')) {
                 $name = $message['name'];
                 $message['read']   = !$message['write'] || $message['passive'];
                 $message['write']  = $message['write'] || $this->searchWritableMessage($name, $configurationMessages);

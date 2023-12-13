@@ -94,11 +94,10 @@ trait ebusd2MQTTHelper
         if (!isset($configurationMessages[$messageId])){
             debug_print_backtrace();
             trigger_error('Unexpected messageId: ' . $messageId, E_USER_ERROR);
-            return '';
         }
         $messageDef            = $configurationMessages[$messageId];
 
-        //einige messages (z.B z1ActualRoomTempDesired) haben mehr als nur ein Feld, aber nur ein Feld ist relevant
+        //einige messages (z. B. z1ActualRoomTempDesired) haben mehr als nur ein Feld, aber nur ein Feld ist relevant
         foreach ($messageDef['fielddefs'] as $fieldDef) {
             if ($fieldDef['type'] !== 'IGN') {
                 break;

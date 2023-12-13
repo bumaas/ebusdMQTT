@@ -3,10 +3,10 @@
   "author":        "bumaas",
   "name":          "ebusd",
   "compatibility": {
-    "version": "6.0"
+    "version": "7.0"
   },
   "url":           "",
   "version":       "1.1",
-  "build":         16,
-  "date":          1698413199
+  "build":         17,
+  "date":          1702467940
 }
