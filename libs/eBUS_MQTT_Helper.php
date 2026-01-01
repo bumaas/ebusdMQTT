@@ -5,6 +5,19 @@ define('MQTT_GROUP_TOPIC', 'ebusd');
 
 trait ebusd2MQTTHelper
 {
+    private const MODULE_ID_MQTT_SERVER     = '{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}';
+    private const DATA_ID_MQTT_SERVER_TX    = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
+    private const MODULE_ID_ARCHIVE_HANDLER = '{43192F0B-135B-4CE7-A0A7-1475603F3060}';
+
+    protected function GetArchiveHandlerID(): int
+    {
+        static $archiveHandlerID = null;
+        if ($archiveHandlerID === null) {
+            $ids = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}');
+            $archiveHandlerID = count($ids) > 0 ? $ids[0] : 0;
+        }
+        return $archiveHandlerID;
+    }
 
     protected function MsgBox(string $Message): void
     {
@@ -12,6 +25,7 @@ trait ebusd2MQTTHelper
 
         $this->UpdateFormField('MsgBox', 'visible', true);
     }
+
     protected function GetParent($instanceID): int
     {
         $instance = IPS_GetInstance($instanceID);
@@ -91,11 +105,11 @@ trait ebusd2MQTTHelper
     private function getPayload(string $messageId, $Value): string
     {
         $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true, 512, JSON_THROW_ON_ERROR);
-        if (!isset($configurationMessages[$messageId])){
+        if (!isset($configurationMessages[$messageId])) {
             debug_print_backtrace();
             trigger_error('Unexpected messageId: ' . $messageId, E_USER_ERROR);
         }
-        $messageDef            = $configurationMessages[$messageId];
+        $messageDef = $configurationMessages[$messageId];
 
         //einige messages (z. B. z1ActualRoomTempDesired) haben mehr als nur ein Feld, aber nur ein Feld ist relevant
         foreach ($messageDef['fielddefs'] as $fieldDef) {
@@ -104,7 +118,7 @@ trait ebusd2MQTTHelper
             }
         }
 
-        if (!isset($fieldDef)){
+        if (!isset($fieldDef)) {
             trigger_error('no valid fielDef found', E_USER_NOTICE);
             return '';
         }

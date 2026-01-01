@@ -13,12 +13,11 @@ class ebusdMQTTDevice extends IPSModule
 {
     use ebusd2MQTTHelper;
 
-    private const DATA_ID_MQTT_SERVER_TX = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
     private const PT_PUBLISH = 3; //Packet Type Publish
-    private const QOS_0 = 0; //Quality of Service 0
+    private const QOS_0      = 0; //Quality of Service 0
 
-    private const STATUS_INST_PORT_IS_INVALID = 202;
-    private const STATUS_INST_IP_IS_INVALID   = 204;
+    private const STATUS_INST_PORT_IS_INVALID  = 202;
+    private const STATUS_INST_IP_IS_INVALID    = 204;
     private const STATUS_INST_TOPIC_IS_INVALID = 203;
 
     //property names
@@ -37,8 +36,8 @@ class ebusdMQTTDevice extends IPSModule
     private const ATTR_CHECKCONNECTIONTIMER         = 'CheckConnectionTimer';
 
     //timer names
-    private const TIMER_REFRESH_ALL_MESSAGES = 'refreshAllMessages';
-    private const TIMER_CHECK_CONNECTION     = 'checkConnection';
+    private const TIMER_REQUEST_ALL_VALUES = 'requestAllValues';
+    private const TIMER_CHECK_CONNECTION   = 'checkConnection';
 
     //form element names
     private const FORM_LIST_VARIABLELIST     = 'VariableList';
@@ -137,9 +136,11 @@ class ebusdMQTTDevice extends IPSModule
     {
         //Never delete this line!
         parent::Create();
-        $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}'); //MQTT Server
+        $this->ConnectParent(self::MODULE_ID_MQTT_SERVER);
 
         $this->RegisterPropertyString(self::PROP_HOST, '');
+        // We use String for Port to keep compatibility with existing instances.
+        // Changing this to Integer would reset the value for users during an update.
         $this->RegisterPropertyString(self::PROP_PORT, '8080');
         $this->RegisterPropertyString(self::PROP_CIRCUITNAME, '');
         $this->RegisterPropertyInteger(self::PROP_UPDATEINTERVAL, 0);
@@ -153,7 +154,7 @@ class ebusdMQTTDevice extends IPSModule
         $this->RegisterAttributeBoolean(self::ATTR_SIGNAL, true);
         $this->RegisterAttributeInteger(self::ATTR_CHECKCONNECTIONTIMER, 0);
 
-        $this->RegisterTimer(self::TIMER_REFRESH_ALL_MESSAGES, 0, 'IPS_RequestAction(' . $this->InstanceID . ', "timerRefreshAllMessages", "");');
+        $this->RegisterTimer(self::TIMER_REQUEST_ALL_VALUES, 0, 'IPS_RequestAction(' . $this->InstanceID . ', "timerRefreshAllMessages", "");');
         $this->RegisterTimer(self::TIMER_CHECK_CONNECTION, 0, 'IPS_RequestAction(' . $this->InstanceID . ', "timerCheckConnection", "");');
 
         //we will wait until the kernel is ready
@@ -173,7 +174,7 @@ class ebusdMQTTDevice extends IPSModule
         $circuitName = $this->ReadPropertyString(self::PROP_CIRCUITNAME);
         if ($circuitName === '') {
             $this->SetStatus(self::STATUS_INST_TOPIC_IS_INVALID);
-            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, 0);
+            $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, 0);
             return;
         }
 
@@ -185,7 +186,7 @@ class ebusdMQTTDevice extends IPSModule
         if ($this->HasActiveParent()) {
             $filter = sprintf('.*(ebusd\/%s|ebusd\/%s).*', strtolower($circuitName), self::MODEL_GLOBAL_NAME);
             if ($this->trace) {
-                $this->Logger_Dbg('Filter', $filter);
+                $this->logDebug('Filter', $filter);
             }
             // SetReceiveDataFilter prüft intern meist auf Änderungen, wir können es hier sicher aufrufen
             $this->SetReceiveDataFilter($filter);
@@ -199,20 +200,23 @@ class ebusdMQTTDevice extends IPSModule
         $currentStatus = $this->GetStatus();
         if ($currentStatus === IS_ACTIVE) {
             $interval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000;
-            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, $interval);
+            $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, $interval);
 
-            // Einmalig Poll-Prioritäten pushen (verzögert, damit der Parent sicher bereit ist)
+            // Einmalig die Poll-Prioritäten pushen (verzögert, damit der Parent sicher bereit ist)
             $pollPriorities = $this->ReadAttributeString(self::ATTR_POLLPRIORITIES);
-            $this->RegisterOnceTimer('DeferredPollPriorities', sprintf(
-                'IPS_RequestAction(%d, "%s", %s);',
-                $this->InstanceID,
-                'publishPollPriorities',
-                var_export(json_encode(['old' => [], 'new' => json_decode($pollPriorities, true)], JSON_THROW_ON_ERROR), true)
-            ));
+            $this->RegisterOnceTimer(
+                'DeferredPollPriorities',
+                sprintf(
+                    'IPS_RequestAction(%d, "%s", %s);',
+                    $this->InstanceID,
+                    'publishPollPriorities',
+                    var_export(json_encode(['old' => [], 'new' => json_decode($pollPriorities, true)], JSON_THROW_ON_ERROR), true)
+                )
+            );
         } else {
             // Wenn nicht ACTIVE, sollte der Refresh-Timer aus sein.
             // Der CheckConnection-Timer wird bereits in checkConnection() gesteuert.
-            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, 0);
+            $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, 0);
         }
 
         // 6. Summary setzen
@@ -254,7 +258,7 @@ class ebusdMQTTDevice extends IPSModule
 
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data): void
     {
-        $this->Logger_Dbg(
+        $this->logDebug(
             __FUNCTION__,
             sprintf('SenderID: %s, Message: %s, Data: %s', $SenderID, $Message, json_encode($Data, JSON_THROW_ON_ERROR))
         );
@@ -274,12 +278,12 @@ class ebusdMQTTDevice extends IPSModule
                 // oder wenn wir aktuell nicht aktiv sind und eine Chance auf Besserung besteht.
 
                 $newParentStatus = $Data[0];
-                $currentStatus = $this->GetStatus();
+                $currentStatus   = $this->GetStatus();
 
                 // Logik: Nur neu konfigurieren, wenn der Parent nun bereit ist
                 // oder wenn wir bisher wegen des Parents inaktiv waren.
                 if ($newParentStatus === IS_ACTIVE || $currentStatus !== IS_ACTIVE) {
-                    $this->Logger_Dbg(__FUNCTION__, 'Parent status changed to ' . $newParentStatus . '. Triggering ApplyChanges.');
+                    $this->logDebug(__FUNCTION__, 'Parent status changed to ' . $newParentStatus . '. Triggering ApplyChanges.');
                     $this->ApplyChanges();
                 }
                 break;
@@ -288,13 +292,18 @@ class ebusdMQTTDevice extends IPSModule
 
     public function RequestAction($Ident, $Value): void
     {
-        $this->Logger_Dbg(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)));
+        $this->logDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)));
 
         if (!$this->HasActiveParent()) {
             $this->checkConnection();
-            $this->Logger_Dbg(__FUNCTION__, 'No active parent - ignored');
+            $this->logDebug(__FUNCTION__, 'No active parent - ignored');
             return;
         }
+
+        // Hilfsfunktion für JSON-Decoding von $Value
+        $decodeValue = function () use ($Value) {
+            return json_decode((string)$Value, true, 512, JSON_THROW_ON_ERROR);
+        };
 
         switch ($Ident) {
             case 'btnReadCircuits':
@@ -311,12 +320,12 @@ class ebusdMQTTDevice extends IPSModule
                 return;
 
             case 'btnReadValues':
-                $ret = $this->UpdateCurrentValues(json_decode($Value, true, 512, JSON_THROW_ON_ERROR));
+                $ret = $this->UpdateCurrentValues($decodeValue());
                 $this->MsgBox($ret . ' Werte gelesen');
                 return;
 
             case 'btnCreateUpdateVariables':
-                $ret = $this->CreateAndUpdateVariables(json_decode($Value, true, 512, JSON_THROW_ON_ERROR));
+                $ret = $this->CreateAndUpdateVariables($decodeValue());
                 $this->MsgBox($ret . ' Variablen angelegt/aktualisiert');
                 return;
 
@@ -331,76 +340,53 @@ class ebusdMQTTDevice extends IPSModule
                 return;
 
             case 'timerRefreshAllMessages':
-                $this->refreshAllMessages();
+                $this->requestAllValues();
                 return;
 
             case 'publishPollPriorities':
-                $priorities = json_decode($Value, true, 512, JSON_THROW_ON_ERROR);
+                $priorities = $decodeValue();
                 $this->publishPollPriorities($priorities['old'], $priorities['new']);
                 return;
 
             case 'VariableList_onEdit':
-                $parameter = json_decode($Value, true, 512,JSON_THROW_ON_ERROR);
+                $parameter = json_decode($Value, true, 512, JSON_THROW_ON_ERROR);
                 if ($parameter['readable'] !== self::OK_SIGN) {
-                    $this->MsgBox(sprintf('Die Variable "%s" ist nicht lesbar. Die Änderungen werden nicht gespeichert.', $parameter['messagename']));
+                    $this->MsgBox(
+                        sprintf(
+                            'Die Variable "%s" ist nicht lesbar. Die Änderungen werden nicht gespeichert.',
+                            $parameter['messagename'] ?? 'unbekannt'
+                        )
+                    );
                 }
                 return;
         }
 
-        $message = $Ident;
-
         $topic   = sprintf('%s/%s/%s/set', MQTT_GROUP_TOPIC, $this->ReadPropertyString(self::PROP_CIRCUITNAME), $Ident);
-        $payload = $this->getPayload($message, $Value);
+        $payload = $this->getPayload($Ident, $Value);
         $this->publish($topic, $payload);
     }
 
     public function ReceiveData($JSONString): string
     {
-        $this->Logger_Dbg(__FUNCTION__, $JSONString);
+        $this->logDebug(__FUNCTION__, $JSONString);
 
         //prüfen, ob CircuitName vorhanden
-        $mqttTopic = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
-        if (empty($mqttTopic)) {
+        $mqttTopicProperty = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
+        if (empty($mqttTopicProperty)) {
             return '';
         }
+        $mqttTopicLower = strtolower($mqttTopicProperty);
 
-        //prüfen, ob buffer gefüllt ist und Topic und Payload vorhanden sind
-        $Buffer = json_decode($JSONString, false, 512, JSON_THROW_ON_ERROR);
-        if (($Buffer === false) || ($Buffer === null) || !property_exists($Buffer, 'Topic') || !property_exists($Buffer, 'Payload')) {
-            return '';
-        }
 
-        //prüfen, ob Payload gefüllt ist
-        $this->Logger_Dbg('MQTT Topic/Payload', sprintf('Topic: %s -- Payload: %s', $Buffer->Topic, $Buffer->Payload));
-
-        /** @noinspection JsonEncodingApiUsageInspection */
-        $Payload = json_decode($Buffer->Payload, true);
-
-        /*
-        if (json_last_error() !== 0) {
-            $txtError =
-                sprintf('ERROR! (will be solved with ebusd > 3.4) - JSON Error (%s) at Topic "%s": %s, json: %s', json_last_error(), $Buffer->Topic, json_last_error_msg(), $Buffer->Payload);
-            $this->Logger_Dbg(__FUNCTION__, $txtError);
-            //trigger_error($txtError, E_USER_NOTICE);
-            return;
-        }
-        */
-
+        // prüfen, ob buffer korrektes JSON ist
         try {
-            $Payload = json_decode($Buffer->Payload, true, 512, JSON_THROW_ON_ERROR);
+            $Buffer = json_decode($JSONString, false, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException) {
-            $txtError = sprintf(
-                'ERROR! (will be solved with ebusd > 3.4) - JSON Error (%s) at Topic "%s": %s, json: %s',
-                json_last_error(),
-                $Buffer->Topic,
-                json_last_error_msg(),
-                $Buffer->Payload
-            );
-            $this->Logger_Dbg(__FUNCTION__ . ' (ERROR)', $txtError);
+            return '';
         }
 
-        if ($Payload === null) {
-            $this->Logger_Dbg(__FUNCTION__, 'Payload is not set: ' . $Buffer->Payload);
+        //prüfen, ob Topic und Payload vorhanden sind
+        if (!isset($Buffer->Topic, $Buffer->Payload)) {
             return '';
         }
 
@@ -411,20 +397,42 @@ class ebusdMQTTDevice extends IPSModule
         }
 
         //prüfen, ob der Topic korrekt ist
-        if (!str_contains($Buffer->Topic, sprintf('%s/%s/', MQTT_GROUP_TOPIC, $mqttTopic))) {
-            $this->Logger_Dbg('MQTT Topic invalid', $Buffer->Topic);
+        $expectedPrefix = MQTT_GROUP_TOPIC . '/' . $mqttTopicLower . '/';
+        if (!str_starts_with($Buffer->Topic, $expectedPrefix)) {
             return '';
         }
 
-        $messageId = str_replace(MQTT_GROUP_TOPIC . '/' . strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME)) . '/', '', $Buffer->Topic);
+        $this->logDebug('MQTT Topic/Payload', sprintf('Topic: %s -- Payload: %s', $Buffer->Topic, $Buffer->Payload));
+
+        // Payload dekodieren (ebusd > 3.4 sendet valides JSON, ältere Versionen evtl. nicht)
+        try {
+            $Payload = json_decode($Buffer->Payload, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            $txtError = sprintf(
+                'ERROR! (ebusd version issue?) - JSON Error (%s) at Topic "%s": %s, json: %s',
+                json_last_error(),
+                $Buffer->Topic,
+                json_last_error_msg(),
+                $Buffer->Payload
+            );
+            $this->logDebug(__FUNCTION__ . ' (ERROR)', $txtError);
+            return '';
+        }
+
+        if ($Payload === null) {
+            $this->logDebug(__FUNCTION__, 'Payload is null: ' . $Buffer->Payload);
+            return '';
+        }
+
+        $messageId = str_replace(MQTT_GROUP_TOPIC . '/' . $mqttTopicLower . '/', '', $Buffer->Topic);
         if ($this->trace) {
-            $this->Logger_Dbg('MQTT messageId', $messageId);
+            $this->logDebug('MQTT messageId', $messageId);
         }
 
         // ist die Konfiguration der Message bekannt?
         $configurationMessages = json_decode($this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES), true, 512, JSON_THROW_ON_ERROR);
-        if (!array_key_exists($messageId, $configurationMessages)) {
-            $this->Logger_Dbg(
+        if (!isset($configurationMessages[$messageId])) {
+            $this->logDebug(
                 'MQTT messageId - not found',
                 sprintf('%s, %s', $messageId, $this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES))
             );
@@ -433,30 +441,27 @@ class ebusdMQTTDevice extends IPSModule
             return '';
         }
 
-        $messageDef = $configurationMessages[$messageId];
-
-        //ist die Message zum Speichern markiert?
-        $jsonVariableList = $this->ReadAttributeString(self::ATTR_VARIABLELIST);
-
-        $keep = false;
-        foreach (json_decode($jsonVariableList, true, 512, JSON_THROW_ON_ERROR) as $entry) {
-            if (($entry[self::FORM_ELEMENT_MESSAGENAME] === $messageId) && ($entry[self::FORM_ELEMENT_KEEP] === true)) {
-                $keep = true;
+        // Prüfen, ob die Message zum Speichern markiert ist
+        $variableList = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
+        $keep         = false;
+        foreach ($variableList as $entry) {
+            if ($entry[self::FORM_ELEMENT_MESSAGENAME] === $messageId) {
+                $keep = $entry[self::FORM_ELEMENT_KEEP] ?? false;
                 break;
             }
         }
 
-        if ($keep === false) {
-            $this->Logger_Dbg(
-                'MQTT messageId - not found',
-                sprintf('Message \'%s\' is not marked to be stored', $messageId)
-            );
+        if (!$keep) {
+            $this->logDebug('MQTT messageId - skip', "Message '$messageId' is not marked to be stored");
             return '';
         }
 
+        // Werte verarbeiten
+        $messageDef = $configurationMessages[$messageId];
         foreach ($this->getFieldValues($messageDef, $Payload, false) as $value) {
             //wenn die Statusvariable existiert, dann wird sie geschrieben
-            if (@$this->GetIDForIdent($value['ident'])) {
+            $variableId = @$this->GetIDForIdent($value['ident']);
+            if ($variableId > 0) {
                 $this->SetValue($value['ident'], $value['value']);
             }
         }
@@ -466,22 +471,25 @@ class ebusdMQTTDevice extends IPSModule
 
     public function GetConfigurationForm(): string
     {
-        $variableList = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
+        $variableList   = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
+        $circuitOptions = json_decode($this->ReadAttributeString(self::ATTR_CIRCUITOPTIONLIST), true, 512, JSON_THROW_ON_ERROR);
+
+        $isActive = ($this->GetStatus() === IS_ACTIVE);
+
 
         $Form                                                   =
             json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
-        $Form['elements'][0]['items'][1]['items'][0]['options'] =
-            json_decode($this->ReadAttributeString(self::ATTR_CIRCUITOPTIONLIST), true, 3, JSON_THROW_ON_ERROR);
+        $Form['elements'][0]['items'][1]['items'][0]['options'] = $circuitOptions;
         $Form['actions'][1]['values']                           = $this->getUpdatedVariableList($variableList);
-        $Form['actions'][1]['columns'][6]['edit']['enabled']    = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][1]['columns'][7]['edit']['enabled']    = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][0]['enabled']              = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][1]['enabled']              = ($this->GetStatus() === IS_ACTIVE);
-        $Form['actions'][2]['items'][2]['enabled']              = ($this->GetStatus() === IS_ACTIVE);
+        $Form['actions'][1]['columns'][6]['edit']['enabled']    = $isActive;
+        $Form['actions'][1]['columns'][7]['edit']['enabled']    = $isActive;
+        $Form['actions'][2]['items'][0]['enabled']              = $isActive;
+        $Form['actions'][2]['items'][1]['enabled']              = $isActive;
+        $Form['actions'][2]['items'][2]['enabled']              = $isActive;
         $Form['actions'][2]['items'][3]['visible']              = $this->testFunctionsActive;
 
         if ($this->trace) {
-            $this->Logger_Dbg(__FUNCTION__, json_encode($Form, JSON_THROW_ON_ERROR));
+            $this->logDebug(__FUNCTION__, json_encode($Form, JSON_THROW_ON_ERROR));
         }
         return json_encode($Form, JSON_THROW_ON_ERROR);
     }
@@ -493,11 +501,11 @@ class ebusdMQTTDevice extends IPSModule
         $id = $this->GetIDForIdent($Ident);
 
         if (($oldValue === $Value) && (IPS_GetVariable($id)['VariableUpdated'] !== 0)) {
-            $this->Logger_Dbg(__FUNCTION__, sprintf('%s: %s - not changed', $Ident, $Value));
+            $this->logDebug(__FUNCTION__, sprintf('%s: %s - not changed', $Ident, $Value));
             return true;
         }
 
-        $this->Logger_Dbg(
+        $this->logDebug(
             __FUNCTION__,
             sprintf('%s: old: %s (%s), new: %s (%s)', $Ident, $oldValue, gettype($oldValue), $Value, gettype($Value))
         );
@@ -506,9 +514,12 @@ class ebusdMQTTDevice extends IPSModule
 
     protected function SetStatus($Status): bool
     {
-        $this->UpdateFormField('BtnReadConfiguration', 'enabled', $Status === IS_ACTIVE);
-        $this->UpdateFormField('BtnReadValues', 'enabled', $Status === IS_ACTIVE);
-        $this->UpdateFormField('BtnCreateUpdateVariables', 'enabled', $Status === IS_ACTIVE);
+        $isActive = ($Status === IS_ACTIVE);
+        $fields   = ['BtnReadConfiguration', 'BtnReadValues', 'BtnCreateUpdateVariables'];
+
+        foreach ($fields as $field) {
+            $this->UpdateFormField($field, 'enabled', $isActive);
+        }
 
         return parent::SetStatus($Status);
     }
@@ -518,22 +529,27 @@ class ebusdMQTTDevice extends IPSModule
     public function publish(string $topic, string $payload): void
     {
         // see https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
-        $Data['DataID']           = self::DATA_ID_MQTT_SERVER_TX;
-        $Data['PacketType']       = self::PT_PUBLISH;
-        $Data['QualityOfService'] = self::QOS_0;
-        $Data['Retain']           = false;
-        $Data['Topic']            = $topic;
-        $Data['Payload']          = $payload;
+        $Data = [
+            'DataID'           => self::DATA_ID_MQTT_SERVER_TX,
+            'PacketType'       => self::PT_PUBLISH,
+            'QualityOfService' => self::QOS_0,
+            'Retain'           => false,
+            'Topic'            => $topic,
+            'Payload'          => $payload
+        ];
 
         $DataJSON = json_encode($Data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
-        $this->Logger_Dbg(__FUNCTION__, sprintf('Call: %s', $DataJSON));
+        $this->logDebug(__FUNCTION__, sprintf('Call: %s', $DataJSON));
 
         $ret = $this->SendDataToParent($DataJSON);
-        $this->Logger_Dbg(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret));
+        if ($ret === false) {
+            $this->logDebug(__FUNCTION__, 'Error: SendDataToParent returned false');
+        } else {
+            $this->logDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, (string)$ret));
+        }
     }
 
-    //------------------------------------------------------------------------------------------------------------------------
-    // my private functions
+
     private function UpdateCurrentValues(array $variableList): int
     {
         $mqttTopic = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
@@ -541,7 +557,7 @@ class ebusdMQTTDevice extends IPSModule
         $readCounter        = 0;
         $progressBarCounter = 0;
 
-        $formField = null;
+        $formField = [];
         $this->UpdateFormField('ProgressBar', 'maximum', count($variableList));
         $this->UpdateFormField('ProgressBar', 'visible', true);
         foreach ($variableList as $entry) {
@@ -550,13 +566,13 @@ class ebusdMQTTDevice extends IPSModule
             //alle lesbaren Werte holen
             if ($entry[self::FORM_ELEMENT_READABLE] === self::OK_SIGN) {
                 $readCounter++;
-                $entry[self::FORM_ELEMENT_READVALUES] = '' . $this->getCurrentValue($mqttTopic, $entry[self::FORM_ELEMENT_MESSAGENAME]);
+                $entry[self::FORM_ELEMENT_READVALUES] = (string)$this->getCurrentValue($mqttTopic, $entry[self::FORM_ELEMENT_MESSAGENAME]);
             }
             $formField[] = $entry;
         }
 
         $jsonFormField = json_encode($formField, JSON_THROW_ON_ERROR);
-        $this->Logger_Dbg(__FUNCTION__, 'formField: ' . $jsonFormField);
+        $this->logDebug(__FUNCTION__, 'formField: ' . $jsonFormField);
         $this->UpdateFormField('ProgressBar', 'visible', false);
         $this->UpdateFormField(self::FORM_LIST_VARIABLELIST, 'values', $jsonFormField);
         return $readCounter;
@@ -572,50 +588,69 @@ class ebusdMQTTDevice extends IPSModule
             }
         }
 
-        //VariableList aktualisieren bzgl. der Idents
+        // Neue Liste mit aktualisierten Idents generieren
+        $updatedList = $this->getUpdatedVariableList($variableList);
+
+        // UI aktualisieren
         $this->UpdateFormField(
             self::FORM_LIST_VARIABLELIST,
             'values',
-            json_encode($this->getUpdatedVariableList($variableList), JSON_THROW_ON_ERROR)
+            json_encode($updatedList, JSON_THROW_ON_ERROR)
         );
 
-        //Pollprioritäten aktualisieren
+        // Poll-Prioritäten verarbeiten
         $oldPollPriorities = json_decode($this->ReadAttributeString(self::ATTR_POLLPRIORITIES), true, 512, JSON_THROW_ON_ERROR);
         $newPollPriorities = $this->getPollPriorities($variableList);
 
-        $this->publishPollPriorities($oldPollPriorities, $newPollPriorities);
-        $this->Logger_Dbg(__FUNCTION__, json_encode($variableList, JSON_THROW_ON_ERROR));
+        if ($oldPollPriorities !== $newPollPriorities) {
+            $this->publishPollPriorities($oldPollPriorities, $newPollPriorities);
+            $this->WriteAttributeString(self::ATTR_POLLPRIORITIES, json_encode($newPollPriorities, JSON_THROW_ON_ERROR));
+        }
 
-        $this->WriteAttributeString(self::ATTR_POLLPRIORITIES, json_encode($newPollPriorities, JSON_THROW_ON_ERROR));
-        $this->SaveVariableList($variableList);
+        $this->logDebug(__FUNCTION__, json_encode($variableList, JSON_THROW_ON_ERROR));
+
+        // Persistierung der Liste
+        $this->SaveVariableList($updatedList);
+
         return $count;
     }
 
     private function SaveVariableList(array $variableList): void
     {
-        foreach ($variableList as &$item) {
+        $cleanedList = array_map(static function (array $item) {
             $item[self::FORM_ELEMENT_READVALUES] = '';
-        }
-        unset ($item);
-        $this->WriteAttributeString(self::ATTR_VARIABLELIST, json_encode($variableList, JSON_THROW_ON_ERROR));
+            return $item;
+        }, $variableList);
+
+        $this->WriteAttributeString(
+            self::ATTR_VARIABLELIST,
+            json_encode($cleanedList, JSON_THROW_ON_ERROR)
+        );
     }
 
     private function ReadConfiguration(): ?array
     {
+        $host        = $this->ReadPropertyString(self::PROP_HOST);
+        $port        = $this->ReadPropertyString(self::PROP_PORT);
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
-        $url         = sprintf(
-            'http://%s:%s/data/%s/?def&verbose&exact&write',
-            $this->ReadPropertyString(self::PROP_HOST),
-            $this->ReadPropertyString(self::PROP_PORT),
-            $circuitName
-        );
-        $result      = $this->readURL($url) ?? [];
 
-        //alle Felder des Ergebnisses auswerten
-        if (!array_key_exists($circuitName, $result)) {
-            trigger_error(sprintf('configuration of topic \'%s\' not found (URL: %s)', $circuitName, $url));
+        if ($host === '' || $circuitName === '') {
             return null;
         }
+
+        $url    = sprintf('http://%s:%s/data/%s/?def&verbose&exact&write', $host, $port, $circuitName);
+        $result = $this->readURL($url);
+
+        if ($result === null) {
+            $this->logDebug(__FUNCTION__, 'No response from ebusd URL: ' . $url);
+            return null;
+        }
+
+        if (!isset($result[$circuitName]['messages'])) {
+            trigger_error(sprintf('Configuration for circuit \'%s\' not found (URL: %s)', $circuitName, $url));
+            return null;
+        }
+
         $configurationMessages = $result[$circuitName]['messages'];
         if (count($configurationMessages) === 1) {
             trigger_error('Unexpected count of messages: ' . count($configurationMessages));
@@ -625,7 +660,7 @@ class ebusdMQTTDevice extends IPSModule
         //ebusd Konfiguration aufbereiten und als Attribut speichern
         $configurationMessages = $this->selectAndPrepareConfigurationMessages($configurationMessages);
         ksort($configurationMessages);
-        $this->Logger_Dbg(__FUNCTION__, 'configurationMessages: ' . json_encode($configurationMessages, JSON_THROW_ON_ERROR));
+        $this->logDebug(__FUNCTION__, 'configurationMessages: ' . json_encode($configurationMessages, JSON_THROW_ON_ERROR));
         $this->WriteAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES, json_encode($configurationMessages, JSON_THROW_ON_ERROR));
 
         //Ausgabeliste aufbereiten und als Attribut speichern
@@ -636,21 +671,30 @@ class ebusdMQTTDevice extends IPSModule
         return $configurationMessages;
     }
 
-    private function refreshAllMessages(): void
+    private function requestAllValues(): void
     {
-        $jsonVariableList = $this->ReadAttributeString(self::ATTR_VARIABLELIST);
+        $variableListJson = $this->ReadAttributeString(self::ATTR_VARIABLELIST);
+        try {
+            $variableList = json_decode($variableListJson, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            $this->logDebug(__FUNCTION__, 'Error decoding VariableList: ' . $e->getMessage());
+            return;
+        }
 
-        foreach (json_decode($jsonVariableList, true, 512, JSON_THROW_ON_ERROR) as $entry) {
-            if ($entry[self::FORM_ELEMENT_KEEP] && ($entry[self::FORM_ELEMENT_READABLE] === self::OK_SIGN)) {
-                $this->publish(
-                    sprintf(
-                        '%s/%s/%s/get',
-                        MQTT_GROUP_TOPIC,
-                        strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME)),
-                        $entry[self::FORM_ELEMENT_MESSAGENAME]
-                    ),
-                    ''
-                );
+        if (!is_array($variableList) || empty($variableList)) {
+            return;
+        }
+
+        $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
+        $topicPrefix = sprintf('%s/%s', MQTT_GROUP_TOPIC, $circuitName);
+
+        foreach ($variableList as $entry) {
+            $keep     = $entry[self::FORM_ELEMENT_KEEP] ?? false;
+            $readable = ($entry[self::FORM_ELEMENT_READABLE] ?? '') === self::OK_SIGN;
+
+            if ($keep && $readable) {
+                $topic = sprintf('%s/%s/get', $topicPrefix, $entry[self::FORM_ELEMENT_MESSAGENAME]);
+                $this->publish($topic, '');
             }
         }
     }
@@ -658,54 +702,63 @@ class ebusdMQTTDevice extends IPSModule
 
     private function checkConnection(): void
     {
-        $this->SetInstanceStatus();
+        $this->updateInstanceStatus();
 
+        $status = $this->GetStatus();
         if ($this->trace) {
-            $this->Logger_Dbg(__FUNCTION__, 'InstanceStatus: ' . $this->GetStatus());
+            $this->logDebug(__FUNCTION__, 'InstanceStatus: ' . $status);
         }
 
-        if ($this->GetStatus() === IS_INACTIVE) {
-            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000);
-            $checkConnectionTimer = min($this->ReadAttributeInteger(self::ATTR_CHECKCONNECTIONTIMER) * 2, 60 * 3); //3 Minuten
-        } else {
-            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, 0);
+        if ($status === IS_ACTIVE) {
+            // Wenn aktiv: Normalen Update-Timer setzen, Connection-Check-Timer stoppen
+            $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000;
+            $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, $updateInterval);
+
             $checkConnectionTimer = 0;
+        } else {
+            // Wenn inaktiv: Update-Timer stoppen, Connection-Check-Timer mit Backoff starten
+            $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, 0);
+
+            $currentRetry = $this->ReadAttributeInteger(self::ATTR_CHECKCONNECTIONTIMER);
+            // Startwert 5 Sek (falls 0), dann verdoppeln bis max 180 Sek (3 Min)
+            $checkConnectionTimer = min(max($currentRetry * 2, 5), 180);
         }
+
         $this->WriteAttributeInteger(self::ATTR_CHECKCONNECTIONTIMER, $checkConnectionTimer);
 
-        $this->Logger_Dbg(__FUNCTION__, sprintf('new checkConnectionTimer: %s min', $checkConnectionTimer));
-        $this->SetTimerInterval(self::TIMER_CHECK_CONNECTION, $checkConnectionTimer * 60 * 1000);
+        if ($this->trace || $checkConnectionTimer > 0) {
+            $this->logDebug(__FUNCTION__, sprintf('Next connection check in %s seconds', $checkConnectionTimer));
+        }
+
+        $this->SetTimerInterval(self::TIMER_CHECK_CONNECTION, $checkConnectionTimer * 1000);
     }
 
     private function getUpdatedVariableList(array $variableList): array
     {
-        //Die VariablenListe wird aktualisiert: Alle Messages werden daraufhin überprüft, ob die zugehörigen Variablen existieren
+        $ahID = $this->GetArchiveHandlerID();
+
         $variableListUpdated = [];
         foreach ($variableList as $item) {
-            //$this->Logger_Dbg(__FUNCTION__, json_encode($item));
             $identList     = [];
             $variableFound = false;
+
             if (!empty($item[self::FORM_ELEMENT_IDENTNAMES])) {
                 foreach (explode('/', $item[self::FORM_ELEMENT_IDENTNAMES]) as $ident) {
-                    if (@$this->GetIDForIdent($ident)) {
-                        if ($this->isArchived($ident)) {
-                            $identList[] = $ident . '(A)';
-                        } else {
-                            $identList[] = $ident;
-                        }
+                    $varID = @$this->GetIDForIdent($ident);
+
+                    if ($varID > 0) {
+                        $isArchived    = AC_GetLoggingStatus($ahID, $varID);
+                        $identList[]   = $ident . ($isArchived ? '(A)' : '');
                         $variableFound = true;
                     } else {
                         $identList[] = '';
                     }
                 }
             }
-            if ($variableFound) {
-                $item[self::FORM_ELEMENT_OBJECTIDENTS] = implode(', ', $identList);
-            } else {
-                $item[self::FORM_ELEMENT_OBJECTIDENTS] = '';
-            }
 
-            //wenn die Variable nicht lesbar ist, dann werden keep und pollpriority verworfen
+            $item[self::FORM_ELEMENT_OBJECTIDENTS] = $variableFound ? implode(', ', $identList) : '';
+
+            // Wenn die Variable nicht lesbar ist, dann werden keep und pollpriority verworfen
             if ($item[self::FORM_ELEMENT_READABLE] !== self::OK_SIGN) {
                 $item[self::FORM_ELEMENT_KEEP]         = false;
                 $item[self::FORM_ELEMENT_POLLPRIORITY] = 0;
@@ -717,7 +770,7 @@ class ebusdMQTTDevice extends IPSModule
     }
 
     private const EXCLUDED_CIRCUIT_NAMES = ['global', 'broadcast'];
-    private const SCANNER_PREFIX = 'scan.';
+    private const SCANNER_PREFIX         = 'scan.';
 
     private function setCircuitOptions(): void
     {
@@ -727,19 +780,34 @@ class ebusdMQTTDevice extends IPSModule
             $this->ReadPropertyString(self::PROP_PORT)
         );
 
-        $result = $this->readURL($url) ?? []; //wenn Verbindungsdaten falsch oder leer sind
+        $result = $this->readURL($url);
 
         $options = [self::EMPTY_OPTION_VALUE];
 
-        foreach ($result as $circuitname => $circuit) {
-            if (!in_array($circuitname, ['global', 'broadcast']) && !str_starts_with((string)$circuitname, 'scan.')) {
-                $options[] = ['caption' => $circuitname, 'value' => (string)$circuitname];
+        if (is_array($result)) {
+            foreach ($result as $name => $circuit) {
+                $name = (string)$name;
+
+                if (in_array($name, self::EXCLUDED_CIRCUIT_NAMES, true)) {
+                    continue;
+                }
+
+                if (str_starts_with($name, self::SCANNER_PREFIX)) {
+                    continue;
+                }
+
+                $options[] = [
+                    'caption' => $name,
+                    'value'   => $name
+                ];
             }
         }
 
         $optionValue = json_encode($options, JSON_THROW_ON_ERROR);
-        $this->Logger_Dbg(__FUNCTION__, 'optionValues: ' . $optionValue);
 
+        $this->logDebug(__FUNCTION__, 'optionValues: ' . $optionValue);
+
+        // UI und Attribut synchronisieren
         $this->UpdateFormField(self::PROP_CIRCUITNAME, 'options', $optionValue);
         $this->WriteAttributeString(self::ATTR_CIRCUITOPTIONLIST, $optionValue);
     }
@@ -748,8 +816,9 @@ class ebusdMQTTDevice extends IPSModule
     {
         $ret = [];
         foreach ($variableList as $item) {
-            if ((int)$item[self::FORM_ELEMENT_POLLPRIORITY] > 0) {
-                $ret[$item[self::FORM_ELEMENT_MESSAGENAME]] = (int)$item[self::FORM_ELEMENT_POLLPRIORITY];
+            $priority = (int)($item[self::FORM_ELEMENT_POLLPRIORITY] ?? 0);
+            if ($priority > 0) {
+                $ret[$item[self::FORM_ELEMENT_MESSAGENAME]] = $priority;
             }
         }
         return $ret;
@@ -757,30 +826,29 @@ class ebusdMQTTDevice extends IPSModule
 
     private function publishPollPriorities(array $oldPollPriorities, array $newPollPriorities = []): void
     {
-        $newItems        = array_diff($newPollPriorities, $oldPollPriorities);
-        $deprecatedItems = array_diff($oldPollPriorities, $newPollPriorities);
-        $changedItems    = array_diff($newPollPriorities, $newItems, $deprecatedItems);
-        $this->Logger_Dbg(
+        // array_diff_assoc berücksichtigt auch die Keys (Messagenamen)
+        $newItems        = array_diff_assoc($newPollPriorities, $oldPollPriorities);
+        $deprecatedItems = array_diff_key($oldPollPriorities, $newPollPriorities);
+
+        $this->logDebug(
             __FUNCTION__,
             sprintf(
-                'new: %s, deprecated: %s, changed: %s',
+                'new/changed: %s, deprecated: %s',
                 json_encode($newItems, JSON_THROW_ON_ERROR),
-                json_encode($deprecatedItems, JSON_THROW_ON_ERROR),
-                json_encode($changedItems, JSON_THROW_ON_ERROR)
+                json_encode($deprecatedItems, JSON_THROW_ON_ERROR)
             )
         );
 
+        // 1. Veraltete Einträge auf Prio 0 setzen
         foreach ($deprecatedItems as $messagename => $pollPriority) {
-            //$this->Logger_Dbg(__FUNCTION__, sprintf('No Publish performed: %s, Prio: %s!!', $messagename, $pollPriority));
-            //continue;
             $this->publish(
                 sprintf('%s/%s/%s/get', MQTT_GROUP_TOPIC, strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME)), $messagename),
                 '?0'
             );
         }
-        foreach (array_merge($newItems, $changedItems) as $messagename => $pollPriority) {
-            //$this->Logger_Dbg(__FUNCTION__, sprintf('No Publish performed: %s, Prio: %s!!', $messagename, $pollPriority));
-            //continue;
+
+        // 2. Neue oder geänderte Einträge senden
+        foreach ($newItems as $messagename => $pollPriority) {
             $this->publish(
                 sprintf('%s/%s/%s/get', MQTT_GROUP_TOPIC, strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME)), $messagename),
                 '?' . (int)$pollPriority
@@ -790,98 +858,116 @@ class ebusdMQTTDevice extends IPSModule
 
     private function getCurrentValue(string $mqttTopic, string $messageId): ?string
     {
-
-        $url    = sprintf(
+        $url = sprintf(
             'http://%s:%s/data/%s/%s?def&verbose&exact&required&maxage=600',
             $this->ReadPropertyString(self::PROP_HOST),
             $this->ReadPropertyString(self::PROP_PORT),
             $mqttTopic,
             $messageId
         );
-        $result = $this->readURL($url) ?? [];
 
-        //alle Felder auswerten
-        if (!array_key_exists($mqttTopic, $result) || !array_key_exists($messageId, $result[$mqttTopic]['messages'])) {
-            $this->Logger_Dbg(__FUNCTION__, sprintf('current values of message \'%s\' not found (URL: %s)', $messageId, $url));
+        $result = $this->readURL($url);
+
+        // Prüfung ob Ergebnis valide und die erwarteten Daten enthält
+        if ($result === null || !isset($result[$mqttTopic]['messages'][$messageId])) {
+            $this->logDebug(__FUNCTION__, sprintf('current values of message \'%s\' not found (URL: %s)', $messageId, $url));
             return null;
         }
 
         $message = $result[$mqttTopic]['messages'][$messageId];
 
-        $valueString = '';
-        if (isset($message['fields'])) {
-            foreach ($this->getFieldValues($message, $message['fields'], true) as $value) {
-                $valueString .= $value['value'] . '/';
-            }
-            $valueString = substr($valueString, 0, -1);
+        if (!isset($message['fields']) || !is_array($message['fields'])) {
+            return '';
         }
 
-        return $valueString;
+        $values = [];
+        foreach ($this->getFieldValues($message, $message['fields'], true) as $field) {
+            $values[] = $field['value'];
+        }
+
+        return implode('/', $values);
     }
 
     private function readURL(string $url): ?array
     {
-        $this->Logger_Dbg(__FUNCTION__, 'URL: ' . $url);
+        $this->logDebug(__FUNCTION__, 'URL: ' . $url);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5); //max. 5 Sekunden für Verbindungsaufbau
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2); // Schneller Abbruch, wenn Host nicht erreichbar
 
         $result_json = curl_exec($ch);
+        $httpCode    = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError   = curl_error($ch);
         curl_close($ch);
 
         if ($result_json === false) {
-            $this->Logger_Dbg('CURL return', sprintf('empty result for %s', $url));
+            $this->logDebug(__FUNCTION__, sprintf('CURL Error: %s for %s', $curlError, $url));
             return null;
         }
-        return json_decode($result_json, true, 512, JSON_THROW_ON_ERROR);
+
+        if ($httpCode < 200 || $httpCode >= 300) {
+            $this->logDebug(__FUNCTION__, sprintf('HTTP Error: %d for %s', $httpCode, $url));
+            return null;
+        }
+
+        try {
+            $data = json_decode($result_json, true, 512, JSON_THROW_ON_ERROR);
+            return is_array($data) ? $data : null;
+        } catch (JsonException $e) {
+            $this->logDebug(__FUNCTION__, sprintf('JSON Decode Error: %s. Content: %s', $e->getMessage(), substr($result_json, 0, 100)));
+            return null;
+        }
     }
 
     private function getFieldIdentName(array $message, int $fieldId): string
     {
-        $ret       = $message['name'];
-        $fielddefs = $message['fielddefs'];
+        $name      = $message['name'];
+        $fielddefs = $message['fielddefs'] ?? [];
+        $count     = count($fielddefs);
 
-        //Spezialfall tempsensor, presssensor
-        if ((count($fielddefs) === 2) && in_array($fielddefs[0]['name'] . $fielddefs[1]['name'], ['tempsensor', 'presssensor'])) {
-            if ($fieldId === 0) {
-                return $message['name'];
+        // Spezialfall: tempsensor oder presssensor (2 Felder)
+        if ($count === 2) {
+            $combined = ($fielddefs[0]['name'] ?? '') . ($fielddefs[1]['name'] ?? '');
+            if ($combined === 'tempsensor' || $combined === 'presssensor') {
+                return $fieldId === 0 ? $name : $name . '_sensorstatus';
             }
-            return $message['name'] . '_sensorstatus';
-        }
-        //Spezialfall tempmirrorsensor
-        if ((count($fielddefs) === 3) && ($fielddefs[0]['name'] . $fielddefs[1]['name'] . $fielddefs[2]['name'] === 'tempmirrorsensor')) {
-            if ($fieldId === 0) {
-                return $message['name'];
-            }
-            if ($fieldId === 1) {
-                return $message['name'] . '_tempmirror';
-            }
-            return $message['name'] . '_sensorstatus';
         }
 
-        if ($this->getNumberOfFieldDefs($fielddefs) > 1) {
-            $ret .= '_' . $fieldId;
+        // Spezialfall: tempmirrorsensor (3 Felder)
+        if ($count === 3) {
+            $combined = ($fielddefs[0]['name'] ?? '') . ($fielddefs[1]['name'] ?? '') . ($fielddefs[2]['name'] ?? '');
+            if ($combined === 'tempmirrorsensor') {
+                if ($fieldId === 0) {
+                    return $name;
+                }
+                if ($fieldId === 1) {
+                    return $name . '_tempmirror';
+                }
+                return $name . '_sensorstatus';
+            }
         }
 
-        return preg_replace('/[^a-z0-9_]/i', '_', $ret); //alles bis auf a-z, A-Z, 0-9 und '_' durch '_' ersetzen
+        // Standardfall: Wenn mehr als 1 nutzbares Feld vorhanden ist, Index anhängen
+        if ($this->countRelevantFieldDefs($fielddefs) > 1) {
+            $name .= '_' . $fieldId;
+        }
+
+        // Alles außer a-z, 0-9 und _ ersetzen
+        return preg_replace('/[^a-z0-9_]/i', '_', $name);
     }
 
-    private function getNumberOfFieldDefs(array $fieldDefs): int
+    private function countRelevantFieldDefs(array $fieldDefs): int
     {
-        $count = 0;
-        foreach ($fieldDefs as $fielddef) {
-            if ($fielddef['type'] !== 'IGN') {
-                $count++;
-            }
-        }
-        return $count;
+        return count(array_filter($fieldDefs, static fn($f) => ($f['type'] ?? '') !== 'IGN'));
     }
+
 
     private function getFieldLabel(array $message, int $fieldId): string
     {
         //wenn die Meldung kommentiert ist und es nur ein Feld in der Meldung gibt, dann wird dieser Kommentar genommen
-        if (!empty($message['comment']) && ($this->getNumberOfFieldDefs($message['fielddefs']) === 1)) {
+        if (!empty($message['comment']) && ($this->countRelevantFieldDefs($message['fielddefs']) === 1)) {
             return $message['comment'];
         }
 
@@ -941,9 +1027,9 @@ class ebusdMQTTDevice extends IPSModule
         int $variableType,
         array $associations = [],
         bool $numericValues = false
-    ) {
+    ): mixed {
         if ($this->trace) {
-            $this->Logger_Dbg(
+            $this->logDebug(
                 __FUNCTION__,
                 sprintf(
                     '%s[%s]: %s, %s, %s',
@@ -956,82 +1042,66 @@ class ebusdMQTTDevice extends IPSModule
             );
         }
 
-        $fieldValues = array_values($fields); //den Key durch Index ersetzen
+        // Sicherstellen, dass wir numerische Indizes haben
+        $fieldValues = array_values($fields);
 
-        if (!array_key_exists($key, $fieldValues)) {
-            $this->Logger_Dbg(
-                __FUNCTION__,
-                sprintf('key is not set: [%s]: %s', $key, json_encode($fieldValues, JSON_THROW_ON_ERROR))
-            );
+        if (!isset($fieldValues[$key])) {
+            $this->logDebug(__FUNCTION__, sprintf('Key [%s] not set for message %s', $key, $messageId));
             return null;
         }
 
-        if (!array_key_exists('value', $fieldValues[$key])) {
-            $this->Logger_Dbg(
-                __FUNCTION__,
-                sprintf('Value is not set: [%s]: %s', $key, json_encode($fieldValues[$key], JSON_THROW_ON_ERROR))
-            );
+        if (!isset($fieldValues[$key]['value'])) {
+            $this->logDebug(__FUNCTION__, sprintf('Value not set for key [%s] in message %s', $key, $messageId));
             return null;
         }
 
         $value = $fieldValues[$key]['value'];
 
-        if (!$numericValues && is_string($value) && count($associations)) {
-            $value = $this->getValueOfAssoziation($fieldValues[$key]['value'], $associations);
-            if ($value === null) {
-                $this->Logger_Dbg(
-                    __FUNCTION__,
-                    sprintf(
-                        'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
-                        $fieldValues[$key]['value'],
-                        $key,
-                        $fieldValues[$key]['name'],
-                        json_encode($associations, JSON_THROW_ON_ERROR)
-                    )
+        // Assoziationen auflösen (Mapping von String-Werten auf Integer-IDs)
+        if (!$numericValues && is_string($value) && !empty($associations)) {
+            $mappedValue = $this->resolveAssociationValue($value, $associations);
+            if ($mappedValue === null) {
+                $errorMsg = sprintf(
+                    'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations',
+                    $value,
+                    $key,
+                    $fieldValues[$key]['name'] ?? 'unknown'
                 );
-                trigger_error(__FUNCTION__ . ': ' .  sprintf(
-                                  'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations %s',
-                                  $fieldValues[$key]['value'],
-                                  $key,
-                                  $fieldValues[$key]['name'],
-                                  json_encode($associations, JSON_THROW_ON_ERROR)
-                              ));
+                $this->logDebug(__FUNCTION__, $errorMsg . ' ' . json_encode($associations, JSON_THROW_ON_ERROR));
+                // trigger_error optional behalten oder durch LogMessage ersetzen
+            } else {
+                $value = $mappedValue;
             }
         }
 
+        if ($numericValues) {
+            return $value;
+        }
 
-        if (!$numericValues) {
-            switch ($variableType) {
-                case VARIABLETYPE_BOOLEAN:
-                    $ret = (bool)$value;
-                    break;
-                case VARIABLETYPE_INTEGER:
-                    $ret = (int)$value;
-                    break;
-                case VARIABLETYPE_FLOAT:
-                    $ret = (float)$value;
-                    break;
-                case VARIABLETYPE_STRING:
-                    $ret = (string)$value;
-                    break;
-                default:
-                    $ret = null;
-                    trigger_error('Unexpected VariableType: ' . $variableType);
-            }
-        } else {
-            $ret = $value;
+        // Typ-Konvertierung
+        $ret = match ($variableType) {
+            VARIABLETYPE_BOOLEAN => (bool)$value,
+            VARIABLETYPE_INTEGER => (int)$value,
+            VARIABLETYPE_FLOAT => (float)$value,
+            VARIABLETYPE_STRING => (string)$value,
+            default => null,
+        };
+
+        if ($ret === null && $variableType !== -1) { // -1 oder unbekannter Typ
+            $this->LogMessage('Unexpected VariableType: ' . $variableType, KL_ERROR);
         }
 
         if ($this->trace) {
-            $this->Logger_Dbg(__FUNCTION__, sprintf('return: %s', $ret));
+            $this->logDebug(__FUNCTION__, sprintf('return: %s', var_export($ret, true)));
         }
+
         return $ret;
     }
 
-    private function getValueOfAssoziation(string $value, array $associations): ?int
+    private function resolveAssociationValue(string $value, array $associations): ?int
     {
         if ($this->trace) {
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Value: %s, Associations: %s', $value, json_encode($associations, JSON_THROW_ON_ERROR)));
+            $this->logDebug(__FUNCTION__, sprintf('Value: %s, Associations: %s', $value, json_encode($associations, JSON_THROW_ON_ERROR)));
         }
 
         foreach ($associations as $assValue) {
@@ -1049,7 +1119,7 @@ class ebusdMQTTDevice extends IPSModule
             if (count($message['fielddefs']) === 0) {
                 //einige wenige messages haben keine fielddefs
                 // z.B.: wi,,ioteststop,I/O Test stoppen,,,,01,,,,,,
-                $this->Logger_Dbg(__FUNCTION__, sprintf('%s: No fielddefs found of message %s', __FUNCTION__, $message['name']));
+                $this->logDebug(__FUNCTION__, sprintf('%s: No fielddefs found of message %s', __FUNCTION__, $message['name']));
                 continue;
             }
 
@@ -1082,7 +1152,7 @@ class ebusdMQTTDevice extends IPSModule
             }
 
             //keep wird aus der gespeicherten Liste geholt
-            $storedItem = $this->getItemOfStoredVariableList($message['name']);
+            $storedItem = $this->findStoredVariableItem($message['name']);
             if ($storedItem !== null) {
                 $keep         = $storedItem[self::FORM_ELEMENT_KEEP];
                 $pollpriority = $storedItem[self::FORM_ELEMENT_POLLPRIORITY];
@@ -1110,229 +1180,135 @@ class ebusdMQTTDevice extends IPSModule
         return $elements;
     }
 
-    private function getItemOfStoredVariableList(string $messagename): ?array
+    /**
+     * Sucht ein gespeichertes Item in der Variablenliste anhand des Messagenamens.
+     *
+     * @param string $messagename
+     *
+     * @return array|null
+     */
+    private function findStoredVariableItem(string $messagename): ?array
     {
-        $storedVariableList = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 3, JSON_THROW_ON_ERROR);
+        // Wir nutzen ein lokales Cache-Array, um mehrfaches Dekodieren pro Request zu vermeiden
+        static $cachedList = null;
 
-        foreach ($storedVariableList as $item) {
-            if ($item[self::FORM_ELEMENT_MESSAGENAME] === $messagename) {
+        if ($cachedList === null) {
+            $json = $this->ReadAttributeString(self::ATTR_VARIABLELIST);
+            try {
+                $cachedList = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+            } catch (JsonException) {
+                $cachedList = [];
+            }
+        }
+
+        foreach ($cachedList as $item) {
+            if (isset($item[self::FORM_ELEMENT_MESSAGENAME]) && $item[self::FORM_ELEMENT_MESSAGENAME] === $messagename) {
                 return $item;
             }
         }
+
         return null;
     }
 
     private function RegisterVariablesOfMessage(array $configurationMessage): int
     {
         $countOfVariables = 0;
-
         foreach ($configurationMessage['fielddefs'] as $fielddefkey => $fielddef) {
-            if ($this->trace) {
-                $this->Logger_Dbg(
-                    __FUNCTION__,
-                    sprintf(
-                        'Message: %s (%s), Field: %s: %s',
-                        $configurationMessage['comment'],
-                        $configurationMessage['name'],
-                        $fielddefkey,
-                        json_encode($fielddef, JSON_THROW_ON_ERROR)
-                    )
-                );
-            }
-            if ($fielddef['type'] === 'IGN') { //Ignore
+            if ($fielddef['type'] === 'IGN') {
                 continue;
             }
-            if ($fielddef['name'] !== '') {
-                $profileName = 'EBM.' . $configurationMessage['name'] . '.' . $fielddef['name'];
-            } else {
-                $profileName = 'EBM.' . $configurationMessage['name'];
+
+            if ($this->trace) {
+                $this->logDebug(__FUNCTION__, sprintf('Field: %s: %s', $fielddefkey, json_encode($fielddef, JSON_THROW_ON_ERROR)));
             }
 
-            $ident      = $this->getFieldIdentName($configurationMessage, $fielddefkey);
-            $objectName = $this->getFieldLabel($configurationMessage, $fielddefkey);
-            if (($ident === '') || ($objectName === '')) {
+            $profileName = 'EBM.' . $configurationMessage['name'] . ($fielddef['name'] !== '' ? '.' . $fielddef['name'] : '');
+            $ident       = $this->getFieldIdentName($configurationMessage, $fielddefkey);
+            $objectName  = $this->getFieldLabel($configurationMessage, $fielddefkey);
+
+            if ($ident === '' || $objectName === '') {
                 continue;
             }
 
             $variableTyp = $this->getIPSVariableType($fielddef);
+            $unit        = match ($fielddef['unit']) {
+                '%' => self::ZERO_WIDTH_SPACE . '%',
+                '' => '',
+                default => ' ' . $fielddef['unit']
+            };
 
-            //Assoziationen vorhanden
+            // Profil-Registrierung
             if (isset($fielddef['values'])) {
-                if ($this->trace) {
-                    $this->Logger_Dbg('Values', json_encode($fielddef['values'], JSON_THROW_ON_ERROR));
-                }
                 $ass = [];
-                if ($fielddef['unit'] !== '') {
-                    $unit = ' ' . $fielddef['unit'];
-                } else {
-                    $unit = '';
-                }
                 foreach ($fielddef['values'] as $key => $value) {
-                    $ass[] = [$key, $value . $unit, '', -1];
-                }
-                if ($this->trace) {
-                    $this->Logger_Dbg(
-                        'Associations',
-                        sprintf(
-                            'Name: "%s", Assoziationen: %s',
-                            $profileName,
-                            json_encode($ass, JSON_THROW_ON_ERROR)
-                        )
-                    );
+                    $ass[] = [$key, $value . ($fielddef['unit'] !== '' ? ' ' . $fielddef['unit'] : ''), '', -1];
                 }
 
-                switch ($variableTyp) {
-                    case VARIABLETYPE_INTEGER:
-                        $this->RegisterProfileIntegerEx($profileName, '', '', '', $ass);
-                        break;
-                    case VARIABLETYPE_FLOAT:
-                        $this->RegisterProfileFloatEx($profileName, '', '', '', $ass);
-                        break;
+                if ($variableTyp === VARIABLETYPE_INTEGER) {
+                    $this->RegisterProfileIntegerEx($profileName, '', '', '', $ass);
+                } elseif ($variableTyp === VARIABLETYPE_FLOAT) {
+                    $this->RegisterProfileFloatEx($profileName, '', '', '', $ass);
                 }
             } else {
                 $TypeDef = self::DataTypes[$fielddef['type']];
-                switch ($fielddef['unit']) {
-                    case '%':
-                        $unit = self::ZERO_WIDTH_SPACE . '%';
-                        break;
-                    case '':
-                        $unit = '';
-                        break;
-                    default:
-                        $unit = ' ' . $fielddef['unit'];
-                }
-                switch ($variableTyp) {
-                    case VARIABLETYPE_INTEGER:
-                        if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)){
-                            $this->RegisterProfileFloat(
-                                $profileName,
-                                '',
-                                '',
-                                $unit,
-                                $TypeDef['MinValue']/$fielddef['divisor'],
-                                $TypeDef['MaxValue']/$fielddef['divisor'],
-                                $TypeDef['StepSize']/$fielddef['divisor']
-                            );
-                        } else {
-                            $this->RegisterProfileInteger(
-                                $profileName,
-                                '',
-                                '',
-                                $unit,
-                                $TypeDef['MinValue'],
-                                $TypeDef['MaxValue'],
-                                $TypeDef['StepSize']
-                            );
-                        }
-                        break;
+                $divisor = $fielddef['divisor'] ?? 0;
 
-                    case VARIABLETYPE_FLOAT:
-                        if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)) {
-                            $this->RegisterProfileFloat(
-                                $profileName,
-                                '',
-                                '',
-                                $fielddef['unit'],
-                                $TypeDef['MinValue']/$fielddef['divisor'],
-                                $TypeDef['MaxValue']/$fielddef['divisor'],
-                                $TypeDef['StepSize']/$fielddef['divisor'],
-                                (int) log($fielddef['divisor'], 10)
-                            );
-                        } else {
-                            $this->RegisterProfileFloat(
-                                $profileName,
-                                '',
-                                '',
-                                $fielddef['unit'],
-                                $TypeDef['MinValue'],
-                                $TypeDef['MaxValue'],
-                                $TypeDef['StepSize'],
-                                $TypeDef['Digits']
-                            );
-                        }
+                if ($variableTyp === VARIABLETYPE_INTEGER && $divisor <= 0) {
+                    $this->RegisterProfileInteger($profileName, '', '', $unit, $TypeDef['MinValue'], $TypeDef['MaxValue'], $TypeDef['StepSize']);
+                } else {
+                    // Sowohl FLOAT als auch INTEGER mit Divisor werden zu FLOAT-Profilen
+                    $div    = $divisor > 0 ? $divisor : 1;
+                    $digits = $variableTyp === VARIABLETYPE_FLOAT ? ($divisor > 0 ? (int)log($divisor, 10) : $TypeDef['Digits']) : 0;
+
+                    $this->RegisterProfileFloat(
+                        $profileName,
+                        '',
+                        '',
+                        $unit,
+                        $TypeDef['MinValue'] / $div,
+                        $TypeDef['MaxValue'] / $div,
+                        $TypeDef['StepSize'] / $div,
+                        $digits
+                    );
                 }
             }
+
+            // Variablen-Registrierung
+            $id        = 0;
+            $typeLabel = '';
 
             switch ($variableTyp) {
                 case VARIABLETYPE_BOOLEAN:
-                    $id = @$this->RegisterVariableBoolean($ident, $objectName, '~Switch');
-                    if ($id > 0) {
-                        $countOfVariables++;
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf('Boolean Variable angelegt. Ident: %s, Label: %s, Profil: %s', $ident, $objectName, '~Switch')
-                        );
-                    } else {
-                        trigger_error(
-                            sprintf('Boolean Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident,  '~Switch'), E_USER_WARNING
-                        );
-                    }
+                    $id        = @$this->RegisterVariableBoolean($ident, $objectName, '~Switch');
+                    $typeLabel = 'Boolean';
                     break;
-
                 case VARIABLETYPE_STRING:
-                    $id = @$this->RegisterVariableString($ident, $objectName);
-                    if ($id > 0) {
-                        $countOfVariables++;
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf('String Variable angelegt. Ident: %s, Label: %s', $ident, $objectName)
-                        );
-                    } else {
-                        trigger_error(
-                            sprintf('String Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
-                        );
-                    }
+                    $id        = @$this->RegisterVariableString($ident, $objectName);
+                    $typeLabel = 'String';
                     break;
-
                 case VARIABLETYPE_INTEGER:
-                    if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)){
-                        $id = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
-                        if ($id > 0) {
-                            $countOfVariables++;
-                            $this->Logger_Dbg(
-                                __FUNCTION__,
-                                sprintf('Float Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
-                            );
-                        } else {
-                            trigger_error(
-                                sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
-                            );
-                        }
+                    if (isset($fielddef['divisor']) && $fielddef['divisor'] > 0) {
+                        $id        = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
+                        $typeLabel = 'Float (Divisor)';
                     } else {
-                        $id = @$this->RegisterVariableInteger($ident, $objectName, $profileName);
-                        if ($id > 0) {
-                            $countOfVariables++;
-                            $this->Logger_Dbg(
-                                __FUNCTION__,
-                                sprintf('Integer Variable angelegt. Ident: %s, Label: %s', $ident, $profileName)
-                            );
-                        } else {
-                            trigger_error(
-                                sprintf('Integer Variable konnte nicht angelegt werden. Ident: %s, Label: %s', $ident, $profileName), E_USER_WARNING
-                            );
-                        }
+                        $id        = @$this->RegisterVariableInteger($ident, $objectName, $profileName);
+                        $typeLabel = 'Integer';
                     }
-
                     break;
-
                 case VARIABLETYPE_FLOAT:
-                    $id = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
-                    if ($id > 0) {
-                        $countOfVariables++;
-                        $this->Logger_Dbg(
-                            __FUNCTION__,
-                            sprintf('Float Variable angelegt. Ident: %s, Name: %s, Label: %s', $ident, $objectName, $profileName)
-                        );
-                    } else {
-                        trigger_error(
-                            sprintf('Float Variable konnte nicht angelegt werden. Ident: %s, Name: %s, Profile: %s', $ident, $objectName, $profileName), E_USER_WARNING
-                        );
-                    }
+                    $id        = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
+                    $typeLabel = 'Float';
                     break;
             }
 
-            if ($configurationMessage['write']
-                && ($this->getNumberOfFieldDefs($configurationMessage['fielddefs']) === 1)) { //schreibbar und kein Multifeld
+            if ($id > 0) {
+                $countOfVariables++;
+                $this->logDebug(__FUNCTION__, sprintf('%s Variable angelegt. Ident: %s, Label: %s', $typeLabel, $ident, $objectName));
+            } else {
+                trigger_error(sprintf('%s Variable konnte nicht angelegt werden. Ident: %s', $typeLabel, $ident), E_USER_WARNING);
+            }
+
+            if ($configurationMessage['write'] && ($this->countRelevantFieldDefs($configurationMessage['fielddefs']) === 1)) {
                 $this->EnableAction($ident);
             }
         }
@@ -1342,21 +1318,39 @@ class ebusdMQTTDevice extends IPSModule
     private function checkGlobalMessage(string $topic, string $payload): void
     {
         if ($topic === 'ebusd/global/signal') {
-            $this->Logger_Dbg(__FUNCTION__, sprintf('%s: %s', $topic, $payload));
-            $this->WriteAttributeBoolean(self::ATTR_SIGNAL, filter_var($payload, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE));
-            $this->ApplyChanges();
+            $this->logDebug(__FUNCTION__, sprintf('%s: %s', $topic, $payload));
+            $newSignal = filter_var($payload, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? true;
+
+            // Nur bei Änderung reagieren
+            if ($newSignal !== $this->ReadAttributeBoolean(self::ATTR_SIGNAL)) {
+                $this->WriteAttributeBoolean(self::ATTR_SIGNAL, $newSignal);
+                $this->ApplyChanges();
+            }
         }
     }
 
     private function selectAndPrepareConfigurationMessages(array $configurationMessages): array
     {
         $ret = [];
+        // Vorab-Index für schreibbare Nachrichten erstellen (Performance-Optimierung)
+        $writableMap = [];
+        foreach ($configurationMessages as $msg) {
+            if ($msg['write']) {
+                $writableMap[$msg['name']] = true;
+            }
+        }
 
         foreach ($configurationMessages as $key => $message) {
+            // Nachrichten mit Suffix '-w' (reine Schreib-Endpunkte) überspringen
             if (!str_contains($key, '-w')) {
                 $name = $message['name'];
-                $message['read']   = !$message['write'] || $message['passive'];
-                $message['write']  = $message['write'] || $this->searchWritableMessage($name, $configurationMessages);
+
+                // Eine Nachricht ist lesbar, wenn sie nicht nur zum Schreiben da ist ODER passiv empfangen werden kann
+                $message['read'] = !$message['write'] || $message['passive'];
+
+                // Eine Nachricht ist schreibbar, wenn sie selbst 'write' ist ODER es ein Gegenstück in der Map gibt
+                $message['write'] = $message['write'] || isset($writableMap[$name]);
+
                 $message['lastup'] = 0;
                 $ret[$name]        = $message;
             }
@@ -1364,158 +1358,154 @@ class ebusdMQTTDevice extends IPSModule
         return $ret;
     }
 
-    private function searchWritableMessage($name, array $configurationMessages): bool
-    {
-        foreach ($configurationMessages as $message){
-            if (($name === $message['name']) && $message['write']){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     private function getFieldValues(array $message, array $Payload, bool $numericValues = false): array
     {
-        $ret         = [];
-        $ignoredKeys = 0;
+        $ret          = [];
+        $payloadIndex = 0;
+
         foreach ($message['fielddefs'] as $fielddefkey => $fielddef) {
             if ($this->trace) {
-                $this->Logger_Dbg('--fielddef--: ', $fielddefkey . ':' . json_encode($fielddef, JSON_THROW_ON_ERROR));
+                $this->logDebug('--fielddef--: ', $fielddefkey . ':' . json_encode($fielddef, JSON_THROW_ON_ERROR));
             }
-            if ($fielddef['type'] === 'IGN') { //Ignore
-                ++$ignoredKeys;
+
+            if (($fielddef['type'] ?? '') === 'IGN') {
                 continue;
             }
-            $profileName = 'EBM.' . $message['name'] . '.' . $fielddef['name'];
-            $ident       = $this->getFieldIdentName($message, $fielddefkey);
-            $label       = $this->getFieldLabel($message, $fielddefkey);
-            if (($ident === '') || ($label === '')) {
+
+            // Der Index im Payload erhöht sich nur für Felder, die nicht IGN sind
+            $currentIndex = $payloadIndex++;
+
+            $ident = $this->getFieldIdentName($message, $fielddefkey);
+            $label = $this->getFieldLabel($message, $fielddefkey);
+
+            if ($ident === '' || $label === '') {
                 continue;
             }
 
             $variableType = $this->getIPSVariableType($fielddef);
+            $associations = [];
 
-            //Assoziationen vorhanden
             if (isset($fielddef['values'])) {
-                if ($this->trace) {
-                    $this->Logger_Dbg('Values', json_encode($fielddef['values'], JSON_THROW_ON_ERROR));
-                }
-                $ass = [];
                 foreach ($fielddef['values'] as $key => $value) {
-                    $ass[] = [$key, $value, '', -1];
+                    $associations[] = [$key, $value, '', -1];
                 }
+
                 if ($this->trace) {
-                    $this->Logger_Dbg(
+                    $this->logDebug(
                         'Associations',
                         sprintf(
-                            'Name: "%s", Suffix: "%s", Assoziationen: %s',
-                            $profileName,
-                            $fielddef['unit'],
-                            json_encode($ass, JSON_THROW_ON_ERROR)
+                            'Name: "EBM.%s.%s", Suffix: "%s", Assoziationen: %s',
+                            $message['name'],
+                            $fielddef['name'],
+                            $fielddef['unit'] ?? '',
+                            json_encode($associations, JSON_THROW_ON_ERROR)
                         )
                     );
                 }
-
-                $value = $this->getFieldValue($message['name'], $Payload, $fielddefkey - $ignoredKeys, $variableType, $ass, $numericValues);
-            } else {
-                $value = $this->getFieldValue($message['name'], $Payload, $fielddefkey - $ignoredKeys, $variableType);
             }
+
+            $value = $this->getFieldValue(
+                $message['name'],
+                $Payload,
+                $currentIndex,
+                $variableType,
+                $associations,
+                $numericValues
+            );
 
             $ret[] = ['ident' => $ident, 'value' => $value];
         }
+
         return $ret;
     }
 
     private function getIPSVariableType(array $fielddef): int
     {
-        if (array_key_exists($fielddef['type'], self::DataTypes)) {
-            if (isset($fielddef['divisor']) && ($fielddef['divisor'] > 0)){
-                return VARIABLETYPE_FLOAT;
-            }
-            return self::DataTypes[$fielddef['type']]['VariableType'];
+        $type = $fielddef['type'] ?? '';
+
+        if (!isset(self::DataTypes[$type])) {
+            trigger_error('Unsupported type: ' . $type, E_USER_ERROR);
         }
 
-        trigger_error('Unsupported type: ' . $fielddef['type'], E_USER_ERROR);
-        //return -1;
+        // Ein Divisor erzwingt in der IPS-Logik immer einen Float,
+        // um Nachkommastellen darzustellen.
+        if (($fielddef['divisor'] ?? 0) > 0) {
+            return VARIABLETYPE_FLOAT;
+        }
+
+        return self::DataTypes[$type]['VariableType'];
     }
 
-    private function SetInstanceStatus(): void
+    private function updateInstanceStatus(): void
     {
         $host        = $this->ReadPropertyString(self::PROP_HOST);
-        $port        = $this->ReadPropertyString(self::PROP_PORT);
+        $port        = (int)$this->ReadPropertyString(self::PROP_PORT);
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
         if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
             $this->SetStatus(self::STATUS_INST_IP_IS_INVALID);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid IP'));
+            $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid IP'));
             return;
         }
 
         //Port Prüfen
-        if ((int) $port < 1 || (int) $port > 65535 || !filter_var($port, FILTER_VALIDATE_INT)) {
+        if ((int)$port < 1 || (int)$port > 65535 || !filter_var($port, FILTER_VALIDATE_INT)) {
             $this->SetStatus(self::STATUS_INST_PORT_IS_INVALID);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid Port'));
+            $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid Port'));
             return;
         }
 
         //Circuit prüfen
         if ($circuitName === self::MODEL_GLOBAL_NAME) {
             $this->SetStatus(self::STATUS_INST_TOPIC_IS_INVALID);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'Wrong Circuit name (global)'));
+            $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'Wrong Circuit name (global)'));
             return;
         }
 
         if (!$this->HasActiveParent()) {
             $this->SetStatus(IS_INACTIVE);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'Parent not active'));
+            $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'Parent not active'));
             return;
         }
 
         //Verbindung prüfen und circuits holen
-        $url    = sprintf(
-            'http://%s:%s/data/%s',
-            $this->ReadPropertyString(self::PROP_HOST),
-            $this->ReadPropertyString(self::PROP_PORT),
-            $circuitName
-        );
+        $url    = sprintf('http://%s:%d/data/%s', $host, $port, $circuitName);
         $result = $this->readURL($url);
 
-        if (($result === null) || !array_key_exists(self::MODEL_GLOBAL_NAME, $result)
-            || !filter_var(
-                $result[self::MODEL_GLOBAL_NAME]['signal'],
-                FILTER_VALIDATE_BOOLEAN,
-                FILTER_NULL_ON_FAILURE
-            )) {
+        if ($result === null || !isset($result[self::MODEL_GLOBAL_NAME]['signal'])
+            || !filter_var($result[self::MODEL_GLOBAL_NAME]['signal'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
             $this->SetStatus(IS_INACTIVE);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid connection'));
+            $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid connection'));
             return;
         }
 
 
         if (!array_key_exists($circuitName, $result)) {
             $this->SetStatus(self::STATUS_INST_TOPIC_IS_INVALID);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid circuit name'));
+            $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid circuit name'));
             return;
         }
 
         if (!$this->ReadAttributeBoolean(self::ATTR_SIGNAL)) {
             $this->SetStatus(IS_INACTIVE);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'no signal'));
+            $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'no signal'));
             return;
         }
 
-        if ($this->GetStatus() !== IS_ACTIVE) {
-            $this->SetStatus(IS_ACTIVE);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'active'));
-        }
+        $this->SetStatus(IS_ACTIVE);
+        $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'active'));
     }
 
-    private function Logger_Dbg(string $message, string $data): void
+    private function logDebug(string $message, string $data): void
     {
-        $this->SendDebug($message, $data, 0);
+        // Daten für SendDebug aufbereiten (Strings lassen, Rest zu JSON)
+        $debugData = is_string($data) ? $data : json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+        $this->SendDebug($message, $debugData, 0);
+
         if (function_exists('IPSLogger_Dbg') && $this->ReadPropertyBoolean(self::PROP_WRITEDEBUGINFORMATIONTOIPSLOGGER)) {
-            IPSLogger_Dbg(__CLASS__ . '.' . IPS_GetObject($this->InstanceID)['ObjectName'] . '.' . $message, $data);
+            IPSLogger_Dbg(__CLASS__ . '.' . IPS_GetObject($this->InstanceID)['ObjectName'] . '.' . $message, $debugData);
         }
     }
 }
