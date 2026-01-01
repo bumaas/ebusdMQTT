@@ -13,8 +13,12 @@ class ebusdMQTTDevice extends IPSModule
 {
     use ebusd2MQTTHelper;
 
-    private const STATUS_INST_IP_IS_EMPTY      = 202;
-    private const STATUS_INST_IP_IS_INVALID    = 204; //IP-Adresse ist ungültig
+    private const DATA_ID_MQTT_SERVER_TX = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
+    private const PT_PUBLISH = 3; //Packet Type Publish
+    private const QOS_0 = 0; //Quality of Service 0
+
+    private const STATUS_INST_PORT_IS_INVALID = 202;
+    private const STATUS_INST_IP_IS_INVALID   = 204;
     private const STATUS_INST_TOPIC_IS_INVALID = 203;
 
     //property names
@@ -129,7 +133,7 @@ class ebusdMQTTDevice extends IPSModule
     private const MODEL_GLOBAL_NAME  = 'global';
     private const EMPTY_OPTION_VALUE = ['caption' => '-', 'value' => ''];
 
-    public function Create()
+    public function Create(): void
     {
         //Never delete this line!
         parent::Create();
@@ -156,7 +160,7 @@ class ebusdMQTTDevice extends IPSModule
         $this->RegisterMessage(0, IPS_KERNELMESSAGE);
     }
 
-    public function ApplyChanges()
+    public function ApplyChanges(): void
     {
         //Never delete this line!
         parent::ApplyChanges();
@@ -165,61 +169,90 @@ class ebusdMQTTDevice extends IPSModule
             return;
         }
 
-        if (!$this->HasActiveParent()) {
+        // 1. Grundlegende Validierung der Eigenschaften
+        $circuitName = $this->ReadPropertyString(self::PROP_CIRCUITNAME);
+        if ($circuitName === '') {
+            $this->SetStatus(self::STATUS_INST_TOPIC_IS_INVALID);
+            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, 0);
             return;
         }
 
-        //Setze Filter für ReceiveData
-        $filter = sprintf('.*(ebusd\/%s|ebusd\/%s).*', strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME)), self::MODEL_GLOBAL_NAME);
-        if ($this->trace) {
-            $this->Logger_Dbg('Filter', $filter);
-        }
-        $this->SetReceiveDataFilter($filter);
+        // 2. Nachrichten-Registrierung (Wichtig für Status-Updates der Instanz-Hierarchie)
+        $this->unregisterParentMessages();
+        $this->registerParentMessages();
 
+        // 3. Filter setzen (nur wenn ein Parent da ist)
+        if ($this->HasActiveParent()) {
+            $filter = sprintf('.*(ebusd\/%s|ebusd\/%s).*', strtolower($circuitName), self::MODEL_GLOBAL_NAME);
+            if ($this->trace) {
+                $this->Logger_Dbg('Filter', $filter);
+            }
+            // SetReceiveDataFilter prüft intern meist auf Änderungen, wir können es hier sicher aufrufen
+            $this->SetReceiveDataFilter($filter);
+        }
+
+        // 4. Verbindung und Detail-Status prüfen
+        // Dies setzt intern den Status (ACTIVE/INACTIVE/ERROR)
         $this->checkConnection();
 
-        if ($this->GetStatus() === IS_ACTIVE) {
-            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000);
+        // 5. Abhängig vom resultierenden Status Timer und Prioritäten schalten
+        $currentStatus = $this->GetStatus();
+        if ($currentStatus === IS_ACTIVE) {
+            $interval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000;
+            $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, $interval);
 
-            //wenn die Instanz aktiv ist, dann werden die Pollprioritäten gesetzt
-            //zur Entkoppelung wird RunScriptText aufgerufen
-            $pollPriorities = json_decode($this->ReadAttributeString(self::ATTR_POLLPRIORITIES), true, 512, JSON_THROW_ON_ERROR);
-            $scriptText     = sprintf(
-                'IPS_RequestAction(%s, \'%s\', \'%s\');',
+            // Einmalig Poll-Prioritäten pushen (verzögert, damit der Parent sicher bereit ist)
+            $pollPriorities = $this->ReadAttributeString(self::ATTR_POLLPRIORITIES);
+            $this->RegisterOnceTimer('DeferredPollPriorities', sprintf(
+                'IPS_RequestAction(%d, "%s", %s);',
                 $this->InstanceID,
                 'publishPollPriorities',
-                json_encode(['old' => [], 'new' => $pollPriorities], JSON_THROW_ON_ERROR)
-            );
-            IPS_RunScriptText($scriptText);
-            //$this->publishPollPriorities([], $pollPriorities); todo
+                var_export(json_encode(['old' => [], 'new' => json_decode($pollPriorities, true)], JSON_THROW_ON_ERROR), true)
+            ));
         } else {
+            // Wenn nicht ACTIVE, sollte der Refresh-Timer aus sein.
+            // Der CheckConnection-Timer wird bereits in checkConnection() gesteuert.
             $this->SetTimerInterval(self::TIMER_REFRESH_ALL_MESSAGES, 0);
         }
 
+        // 6. Summary setzen
         $this->SetSummary(
             sprintf(
-                '%s:%s(%s)',
+                '%s:%s (%s)',
                 $this->ReadPropertyString(self::PROP_HOST),
                 $this->ReadPropertyString(self::PROP_PORT),
-                $this->ReadPropertyString(self::PROP_CIRCUITNAME)
+                $circuitName
             )
         );
-        //we will set the instance status when the parent status changes
-        $instIDMQTTServer = $this->GetParent($this->InstanceID);
-        if ($this->trace) {
-            $this->Logger_Dbg('MQTTServer', '#' . $instIDMQTTServer);
-        }
+    }
 
-        if ($instIDMQTTServer > 0) {
-            $this->RegisterMessage($instIDMQTTServer, IM_CHANGESTATUS);
-            $instIDMQTTServerSocket = $this->GetParent($instIDMQTTServer);
-            if ($instIDMQTTServerSocket > 0) {
-                $this->RegisterMessage($instIDMQTTServerSocket, IM_CHANGESTATUS);
+    private function unregisterParentMessages(): void
+    {
+        // Alle bisherigen Registrierungen für IM_CHANGESTATUS löschen, um Dubletten zu vermeiden
+        $messages = $this->GetMessageList();
+        foreach ($messages as $senderID => $msgList) {
+            if (in_array(IM_CHANGESTATUS, $msgList, true)) {
+                $this->UnregisterMessage($senderID, IM_CHANGESTATUS);
             }
         }
     }
 
-    public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+    private function registerParentMessages(): void
+    {
+        // 1. Parent (z.B. MQTT Client)
+        $parentId = $this->GetParent($this->InstanceID);
+        if ($parentId > 0 && IPS_InstanceExists($parentId)) {
+            $this->RegisterMessage($parentId, IM_CHANGESTATUS);
+
+            // 2. Parent des Parents (z.B. Client Socket / Splitter)
+            $grandParentId = $this->GetParent($parentId);
+            if ($grandParentId > 0 && IPS_InstanceExists($grandParentId)) {
+                $this->RegisterMessage($grandParentId, IM_CHANGESTATUS);
+            }
+        }
+    }
+
+    public function MessageSink($TimeStamp, $SenderID, $Message, $Data): void
     {
         $this->Logger_Dbg(
             __FUNCTION__,
@@ -236,12 +269,24 @@ class ebusdMQTTDevice extends IPSModule
                 break;
 
             case IM_CHANGESTATUS: // the parent status has changed
-                $this->ApplyChanges();
+                // $Data[0] ist der neue Status des Senders (Parent)
+                // Wir führen ApplyChanges nur aus, wenn der Parent aktiv wurde
+                // oder wenn wir aktuell nicht aktiv sind und eine Chance auf Besserung besteht.
+
+                $newParentStatus = $Data[0];
+                $currentStatus = $this->GetStatus();
+
+                // Logik: Nur neu konfigurieren, wenn der Parent nun bereit ist
+                // oder wenn wir bisher wegen des Parents inaktiv waren.
+                if ($newParentStatus === IS_ACTIVE || $currentStatus !== IS_ACTIVE) {
+                    $this->Logger_Dbg(__FUNCTION__, 'Parent status changed to ' . $newParentStatus . '. Triggering ApplyChanges.');
+                    $this->ApplyChanges();
+                }
                 break;
         }
     }
 
-    public function RequestAction($Ident, $Value)
+    public function RequestAction($Ident, $Value): void
     {
         $this->Logger_Dbg(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)));
 
@@ -309,20 +354,20 @@ class ebusdMQTTDevice extends IPSModule
         $this->publish($topic, $payload);
     }
 
-    public function ReceiveData($JSONString)
+    public function ReceiveData($JSONString): string
     {
         $this->Logger_Dbg(__FUNCTION__, $JSONString);
 
         //prüfen, ob CircuitName vorhanden
         $mqttTopic = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
         if (empty($mqttTopic)) {
-            return;
+            return '';
         }
 
         //prüfen, ob buffer gefüllt ist und Topic und Payload vorhanden sind
         $Buffer = json_decode($JSONString, false, 512, JSON_THROW_ON_ERROR);
         if (($Buffer === false) || ($Buffer === null) || !property_exists($Buffer, 'Topic') || !property_exists($Buffer, 'Payload')) {
-            return;
+            return '';
         }
 
         //prüfen, ob Payload gefüllt ist
@@ -356,19 +401,19 @@ class ebusdMQTTDevice extends IPSModule
 
         if ($Payload === null) {
             $this->Logger_Dbg(__FUNCTION__, 'Payload is not set: ' . $Buffer->Payload);
-            return;
+            return '';
         }
 
         //Globale Meldungen werden extra behandelt
         if (str_starts_with($Buffer->Topic, MQTT_GROUP_TOPIC . '/global/')) {
             $this->checkGlobalMessage($Buffer->Topic, $Buffer->Payload);
-            return;
+            return '';
         }
 
         //prüfen, ob der Topic korrekt ist
         if (!str_contains($Buffer->Topic, sprintf('%s/%s/', MQTT_GROUP_TOPIC, $mqttTopic))) {
             $this->Logger_Dbg('MQTT Topic invalid', $Buffer->Topic);
-            return;
+            return '';
         }
 
         $messageId = str_replace(MQTT_GROUP_TOPIC . '/' . strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME)) . '/', '', $Buffer->Topic);
@@ -385,7 +430,7 @@ class ebusdMQTTDevice extends IPSModule
             );
 
             $this->LogMessage(sprintf('Message %s nicht in Konfiguration gefunden.', $messageId), KL_ERROR);
-            return;
+            return '';
         }
 
         $messageDef = $configurationMessages[$messageId];
@@ -406,7 +451,7 @@ class ebusdMQTTDevice extends IPSModule
                 'MQTT messageId - not found',
                 sprintf('Message \'%s\' is not marked to be stored', $messageId)
             );
-            return;
+            return '';
         }
 
         foreach ($this->getFieldValues($messageDef, $Payload, false) as $value) {
@@ -415,9 +460,11 @@ class ebusdMQTTDevice extends IPSModule
                 $this->SetValue($value['ident'], $value['value']);
             }
         }
+
+        return '';
     }
 
-    public function GetConfigurationForm()
+    public function GetConfigurationForm(): string
     {
         $variableList = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
 
@@ -470,9 +517,10 @@ class ebusdMQTTDevice extends IPSModule
     // my own public functions
     public function publish(string $topic, string $payload): void
     {
-        $Data['DataID']           = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
-        $Data['PacketType']       = 3;
-        $Data['QualityOfService'] = 0;
+        // see https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
+        $Data['DataID']           = self::DATA_ID_MQTT_SERVER_TX;
+        $Data['PacketType']       = self::PT_PUBLISH;
+        $Data['QualityOfService'] = self::QOS_0;
         $Data['Retain']           = false;
         $Data['Topic']            = $topic;
         $Data['Payload']          = $payload;
@@ -561,7 +609,7 @@ class ebusdMQTTDevice extends IPSModule
             $this->ReadPropertyString(self::PROP_PORT),
             $circuitName
         );
-        $result      = $this->readURL($url);
+        $result      = $this->readURL($url) ?? [];
 
         //alle Felder des Ergebnisses auswerten
         if (!array_key_exists($circuitName, $result)) {
@@ -668,6 +716,9 @@ class ebusdMQTTDevice extends IPSModule
         return $variableListUpdated;
     }
 
+    private const EXCLUDED_CIRCUIT_NAMES = ['global', 'broadcast'];
+    private const SCANNER_PREFIX = 'scan.';
+
     private function setCircuitOptions(): void
     {
         $url = sprintf(
@@ -676,11 +727,7 @@ class ebusdMQTTDevice extends IPSModule
             $this->ReadPropertyString(self::PROP_PORT)
         );
 
-        $result = $this->readURL($url);
-
-        if ($result === null) { //z.B. wenn Verbindungsdaten falsch oder leer
-            $result = [];
-        }
+        $result = $this->readURL($url) ?? []; //wenn Verbindungsdaten falsch oder leer sind
 
         $options = [self::EMPTY_OPTION_VALUE];
 
@@ -690,9 +737,11 @@ class ebusdMQTTDevice extends IPSModule
             }
         }
 
-        $optionVaulue = json_encode($options, JSON_THROW_ON_ERROR);
-        $this->UpdateFormField(self::PROP_CIRCUITNAME, 'options', $optionVaulue);
-        $this->WriteAttributeString(self::ATTR_CIRCUITOPTIONLIST, $optionVaulue);
+        $optionValue = json_encode($options, JSON_THROW_ON_ERROR);
+        $this->Logger_Dbg(__FUNCTION__, 'optionValues: ' . $optionValue);
+
+        $this->UpdateFormField(self::PROP_CIRCUITNAME, 'options', $optionValue);
+        $this->WriteAttributeString(self::ATTR_CIRCUITOPTIONLIST, $optionValue);
     }
 
     private function getPollPriorities(array $variableList): array
@@ -749,10 +798,10 @@ class ebusdMQTTDevice extends IPSModule
             $mqttTopic,
             $messageId
         );
-        $result = $this->readURL($url);
+        $result = $this->readURL($url) ?? [];
 
         //alle Felder auswerten
-        if ((is_null($result) || !array_key_exists($mqttTopic, $result)) || (!array_key_exists($messageId, $result[$mqttTopic]['messages']))) {
+        if (!array_key_exists($mqttTopic, $result) || !array_key_exists($messageId, $result[$mqttTopic]['messages'])) {
             $this->Logger_Dbg(__FUNCTION__, sprintf('current values of message \'%s\' not found (URL: %s)', $messageId, $url));
             return null;
         }
@@ -1394,18 +1443,19 @@ class ebusdMQTTDevice extends IPSModule
     private function SetInstanceStatus(): void
     {
         $host        = $this->ReadPropertyString(self::PROP_HOST);
+        $port        = $this->ReadPropertyString(self::PROP_PORT);
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
-        //IP Prüfen
-        if ($host === '') {
-            $this->SetStatus(self::STATUS_INST_IP_IS_EMPTY);
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'empty Host'));
+        if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
+            $this->SetStatus(self::STATUS_INST_IP_IS_INVALID);
+            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid IP'));
             return;
         }
 
-        if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
-            $this->SetStatus(self::STATUS_INST_IP_IS_INVALID); //IP-Adresse ist ungültig
-            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid IP'));
+        //Port Prüfen
+        if ((int) $port < 1 || (int) $port > 65535 || !filter_var($port, FILTER_VALIDATE_INT)) {
+            $this->SetStatus(self::STATUS_INST_PORT_IS_INVALID);
+            $this->Logger_Dbg(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid Port'));
             return;
         }
 

@@ -1,7 +1,8 @@
 {
   "elements": [
     {
-      "type":  "ExpansionPanel", "caption": "Connection Data",
+      "type":  "ExpansionPanel",
+      "caption": "Connection Data",
       "items": [
         {
           "type":  "RowLayout",
@@ -23,7 +24,8 @@
       ]
     },
     {
-      "type":  "ExpansionPanel", "caption": "Expert Parameters",
+      "type":  "ExpansionPanel",
+      "caption": "Expert Parameters",
       "items": [
         {"type": "CheckBox", "name": "WriteDebugInformationToIPSLogger", "caption": "Debug information are written additionally to the logfile of IPSLibrary"}
       ]
@@ -165,7 +167,7 @@
     {
       "code":    202,
       "icon":    "error",
-      "caption": "IP address can not be empty."
+      "caption": "Port number is not valid."
     },
     {
       "code":    203,

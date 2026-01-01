@@ -12,7 +12,7 @@ trait ebusd2MQTTHelper
 
         $this->UpdateFormField('MsgBox', 'visible', true);
     }
-    protected function GetParent($instanceID)
+    protected function GetParent($instanceID): int
     {
         $instance = IPS_GetInstance($instanceID);
 

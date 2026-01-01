@@ -22,7 +22,7 @@
       "Create/Update Variables": "Speichere Änderungen",
       "Expert Parameters": "Experten Einstellungen",
       "Debug information are written additionally to the logfile of IPSLibrary": "Debug Informationen werden zusätzlich in das Logfile der IPSLibrary geschrieben",
-      "IP address can not be empty.": "IP Adresse darf nicht leer sein.",
+      "Port number is not valid.": "Fehlende oder ungültige Port Nummer.",
       "IP address is not valid.": "IP Adresse ist nicht gültig.",
       "Circuit name is not valid.": "Schaltkreis Name ist nicht gültig.",
       "from": "von",
