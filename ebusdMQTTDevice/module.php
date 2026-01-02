@@ -1007,6 +1007,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
     private function RegisterVariablesOfMessage(array $configurationMessage): int
     {
         $countOfVariables = 0;
+        $relevantFieldsCount = $this->countRelevantFieldDefs($configurationMessage['fielddefs']);
+
         foreach ($configurationMessage['fielddefs'] as $fielddefkey => $fielddef) {
             if ($fielddef['type'] === 'IGN') {
                 continue;
@@ -1016,22 +1018,29 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 $this->logDebug(__FUNCTION__, sprintf('Field: %s: %s', $fielddefkey, json_encode($fielddef, JSON_THROW_ON_ERROR)));
             }
 
-            $profileName = 'EBM.' . $configurationMessage['name'] . ($fielddef['name'] !== '' ? '.' . $fielddef['name'] : '');
-            $ident       = $this->getFieldIdentName($configurationMessage, $fielddefkey);
-            $objectName  = $this->getFieldLabel($configurationMessage, $fielddefkey);
+            $ident      = $this->getFieldIdentName($configurationMessage, $fielddefkey);
+            $objectName = $this->getFieldLabel($configurationMessage, $fielddefkey);
 
             if ($ident === '' || $objectName === '') {
                 continue;
             }
 
-            $variableTyp = $this->getIPSVariableType($fielddef);
-            $unit        = match ($fielddef['unit']) {
+            $suffix = match ($fielddef['unit']) {
                 '%' => self::ZERO_WIDTH_SPACE . '%',
                 '' => '',
                 default => ' ' . $fielddef['unit']
             };
 
+            $variableTyp = $this->getIPSVariableType($fielddef);
+
             // Profil-Registrierung
+            $profileName = match ($variableTyp) {
+                VARIABLETYPE_INTEGER,
+                VARIABLETYPE_FLOAT => 'EBM.' . $configurationMessage['name'] . ($fielddef['name'] !== '' ? '.' . $fielddef['name'] : ''),
+                VARIABLETYPE_BOOLEAN => '~Switch',
+                default => '',
+            };
+
             if (isset($fielddef['values'])) {
                 $ass = [];
                 foreach ($fielddef['values'] as $key => $value) {
@@ -1047,23 +1056,19 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 $TypeDef = $this->getEbusDataTypes()[$fielddef['type']];
                 $divisor = $fielddef['divisor'] ?? 0;
 
-                if ($variableTyp === VARIABLETYPE_INTEGER && $divisor <= 0) {
-                    $this->RegisterProfileInteger($profileName, '', '', $unit, $TypeDef['MinValue'], $TypeDef['MaxValue'], $TypeDef['StepSize']);
-                } else {
-                    // Sowohl FLOAT als auch INTEGER mit Divisor werden zu FLOAT-Profilen
-
+                if ($variableTyp === VARIABLETYPE_INTEGER) {
+                    $this->RegisterProfileInteger($profileName, '', '', $suffix, $TypeDef['MinValue'], $TypeDef['MaxValue'], $TypeDef['StepSize']);
+                } elseif ($variableTyp === VARIABLETYPE_FLOAT) {
                     $div = max(1, $divisor);
-
-                    $digits = 0;
-                    if ($variableTyp === VARIABLETYPE_FLOAT) {
-                        $digits = ($divisor > 0) ? (int)log($divisor, 10) : $TypeDef['Digits'];
-                    }
+                    // Digits basierend auf dem Divisor berechnen (z.B. 100 -> 2 Digits)
+                    // Nutze round() um Floating-Point-Ungenauigkeiten bei log10 zu vermeiden
+                    $digits = ($divisor > 0) ? (int)round(log10($divisor)) : $TypeDef['Digits'];
 
                     $this->RegisterProfileFloat(
                         $profileName,
                         '',
                         '',
-                        $unit,
+                        $suffix,
                         $TypeDef['MinValue'] / $div,
                         $TypeDef['MaxValue'] / $div,
                         $TypeDef['StepSize'] / $div,
@@ -1073,42 +1078,23 @@ class ebusdMQTTDevice extends IPSModuleStrict
             }
 
             // Variablen-Registrierung
-            $id        = 0;
-            $typeLabel = '';
 
-            switch ($variableTyp) {
-                case VARIABLETYPE_BOOLEAN:
-                    $id        = @$this->RegisterVariableBoolean($ident, $objectName, '~Switch');
-                    $typeLabel = 'Boolean';
-                    break;
-                case VARIABLETYPE_STRING:
-                    $id        = @$this->RegisterVariableString($ident, $objectName);
-                    $typeLabel = 'String';
-                    break;
-                case VARIABLETYPE_INTEGER:
-                    if (isset($fielddef['divisor']) && $fielddef['divisor'] > 0) {
-                        $id        = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
-                        $typeLabel = 'Float (Divisor)';
-                    } else {
-                        $id        = @$this->RegisterVariableInteger($ident, $objectName, $profileName);
-                        $typeLabel = 'Integer';
-                    }
-                    break;
-                case VARIABLETYPE_FLOAT:
-                    $id        = @$this->RegisterVariableFloat($ident, $objectName, $profileName);
-                    $typeLabel = 'Float';
-                    break;
-            }
+            $created = $this->MaintainVariable($ident, $objectName, $variableTyp, $profileName, 0, true);
 
-            if ($id > 0) {
-                $countOfVariables++;
-                $this->logDebug(__FUNCTION__, sprintf('%s Variable angelegt. Ident: %s, Label: %s', $typeLabel, $ident, $objectName));
-            } else {
-                trigger_error(sprintf('%s Variable konnte nicht angelegt werden. Ident: %s', $typeLabel, $ident), E_USER_WARNING);
-            }
-
-            if ($configurationMessage['write'] && ($this->countRelevantFieldDefs($configurationMessage['fielddefs']) === 1)) {
+            if ($configurationMessage['write'] && ($relevantFieldsCount === 1)) {
                 $this->EnableAction($ident);
+            }
+
+            if ($created) {
+                $countOfVariables++;
+                $typeLabel = match ($variableTyp) {
+                    VARIABLETYPE_BOOLEAN => 'Boolean',
+                    VARIABLETYPE_INTEGER => 'Integer',
+                    VARIABLETYPE_FLOAT => 'Float',
+                    VARIABLETYPE_STRING => 'String',
+                    default => 'Unknown'
+                };
+                $this->logDebug(__FUNCTION__, sprintf('%s Variable neu angelegt. Ident: %s, Label: %s', $typeLabel, $ident, $objectName));
             }
         }
         return $countOfVariables;
