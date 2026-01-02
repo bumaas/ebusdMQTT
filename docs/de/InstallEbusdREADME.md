@@ -3,31 +3,33 @@
    ## Inhaltverzeichnis
    1. [Installation des richtigen Pakets](#1-installation-des-richtigen-pakets)
    2. [Abschluss der Installation](#2-abschluss-der-installation)
-   3. [Überprüfung der Konfiguration](#3-berprfung-der-konfiguration)
+   3. [Überprüfung der Konfiguration](#3-überprüfung-der-konfiguration)
    4. [Mit ebusctl Daten lesen und schreiben](#4-mit-ebusctl-daten-lesen-und-schreiben)
-   5. [Über http ebusd Daten abfragen](#5-ber-http-ebusd-daten-abfragen)
+   5. [Über http ebusd Daten abfragen](#5-über-http-ebusd-daten-abfragen)
    6. [IP-Symcon relevante Konfigurationsparameter](#6-ip-symcon-relevante-konfigurationsparameter)
-    
-Die detaillierte Installationsbeschreibung des eBUS Daemon ist im [ebusd Wiki](https://github.com/john30/ebusd/wiki) zu finden.
+
+> [!TIP]
+> Die detaillierte Installationsbeschreibung des eBUS Daemon ist im [ebusd Wiki](https://github.com/john30/ebusd/wiki) zu finden.
 
 Es gibt zahlreiche Wege, ebusd zu installieren. Da die Installation nicht ganz trivial ist, fasse ich hier einmal zusammen, wie sich ebusd auf einem Raspberry Pi 1 Mod.B unter Buster installieren lässt.
 
 ## 1. Installation des richtigen Pakets
 
-Je nach eingesetzter Hardware und installiertem Betriebssystem ist das passende Packet von der Seite [ebusd releases](https://github.com/john30/ebusd/releases) zu installieren.
+Wähle das passende Paket für deine Hardware und OS-Version von der Seite [ebusd releases](https://github.com/john30/ebusd/releases).
 
-Tipp: die Architektur (amd64, armhf oder i386) und die OS Version findet man heraus mit 
+**Tipp:** die Architektur (amd64, armhf oder i386) und die OS-Version findet man heraus mit 
+```bash
 dpkg --print-architecture
-und
 cat /etc/os-release
+```
 
 Wichtig: es ist ein Paket mit **MQTT Support** zu wählen!
 
 Wenn das passende Paket (z.B. ebusd-22.4_armv7-buster_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren.:
-```
+```bash
 wget https://github.com/john30/ebusd/releases/download/v22.4/ebusd-22.4_armv7-buster_mqtt1.deb
 ```
-```
+```bash
 sudo dpkg -i ebusd-22.4_armv7-buster_mqtt1.deb
 ```
 Falls es bei der Installation des ebusd Paketes zu einer Fehlermeldung kommen sollte wie:
@@ -39,7 +41,7 @@ Paket libmosquitto1 ist nicht installiert.
 ```
 
 Dann ist vorab die passende libmosquitto[0/1] zu installieren:
-```
+```bash
 sudo apt-get update
 sudo apt-get install libmosquitto1
 ```
@@ -78,7 +80,7 @@ Der vierte Parameter besagt, dass es keine Zugriffsbeschränkungen geben soll.
 Alternativ bietet sich an, die benötigten Dateien lokal zu speichern und den Parameter auf den lokalen Pfad zu setzen.
 
 Dazu wählt man sich ein passendes Verzeichnis aus (z.B. /home/pi/) und führt in dem Verzeichnis den folgenden Befehl aus:
-```
+```bash
 git clone https://github.com/john30/ebusd-configuration.git
 ```
 Dadurch werden die Konfigurationsdateien im Unterverzeichnis /home/pi/ebusd-configuration gespeichert, so dass die Einstellung für configpath auf das lokale Verzeichnis umgestellt werden kann:
@@ -111,7 +113,7 @@ sudo systemctl restart ebusd
 ### Installation als Docker Container
 
 Wenn man ebusd als Docker laufen lässt, empfiehlt es sich diesen mit Bridge und eigener IP zu erstellen, da sonst Port-Konflikte (8080) auftreten können.
-```
+```bash
 ebusd -f --scanconfig --port=8888 --device=<IP LANGateway>:<Port LANGateway>
 ```
 

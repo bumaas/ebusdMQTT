@@ -9,134 +9,65 @@ if (function_exists('IPSUtils_Include')) {
 require_once __DIR__ . '/../libs/eBUS_MQTT_Helper.php';
 
 
-class ebusdMQTTDevice extends IPSModule
+class ebusdMQTTDevice extends IPSModuleStrict
 {
     use ebusd2MQTTHelper;
 
-    private const PT_PUBLISH = 3; //Packet Type Publish
-    private const QOS_0      = 0; //Quality of Service 0
+    private const int PT_PUBLISH = 3; //Packet Type Publish
+    private const int QOS_0      = 0; //Quality of Service 0
 
-    private const STATUS_INST_PORT_IS_INVALID  = 202;
-    private const STATUS_INST_IP_IS_INVALID    = 204;
-    private const STATUS_INST_TOPIC_IS_INVALID = 203;
+    private const int STATUS_INST_PORT_IS_INVALID  = 202;
+    private const int STATUS_INST_IP_IS_INVALID    = 204;
+    private const int STATUS_INST_TOPIC_IS_INVALID = 203;
 
     //property names
-    private const PROP_HOST                             = 'Host';
-    private const PROP_PORT                             = 'Port';
-    private const PROP_CIRCUITNAME                      = 'CircuitName';
-    private const PROP_UPDATEINTERVAL                   = 'UpdateInterval';
-    private const PROP_WRITEDEBUGINFORMATIONTOIPSLOGGER = 'WriteDebugInformationToIPSLogger';
+    private const string PROP_HOST                             = 'Host';
+    private const string PROP_PORT                             = 'Port';
+    private const string PROP_CIRCUITNAME                      = 'CircuitName';
+    private const string PROP_UPDATEINTERVAL                   = 'UpdateInterval';
+    private const string PROP_WRITEDEBUGINFORMATIONTOIPSLOGGER = 'WriteDebugInformationToIPSLogger';
 
     //attribute names
-    private const ATTR_EBUSD_CONFIGURATION_MESSAGES = 'ebusdConfigurationMessages';
-    private const ATTR_VARIABLELIST                 = 'VariableList';
-    private const ATTR_POLLPRIORITIES               = 'PollPriorities';
-    private const ATTR_CIRCUITOPTIONLIST            = 'CircuitOptionList';
-    private const ATTR_SIGNAL                       = 'GlobalSignal';
-    private const ATTR_CHECKCONNECTIONTIMER         = 'CheckConnectionTimer';
+    private const string ATTR_EBUSD_CONFIGURATION_MESSAGES = 'ebusdConfigurationMessages';
+    private const string ATTR_VARIABLELIST                 = 'VariableList';
+    private const string ATTR_POLLPRIORITIES               = 'PollPriorities';
+    private const string ATTR_CIRCUITOPTIONLIST            = 'CircuitOptionList';
+    private const string ATTR_SIGNAL                       = 'GlobalSignal';
+    private const string ATTR_CHECKCONNECTIONTIMER         = 'CheckConnectionTimer';
 
     //timer names
-    private const TIMER_REQUEST_ALL_VALUES = 'requestAllValues';
-    private const TIMER_CHECK_CONNECTION   = 'checkConnection';
+    private const string TIMER_REQUEST_ALL_VALUES = 'requestAllValues';
+    private const string TIMER_CHECK_CONNECTION   = 'checkConnection';
 
     //form element names
-    private const FORM_LIST_VARIABLELIST     = 'VariableList';
-    private const FORM_ELEMENT_READABLE      = 'readable';
-    private const FORM_ELEMENT_POLLPRIORITY  = 'pollpriority';
-    private const FORM_ELEMENT_MESSAGENAME   = 'messagename';
-    private const FORM_ELEMENT_VARIABLENAMES = 'variablenames';
-    private const FORM_ELEMENT_IDENTNAMES    = 'identnames';
-    private const FORM_ELEMENT_READVALUES    = 'readvalues';
-    private const FORM_ELEMENT_KEEP          = 'keep';
-    private const FORM_ELEMENT_OBJECTIDENTS  = 'objectidents';
+    private const string FORM_LIST_VARIABLELIST     = 'VariableList';
+    private const string FORM_ELEMENT_READABLE      = 'readable';
+    private const string FORM_ELEMENT_POLLPRIORITY  = 'pollpriority';
+    private const string FORM_ELEMENT_MESSAGENAME   = 'messagename';
+    private const string FORM_ELEMENT_VARIABLENAMES = 'variablenames';
+    private const string FORM_ELEMENT_IDENTNAMES    = 'identnames';
+    private const string FORM_ELEMENT_READVALUES    = 'readvalues';
+    private const string FORM_ELEMENT_WRITABLE      = 'writable';
+    private const string FORM_ELEMENT_KEEP          = 'keep';
+    private const string FORM_ELEMENT_OBJECTIDENTS  = 'objectidents';
 
     private bool $trace               = false;
 
     private bool $testFunctionsActive = false; //button "Publish Poll Priorities" aktivieren
 
-    // die von ebusd unterstützen Datentypen
-    //siehe https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types
-
-    private const DataTypes = [
-        // VARIABLETYPE_BOOLEAN
-        'BI0'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI1'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI2'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI3'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI4'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI5'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI6'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        'BI7'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
-        // VARIABLETYPE_INTEGER
-        'BDY'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 7, 'StepSize' => 1],
-        'HDY'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 7, 'StepSize' => 1],
-        'BCD'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99, 'StepSize' => 1],
-        'BCD:2' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
-        'BCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
-        'BCD:4' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
-        'HCD'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
-        'HCD:1' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99, 'StepSize' => 1],
-        'HCD:2' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
-        'HCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
-        'PIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
-        'UCH'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 256, 'StepSize' => 1],
-        'SCH'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -127, 'MaxValue' => 127, 'StepSize' => 1],
-        'D1B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -127, 'MaxValue' => 127, 'StepSize' => 1],
-        'UIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65534, 'StepSize' => 1],
-        'UIR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65534, 'StepSize' => 1],
-        'SIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -32767, 'MaxValue' => 32767, 'StepSize' => 1],
-        'SIR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -32767, 'MaxValue' => 32767, 'StepSize' => 1],
-        'U3N'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 16777214, 'StepSize' => 1],
-        'U3R'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 16777214, 'StepSize' => 1],
-        'S3N'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -8388607, 'MaxValue' => 8388607, 'StepSize' => 1],
-        'S3R'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -8388607, 'MaxValue' => 8388607, 'StepSize' => 1],
-        'ULG'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967294 ist zu groß
-        'ULR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967294 ist zu groß
-        'SLG'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2147483647, 'MaxValue' => 2147483647, 'StepSize' => 1],
-        'SLR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2147483647, 'MaxValue' => 2147483647, 'StepSize' => 1],
-        // VARIABLETYPE_FLOAT
-        'D1C'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => 0, 'MaxValue' => 100, 'StepSize' => 0.5, 'Digits' => 1],
-        'D2B'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -127.99, 'MaxValue' => 127.99, 'StepSize' => 0.01, 'Digits' => 2],
-        'D2C'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -2047.9, 'MaxValue' => 2047.9, 'StepSize' => 0.1, 'Digits' => 1],
-        'FLT'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -32.767, 'MaxValue' => 32.767, 'StepSize' => 0.001, 'Digits' => 3],
-        'FLR'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -32.767, 'MaxValue' => 32.767, 'StepSize' => 0.001, 'Digits' => 3],
-        'EXP'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -3.0e38, 'MaxValue' => 3.0e38, 'StepSize' => 0.001, 'Digits' => 3],
-        'EXR'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -3.0e38, 'MaxValue' => 3.0e38, 'StepSize' => 0.001, 'Digits' => 3],
-        // VARIABLETYPE_STRING
-        'STR'   => ['VariableType' => VARIABLETYPE_STRING],
-        'NTS'   => ['VariableType' => VARIABLETYPE_STRING],
-        'HEX'   => ['VariableType' => VARIABLETYPE_STRING],
-        'BDA'   => ['VariableType' => VARIABLETYPE_STRING],
-        'BDA:3' => ['VariableType' => VARIABLETYPE_STRING],
-        'HDA'   => ['VariableType' => VARIABLETYPE_STRING],
-        'HDA:3' => ['VariableType' => VARIABLETYPE_STRING],
-        'DAY'   => ['VariableType' => VARIABLETYPE_STRING],
-        'BTI'   => ['VariableType' => VARIABLETYPE_STRING],
-        'HTI'   => ['VariableType' => VARIABLETYPE_STRING],
-        'VTI'   => ['VariableType' => VARIABLETYPE_STRING],
-        'BTM'   => ['VariableType' => VARIABLETYPE_STRING],
-        'HTM'   => ['VariableType' => VARIABLETYPE_STRING],
-        'VTM'   => ['VariableType' => VARIABLETYPE_STRING],
-        'MIN'   => ['VariableType' => VARIABLETYPE_STRING],
-        'TTM'   => ['VariableType' => VARIABLETYPE_STRING],
-        'TTH'   => ['VariableType' => VARIABLETYPE_STRING],
-        'TTQ'   => ['VariableType' => VARIABLETYPE_STRING]
-    ];
-
     //ok-Zeichen für die Auswahlliste (siehe https://www.compart.com/de/unicode/)
-    private const OK_SIGN = "\u{2714}";
+    private const string OK_SIGN = "\u{2714}";
     //Leerzeichen für Profile mit % im Suffix
-    private const ZERO_WIDTH_SPACE = "\u{200B}";
+    private const string ZERO_WIDTH_SPACE = "\u{200B}";
 
     //global
-    private const MODEL_GLOBAL_NAME  = 'global';
-    private const EMPTY_OPTION_VALUE = ['caption' => '-', 'value' => ''];
+    private const string MODEL_GLOBAL_NAME  = 'global';
+    private const array  EMPTY_OPTION_VALUE = ['caption' => '-', 'value' => ''];
 
     public function Create(): void
     {
         //Never delete this line!
         parent::Create();
-        $this->ConnectParent(self::MODULE_ID_MQTT_SERVER);
 
         $this->RegisterPropertyString(self::PROP_HOST, '');
         // We use String for Port to keep compatibility with existing instances.
@@ -210,7 +141,8 @@ class ebusdMQTTDevice extends IPSModule
                     'IPS_RequestAction(%d, "%s", %s);',
                     $this->InstanceID,
                     'publishPollPriorities',
-                    var_export(json_encode(['old' => [], 'new' => json_decode($pollPriorities, true)], JSON_THROW_ON_ERROR), true)
+                    var_export(json_encode(['old' => [], 'new' => json_decode($pollPriorities, true, 512, JSON_THROW_ON_ERROR)], JSON_THROW_ON_ERROR),
+                               true)
                 )
             );
         } else {
@@ -256,7 +188,7 @@ class ebusdMQTTDevice extends IPSModule
         }
     }
 
-    public function MessageSink($TimeStamp, $SenderID, $Message, $Data): void
+    public function MessageSink(int $TimeStamp, int $SenderID, int $Message, array $Data): void
     {
         $this->logDebug(
             __FUNCTION__,
@@ -273,24 +205,20 @@ class ebusdMQTTDevice extends IPSModule
                 break;
 
             case IM_CHANGESTATUS: // the parent status has changed
-                // $Data[0] ist der neue Status des Senders (Parent)
-                // Wir führen ApplyChanges nur aus, wenn der Parent aktiv wurde
-                // oder wenn wir aktuell nicht aktiv sind und eine Chance auf Besserung besteht.
-
-                $newParentStatus = $Data[0];
-                $currentStatus   = $this->GetStatus();
-
                 // Logik: Nur neu konfigurieren, wenn der Parent nun bereit ist
                 // oder wenn wir bisher wegen des Parents inaktiv waren.
+                $newParentStatus = (int)$Data[0];
+                $currentStatus   = $this->GetStatus();
+
                 if ($newParentStatus === IS_ACTIVE || $currentStatus !== IS_ACTIVE) {
-                    $this->logDebug(__FUNCTION__, 'Parent status changed to ' . $newParentStatus . '. Triggering ApplyChanges.');
+                    $this->logDebug(__FUNCTION__, 'Parent status changed. Triggering ApplyChanges.');
                     $this->ApplyChanges();
                 }
                 break;
         }
     }
 
-    public function RequestAction($Ident, $Value): void
+    public function RequestAction(string $Ident, mixed $Value): void
     {
         $this->logDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)));
 
@@ -301,7 +229,7 @@ class ebusdMQTTDevice extends IPSModule
         }
 
         // Hilfsfunktion für JSON-Decoding von $Value
-        $decodeValue = function () use ($Value) {
+        $decodeValue = static function () use ($Value) {
             return json_decode((string)$Value, true, 512, JSON_THROW_ON_ERROR);
         };
 
@@ -359,18 +287,24 @@ class ebusdMQTTDevice extends IPSModule
                     );
                 }
                 return;
-        }
 
-        $topic   = sprintf('%s/%s/%s/set', MQTT_GROUP_TOPIC, $this->ReadPropertyString(self::PROP_CIRCUITNAME), $Ident);
-        $payload = $this->getPayload($Ident, $Value);
-        $this->publish($topic, $payload);
+            default:
+                // Prüfen, ob die Variable zum Ident existiert bevor wir publishen
+                if ($this->GetIDForIdent($Ident) === 0) {
+                    $this->logDebug(__FUNCTION__, 'Unknown Ident: ' . $Ident);
+                    return;
+                }
+                $topic   = sprintf('%s/%s/%s/set', MQTT_GROUP_TOPIC, $this->ReadPropertyString(self::PROP_CIRCUITNAME), $Ident);
+                $payload = $this->getPayload($Ident, $Value);
+                $this->publish($topic, $payload);
+        }
     }
 
-    public function ReceiveData($JSONString): string
+    public function ReceiveData(string $JSONString): string
     {
         $this->logDebug(__FUNCTION__, $JSONString);
 
-        //prüfen, ob CircuitName vorhanden
+        //wir prüfen, ob CircuitName vorhanden ist
         $mqttTopicProperty = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
         if (empty($mqttTopicProperty)) {
             return '';
@@ -378,53 +312,62 @@ class ebusdMQTTDevice extends IPSModule
         $mqttTopicLower = strtolower($mqttTopicProperty);
 
 
-        // prüfen, ob buffer korrektes JSON ist
+        //wir prüfen, ob buffer korrektes JSON ist
         try {
-            $Buffer = json_decode($JSONString, false, 512, JSON_THROW_ON_ERROR);
+            $data = json_decode($JSONString, true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException) {
             return '';
         }
 
-        //prüfen, ob Topic und Payload vorhanden sind
-        if (!isset($Buffer->Topic, $Buffer->Payload)) {
+        //wir prüfen, ob Topic und Payload vorhanden sind
+        if (!isset($data['Topic'], $data['Payload'])) {
             return '';
         }
 
+        $topic      = $data['Topic'];
+        $payloadHex = $data['Payload'];
+
+        if (!ctype_xdigit($payloadHex)) {
+            $this->logDebug(__FUNCTION__, 'Payload is not a valid hex string: ' . $payloadHex);
+            return '';
+        }
+        $payloadJson = hex2bin($payloadHex);
+
         //Globale Meldungen werden extra behandelt
-        if (str_starts_with($Buffer->Topic, MQTT_GROUP_TOPIC . '/global/')) {
-            $this->checkGlobalMessage($Buffer->Topic, $Buffer->Payload);
+        if (str_starts_with($topic, MQTT_GROUP_TOPIC . '/global/')) {
+            $this->checkGlobalMessage($topic, $payloadJson);
             return '';
         }
 
         //prüfen, ob der Topic korrekt ist
         $expectedPrefix = MQTT_GROUP_TOPIC . '/' . $mqttTopicLower . '/';
-        if (!str_starts_with($Buffer->Topic, $expectedPrefix)) {
+        if (!str_starts_with($topic, $expectedPrefix)) {
             return '';
         }
 
-        $this->logDebug('MQTT Topic/Payload', sprintf('Topic: %s -- Payload: %s', $Buffer->Topic, $Buffer->Payload));
+        $this->logDebug('MQTT Topic/Payload', sprintf('Topic: %s -- Payload: %s', $topic, $payloadJson));
 
         // Payload dekodieren (ebusd > 3.4 sendet valides JSON, ältere Versionen evtl. nicht)
         try {
-            $Payload = json_decode($Buffer->Payload, true, 512, JSON_THROW_ON_ERROR);
+            $Payload = json_decode($payloadJson, true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException) {
             $txtError = sprintf(
                 'ERROR! (ebusd version issue?) - JSON Error (%s) at Topic "%s": %s, json: %s',
                 json_last_error(),
-                $Buffer->Topic,
+                $topic,
                 json_last_error_msg(),
-                $Buffer->Payload
+                $payloadJson
             );
             $this->logDebug(__FUNCTION__ . ' (ERROR)', $txtError);
             return '';
         }
 
         if ($Payload === null) {
-            $this->logDebug(__FUNCTION__, 'Payload is null: ' . $Buffer->Payload);
+            $this->logDebug(__FUNCTION__, 'Payload is null: ' . $payloadJson);
             return '';
         }
 
-        $messageId = str_replace(MQTT_GROUP_TOPIC . '/' . $mqttTopicLower . '/', '', $Buffer->Topic);
+        $messageId = str_replace(MQTT_GROUP_TOPIC . '/' . $mqttTopicLower . '/', '', $topic);
         if ($this->trace) {
             $this->logDebug('MQTT messageId', $messageId);
         }
@@ -443,13 +386,9 @@ class ebusdMQTTDevice extends IPSModule
 
         // Prüfen, ob die Message zum Speichern markiert ist
         $variableList = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
-        $keep         = false;
-        foreach ($variableList as $entry) {
-            if ($entry[self::FORM_ELEMENT_MESSAGENAME] === $messageId) {
-                $keep = $entry[self::FORM_ELEMENT_KEEP] ?? false;
-                break;
-            }
-        }
+
+        $entry = array_find($variableList, static fn(array $e) => $e[self::FORM_ELEMENT_MESSAGENAME] === $messageId);
+        $keep  = $entry[self::FORM_ELEMENT_KEEP] ?? false;
 
         if (!$keep) {
             $this->logDebug('MQTT messageId - skip', "Message '$messageId' is not marked to be stored");
@@ -458,8 +397,8 @@ class ebusdMQTTDevice extends IPSModule
 
         // Werte verarbeiten
         $messageDef = $configurationMessages[$messageId];
-        foreach ($this->getFieldValues($messageDef, $Payload, false) as $value) {
-            //wenn die Statusvariable existiert, dann wird sie geschrieben
+        foreach ($this->getFieldValues($messageDef, $Payload) as $value) {
+            //wenn die Statusvariable existiert, wird sie geschrieben
             $variableId = @$this->GetIDForIdent($value['ident']);
             if ($variableId > 0) {
                 $this->SetValue($value['ident'], $value['value']);
@@ -494,7 +433,7 @@ class ebusdMQTTDevice extends IPSModule
         return json_encode($Form, JSON_THROW_ON_ERROR);
     }
 
-    protected function SetValue($Ident, $Value): bool
+    protected function SetValue(string $Ident, mixed $Value): bool
     {
         $oldValue = $this->GetValue($Ident);
 
@@ -512,7 +451,7 @@ class ebusdMQTTDevice extends IPSModule
         return parent::SetValue($Ident, $Value);
     }
 
-    protected function SetStatus($Status): bool
+    protected function SetStatus(int $Status): bool
     {
         $isActive = ($Status === IS_ACTIVE);
         $fields   = ['BtnReadConfiguration', 'BtnReadValues', 'BtnCreateUpdateVariables'];
@@ -542,11 +481,7 @@ class ebusdMQTTDevice extends IPSModule
         $this->logDebug(__FUNCTION__, sprintf('Call: %s', $DataJSON));
 
         $ret = $this->SendDataToParent($DataJSON);
-        if ($ret === false) {
-            $this->logDebug(__FUNCTION__, 'Error: SendDataToParent returned false');
-        } else {
-            $this->logDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, (string)$ret));
-        }
+        $this->logDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret));
     }
 
 
@@ -676,12 +611,11 @@ class ebusdMQTTDevice extends IPSModule
         $variableListJson = $this->ReadAttributeString(self::ATTR_VARIABLELIST);
         try {
             $variableList = json_decode($variableListJson, true, 512, JSON_THROW_ON_ERROR);
+            if (!is_array($variableList) || empty($variableList)) {
+                return;
+            }
         } catch (JsonException $e) {
             $this->logDebug(__FUNCTION__, 'Error decoding VariableList: ' . $e->getMessage());
-            return;
-        }
-
-        if (!is_array($variableList) || empty($variableList)) {
             return;
         }
 
@@ -758,7 +692,7 @@ class ebusdMQTTDevice extends IPSModule
 
             $item[self::FORM_ELEMENT_OBJECTIDENTS] = $variableFound ? implode(', ', $identList) : '';
 
-            // Wenn die Variable nicht lesbar ist, dann werden keep und pollpriority verworfen
+            // Wenn die Variable nicht lesbar ist, werden keep und pollpriority verworfen
             if ($item[self::FORM_ELEMENT_READABLE] !== self::OK_SIGN) {
                 $item[self::FORM_ELEMENT_KEEP]         = false;
                 $item[self::FORM_ELEMENT_POLLPRIORITY] = 0;
@@ -769,8 +703,8 @@ class ebusdMQTTDevice extends IPSModule
         return $variableListUpdated;
     }
 
-    private const EXCLUDED_CIRCUIT_NAMES = ['global', 'broadcast'];
-    private const SCANNER_PREFIX         = 'scan.';
+    private const array  EXCLUDED_CIRCUIT_NAMES = ['global', 'broadcast'];
+    private const string SCANNER_PREFIX         = 'scan.';
 
     private function setCircuitOptions(): void
     {
@@ -868,7 +802,7 @@ class ebusdMQTTDevice extends IPSModule
 
         $result = $this->readURL($url);
 
-        // Prüfung ob Ergebnis valide und die erwarteten Daten enthält
+        // Prüfung, ob Ergebnis valide und die erwarteten Daten enthält
         if ($result === null || !isset($result[$mqttTopic]['messages'][$messageId])) {
             $this->logDebug(__FUNCTION__, sprintf('current values of message \'%s\' not found (URL: %s)', $messageId, $url));
             return null;
@@ -888,137 +822,6 @@ class ebusdMQTTDevice extends IPSModule
         return implode('/', $values);
     }
 
-    private function readURL(string $url): ?array
-    {
-        $this->logDebug(__FUNCTION__, 'URL: ' . $url);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2); // Schneller Abbruch, wenn Host nicht erreichbar
-
-        $result_json = curl_exec($ch);
-        $httpCode    = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $curlError   = curl_error($ch);
-        curl_close($ch);
-
-        if ($result_json === false) {
-            $this->logDebug(__FUNCTION__, sprintf('CURL Error: %s for %s', $curlError, $url));
-            return null;
-        }
-
-        if ($httpCode < 200 || $httpCode >= 300) {
-            $this->logDebug(__FUNCTION__, sprintf('HTTP Error: %d for %s', $httpCode, $url));
-            return null;
-        }
-
-        try {
-            $data = json_decode($result_json, true, 512, JSON_THROW_ON_ERROR);
-            return is_array($data) ? $data : null;
-        } catch (JsonException $e) {
-            $this->logDebug(__FUNCTION__, sprintf('JSON Decode Error: %s. Content: %s', $e->getMessage(), substr($result_json, 0, 100)));
-            return null;
-        }
-    }
-
-    private function getFieldIdentName(array $message, int $fieldId): string
-    {
-        $name      = $message['name'];
-        $fielddefs = $message['fielddefs'] ?? [];
-        $count     = count($fielddefs);
-
-        // Spezialfall: tempsensor oder presssensor (2 Felder)
-        if ($count === 2) {
-            $combined = ($fielddefs[0]['name'] ?? '') . ($fielddefs[1]['name'] ?? '');
-            if ($combined === 'tempsensor' || $combined === 'presssensor') {
-                return $fieldId === 0 ? $name : $name . '_sensorstatus';
-            }
-        }
-
-        // Spezialfall: tempmirrorsensor (3 Felder)
-        if ($count === 3) {
-            $combined = ($fielddefs[0]['name'] ?? '') . ($fielddefs[1]['name'] ?? '') . ($fielddefs[2]['name'] ?? '');
-            if ($combined === 'tempmirrorsensor') {
-                if ($fieldId === 0) {
-                    return $name;
-                }
-                if ($fieldId === 1) {
-                    return $name . '_tempmirror';
-                }
-                return $name . '_sensorstatus';
-            }
-        }
-
-        // Standardfall: Wenn mehr als 1 nutzbares Feld vorhanden ist, Index anhängen
-        if ($this->countRelevantFieldDefs($fielddefs) > 1) {
-            $name .= '_' . $fieldId;
-        }
-
-        // Alles außer a-z, 0-9 und _ ersetzen
-        return preg_replace('/[^a-z0-9_]/i', '_', $name);
-    }
-
-    private function countRelevantFieldDefs(array $fieldDefs): int
-    {
-        return count(array_filter($fieldDefs, static fn($f) => ($f['type'] ?? '') !== 'IGN'));
-    }
-
-
-    private function getFieldLabel(array $message, int $fieldId): string
-    {
-        //wenn die Meldung kommentiert ist und es nur ein Feld in der Meldung gibt, dann wird dieser Kommentar genommen
-        if (!empty($message['comment']) && ($this->countRelevantFieldDefs($message['fielddefs']) === 1)) {
-            return $message['comment'];
-        }
-
-        //wenn die Meldung kommentiert ist, aber aus mehreren Einträgen besteht
-        if (!empty($message['comment'])) {
-            $labels      = explode('/', $message['comment']);
-            $countLabels = count($labels);
-            if (($countLabels > 1) && ($fieldId < $countLabels)) {
-                return $labels[$fieldId];
-            }
-        }
-
-        //fielddefs auswerten:
-        $fielddefs = $message['fielddefs'];
-
-        //Spezialfall tempsensor, presssensor
-        if ((count($fielddefs) === 2) && in_array($fielddefs[0]['name'] . $fielddefs[1]['name'], ['tempsensor', 'presssensor'])) {
-            if ($fieldId === 0) {
-                return $message['comment'];
-            }
-            return $message['comment'] . ' (Sensor)';
-        }
-
-        //Spezialfall tempmirrorsensor
-        if ((count($fielddefs) === 3) && ($fielddefs[0]['name'] . $fielddefs[1]['name'] . $fielddefs[2]['name'] === 'tempmirrorsensor')) {
-            if ($fieldId === 0) {
-                return $message['comment'];
-            }
-            if ($fieldId === 1) {
-                return $message['comment'] . ' (TempMirror)';
-            }
-            return $message['comment'] . ' (Sensor)';
-        }
-
-        //Spezialfall TTM Zeiten (von/bis)
-        if ($message['fielddefs'][$fieldId]['type'] === 'TTM') {
-            if (($fieldId % 2) === 1) {
-                return sprintf('%s %s %s', $message['comment'], ceil($fieldId / 2), $this->Translate('from'));
-            }
-            return sprintf('%s %s %s', $message['comment'], ceil($fieldId / 2), $this->Translate('to'));
-        }
-
-        if ($message['fielddefs'][$fieldId]['comment'] !== '') {
-            if ($message['fielddefs'][$fieldId]['comment'] === 'Temperatur') {
-                return sprintf('%s (%s)', $message['fielddefs'][$fieldId]['comment'], $message['fielddefs'][$fieldId]['name']);
-            }
-            return $message['fielddefs'][$fieldId]['comment'];
-        }
-
-        return $message['fielddefs'][$fieldId]['name'];
-    }
 
     private function getFieldValue(
         string $messageId,
@@ -1098,24 +901,13 @@ class ebusdMQTTDevice extends IPSModule
         return $ret;
     }
 
-    private function resolveAssociationValue(string $value, array $associations): ?int
-    {
-        if ($this->trace) {
-            $this->logDebug(__FUNCTION__, sprintf('Value: %s, Associations: %s', $value, json_encode($associations, JSON_THROW_ON_ERROR)));
-        }
-
-        foreach ($associations as $assValue) {
-            if ($assValue[1] === $value) {
-                return $assValue[0];
-            }
-        }
-        return null;
-    }
 
     private function getVariableList(string $jsonConfigurationMessages): array
     {
         $elements = [];
-        foreach (json_decode($jsonConfigurationMessages, true, 512, JSON_THROW_ON_ERROR) as $message) {
+        $messages = json_decode($jsonConfigurationMessages, true, 512, JSON_THROW_ON_ERROR);
+
+        foreach ($messages as $message) {
             if (count($message['fielddefs']) === 0) {
                 //einige wenige messages haben keine fielddefs
                 // z.B.: wi,,ioteststop,I/O Test stoppen,,,,01,,,,,,
@@ -1131,9 +923,6 @@ class ebusdMQTTDevice extends IPSModule
                     continue;
                 }
                 $fieldLabel      = $this->getFieldLabel($message, $fielddefkey);
-                $fieldLabel      = implode(
-                    json_decode('["' . $fieldLabel . '"]', true, 512, JSON_THROW_ON_ERROR)
-                ); //wandelt unicode escape Sequenzen wie in 'd.27 Zubeh\u00f6rrelais 1' in utf8 um
                 $variableNames[] = $fieldLabel;
 
                 $ident        = $this->getFieldIdentName($message, $fielddefkey);
@@ -1148,29 +937,24 @@ class ebusdMQTTDevice extends IPSModule
             }
 
             if (count($identNames) === 0) {
-                trigger_error(sprintf('%s: No idents found of message %s', __FUNCTION__, $message['name']), E_USER_NOTICE);
+                trigger_error(sprintf('%s: No idents found of message %s', __FUNCTION__, $message['name']));
             }
 
-            //keep wird aus der gespeicherten Liste geholt
-            $storedItem = $this->findStoredVariableItem($message['name']);
-            if ($storedItem !== null) {
-                $keep         = $storedItem[self::FORM_ELEMENT_KEEP];
-                $pollpriority = $storedItem[self::FORM_ELEMENT_POLLPRIORITY];
-            } else {
-                $keep         = false;
-                $pollpriority = 0;
-            }
+            // Nutzt den effizienten statischen Cache in findStoredVariableItem
+            $storedItem   = $this->findStoredVariableItem($message['name']);
+            $keep         = $storedItem[self::FORM_ELEMENT_KEEP] ?? false;
+            $pollPriority = $storedItem[self::FORM_ELEMENT_POLLPRIORITY] ?? 0;
 
             $element = [
                 self::FORM_ELEMENT_MESSAGENAME   => $message['name'],
                 self::FORM_ELEMENT_VARIABLENAMES => implode('/', $variableNames),
                 self::FORM_ELEMENT_IDENTNAMES    => implode('/', $identNames),
                 self::FORM_ELEMENT_READABLE      => ($message['read'] === true) ? self::OK_SIGN : '',
-                'writable'                       => ($message['write'] === true) ? self::OK_SIGN : '',
+                self::FORM_ELEMENT_WRITABLE      => ($message['write'] === true) ? self::OK_SIGN : '',
                 self::FORM_ELEMENT_READVALUES    => '',
                 self::FORM_ELEMENT_KEEP          => $keep,
                 self::FORM_ELEMENT_OBJECTIDENTS  => implode('/', $identNamesExisting),
-                self::FORM_ELEMENT_POLLPRIORITY  => $pollpriority
+                self::FORM_ELEMENT_POLLPRIORITY  => $pollPriority
             ];
             if ($element[self::FORM_ELEMENT_READABLE] !== self::OK_SIGN) {
                 $element['rowColor'] = '#DFDFDF';
@@ -1182,32 +966,42 @@ class ebusdMQTTDevice extends IPSModule
 
     /**
      * Sucht ein gespeichertes Item in der Variablenliste anhand des Messagenamens.
+     * Nutzt einen statischen Cache, um wiederholte JSON-Dekodierungen zu vermeiden.
      *
-     * @param string $messagename
+     * @param string $messagename Der Name der eBUS-Nachricht, nach der gesucht wird.
      *
-     * @return array|null
+     * @return array|null Das gefundene Item als Array oder null, wenn nichts gefunden wurde.
+     * @throws \JsonException Wenn die JSON-Daten im Attribut ungültig sind.
      */
     private function findStoredVariableItem(string $messagename): ?array
     {
-        // Wir nutzen ein lokales Cache-Array, um mehrfaches Dekodieren pro Request zu vermeiden
-        static $cachedList = null;
+        static $indexedCache = null;
+        static $lastCacheHash = '';
 
-        if ($cachedList === null) {
-            $json = $this->ReadAttributeString(self::ATTR_VARIABLELIST);
-            try {
-                $cachedList = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-            } catch (JsonException) {
-                $cachedList = [];
+        // Aktuelle Liste aus den Instanz-Attributen lesen
+        $json = $this->ReadAttributeString(self::ATTR_VARIABLELIST);
+
+        // Hash erzeugen, um festzustellen, ob sich die Liste seit dem letzten Aufruf geändert hat
+        $currentHash = md5($json);
+
+        // Cache neu aufbauen, wenn er leer ist oder sich die Quelldaten geändert haben
+        if ($indexedCache === null || $lastCacheHash !== $currentHash) {
+            $list         = json_decode($json, true, 512, JSON_THROW_ON_ERROR) ? : [];
+            $indexedCache = [];
+
+            // Die Liste für schnelleren Zugriff über den Messagenamen indizieren
+            foreach ($list as $item) {
+                if (isset($item[self::FORM_ELEMENT_MESSAGENAME])) {
+                    $indexedCache[$item[self::FORM_ELEMENT_MESSAGENAME]] = $item;
+                }
             }
+
+            // Hash für den nächsten Vergleich speichern
+            $lastCacheHash = $currentHash;
         }
 
-        foreach ($cachedList as $item) {
-            if (isset($item[self::FORM_ELEMENT_MESSAGENAME]) && $item[self::FORM_ELEMENT_MESSAGENAME] === $messagename) {
-                return $item;
-            }
-        }
-
-        return null;
+        // Das gesuchte Item aus dem indizierten Cache zurückgeben (oder null)
+        return $indexedCache[$messagename] ?? null;
     }
 
     private function RegisterVariablesOfMessage(array $configurationMessage): int
@@ -1250,15 +1044,20 @@ class ebusdMQTTDevice extends IPSModule
                     $this->RegisterProfileFloatEx($profileName, '', '', '', $ass);
                 }
             } else {
-                $TypeDef = self::DataTypes[$fielddef['type']];
+                $TypeDef = $this->getEbusDataTypes()[$fielddef['type']];
                 $divisor = $fielddef['divisor'] ?? 0;
 
                 if ($variableTyp === VARIABLETYPE_INTEGER && $divisor <= 0) {
                     $this->RegisterProfileInteger($profileName, '', '', $unit, $TypeDef['MinValue'], $TypeDef['MaxValue'], $TypeDef['StepSize']);
                 } else {
                     // Sowohl FLOAT als auch INTEGER mit Divisor werden zu FLOAT-Profilen
-                    $div    = $divisor > 0 ? $divisor : 1;
-                    $digits = $variableTyp === VARIABLETYPE_FLOAT ? ($divisor > 0 ? (int)log($divisor, 10) : $TypeDef['Digits']) : 0;
+
+                    $div = max(1, $divisor);
+
+                    $digits = 0;
+                    if ($variableTyp === VARIABLETYPE_FLOAT) {
+                        $digits = ($divisor > 0) ? (int)log($divisor, 10) : $TypeDef['Digits'];
+                    }
 
                     $this->RegisterProfileFloat(
                         $profileName,
@@ -1420,22 +1219,6 @@ class ebusdMQTTDevice extends IPSModule
         return $ret;
     }
 
-    private function getIPSVariableType(array $fielddef): int
-    {
-        $type = $fielddef['type'] ?? '';
-
-        if (!isset(self::DataTypes[$type])) {
-            trigger_error('Unsupported type: ' . $type, E_USER_ERROR);
-        }
-
-        // Ein Divisor erzwingt in der IPS-Logik immer einen Float,
-        // um Nachkommastellen darzustellen.
-        if (($fielddef['divisor'] ?? 0) > 0) {
-            return VARIABLETYPE_FLOAT;
-        }
-
-        return self::DataTypes[$type]['VariableType'];
-    }
 
     private function updateInstanceStatus(): void
     {
@@ -1450,7 +1233,7 @@ class ebusdMQTTDevice extends IPSModule
         }
 
         //Port Prüfen
-        if ((int)$port < 1 || (int)$port > 65535 || !filter_var($port, FILTER_VALIDATE_INT)) {
+        if ($port < 1 || $port > 65535 || !filter_var($port, FILTER_VALIDATE_INT)) {
             $this->SetStatus(self::STATUS_INST_PORT_IS_INVALID);
             $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'invalid Port'));
             return;
@@ -1497,16 +1280,5 @@ class ebusdMQTTDevice extends IPSModule
         $this->logDebug(__FUNCTION__, sprintf('Status: %s (%s)', $this->GetStatus(), 'active'));
     }
 
-    private function logDebug(string $message, string $data): void
-    {
-        // Daten für SendDebug aufbereiten (Strings lassen, Rest zu JSON)
-        $debugData = is_string($data) ? $data : json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-        $this->SendDebug($message, $debugData, 0);
-
-        if (function_exists('IPSLogger_Dbg') && $this->ReadPropertyBoolean(self::PROP_WRITEDEBUGINFORMATIONTOIPSLOGGER)) {
-            IPSLogger_Dbg(__CLASS__ . '.' . IPS_GetObject($this->InstanceID)['ObjectName'] . '.' . $message, $debugData);
-        }
-    }
 }
 
