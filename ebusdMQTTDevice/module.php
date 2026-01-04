@@ -254,7 +254,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
             case 'btnCreateUpdateVariables':
                 $ret = $this->CreateAndUpdateVariables($decodeValue());
-                $this->MsgBox($ret . ' Variablen angelegt/aktualisiert');
+                $this->MsgBox($ret . ' Variablen neu angelegt');
                 return;
 
             case 'btnPublishPollPriorities':
@@ -333,6 +333,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
         }
         $payloadJson = hex2bin($payloadHex);
 
+
         //Globale Meldungen werden extra behandelt
         if (str_starts_with($topic, MQTT_GROUP_TOPIC . '/global/')) {
             $this->checkGlobalMessage($topic, $payloadJson);
@@ -345,11 +346,13 @@ class ebusdMQTTDevice extends IPSModuleStrict
             return '';
         }
 
-        $this->logDebug('MQTT Topic/Payload', sprintf('Topic: %s -- Payload: %s', $topic, $payloadJson));
+        // Entfernt LF/CR und alle direkt darauf folgenden Leerzeichen (Einrückungen)
+        $debugPayload = preg_replace('/[\r\n]+\s*/', '', $payloadJson);
+        $this->logDebug('MQTT Topic/Payload', sprintf('Topic: %s -- Payload: %s', $topic, $debugPayload));
 
         // Payload dekodieren (ebusd > 3.4 sendet valides JSON, ältere Versionen evtl. nicht)
         try {
-            $Payload = json_decode($payloadJson, true, 512, JSON_THROW_ON_ERROR);
+            $payload = json_decode($payloadJson, true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException) {
             $txtError = sprintf(
                 'ERROR! (ebusd version issue?) - JSON Error (%s) at Topic "%s": %s, json: %s',
@@ -362,7 +365,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
             return '';
         }
 
-        if ($Payload === null) {
+        if ($payload === null) {
             $this->logDebug(__FUNCTION__, 'Payload is null: ' . $payloadJson);
             return '';
         }
@@ -397,7 +400,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         // Werte verarbeiten
         $messageDef = $configurationMessages[$messageId];
-        foreach ($this->getFieldValues($messageDef, $Payload) as $value) {
+        foreach ($this->getFieldValues($messageDef, $payload) as $value) {
             //wenn die Statusvariable existiert, wird sie geschrieben
             $variableId = @$this->GetIDForIdent($value['ident']);
             if ($variableId > 0) {
@@ -474,7 +477,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
             'QualityOfService' => self::QOS_0,
             'Retain'           => false,
             'Topic'            => $topic,
-            'Payload'          => $payload
+            'Payload'          => bin2hex($payload)
         ];
 
         $DataJSON = json_encode($Data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
@@ -828,7 +831,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
         array $fields,
         int $key,
         int $variableType,
-        array $associations = [],
+        array $valueMap = [],
         bool $numericValues = false
     ): mixed {
         if ($this->trace) {
@@ -840,7 +843,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
                     $key,
                     $variableType,
                     json_encode($fields, JSON_THROW_ON_ERROR),
-                    json_encode($associations, JSON_THROW_ON_ERROR)
+                    json_encode($valueMap, JSON_THROW_ON_ERROR)
                 )
             );
         }
@@ -861,8 +864,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $value = $fieldValues[$key]['value'];
 
         // Assoziationen auflösen (Mapping von String-Werten auf Integer-IDs)
-        if (!$numericValues && is_string($value) && !empty($associations)) {
-            $mappedValue = $this->resolveAssociationValue($value, $associations);
+        if (!$numericValues && is_string($value) && !empty($valueMap)) {
+            $mappedValue = $this->resolveAssociationValue($value, $valueMap);
             if ($mappedValue === null) {
                 $errorMsg = sprintf(
                     'Value \'%s\' of field \'%s\' (name: \'%s\') not defined in associations',
@@ -870,7 +873,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
                     $key,
                     $fieldValues[$key]['name'] ?? 'unknown'
                 );
-                $this->logDebug(__FUNCTION__, $errorMsg . ' ' . json_encode($associations, JSON_THROW_ON_ERROR));
+                $this->logDebug(__FUNCTION__, $errorMsg . ' ' . json_encode($valueMap, JSON_THROW_ON_ERROR));
                 // trigger_error optional behalten oder durch LogMessage ersetzen
             } else {
                 $value = $mappedValue;
@@ -1006,16 +1009,14 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     private function RegisterVariablesOfMessage(array $configurationMessage): int
     {
-        $countOfVariables = 0;
+        $countOfVariables    = 0;
+        $fieldDefs           = $configurationMessage['fielddefs'] ?? [];
         $relevantFieldsCount = $this->countRelevantFieldDefs($configurationMessage['fielddefs']);
+        $isWritable          = $configurationMessage['write'] ?? false;
 
-        foreach ($configurationMessage['fielddefs'] as $fielddefkey => $fielddef) {
-            if ($fielddef['type'] === 'IGN') {
+        foreach ($fieldDefs as $fielddefkey => $fielddef) {
+            if (($fielddef['type'] ?? '') === 'IGN') {
                 continue;
-            }
-
-            if ($this->trace) {
-                $this->logDebug(__FUNCTION__, sprintf('Field: %s: %s', $fielddefkey, json_encode($fielddef, JSON_THROW_ON_ERROR)));
             }
 
             $ident      = $this->getFieldIdentName($configurationMessage, $fielddefkey);
@@ -1025,79 +1026,191 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 continue;
             }
 
-            $suffix = match ($fielddef['unit']) {
-                '%' => self::ZERO_WIDTH_SPACE . '%',
-                '' => '',
-                default => ' ' . $fielddef['unit']
-            };
-
-            $variableTyp = $this->getIPSVariableType($fielddef);
-
-            // Profil-Registrierung
-            $profileName = match ($variableTyp) {
-                VARIABLETYPE_INTEGER,
-                VARIABLETYPE_FLOAT => 'EBM.' . $configurationMessage['name'] . ($fielddef['name'] !== '' ? '.' . $fielddef['name'] : ''),
-                VARIABLETYPE_BOOLEAN => '~Switch',
-                default => '',
-            };
-
-            if (isset($fielddef['values'])) {
-                $ass = [];
-                foreach ($fielddef['values'] as $key => $value) {
-                    $ass[] = [$key, $value . ($fielddef['unit'] !== '' ? ' ' . $fielddef['unit'] : ''), '', -1];
-                }
-
-                if ($variableTyp === VARIABLETYPE_INTEGER) {
-                    $this->RegisterProfileIntegerEx($profileName, '', '', '', $ass);
-                } elseif ($variableTyp === VARIABLETYPE_FLOAT) {
-                    $this->RegisterProfileFloatEx($profileName, '', '', '', $ass);
-                }
-            } else {
-                $TypeDef = $this->getEbusDataTypes()[$fielddef['type']];
-                $divisor = $fielddef['divisor'] ?? 0;
-
-                if ($variableTyp === VARIABLETYPE_INTEGER) {
-                    $this->RegisterProfileInteger($profileName, '', '', $suffix, $TypeDef['MinValue'], $TypeDef['MaxValue'], $TypeDef['StepSize']);
-                } elseif ($variableTyp === VARIABLETYPE_FLOAT) {
-                    $div = max(1, $divisor);
-                    // Digits basierend auf dem Divisor berechnen (z.B. 100 -> 2 Digits)
-                    // Nutze round() um Floating-Point-Ungenauigkeiten bei log10 zu vermeiden
-                    $digits = ($divisor > 0) ? (int)round(log10($divisor)) : $TypeDef['Digits'];
-
-                    $this->RegisterProfileFloat(
-                        $profileName,
-                        '',
-                        '',
-                        $suffix,
-                        $TypeDef['MinValue'] / $div,
-                        $TypeDef['MaxValue'] / $div,
-                        $TypeDef['StepSize'] / $div,
-                        $digits
-                    );
-                }
+            if ($this->trace) {
+                $this->logDebug(__FUNCTION__, sprintf('Field: %s: %s', $fielddefkey, json_encode($fielddef, JSON_THROW_ON_ERROR)));
             }
 
+            $variableType = $this->getIPSVariableType($fielddef);
+            // Action nur erlauben, wenn die Nachricht schreibbar ist UND nur ein Feld existiert (Symcon Standard-Verhalten für einfache Variablen)
+            $variableHasAction = $isWritable && ($relevantFieldsCount === 1);
+
+
+            // Vorbereitung der Präsentations-Daten
+            $presentation = $this->getVariablePresentation($fielddef, $variableType, $variableHasAction);
+
             // Variablen-Registrierung
+            $created = $this->MaintainVariable($ident, $objectName, $variableType, $presentation, 0, true);
 
-            $created = $this->MaintainVariable($ident, $objectName, $variableTyp, $profileName, 0, true);
-
-            if ($configurationMessage['write'] && ($relevantFieldsCount === 1)) {
+            if ($variableHasAction) {
                 $this->EnableAction($ident);
             }
 
             if ($created) {
                 $countOfVariables++;
-                $typeLabel = match ($variableTyp) {
+                $typeLabel = match ($variableType) {
                     VARIABLETYPE_BOOLEAN => 'Boolean',
                     VARIABLETYPE_INTEGER => 'Integer',
                     VARIABLETYPE_FLOAT => 'Float',
                     VARIABLETYPE_STRING => 'String',
-                    default => 'Unknown'
+                    default => 'Unknown (' . $variableType . ')'
                 };
                 $this->logDebug(__FUNCTION__, sprintf('%s Variable neu angelegt. Ident: %s, Label: %s', $typeLabel, $ident, $objectName));
             }
         }
         return $countOfVariables;
+    }
+
+    private function getPresentationOptions(array $fielddef, int $variableType): array
+    {
+        if ($variableType === VARIABLETYPE_BOOLEAN) {
+            return [
+                [
+                    'Value'              => false,
+                    'Caption'            => 'Aus',
+                    'IconValue'          => '',
+                    'IconActive'         => false,
+                    'ColorActive'        => false,
+                    'ColorValue'         => -1,
+                    'ContentColorActive' => false
+                ],
+                [
+                    'Value'              => true,
+                    'Caption'            => 'An',
+                    'IconValue'          => '',
+                    'IconActive'         => false,
+                    'ColorActive'        => true,
+                    'ColorValue'         => 1692672,
+                    'ContentColorActive' => false
+                ],
+            ];
+        }
+
+        $options = [];
+        if (isset($fielddef['values'])) {
+            foreach ($fielddef['values'] as $key => $value) {
+                $options[] = [
+                    'Value'      => $key,
+                    'Caption'    => $value . ($fielddef['unit'] !== '' ? ' ' . $fielddef['unit'] : ''),
+                    'Icon'       => '',
+                    'Color'      => -1,
+                    'IconActive' => false,
+                    'IconValue'  => ''
+                ];
+            }
+        }
+        return $options;
+    }
+
+    private function getPresentationIntervals(array $fielddef): array
+    {
+        $intervals = [];
+        if (isset($fielddef['values'])) {
+            foreach ($fielddef['values'] as $key => $value) {
+                $intervals[] = [
+                    'ColorDisplay'        => -1,
+                    'ContentColorDisplay' => -1,
+                    'IntervalMinValue'    => $key,
+                    'IntervalMaxValue'    => $key + 1,
+                    'ConstantActive'      => true,
+                    'ConstantValue'       => $value . ($fielddef['unit'] !== '' ? ' ' . $fielddef['unit'] : ''),
+                    'ConversionFactor'    => 1,
+                    'IconActive'          => false,
+                    'IconValue'           => '',
+                    'PrefixActive'        => false,
+                    'PrefixValue'         => '',
+                    'SuffixActive'        => false,
+                    'SuffixValue'         => '',
+                    'DigitsActive'        => false,
+                    'DigitsValue'         => 0,
+                    'ColorActive'         => false,
+                    'ColorValue'          => -1,
+                    'ContentColorActive'  => false,
+                    'ContentColorValue'   => -1
+                ];
+            }
+        }
+        return $intervals;
+    }
+
+    private function getVariablePresentation(array $fielddef, int $variableType, bool $hasAction): array
+    {
+        $suffix = match ($fielddef['unit']) {
+            '%' => self::ZERO_WIDTH_SPACE . '%',
+            '' => '',
+            default => ' ' . $fielddef['unit']
+        };
+
+        // 1. Boolean Sonderfall
+        if ($variableType === VARIABLETYPE_BOOLEAN) {
+            $options = $this->getPresentationOptions($fielddef, $variableType);
+            return array_filter([
+                                    'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+                                    'OPTIONS'      => $options ? json_encode($options, JSON_THROW_ON_ERROR) : null
+                                ]);
+        }
+
+        // 2. Zahlen (Integer / Float)
+        if ($variableType === VARIABLETYPE_INTEGER || $variableType === VARIABLETYPE_FLOAT) {
+            $typeDef = $this->getEbusDataTypeDefinitions()[$fielddef['type']];
+            $div     = max(1, $fielddef['divisor'] ?? 0);
+            $digits  = ($variableType === VARIABLETYPE_FLOAT && $div > 1)
+                ? (int)round(log10($div))
+                : ($typeDef['Digits'] ?? 0);
+
+            if ($hasAction) {
+                $options = $this->getPresentationOptions($fielddef, $variableType);
+
+                // Enumeration (wenn feste Werte definiert sind)
+                if (!empty($options)) {
+                    return [
+                        'PRESENTATION' => VARIABLE_PRESENTATION_ENUMERATION,
+                        'OPTIONS'      => json_encode($options, JSON_THROW_ON_ERROR)
+                    ];
+                }
+
+                // Eingabefeld oder Slider
+                if ($typeDef['MinValue'] === $typeDef['MaxValue']) {
+                    return [
+                        'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_INPUT,
+                        'SUFFIX'       => $suffix,
+                    ];
+                }
+
+                return [
+                    'PRESENTATION' => VARIABLE_PRESENTATION_SLIDER,
+                    'SUFFIX'       => $suffix,
+                    'DIGITS'       => $digits,
+                    'MIN'          => $typeDef['MinValue'] / $div,
+                    'MAX'          => $typeDef['MaxValue'] / $div,
+                    'STEP_SIZE'    => $typeDef['StepSize'] / $div,
+                ];
+            }
+
+            // Nur Anzeige (keine Action)
+            $intervals = $this->getPresentationIntervals($fielddef);
+            if (!empty($intervals)) {
+                return [
+                    'PRESENTATION'     => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+                    'INTERVALS'        => json_encode($intervals, JSON_THROW_ON_ERROR),
+                    'INTERVALS_ACTIVE' => true
+                ];
+            }
+
+            return [
+                'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+                'SUFFIX'       => $suffix,
+                'DIGITS'       => $digits,
+            ];
+        }
+
+        // 3. Fallback für Strings und Unbekanntes
+        $options = $hasAction ? $this->getPresentationOptions($fielddef, $variableType) : [];
+
+        return array_filter([
+                                'PRESENTATION' => $hasAction ? VARIABLE_PRESENTATION_VALUE_INPUT : VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+                                'SUFFIX'       => $hasAction ? null : $suffix,
+                                'OPTIONS'      => $options ? json_encode($options, JSON_THROW_ON_ERROR) : null
+                            ]);
     }
 
     private function checkGlobalMessage(string $topic, string $payload): void
@@ -1144,14 +1257,14 @@ class ebusdMQTTDevice extends IPSModuleStrict
     }
 
 
-    private function getFieldValues(array $message, array $Payload, bool $numericValues = false): array
+    private function getFieldValues(array $message, array $payload, bool $numericValues = false): array
     {
         $ret          = [];
         $payloadIndex = 0;
 
-        foreach ($message['fielddefs'] as $fielddefkey => $fielddef) {
+        foreach ($message['fielddefs'] as $fieldDefKey => $fielddef) {
             if ($this->trace) {
-                $this->logDebug('--fielddef--: ', $fielddefkey . ':' . json_encode($fielddef, JSON_THROW_ON_ERROR));
+                $this->logDebug('--fielddef--: ', $fieldDefKey . ':' . json_encode($fielddef, JSON_THROW_ON_ERROR));
             }
 
             if (($fielddef['type'] ?? '') === 'IGN') {
@@ -1161,22 +1274,20 @@ class ebusdMQTTDevice extends IPSModuleStrict
             // Der Index im Payload erhöht sich nur für Felder, die nicht IGN sind
             $currentIndex = $payloadIndex++;
 
-            $ident = $this->getFieldIdentName($message, $fielddefkey);
-            $label = $this->getFieldLabel($message, $fielddefkey);
+            $ident = $this->getFieldIdentName($message, $fieldDefKey);
+            $label = $this->getFieldLabel($message, $fieldDefKey);
 
             if ($ident === '' || $label === '') {
                 continue;
             }
 
             $variableType = $this->getIPSVariableType($fielddef);
-            $associations = [];
 
-            if (isset($fielddef['values'])) {
-                foreach ($fielddef['values'] as $key => $value) {
-                    $associations[] = [$key, $value, '', -1];
-                }
+            $valueMap = isset($fielddef['values'])
+                ? array_map(null, array_keys($fielddef['values']), $fielddef['values'])
+                : [];
 
-                if ($this->trace) {
+            if ($this->trace && $valueMap) {
                     $this->logDebug(
                         'Associations',
                         sprintf(
@@ -1184,18 +1295,17 @@ class ebusdMQTTDevice extends IPSModuleStrict
                             $message['name'],
                             $fielddef['name'],
                             $fielddef['unit'] ?? '',
-                            json_encode($associations, JSON_THROW_ON_ERROR)
+                            json_encode($valueMap, JSON_THROW_ON_ERROR)
                         )
                     );
                 }
-            }
 
             $value = $this->getFieldValue(
                 $message['name'],
-                $Payload,
+                $payload,
                 $currentIndex,
                 $variableType,
-                $associations,
+                $valueMap,
                 $numericValues
             );
 
@@ -1209,7 +1319,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
     private function updateInstanceStatus(): void
     {
         $host        = $this->ReadPropertyString(self::PROP_HOST);
-        $port        = (int)$this->ReadPropertyString(self::PROP_PORT);
+        $portString  = $this->ReadPropertyString(self::PROP_PORT);
+        $port        = is_numeric($portString) ? (int)$portString : 0;
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
         if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {

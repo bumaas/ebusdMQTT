@@ -66,16 +66,20 @@ Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit
 Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
 
 Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden.
+In der Liste der Statusvariablen markiert ein **(A)** hinter dem Ident, dass für diese Variable die Archivierung im Query-Logger (Archive Handler) aktiv ist.
+
+Das Modul überwacht zudem das globale Signal des ebusd. Geht das Signal verloren (z.B. Hardware-Trennung), wird die Instanz automatisch auf *Inaktiv* gesetzt.
+
 Bei Bedarf kann für eine Statusvariable eine Poll Priorität angegeben werden, die von ebusd verwendet werden soll. Die Poll Prioriät besagt, in welchem Intervallzyklus eine Meldung von ebusd gepollt werden soll.
 Meldungen mit Priorität 1 werden in jedem Pollzyklus abgefragt, Meldungen mit Priorität 2 werden in jedem zweiten Zyklus abgefragt usw.. Die Pollpriorität kann gesetzt werden, wenn das Abfrageintervall, das im Minutenbereich liegt, für einzelne Meldungen nicht fein genug ist.
 
 ## 5. Einbindung ins Webfront
-Alle Statusvariablen sind für eine Anzeige und (sofern vom ebusd ein Schreiben unterstützt wird) zum Ändern im Webfront vorbereitet. Sie haben alle ein Profil, das der ebusd Definition entspricht.
-Zur Verwendung im Webfront sollten sie jedoch überprüft werden. Insbesondere der Wertebereich (min/max) ist zu kontrollieren und auf reelle bzw. anlagenspezifische Werte zu setzen.
+Alle Statusvariablen sind für eine Anzeige und (sofern vom ebusd ein Schreiben unterstützt wird) zum Ändern im Webfront vorbereitet. Sie haben alle eine Darstellung, die der ebusd Definition entspricht.
+Zur Verwendung in der Visu sollten sie jedoch überprüft werden. Insbesondere der Wertebereich (min/max) ist zu kontrollieren und auf reelle bzw. anlagenspezifische Werte zu setzen.
 
 Besonderheit:
 
-Schreibbare Mehrfachfelder können nicht direkt aus dem Webfront heraus geändert werden. Sie lassen sich aber über EBM_publish schreiben.
+Schreibbare Mehrfachfelder können nicht direkt aus der Visu heraus geändert werden. Sie lassen sich aber über EBM_publish schreiben.
 
 Beispiel:
 ```php

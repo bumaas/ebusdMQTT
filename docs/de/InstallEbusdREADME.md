@@ -51,7 +51,7 @@ sudo apt-get install libmosquitto1
 
 Zum Abschluss der Installation erfolgen folgende Hinweise, die auszuführen sind:
 
-```
+```text
 1. Edit /etc/default/ebusd
    (especially if your device is not /dev/ttyUSB0)
 2. Start the daemon with 'systemctl start ebusd'
@@ -85,7 +85,7 @@ git clone https://github.com/john30/ebusd-configuration.git
 ```
 Dadurch werden die Konfigurationsdateien im Unterverzeichnis /home/pi/ebusd-configuration gespeichert, so dass die Einstellung für configpath auf das lokale Verzeichnis umgestellt werden kann:
 ```
---configpath=/home/pi/ebusd-configuration/ebusd-2.1.x/de"
+--configpath=/home/pi/ebusd-configuration/ebusd-2.1.x/de
 ```
 
 
@@ -96,7 +96,7 @@ zu 3.)
 Im Logfile /var/log/ebusd.log muss erkennbar sein, dass der Adapter gefunden wurde und dass ein automatischer Scan durchgeführt wurde. Wenn es beim Scan zu Timeouts kommt, kann versucht werden, mit der zusätzlichen Option --receivetimeout=100000 das Limit zu erhöhen. 
 
 Ein erfolgreicher Star sieht so aus:
-```
+```text
 2022-11-11 17:08:44.010 [main notice] ebusd 22.4.v22.4 started with auto scan on device /dev/ttyebus
 2022-11-11 17:08:44.029 [bus notice] bus started with own address 31/36
 2022-11-11 17:08:44.033 [mqtt notice] connection established
@@ -106,7 +106,7 @@ Ein erfolgreicher Star sieht so aus:
 ```
 
 Tipp: wenn der Dienst neu gestartet werden soll, geht das am einfachsten über
-```
+```bash
 sudo systemctl restart ebusd
 ```
 
@@ -122,7 +122,7 @@ Wenn diese Dinge geschafft sind, ist im nächsten Schritt zu prüfen, ob ebusd d
 
 Das wird überprüft mit 'ebusctl i'. Hier ein Auszug:
 
-```
+```text
 version: ebusd 22.4.v22.4
 ...
 signal: acquired
@@ -140,7 +140,7 @@ Auch wird angezeigt - ganz wichtig - welche Konfigurationsdateien geladen wurden
 
 Über den scan Befehl (z.B. ebusctl scan 15) lässt sich zusätzlich die Produkt ID des Gerätes anzeigen (hier: 0020218357):
 
-```
+```text
 15;Vaillant;70000;0419;4603;21;17;09;0020218357;0082;015122;N7
 ```
 
@@ -149,13 +149,13 @@ An dieser Stelle sollte man einen Blick in die Konfigurationsdatei werfen und da
 Die Konfigurationsdatei findet sich unter https://github.com/john30/ebusd-configuration/tree/master/ebusd-2.1.x/de/vaillant 
 
 Darin findet man als Beispiel den Eintrag zur Heizkurve des ersten Heizkreises:
-```
+```text
 r;w,,Hc1HeatCurve,HeatCurve Heizkreis 1,,,,0F00,,,EXP,,,heating curve of Hc1
 ```
 Die wichtigsten Informationen daraus: r=lesbar, w=schreibbar, Hc1HeatCurve = Name des Parameters.
 
 Mit Hilfe dieser Informationen lassen sich die Daten über ebusctl auslesen bzw. schreiben
-```
+```text
 pi@raspberrypi:~ $ ebusctl
 localhost: r -c 700 Hc1HeatCurve
 0.58
@@ -172,13 +172,13 @@ Die Beschreibung aller Befehle findet sich im Kapitel [3.1 TCP client commands](
 
 Als letztes sollte man prüfen, ob sich in einem Browser die ebusd Daten abfragen lassen:
 
-```
+```http
 http://raspberrypi:8080/data
 ```
 
 Es sollten die Daten der erkannten Geräte geliefert werden:
 
-```
+```text
 {
  "700": {
   "messages": {   "AdaptHeatCurve": {
@@ -219,7 +219,7 @@ Soweit zur Installation und zum Einstieg in ebusd.
 
 ## 6. IP-Symcon relevante Konfigurationsparameter
 Für die Integration von ebusd in IP-Symcon werden die Daten von ebusd über http und MQTT zur Vefügung gestellt. Dazu sind die Konfigurationsparameter in der _/etc/default/ebusd_ um folgende Optionen zu erweitern:
-```
+```text
  --pollinterval 5  --accesslevel=* --httpport=8080 --mqtthost=<IP> --mqttport=<Port> --mqttuser=<USER> --mqttpass=<PASSWORT> --mqttjson
 ```
 - \<IP> - IP-Adresse des IP-Symcon Systems

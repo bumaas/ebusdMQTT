@@ -6,10 +6,12 @@ const MQTT_GROUP_TOPIC = 'ebusd';
 trait ebusd2MQTTHelper
 {
     private const string MODULE_ID_MQTT_SERVER     = '{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}';
-    private const string DATA_ID_MQTT_SERVER_TX    = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
     private const string MODULE_ID_ARCHIVE_HANDLER = '{43192F0B-135B-4CE7-A0A7-1475603F3060}';
 
-    private static array $ebusDataTypesCache = [];
+    //Datenfluss
+    private const string DATA_ID_MQTT_SERVER_TX    = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
+
+    private static array $ebusDataTypesDefinitionsCache = [];
 
 
     /**
@@ -22,15 +24,15 @@ trait ebusd2MQTTHelper
      * @return array An associative array where keys represent eBUS data types and values define their
      *               corresponding configuration details, including variable type and optional constraints.
      */
-    protected function getEbusDataTypes(): array
+    protected function getEbusDataTypeDefinitions(): array
     {
-        if (!empty(self::$ebusDataTypesCache)) {
-            return self::$ebusDataTypesCache;
+        if (!empty(self::$ebusDataTypesDefinitionsCache)) {
+            return self::$ebusDataTypesDefinitionsCache;
         }
 
         // die von ebusd unterstützen Datentypen
         //siehe https://github.com/john30/ebusd/wiki/4.3.-Builtin-data-types
-        self::$ebusDataTypesCache = [
+        self::$ebusDataTypesDefinitionsCache = [
             // VARIABLETYPE_BOOLEAN
             'BI0'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
             'BI1'   => ['VariableType' => VARIABLETYPE_BOOLEAN],
@@ -96,7 +98,7 @@ trait ebusd2MQTTHelper
             'TTQ'   => ['VariableType' => VARIABLETYPE_STRING]
         ];
 
-        return self::$ebusDataTypesCache;
+        return self::$ebusDataTypesDefinitionsCache;
     }
 
     protected function GetArchiveHandlerID(): int
@@ -218,7 +220,7 @@ trait ebusd2MQTTHelper
             return '';
         }
 
-        $ebusTypes = $this->getEbusDataTypes();
+        $ebusTypes = $this->getEbusDataTypeDefinitions();
         if (!isset($ebusTypes[$fieldDef['type']])) {
             trigger_error('Unsupported ebus type: ' . $fieldDef['type']);
             return '';
@@ -260,6 +262,7 @@ trait ebusd2MQTTHelper
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2); // Schneller Abbruch, wenn Host nicht erreichbar ist
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Symcon eBUS Module');
 
         $result_json = curl_exec($ch);
         $httpCode    = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -285,15 +288,16 @@ trait ebusd2MQTTHelper
         }
     }
 
-    protected function resolveAssociationValue(string $value, array $associations): ?int
+    protected function resolveAssociationValue(string $value, array $valueMap): ?int
     {
         if ($this->trace) {
-            $this->logDebug(__FUNCTION__, sprintf('Value: %s, Associations: %s', $value, json_encode($associations, JSON_THROW_ON_ERROR)));
+            $this->logDebug(__FUNCTION__, sprintf('Value: %s, Associations: %s', $value, json_encode($valueMap, JSON_THROW_ON_ERROR)));
         }
 
-        foreach ($associations as $assValue) {
-            if ($assValue[1] === $value) {
-                return $assValue[0];
+        foreach ($valueMap as $association) {
+            [$id, $text] = $association;
+            if ($text === $value) {
+                return $id;
             }
         }
         return null;
@@ -303,7 +307,7 @@ trait ebusd2MQTTHelper
     {
         $type = $fielddef['type'] ?? '';
 
-        if (!isset($this->getEbusDataTypes()[$type])) {
+        if (!isset($this->getEbusDataTypeDefinitions()[$type])) {
             trigger_error('Unsupported type: ' . $type);
         }
 
@@ -313,7 +317,7 @@ trait ebusd2MQTTHelper
             return VARIABLETYPE_FLOAT;
         }
 
-        return $this->getEbusDataTypes()[$type]['VariableType'];
+        return $this->getEbusDataTypeDefinitions()[$type]['VariableType'];
     }
 
     protected function getFieldIdentName(array $message, int $fieldId): string
@@ -355,7 +359,13 @@ trait ebusd2MQTTHelper
 
     protected function countRelevantFieldDefs(array $fieldDefs): int
     {
-        return count(array_filter($fieldDefs, static fn($f) => ($f['type'] ?? '') !== 'IGN'));
+        $count = 0;
+        foreach ($fieldDefs as $f) {
+            if (($f['type'] ?? '') !== 'IGN') {
+                $count++;
+            }
+        }
+        return $count;
     }
 
     protected function getFieldLabel(array $message, int $fieldId): string
