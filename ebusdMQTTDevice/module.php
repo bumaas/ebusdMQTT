@@ -390,7 +390,19 @@ class ebusdMQTTDevice extends IPSModuleStrict
         // Prüfen, ob die Message zum Speichern markiert ist
         $variableList = json_decode($this->ReadAttributeString(self::ATTR_VARIABLELIST), true, 512, JSON_THROW_ON_ERROR);
 
-        $entry = array_find($variableList, static fn(array $e) => $e[self::FORM_ELEMENT_MESSAGENAME] === $messageId);
+        $callback = static fn(array $e) => $e[self::FORM_ELEMENT_MESSAGENAME] === $messageId;
+        $entry    = null;
+
+        if (function_exists('array_find')) { //kommt mit PHP 8.4 bzw. Symcon 8.2
+            $entry = array_find($variableList, $callback);
+        } else {
+            foreach ($variableList as $item) {
+                if ($callback($item)) {
+                    $entry = $item;
+                    break;
+                }
+            }
+        }
         $keep  = $entry[self::FORM_ELEMENT_KEEP] ?? false;
 
         if (!$keep) {
