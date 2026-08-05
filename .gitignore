@@ -54,3 +54,9 @@ Temporary Items
 # ===============
 # Testdaten
 docs/Examples/Testdaten
+
+# ===============
+# Claude Code (persönliche Dateien)
+# ===============
+CLAUDE.local.md
+.claude/settings.local.json

@@ -1,0 +1,23 @@
+name: Checks
+
+on: [push, pull_request]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+      - name: PHP-Syntax
+        run: |
+          php -l ebusdMQTTDevice/module.php
+          php -l libs/eBUS_MQTT_Helper.php
+          php -l tests/check_locale.php
+      - name: JSON-Validität
+        run: |
+          find . -name '*.json' -not -path './.git/*' -print0 |
+            xargs -0 -n1 php -r 'json_decode(file_get_contents($argv[1]), false, 512, JSON_THROW_ON_ERROR); echo $argv[1], " ok\n";' --
+      - name: Übersetzungen
+        run: php tests/check_locale.php

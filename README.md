@@ -1,6 +1,7 @@
 [![Version](https://img.shields.io/badge/Symcon-PHPModul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
 ![Version](https://img.shields.io/badge/Symcon%20Version-5.3%20%3E-blue.svg)
 [![Donate](https://img.shields.io/badge/Donate-Paypal-009cde.svg)](https://www.paypal.me/bumaas)
+[![Checks](https://github.com/bumaas/ebusdMQTT/actions/workflows/check.yml/badge.svg)](https://github.com/bumaas/ebusdMQTT/actions/workflows/check.yml)
 
 
 # ebusdMQTT
