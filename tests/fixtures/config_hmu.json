@@ -1,0 +1,1795 @@
+{
+ "hmu": {
+  "messages": {   "AirInletTemp": {
+    "name": "AirInletTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935224,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 38], "comment": "Lufteinlasstemperatur",
+    "fields": {
+     "temp": {"value": 31.94, "unit": "°C", "comment": "Temperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "temp", "slave": true, "type": "D2C", "isbits": false, "length": 2, "unit": "°C", "comment": "Temperatur"}
+    ]
+   },
+   "AirInletTempSens": {
+    "name": "AirInletTempSens",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934705,
+    "zz": 8,
+    "id": [181, 20, 5, 48, 3, 255, 255], "comment": "Lufteinlasstemp.",
+    "fields": {
+     "0": {"name": "", "value": 29.9, "unit": "°C", "comment": "T.0.48 Lufteinlasstemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.48 Lufteinlasstemperatur"}
+    ]
+   },
+   "BuildingCircuitPumpPower": {
+    "name": "BuildingCircuitPumpPower",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935224,
+    "zz": 8,
+    "id": [181, 20, 5, 1, 3, 255, 255], "comment": "Gebäudekreispumpe Leistung",
+    "fields": {
+     "0": {"name": "", "value": 0, "unit": "%", "comment": "T.0.01 Gebäudekreispumpe Leistung"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "%", "comment": "T.0.01 Gebäudekreispumpe Leistung"}
+    ]
+   },
+   "BuildingPumpHours": {
+    "name": "BuildingPumpHours",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935224,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 2], "comment": "Gebäudepumpe Stunden",
+    "fields": {
+     "hoursum": {"value": 24542, "unit": "h", "comment": "Gebäudepumpe Stunden"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "hoursum", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "h", "comment": "Gebäudepumpe Stunden"}
+    ]
+   },
+   "BuildingPumpStarts": {
+    "name": "BuildingPumpStarts",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935224,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 3], "comment": "Gebäudepumpe Starts",
+    "fields": {
+     "0": {"name": "", "value": 3932, "comment": "Gebäudepumpe Starts"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Gebäudepumpe Starts"}
+    ]
+   },
+   "CircuitBuildingFlowRate": {
+    "name": "CircuitBuildingFlowRate",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935224,
+    "zz": 8,
+    "id": [181, 20, 5, 43, 3, 255, 255], "comment": "Gebäudekreis Durchfluss",
+    "fields": {
+     "0": {"name": "", "value": 0, "unit": "l/h", "comment": "T.0.45 Gebäudekreis: Durchfluss"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "l/h", "comment": "T.0.45 Gebäudekreis: Durchfluss"}
+    ]
+   },
+   "CircuitBuildingWaterPressure": {
+    "name": "CircuitBuildingWaterPressure",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935225,
+    "zz": 8,
+    "id": [181, 20, 5, 42, 3, 255, 255], "comment": "Gebäudekreis Druck",
+    "fields": {
+     "0": {"name": "", "value": 1.4, "unit": "bar", "comment": "T.0.42 Gebäudekreis: Druck"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "bar", "comment": "T.0.42 Gebäudekreis: Druck"}
+    ]
+   },
+   "clearerrorhistory": {
+    "name": "clearerrorhistory",
+    "passive": false,
+    "write": true,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 3, 2, 1], "comment": "Fehlerhistorie löschen",
+    "fielddefs": [
+     { "name": "cleared", "slave": true, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "nein", "1": "ja" }, "unit": "", "comment": ""}
+    ]
+   },
+   "CompressorHours": {
+    "name": "CompressorHours",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935225,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 0], "comment": "Kompressor Stunden",
+    "fields": {
+     "hoursum": {"value": 23337, "unit": "h", "comment": "Kompressor Stunden"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "hoursum", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "h", "comment": "Kompressor Stunden"}
+    ]
+   },
+   "CompressorInletTemp": {
+    "name": "CompressorInletTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935225,
+    "zz": 8,
+    "id": [181, 20, 5, 56, 3, 255, 255], "comment": "Kompressoreinlasstemperatur",
+    "fields": {
+     "0": {"name": "", "value": 39.6, "unit": "°C", "comment": "T.0.56 Kompressoreinlastemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.56 Kompressoreinlastemperatur"}
+    ]
+   },
+   "CompressorOutletTemp": {
+    "name": "CompressorOutletTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935225,
+    "zz": 8,
+    "id": [181, 20, 5, 55, 3, 255, 255], "comment": "Kompressorauslasstemperatur",
+    "fields": {
+     "0": {"name": "", "value": 47.2, "unit": "°C", "comment": "T.0.55 Kompressorauslastemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.55 Kompressorauslastemperatur"}
+    ]
+   },
+   "CompressorSpeed": {
+    "name": "CompressorSpeed",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935225,
+    "zz": 8,
+    "id": [181, 20, 5, 93, 3, 255, 255], "comment": "Kompressor Drehzahl",
+    "fields": {
+     "0": {"name": "", "value": 0.0, "unit": "U/s", "comment": "T.0.93 Kompressor Drehzahl"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "U/s", "comment": "T.0.93 Kompressor Drehzahl"}
+    ]
+   },
+   "CompressorStarts": {
+    "name": "CompressorStarts",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935225,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 1], "comment": "Kompressor Starts",
+    "fields": {
+     "0": {"name": "", "value": 5601, "comment": "Kompressor Starts"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Kompressor Starts"}
+    ]
+   },
+   "CondensateTrayHeater": {
+    "name": "CondensateTrayHeater",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 19, 3, 255, 255], "comment": "Kondensatwannenheizung",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "aus", "1": "an" }, "unit": "", "comment": "T.0.19 Kondensatwannenheizung"}
+    ]
+   },
+   "CondensationTemp": {
+    "name": "CondensationTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935226,
+    "zz": 8,
+    "id": [181, 20, 5, 86, 3, 255, 255], "comment": "Kondensationstemperatur",
+    "fields": {
+     "0": {"name": "", "value": 25.3, "unit": "°C", "comment": "T.0.86 Kondensationstemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.86 Kondensationstemperatur"}
+    ]
+   },
+   "CondenserOutletTemp": {
+    "name": "CondenserOutletTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935226,
+    "zz": 8,
+    "id": [181, 20, 5, 59, 3, 255, 255], "comment": "Temperatur Kondensatorauslass",
+    "fields": {
+     "0": {"name": "", "value": 41.7, "unit": "°C", "comment": "T.0.59 Temperatur Kondensatorauslass"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.59 Temperatur Kondensatorauslass"}
+    ]
+   },
+   "ConsumptionThisYear10": {
+    "name": "ConsumptionThisYear10",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 10, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear11": {
+    "name": "ConsumptionThisYear11",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 11, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear12": {
+    "name": "ConsumptionThisYear12",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 12, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear1": {
+    "name": "ConsumptionThisYear1",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 1, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear2": {
+    "name": "ConsumptionThisYear2",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 2, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear3": {
+    "name": "ConsumptionThisYear3",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 3, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear4": {
+    "name": "ConsumptionThisYear4",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 4, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear5": {
+    "name": "ConsumptionThisYear5",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 5, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear6": {
+    "name": "ConsumptionThisYear6",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 6, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear7": {
+    "name": "ConsumptionThisYear7",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 7, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear8": {
+    "name": "ConsumptionThisYear8",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 8, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionThisYear9": {
+    "name": "ConsumptionThisYear9",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 26, 2, 9, 0],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "ConsumptionTotal": {
+    "name": "ConsumptionTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 22, 24, 2],
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "CurrentCompressorUtil": {
+    "name": "CurrentCompressorUtil",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935226,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 37], "comment": "Modulation Kompressor",
+    "fields": {
+     "0": {"name": "", "value": 0.00, "unit": "%"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D2C", "isbits": false, "length": 2, "divisor": 16, "unit": "%", "comment": ""}
+    ]
+   },
+   "CurrentConsumedPower": {
+    "name": "CurrentConsumedPower",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935226,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 36], "comment": "elektrische Leistungsaufnahme",
+    "fields": {
+     "0": {"name": "", "value": 0.0, "unit": "kW"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "kW", "comment": ""}
+    ]
+   },
+   "currenterror": {
+    "name": "currenterror",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 3, 0, 1], "comment": "Aktuelle Fehler",
+    "fielddefs": [
+     { "name": "error", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Fehlernummer"},
+     { "name": "error", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Fehlernummer"},
+     { "name": "error", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Fehlernummer"},
+     { "name": "error", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Fehlernummer"},
+     { "name": "error", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Fehlernummer"}
+    ]
+   },
+   "CurrentYieldPower": {
+    "name": "CurrentYieldPower",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935226,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 35], "comment": "Kälteleistung",
+    "fields": {
+     "0": {"name": "", "value": 0.0, "unit": "kW"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "kW", "comment": ""}
+    ]
+   },
+   "CylinderTemp": {
+    "name": "CylinderTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934777,
+    "zz": 8,
+    "id": [181, 20, 5, 44, 3, 255, 255], "comment": "Speichertemperatur",
+    "fields": {
+     "0": {"name": "", "value": -99.0, "unit": "°C", "comment": "T.1.44 Speichertemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.1.44 Speichertemperatur"}
+    ]
+   },
+   "DateTime": {
+    "name": "DateTime",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935226,
+    "zz": 8,
+    "id": [181, 4, 0], "comment": "Datum Uhrzeit",
+    "fields": {
+     "dcfstate": {"value": "nosignal", "comment": "DCF Empfängerstatus"},
+     "btime": {"value": "-:-:-", "comment": "Uhrzeit"},
+     "bdate": {"value": "-.-.-", "comment": "Datum"},
+     "temp2": {"value": null, "unit": "°C", "comment": "Temperatur"}
+    },
+    "fielddefs": [
+     { "name": "dcfstate", "slave": true, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "nosignal", "1": "ok", "2": "sync", "3": "valid" }, "unit": "", "comment": "DCF Empfängerstatus"},
+     { "name": "btime", "slave": true, "type": "BTI", "isbits": false, "length": 3, "unit": "", "comment": "Uhrzeit"},
+     { "name": "bdate", "slave": true, "type": "BDA", "isbits": false, "length": 4, "unit": "", "comment": "Datum"},
+     { "name": "temp2", "slave": true, "type": "D2B", "isbits": false, "length": 2, "unit": "°C", "comment": "Temperatur"}
+    ]
+   },
+   "DCFStatus": {
+    "name": "DCFStatus",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934783,
+    "zz": 8,
+    "id": [181, 20, 5, 71, 3, 255, 255], "comment": "DCF Status",
+    "fields": {
+     "0": {"name": "", "value": 0, "comment": "T.1.71 DCF Status"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "T.1.71 DCF Status"}
+    ]
+   },
+   "EEVOutletTemp": {
+    "name": "EEVOutletTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935226,
+    "zz": 8,
+    "id": [181, 20, 5, 57, 3, 255, 255], "comment": "EEV Auslass Tempperatur",
+    "fields": {
+     "0": {"name": "", "value": 31.7, "unit": "°C", "comment": "T.0.57 Temperatur EEV Auslass"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.57 Temperatur EEV Auslass"}
+    ]
+   },
+   "EEVSteps": {
+    "name": "EEVSteps",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935227,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 13], "comment": "EEV Schritte",
+    "fields": {
+     "0": {"name": "", "value": 62137, "comment": "EEV Schritte"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "EEV Schritte"}
+    ]
+   },
+   "EnergyConsumptionTotal": {
+    "name": "EnergyConsumptionTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935228,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 77], "comment": "Energieverbrauch gesamt",
+    "fields": {
+     "0": {"name": "", "value": 26056, "unit": "kWh"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "EnergyIntegral": {
+    "name": "EnergyIntegral",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935228,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 33], "comment": "Energie Integral",
+    "fields": {
+     "0": {"name": "", "value": -53, "unit": "°min"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SLG", "isbits": false, "length": 4, "unit": "°min", "comment": ""}
+    ]
+   },
+   "EnergyYieldCoolDay": {
+    "name": "EnergyYieldCoolDay",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935228,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 1], "comment": "Energieertrag Tag Kühlen",
+    "fields": {
+     "energy": {"value": 0.0, "unit": "kWh", "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "kWh", "comment": "comment"}
+    ]
+   },
+   "EnergyYieldCoolMonth": {
+    "name": "EnergyYieldCoolMonth",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935228,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 42], "comment": "Energieertrag Monat Kühlen",
+    "fields": {
+     "energy": {"value": 0.0, "unit": "kWh"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "EnergyYieldCoolTotal": {
+    "name": "EnergyYieldCoolTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935228,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 44], "comment": "Energieertrag gesamt Kühlen",
+    "fields": {
+     "energy": {"value": 733, "unit": "kWh"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "EnergyYieldHcDay": {
+    "name": "EnergyYieldHcDay",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935229,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 0], "comment": "Energieertrag Tag Heizen",
+    "fields": {
+     "energy": {"value": 0.0, "unit": "kWh", "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "kWh", "comment": "comment"}
+    ]
+   },
+   "EnergyYieldHcMonth": {
+    "name": "EnergyYieldHcMonth",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935229,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 14], "comment": "Energieertrag Monat Heizen",
+    "fields": {
+     "energy": {"value": 0.0, "unit": "kWh", "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "kWh", "comment": "comment"}
+    ]
+   },
+   "EnergyYieldHwcDay": {
+    "name": "EnergyYieldHwcDay",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935229,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 2], "comment": "Energieertrag Tag WW",
+    "fields": {
+     "energy": {"value": 2.5, "unit": "kWh", "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "kWh", "comment": "comment"}
+    ]
+   },
+   "EnergyYieldHwcMonth": {
+    "name": "EnergyYieldHwcMonth",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935229,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 18], "comment": "Energieertrag Monat WW",
+    "fields": {
+     "energy": {"value": 11.3, "unit": "kWh"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "EnergyYieldHwcTotal": {
+    "name": "EnergyYieldHwcTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935229,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 22], "comment": "Energieertrag gesamt Warmwasser",
+    "fields": {
+     "energy": {"value": 4619, "unit": "kWh"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "EnergyYieldHwTotal": {
+    "name": "EnergyYieldHwTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935229,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 16], "comment": "Energieertrag gesamt Heizen",
+    "fields": {
+     "0": {"name": "", "value": 87975, "unit": "kWh"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "errorhistory": {
+    "name": "errorhistory",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 3, 1, 1], "comment": "Fehlerhistorie",
+    "fielddefs": [
+     { "name": "index", "slave": false, "type": "UCH", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "status", "slave": true, "type": "UCH", "isbits": false, "length": 1, "unit": "", "comment": "Status"},
+     { "name": "time2", "slave": true, "type": "VTM", "isbits": false, "length": 2, "unit": "", "comment": "Zeit"},
+     { "name": "date", "slave": true, "type": "HDA:3", "isbits": false, "length": 3, "unit": "", "comment": "Datum"},
+     { "name": "error", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Fehlernummer"}
+    ]
+   },
+   "EvaporationTemp": {
+    "name": "EvaporationTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935230,
+    "zz": 8,
+    "id": [181, 20, 5, 85, 3, 255, 255], "comment": "Verdampfungstemperatur",
+    "fields": {
+     "0": {"name": "", "value": 22.8, "unit": "°C", "comment": "T.0.85 Verdampfungstemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.85 Verdampfungstemperatur"}
+    ]
+   },
+   "F1e": {
+    "name": "F1e",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 30], "comment": "F1e",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D2B", "isbits": false, "length": 2, "divisor": 256, "unit": "", "comment": ""}
+    ]
+   },
+   "F1f": {
+    "name": "F1f",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935230,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 31], "comment": "F1f Vorlaufsoll ??",
+    "fields": {
+     "0": {"name": "", "value": 20.00}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D2C", "isbits": false, "length": 2, "divisor": 16, "unit": "", "comment": ""}
+    ]
+   },
+   "F20": {
+    "name": "F20",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935230,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 32], "comment": "F20 aktuelle Vorlauftemp. ??",
+    "fields": {
+     "0": {"name": "", "value": 48.56}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D2C", "isbits": false, "length": 2, "divisor": 16, "unit": "", "comment": ""}
+    ]
+   },
+   "F3c": {
+    "name": "F3c",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935230,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 60], "comment": "F3c Gebäudekreis Durchluss??",
+    "fields": {
+     "0": {"name": "", "value": 0}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "unit": "", "comment": ""}
+    ]
+   },
+   "F3d": {
+    "name": "F3d",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 61], "comment": "F3d",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D2B", "isbits": false, "length": 2, "divisor": 256, "unit": "", "comment": ""}
+    ]
+   },
+   "Fan1": {
+    "name": "Fan1",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935230,
+    "zz": 8,
+    "id": [181, 20, 5, 17, 3, 255, 255], "comment": "Lüfter 1",
+    "fields": {
+     "0": {"name": "", "value": 0, "unit": "%", "comment": "T.0.02 Lüfter 1"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "%", "comment": "T.0.02 Lüfter 1"}
+    ]
+   },
+   "Fan1Hours": {
+    "name": "Fan1Hours",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935230,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 81], "comment": "Betr.std.Lüfter 1",
+    "fields": {
+     "hoursum": {"value": 23157, "unit": "h", "comment": "Betriebsstunden Lüfter 1"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "hoursum", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "h", "comment": "Betriebsstunden Lüfter 1"}
+    ]
+   },
+   "Fan1Starts": {
+    "name": "Fan1Starts",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935231,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 82], "comment": "Starts Lüfter 1",
+    "fields": {
+     "0": {"name": "", "value": 10535, "comment": "Starts Lüfter 1"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Starts Lüfter 1"}
+    ]
+   },
+   "FlowTemp": {
+    "name": "FlowTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934885,
+    "zz": 8,
+    "id": [181, 20, 5, 40, 3, 255, 255], "comment": "Vorlauftemperatur",
+    "fields": {
+     "0": {"name": "", "value": 48.9, "unit": "°C", "comment": "T.0.40 Vorlauftemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.40 Vorlauftemperatur"}
+    ]
+   },
+   "FlowTempImmersionHeater": {
+    "name": "FlowTempImmersionHeater",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935231,
+    "zz": 8,
+    "id": [181, 20, 5, 130, 3, 255, 255], "comment": "Vorlauftemperatur Heizstab",
+    "fields": {
+     "0": {"name": "", "value": -99.0, "unit": "°C", "comment": "T1.130 Vorlauftemperatur Heizstab"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T1.130 Vorlauftemperatur Heizstab"}
+    ]
+   },
+   "FourPortValve": {
+    "name": "FourPortValve",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 20, 3, 255, 255], "comment": "Vierwegeventil",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "aus", "1": "an" }, "unit": "", "comment": "T.0.20 4-Wege-Ventil"}
+    ]
+   },
+   "FourWayValveHours": {
+    "name": "FourWayValveHours",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935231,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 6], "comment": "4-Wege-V. Std.",
+    "fields": {
+     "hoursum": {"value": 581, "unit": "h", "comment": "4-Wege Ventil Stunden"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "hoursum", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "h", "comment": "4-Wege Ventil Stunden"}
+    ]
+   },
+   "FourWayValveSwitchingOperations": {
+    "name": "FourWayValveSwitchingOperations",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935231,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 7], "comment": "4-Wege Schaltv.",
+    "fields": {
+     "0": {"name": "", "value": 5064, "comment": "Schaltvorgänge 4-Wege Ventil"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "Schaltvorgänge 4-Wege Ventil"}
+    ]
+   },
+   "HeatingCoilCompressor": {
+    "name": "HeatingCoilCompressor",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935231,
+    "zz": 8,
+    "id": [181, 20, 5, 23, 3, 255, 255], "comment": "Heizwendel Kompressor",
+    "fields": {
+     "0": {"name": "", "value": "aus", "comment": "T.0.23 Heizwendel Kompressor"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "aus", "1": "an" }, "unit": "", "comment": "T.0.23 Heizwendel Kompressor"}
+    ]
+   },
+   "HighPressure": {
+    "name": "HighPressure",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935231,
+    "zz": 8,
+    "id": [181, 20, 5, 63, 3, 255, 255], "comment": "Hochdruck",
+    "fields": {
+     "0": {"name": "", "value": 8.6, "unit": "bar", "comment": "T.0.63 Hochdruck"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "bar", "comment": "T.0.63 Hochdruck"}
+    ]
+   },
+   "HighPressureSwitch": {
+    "name": "HighPressureSwitch",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935231,
+    "zz": 8,
+    "id": [181, 20, 5, 67, 3, 255, 255], "comment": "Hochdruckschalter",
+    "fields": {
+     "0": {"name": "", "value": "geschlossen", "comment": "T.0.67 Hochdruckschalter"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "offen", "1": "geschlossen" }, "unit": "", "comment": "T.0.67 Hochdruckschalter"}
+    ]
+   },
+   "Hours": {
+    "name": "Hours",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935232,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 64], "comment": "Betriebsstd. Gesamt",
+    "fields": {
+     "hoursum": {"value": 42347, "unit": "h", "comment": "Stunden"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "hoursum", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "h", "comment": "Stunden"}
+    ]
+   },
+   "HoursCool": {
+    "name": "HoursCool",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935232,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 67], "comment": "Betriebsstd. Kühlen",
+    "fields": {
+     "hoursum": {"value": 532, "unit": "h", "comment": "Stunden"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "hoursum", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "h", "comment": "Stunden"}
+    ]
+   },
+   "HoursHc": {
+    "name": "HoursHc",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935232,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 65], "comment": "Betriebsstd. Heizen",
+    "fields": {
+     "hoursum": {"value": 22158, "unit": "h", "comment": "Stunden"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "hoursum", "slave": true, "type": "ULG", "isbits": false, "length": 4, "unit": "h", "comment": "Stunden"}
+    ]
+   },
+   "ImmersionHeaterSafetyCutOut": {
+    "name": "ImmersionHeaterSafetyCutOut",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935232,
+    "zz": 8,
+    "id": [181, 20, 5, 124, 3, 255, 255], "comment": "STB Heizstab",
+    "fields": {
+     "0": {"name": "", "value": "geschlossen", "comment": "T.1.124 STB Heizstab"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "geschlossen", "1": "offen" }, "unit": "", "comment": "T.1.124 STB Heizstab"}
+    ]
+   },
+   "LockoutContactS20": {
+    "name": "LockoutContactS20",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 46, 3, 255, 255], "comment": "Sperrkontakt S20",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "geschlossen", "1": "offen" }, "unit": "", "comment": "T.1.46 Sperrkontakt S20"}
+    ]
+   },
+   "LockoutContactS21": {
+    "name": "LockoutContactS21",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 72, 3, 255, 255], "comment": "Sperrkontakt S21",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "geschlossen", "1": "offen" }, "unit": "", "comment": "T.1.72 Sperrkontakt S21"}
+    ]
+   },
+   "LowPressure": {
+    "name": "LowPressure",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935232,
+    "zz": 8,
+    "id": [181, 20, 5, 64, 3, 255, 255], "comment": "Niederdruck",
+    "fields": {
+     "0": {"name": "", "value": 8.0, "unit": "bar", "comment": "T.0.64 Niederdruck"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "bar", "comment": "T.0.64 Niederdruck"}
+    ]
+   },
+   "MA1Output": {
+    "name": "MA1Output",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 119, 3, 255, 255], "comment": "MA1 Ausgang",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "aus", "1": "an" }, "unit": "", "comment": "T.1.119 MA1 Ausgang"}
+    ]
+   },
+   "MIInput": {
+    "name": "MIInput",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 125, 3, 255, 255], "comment": "ME Eingang",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "unit": "", "comment": "T.1.125 ME Eingang"}
+    ]
+   },
+   "MO2Output": {
+    "name": "MO2Output",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 126, 3, 255, 255], "comment": "MA2 Ausgang",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "aus", "1": "an" }, "unit": "", "comment": "T.1.126 MA1 Ausgang"}
+    ]
+   },
+   "MO3Output": {
+    "name": "MO3Output",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 127, 3, 255, 255], "comment": "MA3 Ausgang",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "aus", "1": "an" }, "unit": "", "comment": "T.1.127 MA1 Ausgang"}
+    ]
+   },
+   "OutdoorTemp": {
+    "name": "OutdoorTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934921,
+    "zz": 8,
+    "id": [181, 20, 5, 69, 3, 255, 255], "comment": "Außentemperatur",
+    "fields": {
+     "0": {"name": "", "value": -99.0, "unit": "°C", "comment": "T.1.69 Außentemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.1.69 Außentemperatur"}
+    ]
+   },
+   "OverheatingActualValue": {
+    "name": "OverheatingActualValue",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 88, 3, 255, 255], "comment": "Istwert Überhitzung",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "K", "comment": "T.0.88 Istwert Überhitzung"}
+    ]
+   },
+   "OverheatingTargetValue": {
+    "name": "OverheatingTargetValue",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 87, 3, 255, 255], "comment": "Sollwert Überhitzung",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "K", "comment": "T.0.87 Sollwert Überhitzung"}
+    ]
+   },
+   "PositionEEV": {
+    "name": "PositionEEV",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 20, 5, 21, 3, 255, 255], "comment": "Position EEV",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "%", "comment": "T.0.21 Position: EEV"}
+    ]
+   },
+   "PrioritySwitchingValve": {
+    "name": "PrioritySwitchingValve",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935232,
+    "zz": 8,
+    "id": [181, 20, 5, 2, 3, 255, 255], "comment": "Vorrangumschaltventil WW",
+    "fields": {
+     "0": {"name": "", "value": "Heizen", "comment": "T.1.02 Vorrangumschaltventil WW"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "Heizen", "1": "Warmwasser" }, "unit": "", "comment": "T.1.02 Vorrangumschaltventil WW"}
+    ]
+   },
+   "ReturnTemp": {
+    "name": "ReturnTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935233,
+    "zz": 8,
+    "id": [181, 20, 5, 41, 3, 255, 255], "comment": "Rücklauftemperatur",
+    "fields": {
+     "0": {"name": "", "value": 45.6, "unit": "°C", "comment": "T.0.41 Rücklauftemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.0.41 Rücklauftemperatur"}
+    ]
+   },
+   "SEERCoolMonth": {
+    "name": "SEERCoolMonth",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 43], "comment": "SEER Monat Kühlen",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "", "comment": ""}
+    ]
+   },
+   "SEERCoolTotal": {
+    "name": "SEERCoolTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 45], "comment": "SEER gesamt Kühlen",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "", "comment": ""}
+    ]
+   },
+   "SetMode": {
+    "name": "SetMode",
+    "passive": true,
+    "write": true,
+    "lastup": 1785935234,
+    "zz": 8,
+    "id": [181, 16, 0], "comment": "Betriebsart",
+    "fields": {
+     "hcmode": {"value": "auto", "comment": "Boiler Modus"},
+     "flowtempdesired": {"value": 0.0, "unit": "°C", "comment": "Temperatur"},
+     "hwctempdesired": {"value": null, "unit": "°C", "comment": "Temperatur"},
+     "hwcflowtempdesired": {"value": null, "unit": "°C", "comment": "Temperatur"},
+     "disablehc": {"value": 1},
+     "disablehwctapping": {"value": 1},
+     "disablehwcload": {"value": 1},
+     "remoteControlHcPump": {"value": 0},
+     "releaseBackup": {"value": 0},
+     "releaseCooling": {"value": 0}
+    },
+    "fielddefs": [
+     { "name": "hcmode", "slave": false, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "auto", "1": "off", "2": "heat", "3": "water" }, "unit": "", "comment": "Boiler Modus"},
+     { "name": "flowtempdesired", "slave": false, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "hwctempdesired", "slave": false, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "hwcflowtempdesired", "slave": false, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "", "slave": false, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "disablehc", "slave": false, "type": "BI0", "isbits": true, "length": 1, "unit": "", "comment": ""},
+     { "name": "disablehwctapping", "slave": false, "type": "BI1", "isbits": true, "length": 1, "unit": "", "comment": ""},
+     { "name": "disablehwcload", "slave": false, "type": "BI2", "isbits": true, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": false, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "remoteControlHcPump", "slave": false, "type": "BI0", "isbits": true, "length": 1, "unit": "", "comment": ""},
+     { "name": "releaseBackup", "slave": false, "type": "BI1", "isbits": true, "length": 1, "unit": "", "comment": ""},
+     { "name": "releaseCooling", "slave": false, "type": "BI2", "isbits": true, "length": 1, "unit": "", "comment": ""}
+    ]
+   },
+   "stat04": {
+    "name": "stat04",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 4], "comment": "stat 04",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "comment"}
+    ]
+   },
+   "stat05": {
+    "name": "stat05",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 52, 5], "comment": "stat 05",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "comment"}
+    ]
+   },
+   "stat_unknown32": {
+    "name": "stat_unknown32",
+    "passive": false,
+    "write": false,
+    "lastup": 1785919258,
+    "zz": 8,
+    "id": [181, 26, 4, 255, 50], "comment": "stat_unknown32",
+    "fields": {
+     "0": {"name": "", "value": 49359, "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "comment"}
+    ]
+   },
+   "stat_unknown33": {
+    "name": "stat_unknown33",
+    "passive": false,
+    "write": false,
+    "lastup": 1785932870,
+    "zz": 8,
+    "id": [181, 26, 4, 255, 51], "comment": "stat_unknown33",
+    "fields": {
+     "0": {"name": "", "value": 35776, "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "comment"}
+    ]
+   },
+   "stat_unknown34": {
+    "name": "stat_unknown34",
+    "passive": false,
+    "write": false,
+    "lastup": 1785925295,
+    "zz": 8,
+    "id": [181, 26, 4, 255, 52], "comment": "stat_unknown34",
+    "fields": {
+     "0": {"name": "", "value": 49152, "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "comment"}
+    ]
+   },
+   "stat_unknown35": {
+    "name": "stat_unknown35",
+    "passive": false,
+    "write": false,
+    "lastup": 1785928314,
+    "zz": 8,
+    "id": [181, 26, 4, 255, 53], "comment": "stat_unknown35",
+    "fields": {
+     "0": {"name": "", "value": 0, "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "comment"}
+    ]
+   },
+   "stat_unknown36": {
+    "name": "stat_unknown36",
+    "passive": false,
+    "write": false,
+    "lastup": 1785917721,
+    "zz": 8,
+    "id": [181, 26, 4, 255, 54], "comment": "stat_unknown36",
+    "fields": {
+     "0": {"name": "", "value": 0, "comment": "comment"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "", "comment": "comment"}
+    ]
+   },
+   "State": {
+    "name": "State",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935236,
+    "zz": 8,
+    "id": [181, 17, 7],
+    "fields": {
+     "CurrentCompressor": {"value": 0},
+     "energy": {"value": 2.5, "unit": "kWh", "comment": "Täglicher Energieertrag"},
+     "onoff": {"value": 192},
+     "state": {"value": "ready"}
+    },
+    "fielddefs": [
+     { "name": "CurrentCompressor", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "divisor": 10, "unit": "kWh", "comment": "Täglicher Energieertrag"},
+     { "name": "onoff", "slave": true, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "off", "1": "on" }, "unit": "", "comment": ""},
+     { "name": "state", "slave": true, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "ready", "1": "ready", "8": "heating", "9": "heating", "11": "error", "17": "cooling", "128": "heating_water", "129": "heating_water" }, "unit": "", "comment": ""}
+    ]
+   },
+   "Status01": {
+    "name": "Status01",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935233,
+    "zz": 8,
+    "id": [181, 17, 1], "comment": "Vorlauftemperatur/Rücklauftemperatur/Aussentemperatur/WW Temperatur/Speichertemperatur/Pumpenstatus",
+    "fields": {
+     "0": {"name": "temp1", "value": 48.5, "unit": "°C", "comment": "Temperatur"},
+     "1": {"name": "temp1", "value": 45.5, "unit": "°C", "comment": "Temperatur"},
+     "2": {"name": "temp2", "value": null, "unit": "°C", "comment": "Temperatur"},
+     "3": {"name": "temp1", "value": null, "unit": "°C", "comment": "Temperatur"},
+     "4": {"name": "temp1", "value": null, "unit": "°C", "comment": "Temperatur"},
+     "5": {"name": "pumpstate", "value": "off", "comment": "Pumpenstatus"}
+    },
+    "fielddefs": [
+     { "name": "temp1", "slave": true, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "temp1", "slave": true, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "temp2", "slave": true, "type": "D2B", "isbits": false, "length": 2, "unit": "°C", "comment": "Temperatur"},
+     { "name": "temp1", "slave": true, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "temp1", "slave": true, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "pumpstate", "slave": true, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "off", "1": "on", "2": "overrun" }, "unit": "", "comment": "Pumpenstatus"}
+    ]
+   },
+   "Status02": {
+    "name": "Status02",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934939,
+    "zz": 8,
+    "id": [181, 17, 2], "comment": "Betriebsart/Maximaltemperatur/ReglerCurrentTemp/Maximaltemperatur/ReglerCurrentTemp",
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "hwcmode", "slave": true, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "disabled", "1": "on", "2": "off", "3": "auto" }, "unit": "", "comment": "Warmwasser Modus"},
+     { "name": "temp0", "slave": true, "type": "UCH", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "temp1", "slave": true, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "temp0", "slave": true, "type": "UCH", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"},
+     { "name": "temp1", "slave": true, "type": "D1C", "isbits": false, "length": 1, "unit": "°C", "comment": "Temperatur"}
+    ]
+   },
+   "Status16": {
+    "name": "Status16",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934945,
+    "zz": 8,
+    "id": [181, 4, 22], "comment": "Aussentemperatur",
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "temp", "slave": true, "type": "D2C", "isbits": false, "length": 2, "unit": "°C", "comment": "Temperatur"}
+    ]
+   },
+   "Status": {
+    "name": "Status",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934951,
+    "zz": 8,
+    "id": [181, 17, 3], "comment": "Status",
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "temp", "slave": true, "type": "D2C", "isbits": false, "length": 2, "unit": "°C", "comment": "Temperatur"},
+     { "name": "press", "slave": true, "type": "FLT", "isbits": false, "length": 2, "unit": "bar", "comment": "Druck"},
+     { "name": "press", "slave": true, "type": "FLT", "isbits": false, "length": 2, "unit": "bar", "comment": "Druck"},
+     { "name": "hcmode2", "slave": true, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "off", "3": "heat", "4": "water" }, "unit": "", "comment": "Boiler Modus"},
+     { "name": "", "slave": true, "type": "HEX", "isbits": false, "length": 1, "unit": "", "comment": ""}
+    ]
+   },
+   "StatusCirPump": {
+    "name": "StatusCirPump",
+    "passive": true,
+    "write": true,
+    "lastup": 1785935035,
+    "zz": 8,
+    "id": [181, 18, 0], "comment": "Status Zirkulationspumpe",
+    "fields": {
+     "0": {"name": "", "value": "on"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": false, "type": "UCH", "isbits": false, "length": 1, "values": { "0": "off", "100": "on" }, "unit": "", "comment": ""}
+    ]
+   },
+   "SubcoolingActualValue": {
+    "name": "SubcoolingActualValue",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935233,
+    "zz": 8,
+    "id": [181, 20, 5, 90, 3, 255, 255], "comment": "Istwert Unterkühlung",
+    "fields": {
+     "0": {"name": "", "value": -16.3, "unit": "K", "comment": "T.0.90 Istwert Unterkühlung"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "K", "comment": "T.0.90 Istwert Unterkühlung"}
+    ]
+   },
+   "SubcoolingTargetValue": {
+    "name": "SubcoolingTargetValue",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935233,
+    "zz": 8,
+    "id": [181, 20, 5, 89, 3, 255, 255], "comment": "Sollwert Unterkühlung",
+    "fields": {
+     "0": {"name": "", "value": 0.0, "unit": "K", "comment": "T.0.89 Sollwert Unterkühlung"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "K", "comment": "T.0.89 Sollwert Unterkühlung"}
+    ]
+   },
+   "SystemTemp": {
+    "name": "SystemTemp",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934957,
+    "zz": 8,
+    "id": [181, 20, 5, 70, 3, 255, 255], "comment": "Systemtemperatur",
+    "fields": {
+     "0": {"name": "", "value": -99.0, "unit": "°C", "comment": "T.1.70 Systemtemperatur"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "SIN", "isbits": false, "length": 2, "divisor": 10, "unit": "°C", "comment": "T.1.70 Systemtemperatur"}
+    ]
+   },
+   "TempSwitchCompressorOutlet": {
+    "name": "TempSwitchCompressorOutlet",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935233,
+    "zz": 8,
+    "id": [181, 20, 5, 123, 3, 255, 255], "comment": "Temperaturschalter Kompressor Auslass",
+    "fields": {
+     "0": {"name": "", "value": "geschlossen", "comment": "T.0.123 Temperaturschalter Kompressor Auslass"}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 2, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "UIN", "isbits": false, "length": 2, "values": { "0": "offen", "1": "geschlossen" }, "unit": "", "comment": "T.0.123 Temperaturschalter Kompressor Auslass"}
+    ]
+   },
+   "WorkingFigureHcMonth": {
+    "name": "WorkingFigureHcMonth",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 15], "comment": "Arbeitszahl Monat Heizen",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "", "comment": "comment"}
+    ]
+   },
+   "WorkingFigureHcTotal": {
+    "name": "WorkingFigureHcTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935234,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 17], "comment": "Arbeitszahl gesamt Heizen",
+    "fields": {
+     "0": {"name": "", "value": 4.5}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "", "comment": ""}
+    ]
+   },
+   "WorkingFigureHwcMonth": {
+    "name": "WorkingFigureHwcMonth",
+    "passive": false,
+    "write": false,
+    "lastup": 0,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 19], "comment": "Arbeitszahl Monat WW",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "", "comment": ""}
+    ]
+   },
+   "WorkingFigureHwcTotal": {
+    "name": "WorkingFigureHwcTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935234,
+    "zz": 8,
+    "id": [181, 26, 5, 255, 50, 23], "comment": "Arbeitszahl gesamt WW",
+    "fields": {
+     "0": {"name": "", "value": 2.8}
+    },
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 3, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "D1B", "isbits": false, "length": 1, "divisor": 10, "unit": "", "comment": ""}
+    ]
+   },
+   "YieldThisYear10": {
+    "name": "YieldThisYear10",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934969,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 10, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear11": {
+    "name": "YieldThisYear11",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934975,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 11, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear12": {
+    "name": "YieldThisYear12",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934981,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 12, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear1": {
+    "name": "YieldThisYear1",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934987,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 1, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear2": {
+    "name": "YieldThisYear2",
+    "passive": false,
+    "write": false,
+    "lastup": 1785934994,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 2, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear3": {
+    "name": "YieldThisYear3",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935000,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 3, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear4": {
+    "name": "YieldThisYear4",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935006,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 4, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear5": {
+    "name": "YieldThisYear5",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935012,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 5, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear6": {
+    "name": "YieldThisYear6",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935018,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 6, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear7": {
+    "name": "YieldThisYear7",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935024,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 7, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear8": {
+    "name": "YieldThisYear8",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935030,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 8, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldThisYear9": {
+    "name": "YieldThisYear9",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935036,
+    "zz": 8,
+    "id": [181, 22, 26, 1, 9, 0],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "month", "slave": true, "type": "D1B", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   },
+   "YieldTotal": {
+    "name": "YieldTotal",
+    "passive": false,
+    "write": false,
+    "lastup": 1785935042,
+    "zz": 8,
+    "id": [181, 22, 24, 1],
+    "decodeerror": "ERR: invalid position",
+    "fielddefs": [
+     { "name": "", "slave": true, "type": "IGN", "isbits": false, "length": 1, "unit": "", "comment": ""},
+     { "name": "energy", "slave": true, "type": "UIN", "isbits": false, "length": 2, "unit": "kWh", "comment": ""}
+    ]
+   }
+  }
+ },
+ "global": {
+  "version": "23.3.23.3",
+  "updatecheck": "version 26.1 available, broadcast.csv: different version available, memory.csv: different version available, vaillant/08.hmu.csv: different version available, vaillant/15.700.csv: different version available, vaillant/broadcast.csv: different version available, vaillant/errors.inc: different version available, vaillant/general.csv: different version available, vaillant/hcmode.inc: different version available, vaillant/scan.csv: different version available",
+  "access": "*",
+  "signal": true,
+  "symbolrate": 36,
+  "maxsymbolrate": 755,
+  "minarbitrationmicros": 2,
+  "maxarbitrationmicros": 7768,
+  "minsymbollatency": 0,
+  "maxsymbollatency": 45,
+  "qq": 49,
+  "reconnects": 0,
+  "masters": 4,
+  "messages": 612,
+  "lastup": 1785935236
+ }
+}

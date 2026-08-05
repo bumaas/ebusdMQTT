@@ -1,0 +1,612 @@
+{
+    "count": 121,
+    "sha256": "9a02884e8cf1fd77ef8852d02fc5011aa5a5f72ebb4edcbc5cffd01bb7fbdfa0",
+    "flags": {
+        "AirInletTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "AirInletTempSens": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "BuildingCircuitPumpPower": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "BuildingPumpHours": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "BuildingPumpStarts": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CircuitBuildingFlowRate": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CircuitBuildingWaterPressure": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CompressorHours": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CompressorInletTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CompressorOutletTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CompressorSpeed": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CompressorStarts": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CondensateTrayHeater": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CondensationTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CondenserOutletTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear1": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear10": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear11": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear12": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear2": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear3": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear4": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear5": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear6": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear7": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear8": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionThisYear9": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ConsumptionTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CurrentCompressorUtil": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CurrentConsumedPower": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CurrentYieldPower": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "CylinderTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "DCFStatus": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "DateTime": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EEVOutletTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EEVSteps": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyConsumptionTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyIntegral": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldCoolDay": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldCoolMonth": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldCoolTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldHcDay": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldHcMonth": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldHwTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldHwcDay": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldHwcMonth": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EnergyYieldHwcTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "EvaporationTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "F1e": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "F1f": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "F20": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "F3c": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "F3d": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Fan1": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Fan1Hours": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Fan1Starts": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "FlowTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "FlowTempImmersionHeater": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "FourPortValve": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "FourWayValveHours": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "FourWayValveSwitchingOperations": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HeatingCoilCompressor": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HighPressure": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HighPressureSwitch": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hours": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HoursCool": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HoursHc": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ImmersionHeaterSafetyCutOut": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "LockoutContactS20": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "LockoutContactS21": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "LowPressure": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "MA1Output": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "MIInput": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "MO2Output": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "MO3Output": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "OutdoorTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "OverheatingActualValue": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "OverheatingTargetValue": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "PositionEEV": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "PrioritySwitchingValve": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "ReturnTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "SEERCoolMonth": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "SEERCoolTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "SetMode": {
+            "read": true,
+            "write": true,
+            "passive": true
+        },
+        "State": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Status": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Status01": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Status02": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Status16": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "StatusCirPump": {
+            "read": true,
+            "write": true,
+            "passive": true
+        },
+        "SubcoolingActualValue": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "SubcoolingTargetValue": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "SystemTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "TempSwitchCompressorOutlet": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "WorkingFigureHcMonth": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "WorkingFigureHcTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "WorkingFigureHwcMonth": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "WorkingFigureHwcTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear1": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear10": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear11": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear12": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear2": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear3": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear4": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear5": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear6": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear7": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear8": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldThisYear9": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldTotal": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "clearerrorhistory": {
+            "read": false,
+            "write": true,
+            "passive": false
+        },
+        "currenterror": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "errorhistory": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "stat04": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "stat05": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "stat_unknown32": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "stat_unknown33": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "stat_unknown34": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "stat_unknown35": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "stat_unknown36": {
+            "read": true,
+            "write": false,
+            "passive": false
+        }
+    },
+    "errors": []
+}

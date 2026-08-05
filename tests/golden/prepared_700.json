@@ -1,0 +1,1257 @@
+{
+    "count": 250,
+    "sha256": "b210f78e17ffdd3c87377ea92c371c23f9f394cab0d796a0257f5365b44e46eb",
+    "flags": {
+        "AdaptHeatCurve": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "BankHolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "BankHolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ContinuosHeating": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "CylinderChargeHyst": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "CylinderChargeOffset": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Date": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "DisplayedOutsideTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "FrostOverRideTime": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1ActualFlowTempDesired": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc1AutoOffMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1CircuitType": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc1ExcessTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1FlowTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc1HeatCurve": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1HeatCurveAdaption": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc1MaxFlowTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1MinCoolingFlowTargetTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1MinFlowTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1MixerMovement": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc1PumpStatus": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1RoomTempSwitchOn": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1Status": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1SummerTempLimit": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1Unknown04": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1Unknown09": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1Unknown0A": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1Unknown0C": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc1Unknown0D": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2ActualFlowTempDesired": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc2AutoOffMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2CircuitType": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc2ExcessTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2FlowTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc2HeatCurve": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2HeatCurveAdaption": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc2MaxFlowTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2MinFlowTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2MixerMovement": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc2PumpStatus": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2RoomTempSwitchOn": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2Status": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2SummerTempLimit": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2Unknown04": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2Unknown09": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2Unknown0c": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2Unknown0d": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc2Unknown11": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3ActualFlowTempDesired": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc3AutoOffMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3CircuitType": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc3ExcessTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3FlowTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc3HeatCurve": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3HeatCurveAdaption": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc3MaxFlowTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3MinFlowTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3MixerMovement": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Hc3PumpStatus": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3RoomTempSwitchOn": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3Status": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3SummerTempLimit": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3Unknown04": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3Unknown09": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3Unknown0c": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3Unknown0d": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Hc3Unknown11": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HcStorageTempBottom": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HcStorageTempTop": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HolidayTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcBankHolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcBankHolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcFlowTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HwcHolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcHolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcLockTime": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcMaxFlowTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcOpMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcParallelLoading": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcSFMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HwcStorageTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HwcStorageTempBottom": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HwcStorageTempTop": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "HwcTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "HydraulicScheme": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Installer1": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Installer2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "KeyCodeforConfigMenu": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "MaintenanceDate": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "MaintenanceDue": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "MaxCylinderChargeTime": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "MaxRoomHumidity": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "MultiRelaySetting": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "OpMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "OpModeEffect": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "OutsideTempAvg": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PhoneNumber1": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PhoneNumber2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrEnergySum": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrEnergySumHc": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrEnergySumHcLastMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrEnergySumHcThisMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrEnergySumHwc": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrEnergySumHwcLastMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrEnergySumHwcThisMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrFuelSum": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrFuelSumHc": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrFuelSumHcLastMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrFuelSumHcThisMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrFuelSumHwc": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrFuelSumHwcLastMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PrFuelSumHwcThisMonth": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "PumpAdditionalTime": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "SFMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "SolarYieldTotal": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "StartOTCooling": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "SystemFlowTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "Time": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Unknown67": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Unknown68": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "Unknown85": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "WaterPressure": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "YieldTotal": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ccTimer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ccTimer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ccTimer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ccTimer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ccTimer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ccTimer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ccTimer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "clearerrorhistory": {
+            "read": false,
+            "write": true,
+            "passive": false
+        },
+        "currenterror": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "errorhistory": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "hwcTimer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "hwcTimer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "hwcTimer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "hwcTimer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "hwcTimer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "hwcTimer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "hwcTimer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "noiseReductionTimer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "noiseReductionTimer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "noiseReductionTimer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "noiseReductionTimer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "noiseReductionTimer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "noiseReductionTimer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "noiseReductionTimer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "tariffTimer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "tariffTimer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "tariffTimer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "tariffTimer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "tariffTimer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "tariffTimer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "tariffTimer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ventilationTimer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ventilationTimer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ventilationTimer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ventilationTimer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ventilationTimer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ventilationTimer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "ventilationTimer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1ActualRoomTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1BankHolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1BankHolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTemp2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTimer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTimer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTimer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTimer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTimer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTimer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1CoolingTimer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1DayTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1HolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1HolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1HolidayTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Name1": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Name2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1NightTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1OpMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1OpModeCooling": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1QuickVetoTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1RoomTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "z1RoomZoneMapping": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1SFMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Shortname": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Timer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Timer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Timer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Timer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Timer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Timer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Timer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z1Unknown0A00": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "z1Unknown0B00": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "z1ValveStatus": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2ActualRoomTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2BankHolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2BankHolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTemp2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTimer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTimer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTimer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTimer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTimer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTimer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2CoolingTimer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2DayTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2HolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2HolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2HolidayTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Name1": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Name2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2NightTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2OpMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2QuickVetoTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2RoomTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "z2RoomZoneMapping": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2SFMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Shortname": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Timer.Friday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Timer.Monday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Timer.Saturday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Timer.Sunday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Timer.Thursday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Timer.Tuesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2Timer.Wednesday": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z2ValveStatus": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3ActualRoomTempDesired": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3BankHolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3BankHolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3CoolingTemp2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3DayTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3HolidayEndPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3HolidayStartPeriod": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3HolidayTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3Name1": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3Name2": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3NightTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3OpMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3QuickVetoTemp": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3RoomTemp": {
+            "read": true,
+            "write": false,
+            "passive": false
+        },
+        "z3RoomZoneMapping": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3SFMode": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3Shortname": {
+            "read": true,
+            "write": true,
+            "passive": false
+        },
+        "z3ValveStatus": {
+            "read": true,
+            "write": true,
+            "passive": false
+        }
+    },
+    "errors": []
+}

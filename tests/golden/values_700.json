@@ -1,0 +1,5084 @@
+{
+    "AdaptHeatCurve": {
+        "typed": [
+            {
+                "ident": "AdaptHeatCurve",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "AdaptHeatCurve",
+                "value": "nein"
+            }
+        ]
+    },
+    "ContinuosHeating": {
+        "typed": [
+            {
+                "ident": "ContinuosHeating",
+                "value": -26
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ContinuosHeating",
+                "value": -26
+            }
+        ]
+    },
+    "CylinderChargeHyst": {
+        "typed": [
+            {
+                "ident": "CylinderChargeHyst",
+                "value": 6
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CylinderChargeHyst",
+                "value": 6
+            }
+        ]
+    },
+    "CylinderChargeOffset": {
+        "typed": [
+            {
+                "ident": "CylinderChargeOffset",
+                "value": 5
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CylinderChargeOffset",
+                "value": 5
+            }
+        ]
+    },
+    "Date": {
+        "typed": [
+            {
+                "ident": "Date",
+                "value": "05.08.2026"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Date",
+                "value": "05.08.2026"
+            }
+        ]
+    },
+    "DisplayedOutsideTemp": {
+        "typed": [
+            {
+                "ident": "DisplayedOutsideTemp",
+                "value": 27.168
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "DisplayedOutsideTemp",
+                "value": 27.168
+            }
+        ]
+    },
+    "FrostOverRideTime": {
+        "typed": [
+            {
+                "ident": "FrostOverRideTime",
+                "value": 4
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "FrostOverRideTime",
+                "value": 4
+            }
+        ]
+    },
+    "Hc1ActualFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc1ActualFlowTempDesired",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1ActualFlowTempDesired",
+                "value": 0
+            }
+        ]
+    },
+    "Hc1AutoOffMode": {
+        "typed": [
+            {
+                "ident": "Hc1AutoOffMode",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1AutoOffMode",
+                "value": "Nacht"
+            }
+        ]
+    },
+    "Hc1CircuitType": {
+        "typed": [
+            {
+                "ident": "Hc1CircuitType",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1CircuitType",
+                "value": "Heizen"
+            }
+        ]
+    },
+    "Hc1ExcessTemp": {
+        "typed": [
+            {
+                "ident": "Hc1ExcessTemp",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1ExcessTemp",
+                "value": 0
+            }
+        ]
+    },
+    "Hc1FlowTemp": {
+        "typed": [
+            {
+                "ident": "Hc1FlowTemp",
+                "value": 48.5
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1FlowTemp",
+                "value": 48.5
+            }
+        ]
+    },
+    "Hc1HeatCurve": {
+        "typed": [
+            {
+                "ident": "Hc1HeatCurve",
+                "value": 0.48
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1HeatCurve",
+                "value": 0.48
+            }
+        ]
+    },
+    "Hc1HeatCurveAdaption": {
+        "typed": [
+            {
+                "ident": "Hc1HeatCurveAdaption",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1HeatCurveAdaption",
+                "value": 0
+            }
+        ]
+    },
+    "Hc1MaxFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc1MaxFlowTempDesired",
+                "value": 50
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1MaxFlowTempDesired",
+                "value": 50
+            }
+        ]
+    },
+    "Hc1MinCoolingFlowTargetTemp": {
+        "typed": [
+            {
+                "ident": "Hc1MinCoolingFlowTargetTemp",
+                "value": 20
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1MinCoolingFlowTargetTemp",
+                "value": 20
+            }
+        ]
+    },
+    "Hc1MinFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc1MinFlowTempDesired",
+                "value": 15
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1MinFlowTempDesired",
+                "value": 15
+            }
+        ]
+    },
+    "Hc1MixerMovement": {
+        "typed": [
+            {
+                "ident": "Hc1MixerMovement",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1MixerMovement",
+                "value": 0
+            }
+        ]
+    },
+    "Hc1PumpStatus": {
+        "typed": [
+            {
+                "ident": "Hc1PumpStatus",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1PumpStatus",
+                "value": 0
+            }
+        ]
+    },
+    "Hc1RoomTempSwitchOn": {
+        "typed": [
+            {
+                "ident": "Hc1RoomTempSwitchOn",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1RoomTempSwitchOn",
+                "value": "keine"
+            }
+        ]
+    },
+    "Hc1Status": {
+        "typed": [
+            {
+                "ident": "Hc1Status",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1Status",
+                "value": 0
+            }
+        ]
+    },
+    "Hc1SummerTempLimit": {
+        "typed": [
+            {
+                "ident": "Hc1SummerTempLimit",
+                "value": 14
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc1SummerTempLimit",
+                "value": 14
+            }
+        ]
+    },
+    "Hc2ActualFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc2ActualFlowTempDesired",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2ActualFlowTempDesired",
+                "value": 0
+            }
+        ]
+    },
+    "Hc2AutoOffMode": {
+        "typed": [
+            {
+                "ident": "Hc2AutoOffMode",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2AutoOffMode",
+                "value": "Eco"
+            }
+        ]
+    },
+    "Hc2ExcessTemp": {
+        "typed": [
+            {
+                "ident": "Hc2ExcessTemp",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2ExcessTemp",
+                "value": 0
+            }
+        ]
+    },
+    "Hc2FlowTemp": {
+        "typed": [
+            {
+                "ident": "Hc2FlowTemp",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2FlowTemp",
+                "value": null
+            }
+        ]
+    },
+    "Hc2HeatCurve": {
+        "typed": [
+            {
+                "ident": "Hc2HeatCurve",
+                "value": 1.2
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2HeatCurve",
+                "value": 1.2
+            }
+        ]
+    },
+    "Hc2HeatCurveAdaption": {
+        "typed": [
+            {
+                "ident": "Hc2HeatCurveAdaption",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2HeatCurveAdaption",
+                "value": 0
+            }
+        ]
+    },
+    "Hc2MaxFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc2MaxFlowTempDesired",
+                "value": 90
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2MaxFlowTempDesired",
+                "value": 90
+            }
+        ]
+    },
+    "Hc2MinFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc2MinFlowTempDesired",
+                "value": 15
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2MinFlowTempDesired",
+                "value": 15
+            }
+        ]
+    },
+    "Hc2PumpStatus": {
+        "typed": [
+            {
+                "ident": "Hc2PumpStatus",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2PumpStatus",
+                "value": 0
+            }
+        ]
+    },
+    "Hc2RoomTempSwitchOn": {
+        "typed": [
+            {
+                "ident": "Hc2RoomTempSwitchOn",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2RoomTempSwitchOn",
+                "value": "keine"
+            }
+        ]
+    },
+    "Hc2Status": {
+        "typed": [
+            {
+                "ident": "Hc2Status",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2Status",
+                "value": 0
+            }
+        ]
+    },
+    "Hc2SummerTempLimit": {
+        "typed": [
+            {
+                "ident": "Hc2SummerTempLimit",
+                "value": 21
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc2SummerTempLimit",
+                "value": 21
+            }
+        ]
+    },
+    "Hc3ActualFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc3ActualFlowTempDesired",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3ActualFlowTempDesired",
+                "value": 0
+            }
+        ]
+    },
+    "Hc3AutoOffMode": {
+        "typed": [
+            {
+                "ident": "Hc3AutoOffMode",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3AutoOffMode",
+                "value": "Eco"
+            }
+        ]
+    },
+    "Hc3ExcessTemp": {
+        "typed": [
+            {
+                "ident": "Hc3ExcessTemp",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3ExcessTemp",
+                "value": 0
+            }
+        ]
+    },
+    "Hc3FlowTemp": {
+        "typed": [
+            {
+                "ident": "Hc3FlowTemp",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3FlowTemp",
+                "value": null
+            }
+        ]
+    },
+    "Hc3HeatCurve": {
+        "typed": [
+            {
+                "ident": "Hc3HeatCurve",
+                "value": 1.2
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3HeatCurve",
+                "value": 1.2
+            }
+        ]
+    },
+    "Hc3HeatCurveAdaption": {
+        "typed": [
+            {
+                "ident": "Hc3HeatCurveAdaption",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3HeatCurveAdaption",
+                "value": 0
+            }
+        ]
+    },
+    "Hc3MaxFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc3MaxFlowTempDesired",
+                "value": 90
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3MaxFlowTempDesired",
+                "value": 90
+            }
+        ]
+    },
+    "Hc3MinFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "Hc3MinFlowTempDesired",
+                "value": 15
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3MinFlowTempDesired",
+                "value": 15
+            }
+        ]
+    },
+    "Hc3PumpStatus": {
+        "typed": [
+            {
+                "ident": "Hc3PumpStatus",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3PumpStatus",
+                "value": 0
+            }
+        ]
+    },
+    "Hc3RoomTempSwitchOn": {
+        "typed": [
+            {
+                "ident": "Hc3RoomTempSwitchOn",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3RoomTempSwitchOn",
+                "value": "keine"
+            }
+        ]
+    },
+    "Hc3Status": {
+        "typed": [
+            {
+                "ident": "Hc3Status",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3Status",
+                "value": 0
+            }
+        ]
+    },
+    "Hc3SummerTempLimit": {
+        "typed": [
+            {
+                "ident": "Hc3SummerTempLimit",
+                "value": 21
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hc3SummerTempLimit",
+                "value": 21
+            }
+        ]
+    },
+    "HcStorageTempBottom": {
+        "typed": [
+            {
+                "ident": "HcStorageTempBottom",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HcStorageTempBottom",
+                "value": null
+            }
+        ]
+    },
+    "HcStorageTempTop": {
+        "typed": [
+            {
+                "ident": "HcStorageTempTop",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HcStorageTempTop",
+                "value": null
+            }
+        ]
+    },
+    "HolidayTemp": {
+        "typed": [
+            {
+                "ident": "HolidayTemp",
+                "value": 15
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HolidayTemp",
+                "value": 15
+            }
+        ]
+    },
+    "HwcFlowTemp": {
+        "typed": [
+            {
+                "ident": "HwcFlowTemp",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcFlowTemp",
+                "value": 0
+            }
+        ]
+    },
+    "HwcLockTime": {
+        "typed": [
+            {
+                "ident": "HwcLockTime",
+                "value": 30
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcLockTime",
+                "value": 30
+            }
+        ]
+    },
+    "HwcMaxFlowTempDesired": {
+        "typed": [
+            {
+                "ident": "HwcMaxFlowTempDesired",
+                "value": 70
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcMaxFlowTempDesired",
+                "value": 70
+            }
+        ]
+    },
+    "HwcOpMode": {
+        "typed": [
+            {
+                "ident": "HwcOpMode",
+                "value": 2
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcOpMode",
+                "value": "day"
+            }
+        ]
+    },
+    "HwcParallelLoading": {
+        "typed": [
+            {
+                "ident": "HwcParallelLoading",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcParallelLoading",
+                "value": "ein"
+            }
+        ]
+    },
+    "HwcSFMode": {
+        "typed": [
+            {
+                "ident": "HwcSFMode",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcSFMode",
+                "value": "auto"
+            }
+        ]
+    },
+    "HwcStorageTemp": {
+        "typed": [
+            {
+                "ident": "HwcStorageTemp",
+                "value": 48.5
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcStorageTemp",
+                "value": 48.5
+            }
+        ]
+    },
+    "HwcStorageTempBottom": {
+        "typed": [
+            {
+                "ident": "HwcStorageTempBottom",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcStorageTempBottom",
+                "value": null
+            }
+        ]
+    },
+    "HwcStorageTempTop": {
+        "typed": [
+            {
+                "ident": "HwcStorageTempTop",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcStorageTempTop",
+                "value": null
+            }
+        ]
+    },
+    "HwcTempDesired": {
+        "typed": [
+            {
+                "ident": "HwcTempDesired",
+                "value": 46
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HwcTempDesired",
+                "value": 46
+            }
+        ]
+    },
+    "Installer1": {
+        "typed": [
+            {
+                "ident": "Installer1",
+                "value": "Burkh."
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Installer1",
+                "value": "Burkh."
+            }
+        ]
+    },
+    "Installer2": {
+        "typed": [
+            {
+                "ident": "Installer2",
+                "value": "Maas  "
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Installer2",
+                "value": "Maas  "
+            }
+        ]
+    },
+    "MaintenanceDate": {
+        "typed": [
+            {
+                "ident": "MaintenanceDate",
+                "value": "01.09.2026"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "MaintenanceDate",
+                "value": "01.09.2026"
+            }
+        ]
+    },
+    "MaintenanceDue": {
+        "typed": [
+            {
+                "ident": "MaintenanceDue",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "MaintenanceDue",
+                "value": "nein"
+            }
+        ]
+    },
+    "MaxCylinderChargeTime": {
+        "typed": [
+            {
+                "ident": "MaxCylinderChargeTime",
+                "value": 120
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "MaxCylinderChargeTime",
+                "value": 120
+            }
+        ]
+    },
+    "MaxRoomHumidity": {
+        "typed": [
+            {
+                "ident": "MaxRoomHumidity",
+                "value": 40
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "MaxRoomHumidity",
+                "value": 40
+            }
+        ]
+    },
+    "OpMode": {
+        "typed": [
+            {
+                "ident": "OpMode",
+                "value": 2
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "OpMode",
+                "value": "day"
+            }
+        ]
+    },
+    "OpModeEffect": {
+        "typed": [
+            {
+                "ident": "OpModeEffect",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "OpModeEffect",
+                "value": "1"
+            }
+        ]
+    },
+    "OutsideTempAvg": {
+        "typed": [
+            {
+                "ident": "OutsideTempAvg",
+                "value": 25.3125
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "OutsideTempAvg",
+                "value": 25.3125
+            }
+        ]
+    },
+    "PhoneNumber1": {
+        "typed": [
+            {
+                "ident": "PhoneNumber1",
+                "value": "015165"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PhoneNumber1",
+                "value": "015165"
+            }
+        ]
+    },
+    "PhoneNumber2": {
+        "typed": [
+            {
+                "ident": "PhoneNumber2",
+                "value": "109998"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PhoneNumber2",
+                "value": "109998"
+            }
+        ]
+    },
+    "PrEnergySum": {
+        "typed": [
+            {
+                "ident": "PrEnergySum",
+                "value": 26919
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrEnergySum",
+                "value": 26919
+            }
+        ]
+    },
+    "PrEnergySumHc": {
+        "typed": [
+            {
+                "ident": "PrEnergySumHc",
+                "value": 24309
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrEnergySumHc",
+                "value": 24309
+            }
+        ]
+    },
+    "PrEnergySumHcLastMonth": {
+        "typed": [
+            {
+                "ident": "PrEnergySumHcLastMonth",
+                "value": 9
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrEnergySumHcLastMonth",
+                "value": 9
+            }
+        ]
+    },
+    "PrEnergySumHcThisMonth": {
+        "typed": [
+            {
+                "ident": "PrEnergySumHcThisMonth",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrEnergySumHcThisMonth",
+                "value": 0
+            }
+        ]
+    },
+    "PrEnergySumHwc": {
+        "typed": [
+            {
+                "ident": "PrEnergySumHwc",
+                "value": 2512
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrEnergySumHwc",
+                "value": 2512
+            }
+        ]
+    },
+    "PrEnergySumHwcLastMonth": {
+        "typed": [
+            {
+                "ident": "PrEnergySumHwcLastMonth",
+                "value": 41
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrEnergySumHwcLastMonth",
+                "value": 41
+            }
+        ]
+    },
+    "PrEnergySumHwcThisMonth": {
+        "typed": [
+            {
+                "ident": "PrEnergySumHwcThisMonth",
+                "value": 3
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrEnergySumHwcThisMonth",
+                "value": 3
+            }
+        ]
+    },
+    "PrFuelSumHc": {
+        "typed": [
+            {
+                "ident": "PrFuelSumHc",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrFuelSumHc",
+                "value": 0
+            }
+        ]
+    },
+    "PrFuelSumHwc": {
+        "typed": [
+            {
+                "ident": "PrFuelSumHwc",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrFuelSumHwc",
+                "value": 0
+            }
+        ]
+    },
+    "PumpAdditionalTime": {
+        "typed": [
+            {
+                "ident": "PumpAdditionalTime",
+                "value": 5
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PumpAdditionalTime",
+                "value": 5
+            }
+        ]
+    },
+    "SFMode": {
+        "typed": [
+            {
+                "ident": "SFMode",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "SFMode",
+                "value": "auto"
+            }
+        ]
+    },
+    "SolarYieldTotal": {
+        "typed": [
+            {
+                "ident": "SolarYieldTotal",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "SolarYieldTotal",
+                "value": 0
+            }
+        ]
+    },
+    "StartOTCooling": {
+        "typed": [
+            {
+                "ident": "StartOTCooling",
+                "value": 14
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "StartOTCooling",
+                "value": 14
+            }
+        ]
+    },
+    "SystemFlowTemp": {
+        "typed": [
+            {
+                "ident": "SystemFlowTemp",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "SystemFlowTemp",
+                "value": null
+            }
+        ]
+    },
+    "Time": {
+        "typed": [
+            {
+                "ident": "Time",
+                "value": "15:06:39"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Time",
+                "value": "15:06:39"
+            }
+        ]
+    },
+    "WaterPressure": {
+        "typed": [
+            {
+                "ident": "WaterPressure",
+                "value": 1.4
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "WaterPressure",
+                "value": 1.4
+            }
+        ]
+    },
+    "YieldTotal": {
+        "typed": [
+            {
+                "ident": "YieldTotal",
+                "value": 93324
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "YieldTotal",
+                "value": 93324
+            }
+        ]
+    },
+    "ccTimer.Friday": {
+        "typed": [
+            {
+                "ident": "ccTimer_Friday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ccTimer_Friday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Friday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "ccTimer.Monday": {
+        "typed": [
+            {
+                "ident": "ccTimer_Monday_1",
+                "value": "07:00"
+            },
+            {
+                "ident": "ccTimer_Monday_2",
+                "value": "08:00"
+            },
+            {
+                "ident": "ccTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ccTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ccTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ccTimer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ccTimer_Monday_1",
+                "value": "07:00"
+            },
+            {
+                "ident": "ccTimer_Monday_2",
+                "value": "08:00"
+            },
+            {
+                "ident": "ccTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ccTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ccTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ccTimer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "ccTimer.Saturday": {
+        "typed": [
+            {
+                "ident": "ccTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ccTimer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "ccTimer_Saturday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Saturday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Saturday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Saturday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ccTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ccTimer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "ccTimer_Saturday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Saturday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Saturday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Saturday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "ccTimer.Sunday": {
+        "typed": [
+            {
+                "ident": "ccTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ccTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ccTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ccTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Sunday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "ccTimer.Thursday": {
+        "typed": [
+            {
+                "ident": "ccTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ccTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Thursday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "ccTimer.Tuesday": {
+        "typed": [
+            {
+                "ident": "ccTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ccTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Tuesday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "ccTimer.Wednesday": {
+        "typed": [
+            {
+                "ident": "ccTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ccTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ccTimer_Wednesday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "hwcTimer.Friday": {
+        "typed": [
+            {
+                "ident": "hwcTimer_Friday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_2",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Friday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "hwcTimer_Friday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_2",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Friday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Friday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "hwcTimer.Monday": {
+        "typed": [
+            {
+                "ident": "hwcTimer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "hwcTimer_Monday_2",
+                "value": "07:00"
+            },
+            {
+                "ident": "hwcTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "hwcTimer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "hwcTimer_Monday_2",
+                "value": "07:00"
+            },
+            {
+                "ident": "hwcTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "hwcTimer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "hwcTimer.Saturday": {
+        "typed": [
+            {
+                "ident": "hwcTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "hwcTimer_Saturday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "hwcTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "hwcTimer_Saturday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Saturday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "hwcTimer.Sunday": {
+        "typed": [
+            {
+                "ident": "hwcTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "hwcTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "hwcTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "hwcTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Sunday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "hwcTimer.Thursday": {
+        "typed": [
+            {
+                "ident": "hwcTimer_Thursday_1",
+                "value": "06:30"
+            },
+            {
+                "ident": "hwcTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "hwcTimer_Thursday_1",
+                "value": "06:30"
+            },
+            {
+                "ident": "hwcTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Thursday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "hwcTimer.Tuesday": {
+        "typed": [
+            {
+                "ident": "hwcTimer_Tuesday_1",
+                "value": "06:30"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "hwcTimer_Tuesday_1",
+                "value": "06:30"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Tuesday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "hwcTimer.Wednesday": {
+        "typed": [
+            {
+                "ident": "hwcTimer_Wednesday_1",
+                "value": "06:30"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "hwcTimer_Wednesday_1",
+                "value": "06:30"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "hwcTimer_Wednesday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "noiseReductionTimer.Friday": {
+        "typed": [
+            {
+                "ident": "noiseReductionTimer_Friday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "noiseReductionTimer_Friday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Friday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "noiseReductionTimer.Monday": {
+        "typed": [
+            {
+                "ident": "noiseReductionTimer_Monday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "noiseReductionTimer_Monday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "noiseReductionTimer.Saturday": {
+        "typed": [
+            {
+                "ident": "noiseReductionTimer_Saturday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "noiseReductionTimer_Saturday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "noiseReductionTimer.Sunday": {
+        "typed": [
+            {
+                "ident": "noiseReductionTimer_Sunday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "noiseReductionTimer_Sunday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "noiseReductionTimer.Thursday": {
+        "typed": [
+            {
+                "ident": "noiseReductionTimer_Thursday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "noiseReductionTimer_Thursday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "noiseReductionTimer.Tuesday": {
+        "typed": [
+            {
+                "ident": "noiseReductionTimer_Tuesday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "noiseReductionTimer_Tuesday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "noiseReductionTimer.Wednesday": {
+        "typed": [
+            {
+                "ident": "noiseReductionTimer_Wednesday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "noiseReductionTimer_Wednesday_1",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_2",
+                "value": "00:00"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "noiseReductionTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "tariffTimer.Friday": {
+        "typed": [
+            {
+                "ident": "tariffTimer_Friday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Friday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Friday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "tariffTimer_Friday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Friday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Friday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "tariffTimer.Monday": {
+        "typed": [
+            {
+                "ident": "tariffTimer_Monday_1",
+                "value": "05:00"
+            },
+            {
+                "ident": "tariffTimer_Monday_2",
+                "value": "06:00"
+            },
+            {
+                "ident": "tariffTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "tariffTimer_Monday_1",
+                "value": "05:00"
+            },
+            {
+                "ident": "tariffTimer_Monday_2",
+                "value": "06:00"
+            },
+            {
+                "ident": "tariffTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "tariffTimer.Saturday": {
+        "typed": [
+            {
+                "ident": "tariffTimer_Saturday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Saturday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "tariffTimer_Saturday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Saturday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "tariffTimer.Sunday": {
+        "typed": [
+            {
+                "ident": "tariffTimer_Sunday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Sunday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "tariffTimer_Sunday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Sunday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "tariffTimer.Thursday": {
+        "typed": [
+            {
+                "ident": "tariffTimer_Thursday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Thursday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "tariffTimer_Thursday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Thursday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "tariffTimer.Tuesday": {
+        "typed": [
+            {
+                "ident": "tariffTimer_Tuesday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "tariffTimer_Tuesday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "tariffTimer.Wednesday": {
+        "typed": [
+            {
+                "ident": "tariffTimer_Wednesday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "tariffTimer_Wednesday_1",
+                "value": "11:00"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_2",
+                "value": "13:00"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "tariffTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "ventilationTimer.Friday": {
+        "typed": [
+            {
+                "ident": "ventilationTimer_Friday_1",
+                "value": "06:10"
+            },
+            {
+                "ident": "ventilationTimer_Friday_2",
+                "value": "23:10"
+            },
+            {
+                "ident": "ventilationTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Friday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ventilationTimer_Friday_1",
+                "value": "06:10"
+            },
+            {
+                "ident": "ventilationTimer_Friday_2",
+                "value": "23:10"
+            },
+            {
+                "ident": "ventilationTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Friday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "ventilationTimer.Monday": {
+        "typed": [
+            {
+                "ident": "ventilationTimer_Monday_1",
+                "value": "03:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_2",
+                "value": "04:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_6",
+                "value": "00:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ventilationTimer_Monday_1",
+                "value": "03:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_2",
+                "value": "04:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_3",
+                "value": "00:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_4",
+                "value": "00:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_5",
+                "value": "00:00"
+            },
+            {
+                "ident": "ventilationTimer_Monday_6",
+                "value": "00:00"
+            }
+        ]
+    },
+    "ventilationTimer.Saturday": {
+        "typed": [
+            {
+                "ident": "ventilationTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ventilationTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "ventilationTimer.Sunday": {
+        "typed": [
+            {
+                "ident": "ventilationTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ventilationTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "ventilationTimer.Thursday": {
+        "typed": [
+            {
+                "ident": "ventilationTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ventilationTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "ventilationTimer.Tuesday": {
+        "typed": [
+            {
+                "ident": "ventilationTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ventilationTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "ventilationTimer.Wednesday": {
+        "typed": [
+            {
+                "ident": "ventilationTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ventilationTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "ventilationTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1ActualRoomTempDesired": {
+        "typed": [
+            {
+                "ident": "z1ActualRoomTempDesired",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1ActualRoomTempDesired",
+                "value": 0
+            }
+        ]
+    },
+    "z1CoolingTemp": {
+        "typed": [
+            {
+                "ident": "z1CoolingTemp",
+                "value": 20
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTemp",
+                "value": 20
+            }
+        ]
+    },
+    "z1CoolingTemp2": {
+        "typed": [
+            {
+                "ident": "z1CoolingTemp2",
+                "value": 99
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTemp2",
+                "value": 99
+            }
+        ]
+    },
+    "z1CoolingTimer.Friday": {
+        "typed": [
+            {
+                "ident": "z1CoolingTimer_Friday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTimer_Friday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Friday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1CoolingTimer.Monday": {
+        "typed": [
+            {
+                "ident": "z1CoolingTimer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTimer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1CoolingTimer.Saturday": {
+        "typed": [
+            {
+                "ident": "z1CoolingTimer_Saturday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTimer_Saturday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1CoolingTimer.Sunday": {
+        "typed": [
+            {
+                "ident": "z1CoolingTimer_Sunday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTimer_Sunday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1CoolingTimer.Thursday": {
+        "typed": [
+            {
+                "ident": "z1CoolingTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1CoolingTimer.Tuesday": {
+        "typed": [
+            {
+                "ident": "z1CoolingTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1CoolingTimer.Wednesday": {
+        "typed": [
+            {
+                "ident": "z1CoolingTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1CoolingTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_2",
+                "value": "21:30"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1CoolingTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1DayTemp": {
+        "typed": [
+            {
+                "ident": "z1DayTemp",
+                "value": 21
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1DayTemp",
+                "value": 21
+            }
+        ]
+    },
+    "z1HolidayTemp": {
+        "typed": [
+            {
+                "ident": "z1HolidayTemp",
+                "value": 15
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1HolidayTemp",
+                "value": 15
+            }
+        ]
+    },
+    "z1NightTemp": {
+        "typed": [
+            {
+                "ident": "z1NightTemp",
+                "value": 19
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1NightTemp",
+                "value": 19
+            }
+        ]
+    },
+    "z1OpMode": {
+        "typed": [
+            {
+                "ident": "z1OpMode",
+                "value": 2
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1OpMode",
+                "value": "day"
+            }
+        ]
+    },
+    "z1OpModeCooling": {
+        "typed": [
+            {
+                "ident": "z1OpModeCooling",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1OpModeCooling",
+                "value": "off"
+            }
+        ]
+    },
+    "z1QuickVetoTemp": {
+        "typed": [
+            {
+                "ident": "z1QuickVetoTemp",
+                "value": 24
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1QuickVetoTemp",
+                "value": 24
+            }
+        ]
+    },
+    "z1RoomTemp": {
+        "typed": [
+            {
+                "ident": "z1RoomTemp",
+                "value": 32.375
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1RoomTemp",
+                "value": 32.375
+            }
+        ]
+    },
+    "z1SFMode": {
+        "typed": [
+            {
+                "ident": "z1SFMode",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1SFMode",
+                "value": "auto"
+            }
+        ]
+    },
+    "z1Timer.Friday": {
+        "typed": [
+            {
+                "ident": "z1Timer_Friday_1",
+                "value": "06:10"
+            },
+            {
+                "ident": "z1Timer_Friday_2",
+                "value": "23:10"
+            },
+            {
+                "ident": "z1Timer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Friday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1Timer_Friday_1",
+                "value": "06:10"
+            },
+            {
+                "ident": "z1Timer_Friday_2",
+                "value": "23:10"
+            },
+            {
+                "ident": "z1Timer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Friday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1Timer.Monday": {
+        "typed": [
+            {
+                "ident": "z1Timer_Monday_1",
+                "value": "08:00"
+            },
+            {
+                "ident": "z1Timer_Monday_2",
+                "value": "09:00"
+            },
+            {
+                "ident": "z1Timer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1Timer_Monday_1",
+                "value": "08:00"
+            },
+            {
+                "ident": "z1Timer_Monday_2",
+                "value": "09:00"
+            },
+            {
+                "ident": "z1Timer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z1Timer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z1Timer.Saturday": {
+        "typed": [
+            {
+                "ident": "z1Timer_Saturday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_6",
+                "value": "06:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1Timer_Saturday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Saturday_6",
+                "value": "06:00"
+            }
+        ]
+    },
+    "z1Timer.Sunday": {
+        "typed": [
+            {
+                "ident": "z1Timer_Sunday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_6",
+                "value": "06:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1Timer_Sunday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Sunday_6",
+                "value": "06:00"
+            }
+        ]
+    },
+    "z1Timer.Thursday": {
+        "typed": [
+            {
+                "ident": "z1Timer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_6",
+                "value": "06:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1Timer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Thursday_6",
+                "value": "06:00"
+            }
+        ]
+    },
+    "z1Timer.Tuesday": {
+        "typed": [
+            {
+                "ident": "z1Timer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_6",
+                "value": "06:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1Timer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Tuesday_6",
+                "value": "06:00"
+            }
+        ]
+    },
+    "z1Timer.Wednesday": {
+        "typed": [
+            {
+                "ident": "z1Timer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_6",
+                "value": "06:00"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1Timer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_2",
+                "value": "23:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_3",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_4",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_5",
+                "value": "06:00"
+            },
+            {
+                "ident": "z1Timer_Wednesday_6",
+                "value": "06:00"
+            }
+        ]
+    },
+    "z1ValveStatus": {
+        "typed": [
+            {
+                "ident": "z1ValveStatus",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z1ValveStatus",
+                "value": 0
+            }
+        ]
+    },
+    "z2ActualRoomTempDesired": {
+        "typed": [
+            {
+                "ident": "z2ActualRoomTempDesired",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2ActualRoomTempDesired",
+                "value": 0
+            }
+        ]
+    },
+    "z2CoolingTemp": {
+        "typed": [
+            {
+                "ident": "z2CoolingTemp",
+                "value": 24
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTemp",
+                "value": 24
+            }
+        ]
+    },
+    "z2CoolingTemp2": {
+        "typed": [
+            {
+                "ident": "z2CoolingTemp2",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTemp2",
+                "value": 0
+            }
+        ]
+    },
+    "z2CoolingTimer.Friday": {
+        "typed": [
+            {
+                "ident": "z2CoolingTimer_Friday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTimer_Friday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Friday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2CoolingTimer.Monday": {
+        "typed": [
+            {
+                "ident": "z2CoolingTimer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTimer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2CoolingTimer.Saturday": {
+        "typed": [
+            {
+                "ident": "z2CoolingTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTimer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Saturday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2CoolingTimer.Sunday": {
+        "typed": [
+            {
+                "ident": "z2CoolingTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTimer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Sunday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2CoolingTimer.Thursday": {
+        "typed": [
+            {
+                "ident": "z2CoolingTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTimer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Thursday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2CoolingTimer.Tuesday": {
+        "typed": [
+            {
+                "ident": "z2CoolingTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTimer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Tuesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2CoolingTimer.Wednesday": {
+        "typed": [
+            {
+                "ident": "z2CoolingTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2CoolingTimer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2CoolingTimer_Wednesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2DayTemp": {
+        "typed": [
+            {
+                "ident": "z2DayTemp",
+                "value": 20
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2DayTemp",
+                "value": 20
+            }
+        ]
+    },
+    "z2HolidayTemp": {
+        "typed": [
+            {
+                "ident": "z2HolidayTemp",
+                "value": 15
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2HolidayTemp",
+                "value": 15
+            }
+        ]
+    },
+    "z2NightTemp": {
+        "typed": [
+            {
+                "ident": "z2NightTemp",
+                "value": 30
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2NightTemp",
+                "value": 30
+            }
+        ]
+    },
+    "z2OpMode": {
+        "typed": [
+            {
+                "ident": "z2OpMode",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2OpMode",
+                "value": "auto"
+            }
+        ]
+    },
+    "z2QuickVetoTemp": {
+        "typed": [
+            {
+                "ident": "z2QuickVetoTemp",
+                "value": 24
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2QuickVetoTemp",
+                "value": 24
+            }
+        ]
+    },
+    "z2RoomTemp": {
+        "typed": [
+            {
+                "ident": "z2RoomTemp",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2RoomTemp",
+                "value": null
+            }
+        ]
+    },
+    "z2SFMode": {
+        "typed": [
+            {
+                "ident": "z2SFMode",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2SFMode",
+                "value": "auto"
+            }
+        ]
+    },
+    "z2Timer.Friday": {
+        "typed": [
+            {
+                "ident": "z2Timer_Friday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Friday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Friday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2Timer_Friday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Friday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Friday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Friday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Friday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Friday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2Timer.Monday": {
+        "typed": [
+            {
+                "ident": "z2Timer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Monday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Monday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2Timer_Monday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Monday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Monday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Monday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Monday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Monday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2Timer.Saturday": {
+        "typed": [
+            {
+                "ident": "z2Timer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2Timer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "z2Timer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Saturday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2Timer_Saturday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2Timer_Saturday_2",
+                "value": "23:30"
+            },
+            {
+                "ident": "z2Timer_Saturday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Saturday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Saturday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Saturday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2Timer.Sunday": {
+        "typed": [
+            {
+                "ident": "z2Timer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2Timer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Sunday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2Timer_Sunday_1",
+                "value": "07:30"
+            },
+            {
+                "ident": "z2Timer_Sunday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Sunday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Sunday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Sunday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Sunday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2Timer.Thursday": {
+        "typed": [
+            {
+                "ident": "z2Timer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Thursday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2Timer_Thursday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Thursday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Thursday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Thursday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Thursday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Thursday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2Timer.Tuesday": {
+        "typed": [
+            {
+                "ident": "z2Timer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Tuesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2Timer_Tuesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Tuesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Tuesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Tuesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Tuesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Tuesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2Timer.Wednesday": {
+        "typed": [
+            {
+                "ident": "z2Timer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Wednesday_6",
+                "value": "-:-"
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2Timer_Wednesday_1",
+                "value": "06:00"
+            },
+            {
+                "ident": "z2Timer_Wednesday_2",
+                "value": "22:00"
+            },
+            {
+                "ident": "z2Timer_Wednesday_3",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Wednesday_4",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Wednesday_5",
+                "value": "-:-"
+            },
+            {
+                "ident": "z2Timer_Wednesday_6",
+                "value": "-:-"
+            }
+        ]
+    },
+    "z2ValveStatus": {
+        "typed": [
+            {
+                "ident": "z2ValveStatus",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z2ValveStatus",
+                "value": 0
+            }
+        ]
+    },
+    "z3ActualRoomTempDesired": {
+        "typed": [
+            {
+                "ident": "z3ActualRoomTempDesired",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3ActualRoomTempDesired",
+                "value": 0
+            }
+        ]
+    },
+    "z3CoolingTemp2": {
+        "typed": [
+            {
+                "ident": "z3CoolingTemp2",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3CoolingTemp2",
+                "value": 0
+            }
+        ]
+    },
+    "z3DayTemp": {
+        "typed": [
+            {
+                "ident": "z3DayTemp",
+                "value": 20
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3DayTemp",
+                "value": 20
+            }
+        ]
+    },
+    "z3HolidayTemp": {
+        "typed": [
+            {
+                "ident": "z3HolidayTemp",
+                "value": 15
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3HolidayTemp",
+                "value": 15
+            }
+        ]
+    },
+    "z3NightTemp": {
+        "typed": [
+            {
+                "ident": "z3NightTemp",
+                "value": 30
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3NightTemp",
+                "value": 30
+            }
+        ]
+    },
+    "z3OpMode": {
+        "typed": [
+            {
+                "ident": "z3OpMode",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3OpMode",
+                "value": "auto"
+            }
+        ]
+    },
+    "z3QuickVetoTemp": {
+        "typed": [
+            {
+                "ident": "z3QuickVetoTemp",
+                "value": 24
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3QuickVetoTemp",
+                "value": 24
+            }
+        ]
+    },
+    "z3RoomTemp": {
+        "typed": [
+            {
+                "ident": "z3RoomTemp",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3RoomTemp",
+                "value": null
+            }
+        ]
+    },
+    "z3SFMode": {
+        "typed": [
+            {
+                "ident": "z3SFMode",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3SFMode",
+                "value": "auto"
+            }
+        ]
+    },
+    "z3ValveStatus": {
+        "typed": [
+            {
+                "ident": "z3ValveStatus",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "z3ValveStatus",
+                "value": 0
+            }
+        ]
+    }
+}

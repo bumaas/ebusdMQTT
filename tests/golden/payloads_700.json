@@ -1,0 +1,874 @@
+{
+    "AdaptHeatCurve": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "BankHolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "BankHolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ContinuosHeating": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "CylinderChargeHyst": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "CylinderChargeOffset": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Date": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "FrostOverRideTime": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc1AutoOffMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc1ExcessTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1HeatCurve": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1MaxFlowTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1MinCoolingFlowTargetTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1MinFlowTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1PumpStatus": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc1RoomTempSwitchOn": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc1Status": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc1SummerTempLimit": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1Unknown04": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1Unknown09": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1Unknown0A": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1Unknown0C": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc1Unknown0D": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2AutoOffMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc2ExcessTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2HeatCurve": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2MaxFlowTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2MinFlowTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2PumpStatus": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc2RoomTempSwitchOn": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc2Status": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc2SummerTempLimit": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2Unknown04": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2Unknown09": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2Unknown0c": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2Unknown0d": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc2Unknown11": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3AutoOffMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc3ExcessTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3HeatCurve": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3MaxFlowTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3MinFlowTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3PumpStatus": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc3RoomTempSwitchOn": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc3Status": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Hc3SummerTempLimit": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3Unknown04": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3Unknown09": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3Unknown0c": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3Unknown0d": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Hc3Unknown11": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "HolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "HolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "HolidayTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "HwcBankHolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "HwcBankHolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "HwcHolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "HwcHolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "HwcLockTime": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "HwcMaxFlowTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "HwcOpMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "HwcParallelLoading": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "HwcSFMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "HwcTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "HydraulicScheme": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "Installer1": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "Installer2": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "KeyCodeforConfigMenu": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "MaintenanceDate": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "MaxCylinderChargeTime": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "MaxRoomHumidity": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "MultiRelaySetting": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "OpMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "OpModeEffect": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "OutsideTempAvg": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "PhoneNumber1": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "PhoneNumber2": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "PrEnergySum": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrEnergySumHc": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrEnergySumHcLastMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrEnergySumHcThisMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrEnergySumHwc": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrEnergySumHwcLastMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrEnergySumHwcThisMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrFuelSum": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrFuelSumHc": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrFuelSumHcLastMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrFuelSumHcThisMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrFuelSumHwc": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrFuelSumHwcLastMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PrFuelSumHwcThisMonth": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "PumpAdditionalTime": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "SFMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "SolarYieldTotal": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "StartOTCooling": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Time": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "Unknown67": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Unknown68": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "Unknown85": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "YieldTotal": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "ccTimer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ccTimer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ccTimer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ccTimer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ccTimer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ccTimer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ccTimer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "clearerrorhistory": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "hwcTimer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "hwcTimer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "hwcTimer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "hwcTimer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "hwcTimer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "hwcTimer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "hwcTimer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "noiseReductionTimer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "noiseReductionTimer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "noiseReductionTimer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "noiseReductionTimer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "noiseReductionTimer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "noiseReductionTimer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "noiseReductionTimer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "tariffTimer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "tariffTimer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "tariffTimer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "tariffTimer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "tariffTimer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "tariffTimer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "tariffTimer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ventilationTimer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ventilationTimer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ventilationTimer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ventilationTimer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ventilationTimer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ventilationTimer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "ventilationTimer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1ActualRoomTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z1BankHolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1BankHolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1CoolingTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z1CoolingTemp2": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z1CoolingTimer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1CoolingTimer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1CoolingTimer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1CoolingTimer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1CoolingTimer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1CoolingTimer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1CoolingTimer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1DayTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z1HolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1HolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1HolidayTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z1Name1": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Name2": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1NightTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z1OpMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z1OpModeCooling": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z1QuickVetoTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z1RoomZoneMapping": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z1SFMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z1Shortname": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Timer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Timer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Timer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Timer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Timer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Timer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1Timer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z1ValveStatus": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z2ActualRoomTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z2BankHolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2BankHolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2CoolingTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z2CoolingTemp2": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z2CoolingTimer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2CoolingTimer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2CoolingTimer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2CoolingTimer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2CoolingTimer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2CoolingTimer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2CoolingTimer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2DayTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z2HolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2HolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2HolidayTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z2Name1": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Name2": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2NightTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z2OpMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z2QuickVetoTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z2RoomZoneMapping": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z2SFMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z2Shortname": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Timer.Friday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Timer.Monday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Timer.Saturday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Timer.Sunday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Timer.Thursday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Timer.Tuesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2Timer.Wednesday": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z2ValveStatus": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z3ActualRoomTempDesired": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z3BankHolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z3BankHolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z3CoolingTemp2": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z3DayTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z3HolidayEndPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z3HolidayStartPeriod": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z3HolidayTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z3Name1": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z3Name2": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z3NightTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z3OpMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z3QuickVetoTemp": {
+        "sample": 21.5,
+        "payload": "21.500"
+    },
+    "z3RoomZoneMapping": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z3SFMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "z3Shortname": {
+        "sample": "sample",
+        "payload": "sample"
+    },
+    "z3ValveStatus": {
+        "sample": 21,
+        "payload": "21"
+    }
+}

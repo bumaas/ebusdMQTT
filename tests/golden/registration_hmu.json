@@ -1,0 +1,2939 @@
+{
+    "AirInletTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "AirInletTemp",
+                "Lufteinlasstemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "AirInletTempSens": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "AirInletTempSens",
+                "Lufteinlasstemp.",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "BuildingCircuitPumpPower": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "BuildingCircuitPumpPower",
+                "Gebäudekreispumpe Leistung",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "​%",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "BuildingPumpHours": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "BuildingPumpHours",
+                "Gebäudepumpe Stunden",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "BuildingPumpStarts": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "BuildingPumpStarts",
+                "Gebäudepumpe Starts",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CircuitBuildingFlowRate": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CircuitBuildingFlowRate",
+                "Gebäudekreis Durchfluss",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " l/h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CircuitBuildingWaterPressure": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CircuitBuildingWaterPressure",
+                "Gebäudekreis Druck",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " bar",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CompressorHours": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CompressorHours",
+                "Kompressor Stunden",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CompressorInletTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CompressorInletTemp",
+                "Kompressoreinlasstemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CompressorOutletTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CompressorOutletTemp",
+                "Kompressorauslasstemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CompressorSpeed": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CompressorSpeed",
+                "Kompressor Drehzahl",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " U/s",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CompressorStarts": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CompressorStarts",
+                "Kompressor Starts",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CondensateTrayHeater": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CondensateTrayHeater",
+                "Kondensatwannenheizung",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"aus\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"an\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CondensationTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CondensationTemp",
+                "Kondensationstemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CondenserOutletTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CondenserOutletTemp",
+                "Temperatur Kondensatorauslass",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear1": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear1_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear1_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear10": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear10_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear10_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear11": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear11_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear11_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear12": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear12_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear12_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear2": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear2_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear2_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear3": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear3_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear3_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear4": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear4_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear4_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear5": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear5_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear5_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear6": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear6_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear6_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear7": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear7_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear7_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear8": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear8_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear8_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionThisYear9": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear9_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "ConsumptionThisYear9_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ConsumptionTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "ConsumptionTotal",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CurrentCompressorUtil": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CurrentCompressorUtil",
+                "Modulation Kompressor",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "​%",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CurrentConsumedPower": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CurrentConsumedPower",
+                "elektrische Leistungsaufnahme",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kW",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CurrentYieldPower": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CurrentYieldPower",
+                "Kälteleistung",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kW",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "CylinderTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "CylinderTemp",
+                "Speichertemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "DCFStatus": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "DCFStatus",
+                "DCF Status",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "DateTime": {
+        "created": 4,
+        "events": [
+            [
+                "MaintainVariable",
+                "DateTime_0",
+                "DCF Empfängerstatus",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"nosignal\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"ok\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"sync\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"valid\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "DateTime_1",
+                "Uhrzeit",
+                3,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "DateTime_2",
+                "Datum",
+                3,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "DateTime_3",
+                "Temperatur (temp2)",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 2
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EEVOutletTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EEVOutletTemp",
+                "EEV Auslass Tempperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EEVSteps": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EEVSteps",
+                "EEV Schritte",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyConsumptionTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyConsumptionTotal",
+                "Energieverbrauch gesamt",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyIntegral": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyIntegral",
+                "Energie Integral",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °min",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldCoolDay": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldCoolDay",
+                "Energieertrag Tag Kühlen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldCoolMonth": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldCoolMonth",
+                "Energieertrag Monat Kühlen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldCoolTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldCoolTotal",
+                "Energieertrag gesamt Kühlen",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldHcDay": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldHcDay",
+                "Energieertrag Tag Heizen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldHcMonth": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldHcMonth",
+                "Energieertrag Monat Heizen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldHwTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldHwTotal",
+                "Energieertrag gesamt Heizen",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldHwcDay": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldHwcDay",
+                "Energieertrag Tag WW",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldHwcMonth": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldHwcMonth",
+                "Energieertrag Monat WW",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EnergyYieldHwcTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EnergyYieldHwcTotal",
+                "Energieertrag gesamt Warmwasser",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "EvaporationTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "EvaporationTemp",
+                "Verdampfungstemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "F1e": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "F1e",
+                "F1e",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 2
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "F1f": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "F1f",
+                "F1f Vorlaufsoll ??",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "F20": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "F20",
+                "F20 aktuelle Vorlauftemp. ??",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "F3c": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "F3c",
+                "F3c Gebäudekreis Durchluss??",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "F3d": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "F3d",
+                "F3d",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 2
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Fan1": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "Fan1",
+                "Lüfter 1",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "​%",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Fan1Hours": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "Fan1Hours",
+                "Betr.std.Lüfter 1",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Fan1Starts": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "Fan1Starts",
+                "Starts Lüfter 1",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "FlowTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "FlowTemp",
+                "Vorlauftemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "FlowTempImmersionHeater": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "FlowTempImmersionHeater",
+                "Vorlauftemperatur Heizstab",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "FourPortValve": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "FourPortValve",
+                "Vierwegeventil",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"aus\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"an\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "FourWayValveHours": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "FourWayValveHours",
+                "4-Wege-V. Std.",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "FourWayValveSwitchingOperations": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "FourWayValveSwitchingOperations",
+                "4-Wege Schaltv.",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "HeatingCoilCompressor": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "HeatingCoilCompressor",
+                "Heizwendel Kompressor",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"aus\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"an\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "HighPressure": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "HighPressure",
+                "Hochdruck",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " bar",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "HighPressureSwitch": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "HighPressureSwitch",
+                "Hochdruckschalter",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"offen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"geschlossen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Hours": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "Hours",
+                "Betriebsstd. Gesamt",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "HoursCool": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "HoursCool",
+                "Betriebsstd. Kühlen",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "HoursHc": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "HoursHc",
+                "Betriebsstd. Heizen",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " h",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ImmersionHeaterSafetyCutOut": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "ImmersionHeaterSafetyCutOut",
+                "STB Heizstab",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"geschlossen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"offen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "LockoutContactS20": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "LockoutContactS20",
+                "Sperrkontakt S20",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"geschlossen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"offen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "LockoutContactS21": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "LockoutContactS21",
+                "Sperrkontakt S21",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"geschlossen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"offen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "LowPressure": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "LowPressure",
+                "Niederdruck",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " bar",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "MA1Output": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "MA1Output",
+                "MA1 Ausgang",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"aus\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"an\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "MIInput": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "MIInput",
+                "ME Eingang",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "MO2Output": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "MO2Output",
+                "MA2 Ausgang",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"aus\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"an\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "MO3Output": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "MO3Output",
+                "MA3 Ausgang",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"aus\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"an\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "OutdoorTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "OutdoorTemp",
+                "Außentemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "OverheatingActualValue": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "OverheatingActualValue",
+                "Istwert Überhitzung",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " K",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "OverheatingTargetValue": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "OverheatingTargetValue",
+                "Sollwert Überhitzung",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " K",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "PositionEEV": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "PositionEEV",
+                "Position EEV",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "​%",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "PrioritySwitchingValve": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "PrioritySwitchingValve",
+                "Vorrangumschaltventil WW",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"Heizen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"Warmwasser\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "ReturnTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "ReturnTemp",
+                "Rücklauftemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "SEERCoolMonth": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "SEERCoolMonth",
+                "SEER Monat Kühlen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "SEERCoolTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "SEERCoolTotal",
+                "SEER gesamt Kühlen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "SetMode": {
+        "created": 10,
+        "events": [
+            [
+                "MaintainVariable",
+                "SetMode_0",
+                "Boiler Modus",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"auto\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"off\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"heat\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"water\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_1",
+                "Temperatur (flowtempdesired)",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_2",
+                "Temperatur (hwctempdesired)",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_3",
+                "Temperatur (hwcflowtempdesired)",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_5",
+                "disablehc",
+                0,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_6",
+                "disablehwctapping",
+                0,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_7",
+                "disablehwcload",
+                0,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_9",
+                "remoteControlHcPump",
+                0,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_10",
+                "releaseBackup",
+                0,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "SetMode_11",
+                "releaseCooling",
+                0,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "State": {
+        "created": 4,
+        "events": [
+            [
+                "MaintainVariable",
+                "State_0",
+                "CurrentCompressor",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "State_1",
+                "Täglicher Energieertrag",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "State_2",
+                "onoff",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"off\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"on\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "State_3",
+                "state",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"ready\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"ready\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":8,\"IntervalMaxValue\":9,\"ConstantActive\":true,\"ConstantValue\":\"heating\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":9,\"IntervalMaxValue\":10,\"ConstantActive\":true,\"ConstantValue\":\"heating\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":11,\"IntervalMaxValue\":12,\"ConstantActive\":true,\"ConstantValue\":\"error\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":17,\"IntervalMaxValue\":18,\"ConstantActive\":true,\"ConstantValue\":\"cooling\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":128,\"IntervalMaxValue\":129,\"ConstantActive\":true,\"ConstantValue\":\"heating_water\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":129,\"IntervalMaxValue\":130,\"ConstantActive\":true,\"ConstantValue\":\"heating_water\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Status": {
+        "created": 4,
+        "events": [
+            [
+                "MaintainVariable",
+                "Status_0",
+                "Temperatur (temp)",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status_1",
+                "Druck",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " bar",
+                    "DIGITS": 3
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status_2",
+                "Druck",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " bar",
+                    "DIGITS": 3
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status_3",
+                "Boiler Modus",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"off\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"heat\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":4,\"IntervalMaxValue\":5,\"ConstantActive\":true,\"ConstantValue\":\"water\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Status01": {
+        "created": 6,
+        "events": [
+            [
+                "MaintainVariable",
+                "Status01_0",
+                "Vorlauftemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status01_1",
+                "Rücklauftemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status01_2",
+                "Aussentemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 2
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status01_3",
+                "WW Temperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status01_4",
+                "Speichertemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status01_5",
+                "Pumpenstatus",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"off\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"on\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"overrun\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Status02": {
+        "created": 5,
+        "events": [
+            [
+                "MaintainVariable",
+                "Status02_0",
+                "Betriebsart",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"disabled\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"on\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"off\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"auto\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status02_1",
+                "Maximaltemperatur",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status02_2",
+                "ReglerCurrentTemp",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status02_3",
+                "Maximaltemperatur",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "Status02_4",
+                "ReglerCurrentTemp",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "Status16": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "Status16",
+                "Aussentemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "StatusCirPump": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "StatusCirPump",
+                "Status Zirkulationspumpe",
+                1,
+                {
+                    "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":100,\"Caption\":\"on\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                },
+                0,
+                true
+            ],
+            [
+                "EnableAction",
+                "StatusCirPump"
+            ]
+        ]
+    },
+    "SubcoolingActualValue": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "SubcoolingActualValue",
+                "Istwert Unterkühlung",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " K",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "SubcoolingTargetValue": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "SubcoolingTargetValue",
+                "Sollwert Unterkühlung",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " K",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "SystemTemp": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "SystemTemp",
+                "Systemtemperatur",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " °C",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "TempSwitchCompressorOutlet": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "TempSwitchCompressorOutlet",
+                "Temperaturschalter Kompressor Auslass",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"offen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"geschlossen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS_ACTIVE": true
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "WorkingFigureHcMonth": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "WorkingFigureHcMonth",
+                "Arbeitszahl Monat Heizen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "WorkingFigureHcTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "WorkingFigureHcTotal",
+                "Arbeitszahl gesamt Heizen",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "WorkingFigureHwcMonth": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "WorkingFigureHwcMonth",
+                "Arbeitszahl Monat WW",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "WorkingFigureHwcTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "WorkingFigureHwcTotal",
+                "Arbeitszahl gesamt WW",
+                2,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 1
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear1": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear1_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear1_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear10": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear10_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear10_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear11": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear11_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear11_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear12": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear12_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear12_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear2": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear2_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear2_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear3": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear3_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear3_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear4": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear4_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear4_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear5": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear5_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear5_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear6": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear6_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear6_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear7": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear7_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear7_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear8": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear8_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear8_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldThisYear9": {
+        "created": 2,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldThisYear9_1",
+                "month",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "YieldThisYear9_3",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "YieldTotal": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "YieldTotal",
+                "energy",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": " kWh",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "clearerrorhistory": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "clearerrorhistory",
+                "Fehlerhistorie löschen",
+                1,
+                {
+                    "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"nein\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ja\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                },
+                0,
+                true
+            ],
+            [
+                "EnableAction",
+                "clearerrorhistory"
+            ]
+        ]
+    },
+    "currenterror": {
+        "created": 5,
+        "events": [
+            [
+                "MaintainVariable",
+                "currenterror_0",
+                "Fehlernummer",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "currenterror_1",
+                "Fehlernummer",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "currenterror_2",
+                "Fehlernummer",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "currenterror_3",
+                "Fehlernummer",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "currenterror_4",
+                "Fehlernummer",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "errorhistory": {
+        "created": 5,
+        "events": [
+            [
+                "MaintainVariable",
+                "errorhistory_0",
+                "index",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "errorhistory_1",
+                "Status",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "errorhistory_2",
+                "Zeit",
+                3,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "errorhistory_3",
+                "Datum",
+                3,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}"
+                },
+                0,
+                true
+            ],
+            [
+                "MaintainVariable",
+                "errorhistory_4",
+                "Fehlernummer",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "stat04": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "stat04",
+                "stat 04",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "stat05": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "stat05",
+                "stat 05",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "stat_unknown32": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "stat_unknown32",
+                "stat_unknown32",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "stat_unknown33": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "stat_unknown33",
+                "stat_unknown33",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "stat_unknown34": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "stat_unknown34",
+                "stat_unknown34",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "stat_unknown35": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "stat_unknown35",
+                "stat_unknown35",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    },
+    "stat_unknown36": {
+        "created": 1,
+        "events": [
+            [
+                "MaintainVariable",
+                "stat_unknown36",
+                "stat_unknown36",
+                1,
+                {
+                    "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
+                    "SUFFIX": "",
+                    "DIGITS": 0
+                },
+                0,
+                true
+            ]
+        ]
+    }
+}

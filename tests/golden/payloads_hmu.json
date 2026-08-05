@@ -1,0 +1,14 @@
+{
+    "SetMode": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "StatusCirPump": {
+        "sample": 21,
+        "payload": "21"
+    },
+    "clearerrorhistory": {
+        "sample": 21,
+        "payload": "21"
+    }
+}

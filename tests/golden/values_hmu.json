@@ -1,0 +1,1142 @@
+{
+    "AirInletTemp": {
+        "typed": [
+            {
+                "ident": "AirInletTemp",
+                "value": 31.94
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "AirInletTemp",
+                "value": 31.94
+            }
+        ]
+    },
+    "AirInletTempSens": {
+        "typed": [
+            {
+                "ident": "AirInletTempSens",
+                "value": 29.9
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "AirInletTempSens",
+                "value": 29.9
+            }
+        ]
+    },
+    "BuildingCircuitPumpPower": {
+        "typed": [
+            {
+                "ident": "BuildingCircuitPumpPower",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "BuildingCircuitPumpPower",
+                "value": 0
+            }
+        ]
+    },
+    "BuildingPumpHours": {
+        "typed": [
+            {
+                "ident": "BuildingPumpHours",
+                "value": 24542
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "BuildingPumpHours",
+                "value": 24542
+            }
+        ]
+    },
+    "BuildingPumpStarts": {
+        "typed": [
+            {
+                "ident": "BuildingPumpStarts",
+                "value": 3932
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "BuildingPumpStarts",
+                "value": 3932
+            }
+        ]
+    },
+    "CircuitBuildingFlowRate": {
+        "typed": [
+            {
+                "ident": "CircuitBuildingFlowRate",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CircuitBuildingFlowRate",
+                "value": 0
+            }
+        ]
+    },
+    "CircuitBuildingWaterPressure": {
+        "typed": [
+            {
+                "ident": "CircuitBuildingWaterPressure",
+                "value": 1.4
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CircuitBuildingWaterPressure",
+                "value": 1.4
+            }
+        ]
+    },
+    "CompressorHours": {
+        "typed": [
+            {
+                "ident": "CompressorHours",
+                "value": 23337
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CompressorHours",
+                "value": 23337
+            }
+        ]
+    },
+    "CompressorInletTemp": {
+        "typed": [
+            {
+                "ident": "CompressorInletTemp",
+                "value": 39.6
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CompressorInletTemp",
+                "value": 39.6
+            }
+        ]
+    },
+    "CompressorOutletTemp": {
+        "typed": [
+            {
+                "ident": "CompressorOutletTemp",
+                "value": 47.2
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CompressorOutletTemp",
+                "value": 47.2
+            }
+        ]
+    },
+    "CompressorSpeed": {
+        "typed": [
+            {
+                "ident": "CompressorSpeed",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CompressorSpeed",
+                "value": 0
+            }
+        ]
+    },
+    "CompressorStarts": {
+        "typed": [
+            {
+                "ident": "CompressorStarts",
+                "value": 5601
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CompressorStarts",
+                "value": 5601
+            }
+        ]
+    },
+    "CondensationTemp": {
+        "typed": [
+            {
+                "ident": "CondensationTemp",
+                "value": 25.3
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CondensationTemp",
+                "value": 25.3
+            }
+        ]
+    },
+    "CondenserOutletTemp": {
+        "typed": [
+            {
+                "ident": "CondenserOutletTemp",
+                "value": 41.7
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CondenserOutletTemp",
+                "value": 41.7
+            }
+        ]
+    },
+    "CurrentCompressorUtil": {
+        "typed": [
+            {
+                "ident": "CurrentCompressorUtil",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CurrentCompressorUtil",
+                "value": 0
+            }
+        ]
+    },
+    "CurrentConsumedPower": {
+        "typed": [
+            {
+                "ident": "CurrentConsumedPower",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CurrentConsumedPower",
+                "value": 0
+            }
+        ]
+    },
+    "CurrentYieldPower": {
+        "typed": [
+            {
+                "ident": "CurrentYieldPower",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CurrentYieldPower",
+                "value": 0
+            }
+        ]
+    },
+    "CylinderTemp": {
+        "typed": [
+            {
+                "ident": "CylinderTemp",
+                "value": -99
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "CylinderTemp",
+                "value": -99
+            }
+        ]
+    },
+    "DCFStatus": {
+        "typed": [
+            {
+                "ident": "DCFStatus",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "DCFStatus",
+                "value": 0
+            }
+        ]
+    },
+    "DateTime": {
+        "typed": [
+            {
+                "ident": "DateTime_0",
+                "value": 0
+            },
+            {
+                "ident": "DateTime_1",
+                "value": "-:-:-"
+            },
+            {
+                "ident": "DateTime_2",
+                "value": "-.-.-"
+            },
+            {
+                "ident": "DateTime_3",
+                "value": null
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "DateTime_0",
+                "value": "nosignal"
+            },
+            {
+                "ident": "DateTime_1",
+                "value": "-:-:-"
+            },
+            {
+                "ident": "DateTime_2",
+                "value": "-.-.-"
+            },
+            {
+                "ident": "DateTime_3",
+                "value": null
+            }
+        ]
+    },
+    "EEVOutletTemp": {
+        "typed": [
+            {
+                "ident": "EEVOutletTemp",
+                "value": 31.7
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EEVOutletTemp",
+                "value": 31.7
+            }
+        ]
+    },
+    "EEVSteps": {
+        "typed": [
+            {
+                "ident": "EEVSteps",
+                "value": 62137
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EEVSteps",
+                "value": 62137
+            }
+        ]
+    },
+    "EnergyConsumptionTotal": {
+        "typed": [
+            {
+                "ident": "EnergyConsumptionTotal",
+                "value": 26056
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyConsumptionTotal",
+                "value": 26056
+            }
+        ]
+    },
+    "EnergyIntegral": {
+        "typed": [
+            {
+                "ident": "EnergyIntegral",
+                "value": -53
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyIntegral",
+                "value": -53
+            }
+        ]
+    },
+    "EnergyYieldCoolDay": {
+        "typed": [
+            {
+                "ident": "EnergyYieldCoolDay",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldCoolDay",
+                "value": 0
+            }
+        ]
+    },
+    "EnergyYieldCoolMonth": {
+        "typed": [
+            {
+                "ident": "EnergyYieldCoolMonth",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldCoolMonth",
+                "value": 0
+            }
+        ]
+    },
+    "EnergyYieldCoolTotal": {
+        "typed": [
+            {
+                "ident": "EnergyYieldCoolTotal",
+                "value": 733
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldCoolTotal",
+                "value": 733
+            }
+        ]
+    },
+    "EnergyYieldHcDay": {
+        "typed": [
+            {
+                "ident": "EnergyYieldHcDay",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldHcDay",
+                "value": 0
+            }
+        ]
+    },
+    "EnergyYieldHcMonth": {
+        "typed": [
+            {
+                "ident": "EnergyYieldHcMonth",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldHcMonth",
+                "value": 0
+            }
+        ]
+    },
+    "EnergyYieldHwTotal": {
+        "typed": [
+            {
+                "ident": "EnergyYieldHwTotal",
+                "value": 87975
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldHwTotal",
+                "value": 87975
+            }
+        ]
+    },
+    "EnergyYieldHwcDay": {
+        "typed": [
+            {
+                "ident": "EnergyYieldHwcDay",
+                "value": 2.5
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldHwcDay",
+                "value": 2.5
+            }
+        ]
+    },
+    "EnergyYieldHwcMonth": {
+        "typed": [
+            {
+                "ident": "EnergyYieldHwcMonth",
+                "value": 11.3
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldHwcMonth",
+                "value": 11.3
+            }
+        ]
+    },
+    "EnergyYieldHwcTotal": {
+        "typed": [
+            {
+                "ident": "EnergyYieldHwcTotal",
+                "value": 4619
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EnergyYieldHwcTotal",
+                "value": 4619
+            }
+        ]
+    },
+    "EvaporationTemp": {
+        "typed": [
+            {
+                "ident": "EvaporationTemp",
+                "value": 22.8
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "EvaporationTemp",
+                "value": 22.8
+            }
+        ]
+    },
+    "F1f": {
+        "typed": [
+            {
+                "ident": "F1f",
+                "value": 20
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "F1f",
+                "value": 20
+            }
+        ]
+    },
+    "F20": {
+        "typed": [
+            {
+                "ident": "F20",
+                "value": 48.56
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "F20",
+                "value": 48.56
+            }
+        ]
+    },
+    "F3c": {
+        "typed": [
+            {
+                "ident": "F3c",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "F3c",
+                "value": 0
+            }
+        ]
+    },
+    "Fan1": {
+        "typed": [
+            {
+                "ident": "Fan1",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Fan1",
+                "value": 0
+            }
+        ]
+    },
+    "Fan1Hours": {
+        "typed": [
+            {
+                "ident": "Fan1Hours",
+                "value": 23157
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Fan1Hours",
+                "value": 23157
+            }
+        ]
+    },
+    "Fan1Starts": {
+        "typed": [
+            {
+                "ident": "Fan1Starts",
+                "value": 10535
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Fan1Starts",
+                "value": 10535
+            }
+        ]
+    },
+    "FlowTemp": {
+        "typed": [
+            {
+                "ident": "FlowTemp",
+                "value": 48.9
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "FlowTemp",
+                "value": 48.9
+            }
+        ]
+    },
+    "FlowTempImmersionHeater": {
+        "typed": [
+            {
+                "ident": "FlowTempImmersionHeater",
+                "value": -99
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "FlowTempImmersionHeater",
+                "value": -99
+            }
+        ]
+    },
+    "FourWayValveHours": {
+        "typed": [
+            {
+                "ident": "FourWayValveHours",
+                "value": 581
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "FourWayValveHours",
+                "value": 581
+            }
+        ]
+    },
+    "FourWayValveSwitchingOperations": {
+        "typed": [
+            {
+                "ident": "FourWayValveSwitchingOperations",
+                "value": 5064
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "FourWayValveSwitchingOperations",
+                "value": 5064
+            }
+        ]
+    },
+    "HeatingCoilCompressor": {
+        "typed": [
+            {
+                "ident": "HeatingCoilCompressor",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HeatingCoilCompressor",
+                "value": "aus"
+            }
+        ]
+    },
+    "HighPressure": {
+        "typed": [
+            {
+                "ident": "HighPressure",
+                "value": 8.6
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HighPressure",
+                "value": 8.6
+            }
+        ]
+    },
+    "HighPressureSwitch": {
+        "typed": [
+            {
+                "ident": "HighPressureSwitch",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HighPressureSwitch",
+                "value": "geschlossen"
+            }
+        ]
+    },
+    "Hours": {
+        "typed": [
+            {
+                "ident": "Hours",
+                "value": 42347
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Hours",
+                "value": 42347
+            }
+        ]
+    },
+    "HoursCool": {
+        "typed": [
+            {
+                "ident": "HoursCool",
+                "value": 532
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HoursCool",
+                "value": 532
+            }
+        ]
+    },
+    "HoursHc": {
+        "typed": [
+            {
+                "ident": "HoursHc",
+                "value": 22158
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "HoursHc",
+                "value": 22158
+            }
+        ]
+    },
+    "ImmersionHeaterSafetyCutOut": {
+        "typed": [
+            {
+                "ident": "ImmersionHeaterSafetyCutOut",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ImmersionHeaterSafetyCutOut",
+                "value": "geschlossen"
+            }
+        ]
+    },
+    "LowPressure": {
+        "typed": [
+            {
+                "ident": "LowPressure",
+                "value": 8
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "LowPressure",
+                "value": 8
+            }
+        ]
+    },
+    "OutdoorTemp": {
+        "typed": [
+            {
+                "ident": "OutdoorTemp",
+                "value": -99
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "OutdoorTemp",
+                "value": -99
+            }
+        ]
+    },
+    "PrioritySwitchingValve": {
+        "typed": [
+            {
+                "ident": "PrioritySwitchingValve",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "PrioritySwitchingValve",
+                "value": "Heizen"
+            }
+        ]
+    },
+    "ReturnTemp": {
+        "typed": [
+            {
+                "ident": "ReturnTemp",
+                "value": 45.6
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "ReturnTemp",
+                "value": 45.6
+            }
+        ]
+    },
+    "SetMode": {
+        "typed": [
+            {
+                "ident": "SetMode_0",
+                "value": 0
+            },
+            {
+                "ident": "SetMode_1",
+                "value": 0
+            },
+            {
+                "ident": "SetMode_2",
+                "value": null
+            },
+            {
+                "ident": "SetMode_3",
+                "value": null
+            },
+            {
+                "ident": "SetMode_5",
+                "value": true
+            },
+            {
+                "ident": "SetMode_6",
+                "value": true
+            },
+            {
+                "ident": "SetMode_7",
+                "value": true
+            },
+            {
+                "ident": "SetMode_9",
+                "value": false
+            },
+            {
+                "ident": "SetMode_10",
+                "value": false
+            },
+            {
+                "ident": "SetMode_11",
+                "value": false
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "SetMode_0",
+                "value": "auto"
+            },
+            {
+                "ident": "SetMode_1",
+                "value": 0
+            },
+            {
+                "ident": "SetMode_2",
+                "value": null
+            },
+            {
+                "ident": "SetMode_3",
+                "value": null
+            },
+            {
+                "ident": "SetMode_5",
+                "value": 1
+            },
+            {
+                "ident": "SetMode_6",
+                "value": 1
+            },
+            {
+                "ident": "SetMode_7",
+                "value": 1
+            },
+            {
+                "ident": "SetMode_9",
+                "value": 0
+            },
+            {
+                "ident": "SetMode_10",
+                "value": 0
+            },
+            {
+                "ident": "SetMode_11",
+                "value": 0
+            }
+        ]
+    },
+    "State": {
+        "typed": [
+            {
+                "ident": "State_0",
+                "value": 0
+            },
+            {
+                "ident": "State_1",
+                "value": 2.5
+            },
+            {
+                "ident": "State_2",
+                "value": 192
+            },
+            {
+                "ident": "State_3",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "State_0",
+                "value": 0
+            },
+            {
+                "ident": "State_1",
+                "value": 2.5
+            },
+            {
+                "ident": "State_2",
+                "value": 192
+            },
+            {
+                "ident": "State_3",
+                "value": "ready"
+            }
+        ]
+    },
+    "Status01": {
+        "typed": [
+            {
+                "ident": "Status01_0",
+                "value": 48.5
+            },
+            {
+                "ident": "Status01_1",
+                "value": 45.5
+            },
+            {
+                "ident": "Status01_2",
+                "value": null
+            },
+            {
+                "ident": "Status01_3",
+                "value": null
+            },
+            {
+                "ident": "Status01_4",
+                "value": null
+            },
+            {
+                "ident": "Status01_5",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "Status01_0",
+                "value": 48.5
+            },
+            {
+                "ident": "Status01_1",
+                "value": 45.5
+            },
+            {
+                "ident": "Status01_2",
+                "value": null
+            },
+            {
+                "ident": "Status01_3",
+                "value": null
+            },
+            {
+                "ident": "Status01_4",
+                "value": null
+            },
+            {
+                "ident": "Status01_5",
+                "value": "off"
+            }
+        ]
+    },
+    "StatusCirPump": {
+        "typed": [
+            {
+                "ident": "StatusCirPump",
+                "value": 100
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "StatusCirPump",
+                "value": "on"
+            }
+        ]
+    },
+    "SubcoolingActualValue": {
+        "typed": [
+            {
+                "ident": "SubcoolingActualValue",
+                "value": -16.3
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "SubcoolingActualValue",
+                "value": -16.3
+            }
+        ]
+    },
+    "SubcoolingTargetValue": {
+        "typed": [
+            {
+                "ident": "SubcoolingTargetValue",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "SubcoolingTargetValue",
+                "value": 0
+            }
+        ]
+    },
+    "SystemTemp": {
+        "typed": [
+            {
+                "ident": "SystemTemp",
+                "value": -99
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "SystemTemp",
+                "value": -99
+            }
+        ]
+    },
+    "TempSwitchCompressorOutlet": {
+        "typed": [
+            {
+                "ident": "TempSwitchCompressorOutlet",
+                "value": 1
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "TempSwitchCompressorOutlet",
+                "value": "geschlossen"
+            }
+        ]
+    },
+    "WorkingFigureHcTotal": {
+        "typed": [
+            {
+                "ident": "WorkingFigureHcTotal",
+                "value": 4.5
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "WorkingFigureHcTotal",
+                "value": 4.5
+            }
+        ]
+    },
+    "WorkingFigureHwcTotal": {
+        "typed": [
+            {
+                "ident": "WorkingFigureHwcTotal",
+                "value": 2.8
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "WorkingFigureHwcTotal",
+                "value": 2.8
+            }
+        ]
+    },
+    "stat_unknown32": {
+        "typed": [
+            {
+                "ident": "stat_unknown32",
+                "value": 49359
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "stat_unknown32",
+                "value": 49359
+            }
+        ]
+    },
+    "stat_unknown33": {
+        "typed": [
+            {
+                "ident": "stat_unknown33",
+                "value": 35776
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "stat_unknown33",
+                "value": 35776
+            }
+        ]
+    },
+    "stat_unknown34": {
+        "typed": [
+            {
+                "ident": "stat_unknown34",
+                "value": 49152
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "stat_unknown34",
+                "value": 49152
+            }
+        ]
+    },
+    "stat_unknown35": {
+        "typed": [
+            {
+                "ident": "stat_unknown35",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "stat_unknown35",
+                "value": 0
+            }
+        ]
+    },
+    "stat_unknown36": {
+        "typed": [
+            {
+                "ident": "stat_unknown36",
+                "value": 0
+            }
+        ],
+        "numeric": [
+            {
+                "ident": "stat_unknown36",
+                "value": 0
+            }
+        ]
+    }
+}
