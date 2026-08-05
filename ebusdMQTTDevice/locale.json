@@ -28,7 +28,16 @@
       "IP address is not valid.": "IP Adresse ist nicht gültig.",
       "Circuit name is not valid.": "Schaltkreis Name ist nicht gültig.",
       "from": "von",
-      "to": "bis"
+      "to": "bis",
+      "Error": "Fehler",
+      "%s entries found": "%s Einträge gefunden",
+      "%s values read": "%s Werte gelesen",
+      "%s variables newly created": "%s Variablen neu angelegt",
+      "The variable \"%s\" is not readable. The changes will not be saved.": "Die Variable \"%s\" ist nicht lesbar. Die Änderungen werden nicht gespeichert.",
+      "unknown": "unbekannt",
+      "Message %s not found in configuration.": "Message %s nicht in Konfiguration gefunden.",
+      "Off": "Aus",
+      "On": "An"
     }
   }
 }

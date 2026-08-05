@@ -31,14 +31,17 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den IPS-eigenen MQTT Se
 - Zwei Timer: `requestAllValues` (Update-Intervall) und `checkConnection`
   (Signal-Überwachung, Instanzstatus).
 
-## Bekannte Altlasten / Kandidaten
+## Tests
 
-- Die `RegisterProfile*`-Funktionen im Trait sind **tot** (kein Aufruf aus `module.php`,
-  Presentations sind längst umgesetzt) — bei Gelegenheit entfernen.
-- Meldungstexte an den Anwender (`MsgBox('… Werte gelesen')` u. a.) stehen **deutsch und
-  ohne `Translate()`** direkt im PHP-Code; sauber wäre englischer Text + `Translate` +
-  locale-Schlüssel. Bei Umstellung `tests/check_locale.php` erneut laufen lassen
-  (es sammelt `Translate('…')`-Texte automatisch ein).
+- `php tests/check_locale.php` — Übersetzungs-Vollständigkeit (form.json, module.php,
+  `libs/*.php`)
+- `php tests/golden_regression.php` — Golden-File-Regressionstests der Verarbeitungskette
+  (read/write-Ableitung, Formularliste, Variablen-Registrierung samt Presentations,
+  Werte-Dekodierung, Publish-Payloads) auf Basis echter ebusd-REST-Fixtures
+  (`tests/fixtures/`, Schaltkreise hmu = Wärmepumpe, 700 = Regler VRC700).
+  Läuft ohne Kernel/Netz (`tests/symcon_stubs.php`). Bei **beabsichtigten**
+  Verhaltensänderungen: `--update` und den Golden-Diff im Commit reviewen.
+  Neue Fixtures einfangen: `http://<ebusd-host>:8081/data/<circuit>/?def&verbose&exact&write`.
 
 ## Texte pflegen
 
@@ -48,8 +51,8 @@ Bei Änderungen an Formulartexten immer synchron halten:
 2. `locale.json` — deutscher Text unter exakt diesem Schlüssel
 3. `README.md` — falls die Stelle dort ebenfalls dokumentiert ist
 
-CI (`.github/workflows/check.yml`) prüft PHP-Syntax, JSON-Validität und die
-Übersetzungs-Vollständigkeit.
+CI (`.github/workflows/check.yml`) prüft PHP-Syntax, JSON-Validität,
+Übersetzungs-Vollständigkeit und die Golden-Regressionstests.
 
 ## Support-Kontext
 

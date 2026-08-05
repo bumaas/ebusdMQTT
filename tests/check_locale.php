@@ -6,8 +6,8 @@ declare(strict_types=1);
  * Prüft die Übersetzungs-Vollständigkeit der Module dieses Repos:
  *
  *  - Jeder caption/label/suffix-Text aus form.json braucht einen de-Schlüssel in locale.json.
- *  - Jeder Translate('...')-Text (module.php und form.json-Skripte, z. B. onClick)
- *    braucht ebenfalls einen de-Schlüssel.
+ *  - Jeder Translate('...')-Text (module.php, libs/*.php und form.json-Skripte,
+ *    z. B. onClick) braucht ebenfalls einen de-Schlüssel.
  *  - Verwaiste de-Schlüssel werden nur gemeldet, nicht als Fehler gewertet
  *    (dynamische Nutzung wie zusammengesetzte Captions ist möglich).
  *
@@ -32,6 +32,9 @@ foreach ($moduleDirs as $moduleDir) {
     $deKeys = array_keys($locale['translations']['de'] ?? []);
 
     $modulePhp = file_get_contents($dir . '/module.php');
+    foreach (glob($root . '/libs/*.php') ?: [] as $libFile) {
+        $modulePhp .= "\n" . file_get_contents($libFile);
+    }
 
     // 1) Alle caption/label/suffix-Texte aus form.json rekursiv einsammeln
     $formTexts = [];

@@ -1746,7 +1746,7 @@
                 0,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Off\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"On\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
                 },
                 0,
                 true
@@ -1758,7 +1758,7 @@
                 0,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Off\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"On\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
                 },
                 0,
                 true
@@ -1770,7 +1770,7 @@
                 0,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Off\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"On\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
                 },
                 0,
                 true
@@ -1782,7 +1782,7 @@
                 0,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Off\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"On\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
                 },
                 0,
                 true
@@ -1794,7 +1794,7 @@
                 0,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Off\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"On\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
                 },
                 0,
                 true
@@ -1806,7 +1806,7 @@
                 0,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Aus\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"An\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
+                    "OPTIONS": "[{\"Value\":false,\"Caption\":\"Off\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false},{\"Value\":true,\"Caption\":\"On\",\"IconValue\":\"\",\"IconActive\":false,\"ColorActive\":true,\"ColorValue\":1692672,\"ContentColorActive\":false}]"
                 },
                 0,
                 true
