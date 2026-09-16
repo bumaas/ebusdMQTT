@@ -213,17 +213,12 @@ class ebusdMQTTDevice extends IPSModuleStrict
     {
         $this->logDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)));
 
-        if (!$this->HasActiveParent()) {
-            $this->checkConnection();
-            $this->logDebug(__FUNCTION__, 'No active parent - ignored');
-            return;
-        }
-
         // Hilfsfunktion für JSON-Decoding von $Value
         $decodeValue = static function () use ($Value) {
             return json_decode((string)$Value, true, 512, JSON_THROW_ON_ERROR);
         };
 
+        // Diese Aktionen brauchen nur HTTP zu ebusd, nicht den MQTT-Parent
         switch ($Ident) {
             case 'btnReadCircuits':
                 // Formularwerte statt gespeicherter Properties: die Adresse soll vor dem Übernehmen prüfbar sein
@@ -243,7 +238,15 @@ class ebusdMQTTDevice extends IPSModuleStrict
                     $this->MsgBox(sprintf($this->Translate('%s entries found'), count($ret)));
                 }
                 return;
+        }
 
+        if (!$this->HasActiveParent()) {
+            $this->checkConnection();
+            $this->logDebug(__FUNCTION__, 'No active parent - ignored');
+            return;
+        }
+
+        switch ($Ident) {
             case 'btnReadValues':
                 $ret = $this->UpdateCurrentValues($decodeValue());
                 $this->MsgBox(sprintf($this->Translate('%s values read'), $ret));

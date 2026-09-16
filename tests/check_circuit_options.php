@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 /**
- * Tests für den Knopf „Ermittle Schaltkreisnamen" (btnReadCircuits).
+ * Tests für den Knopf „Ermittle Schaltkreisnamen" (btnReadCircuits); dazu, dass er und
+ * „Lese Konfiguration aus" (btnReadConfiguration) ohne aktiven MQTT-Parent laufen.
  *
  * Anlass: Forum t/51854/459 (ebusd auf neue Adresse umgezogen). Der Knopf fragte die
  * gespeicherte statt der eingetippten Adresse ab; die fehlgeschlagene Abfrage leerte
@@ -38,9 +39,11 @@ final class CircuitOptionsHarness extends ebusdMQTTDevice
         return $this->responses[$url] ?? null;
     }
 
+    public bool $parentActive = true;
+
     protected function HasActiveParent(): bool
     {
-        return true;
+        return $this->parentActive;
     }
 
     protected function UpdateFormField(string $Field, string $Parameter, mixed $Value): bool
@@ -130,7 +133,26 @@ $h->RequestAction('btnReadCircuits', clickPayload('10.1.254.12', '8081', '430'))
 $options = json_decode($h->attribute('CircuitOptionList'), true, 512, JSON_THROW_ON_ERROR);
 check(in_array('430', optionValues($options), true), 'aktuell gewählter Schaltkreis bleibt in der Liste');
 
-// 4) Formular: gespeicherter Schaltkreis ist immer eine gültige Option
+// 4) MQTT-Parent inaktiv: das Auslesen braucht nur HTTP und läuft trotzdem
+echo "Parent inaktiv:\n";
+$h               = newHarness('192.168.1.10', '8080', '700');
+$h->parentActive = false;
+$h->responses    = ['http://10.1.254.12:8081/data' => $dataAll];
+$h->RequestAction('btnReadCircuits', clickPayload('10.1.254.12', '8081', '700'));
+check($h->requestedUrls === ['http://10.1.254.12:8081/data'], 'fragt ebusd auch ohne aktiven Parent ab');
+$options = json_decode($h->attribute('CircuitOptionList'), true, 512, JSON_THROW_ON_ERROR);
+check(optionValues($options) === ['', '700', 'hmu'], 'Liste wird auch ohne aktiven Parent gefüllt');
+
+$configUrl       = 'http://10.1.254.12:8081/data/hmu/?def&verbose&exact&write';
+$h               = newHarness('10.1.254.12', '8081', 'hmu');
+$h->parentActive = false;
+$h->responses    = [$configUrl => json_decode(file_get_contents(__DIR__ . '/fixtures/config_hmu.json'), true, 512, JSON_THROW_ON_ERROR)];
+$h->RequestAction('btnReadConfiguration', '');
+check($h->requestedUrls === [$configUrl], 'liest die Konfiguration auch ohne aktiven Parent');
+$messages = json_decode($h->attribute('ebusdConfigurationMessages'), true, 512, JSON_THROW_ON_ERROR);
+check(is_array($messages) && count($messages) > 0, 'Konfiguration wird auch ohne aktiven Parent gespeichert');
+
+// 5) Formular: gespeicherter Schaltkreis ist immer eine gültige Option
 echo "Formularaufbau:\n";
 $h = newHarness('192.168.1.10', '8080', '430');
 $h->setAttributeForTest('CircuitOptionList', json_encode([['caption' => '-', 'value' => '']], JSON_THROW_ON_ERROR));
