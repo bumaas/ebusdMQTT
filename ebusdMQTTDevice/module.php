@@ -1167,13 +1167,25 @@ class ebusdMQTTDevice extends IPSModuleStrict
         }
 
         // 3. Fallback für Strings und Unbekanntes
-        $options = $hasAction ? $this->getPresentationOptions($fielddef, $variableType) : [];
+        if (!$hasAction) {
+            return array_filter([
+                                    'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+                                    'SUFFIX'       => $suffix
+                                ]);
+        }
 
-        return array_filter([
-                                'PRESENTATION' => $hasAction ? VARIABLE_PRESENTATION_VALUE_INPUT : VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-                                'SUFFIX'       => $hasAction ? null : $suffix,
-                                'OPTIONS'      => $options ? json_encode($options, JSON_THROW_ON_ERROR) : null
-                            ]);
+        // Die Werteingabe kennt keine OPTIONS - mit fester Werteliste wird es eine Aufzählung.
+        $options = $this->getPresentationOptions($fielddef, $variableType);
+        if (!empty($options)) {
+            return [
+                'PRESENTATION' => VARIABLE_PRESENTATION_ENUMERATION,
+                'OPTIONS'      => json_encode($options, JSON_THROW_ON_ERROR)
+            ];
+        }
+
+        return [
+            'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_INPUT
+        ];
     }
 
     private function checkGlobalMessage(string $topic, string $payload): void
