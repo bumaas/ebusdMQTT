@@ -18,6 +18,7 @@ jobs:
           php -l tests/symcon_stubs.php
           php -l tests/golden_regression.php
           php -l tests/check_presentations.php
+          php -l tests/check_circuit_options.php
       - name: JSON-Validität
         run: |
           find . -name '*.json' -not -path './.git/*' -print0 |
@@ -28,3 +29,5 @@ jobs:
         run: php tests/check_presentations.php
       - name: Golden-Regression
         run: php tests/golden_regression.php
+      - name: Schaltkreis-Auswahl
+        run: php tests/check_circuit_options.php

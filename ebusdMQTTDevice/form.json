@@ -25,7 +25,7 @@
             {
               "type": "Select", "name": "CircuitName", "caption": "Circuit Name", "visible": true, "options": []
             },
-            {"type": "Button", "name": "btnReadCircuits", "caption": "Read Circuits", "onClick": "IPS_RequestAction($id, 'btnReadCircuits', '');"}
+            {"type": "Button", "name": "btnReadCircuits", "caption": "Read Circuits", "onClick": "IPS_RequestAction($id, 'btnReadCircuits', json_encode(['Host' => $Host, 'Port' => $Port, 'CircuitName' => $CircuitName]));"}
           ]
         },
         {"type": "NumberSpinner", "name": "UpdateInterval", "caption": "Update Interval", "suffix": "Minutes"}

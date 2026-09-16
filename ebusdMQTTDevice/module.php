@@ -226,7 +226,13 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         switch ($Ident) {
             case 'btnReadCircuits':
-                $this->setCircuitOptions();
+                // Formularwerte statt gespeicherter Properties: die Adresse soll vor dem Übernehmen prüfbar sein
+                $formValues = $Value === '' ? [] : $decodeValue();
+                $this->setCircuitOptions(
+                    (string)($formValues['Host'] ?? $this->ReadPropertyString(self::PROP_HOST)),
+                    (string)($formValues['Port'] ?? $this->ReadPropertyString(self::PROP_PORT)),
+                    (string)($formValues['CircuitName'] ?? $this->ReadPropertyString(self::PROP_CIRCUITNAME))
+                );
                 return;
 
             case 'btnReadConfiguration':
@@ -408,7 +414,10 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         $Form                                                   =
             json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
-        $Form['elements'][0]['items'][1]['items'][0]['options'] = $circuitOptions;
+        $Form['elements'][0]['items'][1]['items'][0]['options'] = $this->withCircuitOption(
+            $circuitOptions,
+            $this->ReadPropertyString(self::PROP_CIRCUITNAME)
+        );
         $Form['actions'][1]['values']                           = $this->getUpdatedVariableList($variableList);
         $Form['actions'][1]['columns'][6]['edit']['enabled']    = $isActive;
         $Form['actions'][1]['columns'][7]['edit']['enabled']    = $isActive;
@@ -682,37 +691,38 @@ class ebusdMQTTDevice extends IPSModuleStrict
     private const array  EXCLUDED_CIRCUIT_NAMES = ['global', 'broadcast'];
     private const string SCANNER_PREFIX         = 'scan.';
 
-    private function setCircuitOptions(): void
+    private function setCircuitOptions(string $host, string $port, string $currentCircuit): void
     {
-        $url = sprintf(
-            'http://%s:%s/data',
-            $this->ReadPropertyString(self::PROP_HOST),
-            $this->ReadPropertyString(self::PROP_PORT)
-        );
+        $url = sprintf('http://%s:%s/data', $host, $port);
 
         $result = $this->readURL($url);
 
-        $options = [self::EMPTY_OPTION_VALUE];
-
-        if (is_array($result)) {
-            foreach ($result as $name => $circuit) {
-                $name = (string)$name;
-
-                if (in_array($name, self::EXCLUDED_CIRCUIT_NAMES, true)) {
-                    continue;
-                }
-
-                if (str_starts_with($name, self::SCANNER_PREFIX)) {
-                    continue;
-                }
-
-                $options[] = [
-                    'caption' => $name,
-                    'value'   => $name
-                ];
-            }
+        // Nicht erreichbar: Liste unverändert lassen, sonst wird der gewählte Schaltkreis ungültig
+        if ($result === null) {
+            $this->MsgBox(sprintf($this->Translate('ebusd could not be reached at %s'), $url));
+            return;
         }
 
+        $options = [self::EMPTY_OPTION_VALUE];
+
+        foreach ($result as $name => $circuit) {
+            $name = (string)$name;
+
+            if (in_array($name, self::EXCLUDED_CIRCUIT_NAMES, true)) {
+                continue;
+            }
+
+            if (str_starts_with($name, self::SCANNER_PREFIX)) {
+                continue;
+            }
+
+            $options[] = [
+                'caption' => $name,
+                'value'   => $name
+            ];
+        }
+
+        $options     = $this->withCircuitOption($options, $currentCircuit);
         $optionValue = json_encode($options, JSON_THROW_ON_ERROR);
 
         $this->logDebug(__FUNCTION__, 'optionValues: ' . $optionValue);
@@ -720,6 +730,19 @@ class ebusdMQTTDevice extends IPSModuleStrict
         // UI und Attribut synchronisieren
         $this->UpdateFormField(self::PROP_CIRCUITNAME, 'options', $optionValue);
         $this->WriteAttributeString(self::ATTR_CIRCUITOPTIONLIST, $optionValue);
+    }
+
+    private function withCircuitOption(array $options, string $circuitName): array
+    {
+        if ($circuitName === '' || in_array($circuitName, array_column($options, 'value'), true)) {
+            return $options;
+        }
+
+        $options[] = [
+            'caption' => $circuitName,
+            'value'   => $circuitName
+        ];
+        return $options;
     }
 
     private function getPollPriorities(array $variableList): array
