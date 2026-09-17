@@ -1,7 +1,7 @@
 # ebusdMQTT — Projekt-Hinweise
 
-IP-Symcon-Modul zur Anbindung von [ebusd](https://github.com/john30/ebusd) (eBUS-Daemon für
-Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den IPS-eigenen MQTT Server.
+Symcon-Modul zur Anbindung von [ebusd](https://github.com/john30/ebusd) (eBUS-Daemon für
+Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT Server.
 
 ## Struktur
 
@@ -42,6 +42,13 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den IPS-eigenen MQTT Se
   Läuft ohne Kernel/Netz (`tests/symcon_stubs.php`). Bei **beabsichtigten**
   Verhaltensänderungen: `--update` und den Golden-Diff im Commit reviewen.
   Neue Fixtures einfangen: `http://<ebusd-host>:8081/data/<circuit>/?def&verbose&exact&write`.
+- `php tests/check_presentations.php` — jede Darstellung im Quelltext setzt nur Parameter,
+  die es in dieser Darstellung gibt (Symcon 9.1 validiert das selbst und wirft sonst
+  Fehler); Parameterlisten aus `IPS_GetPresentation` vom 16.09.2026.
+- `php tests/check_circuit_options.php` — Knöpfe „Ermittle Schaltkreisnamen" und „Lese
+  Konfiguration aus": fragen die eingetippte Adresse ab und laufen ohne aktiven MQTT-Parent
+  (Anlass Forum `t/51854/459`; Fixture `tests/fixtures/data_all.json`, echte
+  `/data`-Antwort). Läuft ebenfalls auf `tests/symcon_stubs.php`.
 
 ## Texte pflegen
 
@@ -51,8 +58,9 @@ Bei Änderungen an Formulartexten immer synchron halten:
 2. `locale.json` — deutscher Text unter exakt diesem Schlüssel
 3. `README.md` — falls die Stelle dort ebenfalls dokumentiert ist
 
-CI (`.github/workflows/check.yml`) prüft PHP-Syntax, JSON-Validität,
-Übersetzungs-Vollständigkeit und die Golden-Regressionstests.
+CI (`.github/workflows/check.yml`, PHP 8.4) prüft PHP-Syntax, JSON-Validität,
+Übersetzungs-Vollständigkeit, Darstellungsparameter (`check_presentations.php`), die
+Golden-Regressionstests und die Schaltkreis-Auswahl (`check_circuit_options.php`).
 
 ## Support-Kontext
 
