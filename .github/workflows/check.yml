@@ -31,3 +31,6 @@ jobs:
         run: php tests/golden_regression.php
       - name: Schaltkreis-Auswahl
         run: php tests/check_circuit_options.php
+
+      - name: Modultests
+        run: for t in tests/check-readme.php; do echo "== $t"; php "$t" || exit 1; done

@@ -6,7 +6,7 @@
    3. [Überprüfung der Konfiguration](#3-überprüfung-der-konfiguration)
    4. [Mit ebusctl Daten lesen und schreiben](#4-mit-ebusctl-daten-lesen-und-schreiben)
    5. [Über http ebusd Daten abfragen](#5-über-http-ebusd-daten-abfragen)
-   6. [IP-Symcon relevante Konfigurationsparameter](#6-ip-symcon-relevante-konfigurationsparameter)
+   6. [Symcon relevante Konfigurationsparameter](#6-symcon-relevante-konfigurationsparameter)
 
 > [!TIP]
 > Die detaillierte Installationsbeschreibung des eBUS Daemon ist im [ebusd Wiki](https://github.com/john30/ebusd/wiki) zu finden.
@@ -217,14 +217,14 @@ Standardmäßig horcht der ebusd Service auf den Port 8080. Ist der Port bereits
 
 Soweit zur Installation und zum Einstieg in ebusd.
 
-## 6. IP-Symcon relevante Konfigurationsparameter
-Für die Integration von ebusd in IP-Symcon werden die Daten von ebusd über http und MQTT zur Vefügung gestellt. Dazu sind die Konfigurationsparameter in der _/etc/default/ebusd_ um folgende Optionen zu erweitern:
+## 6. Symcon relevante Konfigurationsparameter
+Für die Integration von ebusd in Symcon werden die Daten von ebusd über http und MQTT zur Vefügung gestellt. Dazu sind die Konfigurationsparameter in der _/etc/default/ebusd_ um folgende Optionen zu erweitern:
 ```text
  --pollinterval 5  --accesslevel=* --httpport=8080 --mqtthost=<IP> --mqttport=<Port> --mqttuser=<USER> --mqttpass=<PASSWORT> --mqttjson
 ```
-- \<IP> - IP-Adresse des IP-Symcon Systems
+- \<IP> - IP-Adresse des Symcon Systems
 - \<PORT> - die im Server Socket der MQTT Server Instanz eingetragene Portnummer
 - \<USER> - der in der MQTT Server Instanz eingetragene Benutzername
 - \<PASSWORT> - das in der MQTT Server Instanz eingetragene Passwort
 
-Eine nähere Beschreibung der Optionen findet sich im Kapitel [2. Run](https://github.com/john30/ebusd/wiki/2.-Run) des Wikis. Die MQTT Parameter müssen den Werten entsprechen, die auf IP-Symcon Seite in der MQTT Server Instanz gesetzt wurden. 
+Eine nähere Beschreibung der Optionen findet sich im Kapitel [2. Run](https://github.com/john30/ebusd/wiki/2.-Run) des Wikis. Die MQTT Parameter müssen den Werten entsprechen, die auf Symcon Seite in der MQTT Server Instanz gesetzt wurden. 

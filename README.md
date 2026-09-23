@@ -5,7 +5,7 @@
 
 
 # ebusdMQTT
-   Anbindung von https://github.com/john30/ebusd an IP-Symcon.
+   Anbindung von https://github.com/john30/ebusd an Symcon.
  
    ## Inhaltverzeichnis
    1. [Funktionsumfang](#1-funktionsumfang)
@@ -19,11 +19,11 @@
     
 ## 1. Funktionsumfang
 
-Das Modul dient zur Einbindung von eBUS Geräten in IP-Symcon. eBUS ('Energie Bus') ist ein Bussystem, das von verschiedenen Herstellern von Heizungs-, Lüftungs- und Solaranlagen genutzt wird.
+Das Modul dient zur Einbindung von eBUS Geräten in Symcon. eBUS ('Energie Bus') ist ein Bussystem, das von verschiedenen Herstellern von Heizungs-, Lüftungs- und Solaranlagen genutzt wird.
 
 Die Anbindung erfolgt über den Kommunikationsdienst **ebusd** in Verbindung mit einem [geeigneten Hardwareadapter](https://github.com/john30/ebusd/wiki/6.-Hardware).
 
-Über das Modul werden die von ebusd zur Verfügung gestellten Parameter zum Auslesen und Schreiben in IP-Symcon als Statusvariablen eingebunden. Die Auswahl der einzubindenden Parameter wird vom Anwender festgelegt.
+Über das Modul werden die von ebusd zur Verfügung gestellten Parameter zum Auslesen und Schreiben in Symcon als Statusvariablen eingebunden. Die Auswahl der einzubindenden Parameter wird vom Anwender festgelegt.
 
   
 
