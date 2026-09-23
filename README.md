@@ -66,6 +66,9 @@ Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit
 - Aktualisierungsintervall:<br>
 Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
 
+- Debug Informationen werden zusätzlich in das Logfile der IPSLibrary geschrieben:<br>
+Schreibt die Debug-Meldungen des Moduls zusätzlich in das Logfile der IPSLibrary (`IPSLogger`). Nur wirksam, wenn die IPSLibrary installiert ist; sonst ohne Funktion. Für die Fehlersuche genügt in der Regel die Debug-Ausgabe der Instanz.
+
 Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden.
 In der Liste der Statusvariablen markiert ein **(A)** hinter dem Ident, dass für diese Variable die Archivierung im Query-Logger (Archive Handler) aktiv ist.
 
