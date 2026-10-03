@@ -60,6 +60,12 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   Timer-Idents bleiben still). Dazu: Aktionen nur an schreibbaren Einfeld-Meldungen
   (`MaintainAction` bei der Registrierung) und `UpdateInterval` < 0 → Status 208. Bei `--update` der Golden-Dateien: Registrierung
   zeichnet `MaintainAction` statt `EnableAction` auf.
+- `php tests/check-script-api.php` — Skript-API für alles hinter den Formular-Knöpfen
+  (Regeln 5/7/9/15): `EBM_RunSelfTest` (Text, nachweislich ohne Wirkung), `EBM_FindMessages`
+  (JSON, Suchfilter; `GetMessageList` ist als Kernel-Methode belegt), `EBM_UpdateConfiguration`,
+  `EBM_SetMessageActive` (ausschalten lässt Variablen stehen), `EBM_ReadMessageValues`
+  (höchstens 20 Meldungen). Knöpfe und Funktionen teilen sich die Logik
+  (`ReadConfiguration` liefert bei Fehlschlag den Grund als Text).
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

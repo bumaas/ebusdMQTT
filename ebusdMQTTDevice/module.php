@@ -28,6 +28,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
     // RequestAction-Idents, die das Modul selbst auslöst (Timer) — ohne aktiven Parent still übergehen
     private const array INTERNAL_IDENTS = ['timerCheckConnection', 'timerRefreshAllMessages', 'publishPollPriorities'];
 
+    // EBM_ReadMessageValues: ebusd fragt ggf. den Bus ab — Obergrenze je Aufruf
+    private const int MAX_MESSAGES_PER_READ = 20;
+
     //property names
     private const string PROP_HOST                             = 'Host';
     private const string PROP_PORT                             = 'Port';
@@ -243,11 +246,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
             case 'btnReadConfiguration':
                 $ret = $this->ReadConfiguration();
-                if ($ret === null) {
-                    $this->MsgBox($this->Translate('Error'));
-                } else {
-                    $this->MsgBox(sprintf($this->Translate('%s entries found'), count($ret)));
-                }
+                $this->MsgBox(is_string($ret) ? $ret : sprintf($this->Translate('%s entries found'), count($ret)));
                 return;
 
             case 'VariableList_onEdit':
@@ -581,6 +580,285 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     //------------------------------------------------------------------------------------------------------------------------
     // my own public functions
+
+    /**
+     * Probelauf ohne Wirkung: prüft MQTT-Parent, ebusd, Signal, Schaltkreis, Konfiguration und
+     * Auswahl und liefert das Ergebnis als Text, jede Störung mit dem nächsten Schritt. Setzt
+     * keinen Status, keinen Timer und kein Attribut und sendet nichts.
+     */
+    public function RunSelfTest(): string
+    {
+        $host        = $this->ReadPropertyString(self::PROP_HOST);
+        $port        = $this->ReadPropertyString(self::PROP_PORT);
+        $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
+        $problems    = 0;
+        $lines       = [
+            sprintf($this->Translate('Self-test of circuit "%s" at ebusd %s:%s (without effect on the instance)'), $circuitName, $host, $port),
+            sprintf($this->Translate('Instance status: %d'), $this->GetStatus())
+        ];
+        $good = static function (string $text) use (&$lines): void {
+            $lines[] = '✔ ' . $text;
+        };
+        $bad  = static function (string $text) use (&$lines, &$problems): void {
+            $lines[] = '✘ ' . $text;
+            $problems++;
+        };
+
+        if ($this->HasActiveParent()) {
+            $good($this->Translate('The MQTT Server (parent instance) is active.'));
+        } else {
+            $bad($this->Translate('The MQTT Server (parent instance) is not active. The values of ebusd arrive via MQTT only - check the MQTT Server instance.'));
+        }
+
+        if ($circuitName === '') {
+            $bad($this->Translate('No circuit selected. Determine the circuits with "Read Circuits" and select one.'));
+        } else {
+            $url    = sprintf('http://%s:%s/data/%s', $host, $port, $circuitName);
+            $result = $this->readURL($url);
+            if ($result === null || !isset($result[self::MODEL_GLOBAL_NAME]['signal'])) {
+                $bad(sprintf($this->Translate('ebusd does not answer at %s. Check host, port and the HTTP port of ebusd (--httpport).'), $url));
+            } elseif (!filter_var($result[self::MODEL_GLOBAL_NAME]['signal'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
+                $bad($this->Translate('ebusd reports no eBUS signal. Check the eBUS adapter and its connection to the bus.'));
+            } elseif (!array_key_exists($circuitName, $result)) {
+                $bad(sprintf($this->Translate('The circuit "%s" does not exist at ebusd. Determine the available circuits with "Read Circuits".'), $circuitName));
+            } else {
+                $good($this->Translate('ebusd answers, reports an eBUS signal and knows the circuit.'));
+            }
+        }
+
+        if (!$this->ReadAttributeBoolean(self::ATTR_SIGNAL)) {
+            $bad($this->Translate('The last eBUS signal reported via MQTT (ebusd/global/signal) was "no signal".'));
+        }
+
+        $configurationMessages = $this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
+        if ($configurationMessages === []) {
+            $bad($this->Translate('The configuration has not been read from ebusd yet. Read it with EBM_UpdateConfiguration.'));
+        } else {
+            $good(sprintf($this->Translate('Configuration read: %d messages.'), count($configurationMessages)));
+        }
+
+        $activeMessages = array_filter(
+            $this->readAttributeArray(self::ATTR_VARIABLELIST),
+            static fn(array $item): bool => ($item[self::FORM_ELEMENT_KEEP] ?? false) && ($item[self::FORM_ELEMENT_READABLE] ?? '') === self::OK_SIGN
+        );
+        if ($activeMessages === []) {
+            $bad($this->Translate('No message is active. Find messages with EBM_FindMessages and activate them with EBM_SetMessageActive.'));
+        } else {
+            $good(sprintf($this->Translate('Active messages: %d.'), count($activeMessages)));
+        }
+
+        $variableCount = 0;
+        $lastUpdate    = 0;
+        foreach (IPS_GetChildrenIDs($this->InstanceID) as $childID) {
+            if (IPS_VariableExists($childID)) {
+                $variableCount++;
+                $lastUpdate = max($lastUpdate, IPS_GetVariable($childID)['VariableUpdated']);
+            }
+        }
+        if ($variableCount > 0) {
+            $good(sprintf($this->Translate('Status variables: %d, last update %s.'), $variableCount, date('d.m.Y H:i:s', $lastUpdate)));
+        }
+
+        $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL);
+        $good(
+            $updateInterval > 0
+                ? sprintf($this->Translate('The active messages are requested every %d minute(s).'), $updateInterval)
+                : $this->Translate('Update interval 0: the module does not request values itself; they arrive only when ebusd publishes them.')
+        );
+
+        $lines[] = $problems === 0 ? $this->Translate('Result: OK') : sprintf($this->Translate('Result: %d problem(s)'), $problems);
+        return implode("\n", $lines);
+    }
+
+    /**
+     * Die Meldungen des Schaltkreises als JSON — dieselbe Information wie die Liste im Formular,
+     * ohne Formatierung. $search filtert (Groß/Klein egal) nach Meldungsname oder Bezeichnung,
+     * '' liefert alle.
+     */
+    public function FindMessages(string $search): string
+    {
+        $variableList = $this->getStoredVariableListOrWarn();
+        if ($variableList === null) {
+            return '';
+        }
+
+        $out = [];
+        foreach ($this->filterVariableList($variableList, $search) as $item) {
+            $idents      = ($item[self::FORM_ELEMENT_IDENTNAMES] ?? '') === '' ? [] : explode('/', $item[self::FORM_ELEMENT_IDENTNAMES]);
+            $variableIDs = [];
+            foreach ($idents as $ident) {
+                $variableID = @$this->GetIDForIdent($ident);
+                if ($variableID > 0) {
+                    $variableIDs[] = $variableID;
+                }
+            }
+            $out[] = [
+                'message'      => $item[self::FORM_ELEMENT_MESSAGENAME],
+                'labels'       => explode('/', (string)($item[self::FORM_ELEMENT_VARIABLENAMES] ?? '')),
+                'idents'       => $idents,
+                'readable'     => ($item[self::FORM_ELEMENT_READABLE] ?? '') === self::OK_SIGN,
+                'writable'     => ($item[self::FORM_ELEMENT_WRITABLE] ?? '') === self::OK_SIGN,
+                'active'       => (bool)($item[self::FORM_ELEMENT_KEEP] ?? false),
+                'pollPriority' => (int)($item[self::FORM_ELEMENT_POLLPRIORITY] ?? 0),
+                'variableIDs'  => $variableIDs
+            ];
+        }
+        return json_encode($out, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    /** Liest die Konfiguration des Schaltkreises von ebusd und speichert sie (Knopf „Lese Konfiguration aus"). */
+    public function UpdateConfiguration(): string
+    {
+        $ret = $this->ReadConfiguration();
+        if (is_string($ret)) {
+            trigger_error($ret, E_USER_WARNING);
+            return '';
+        }
+        return sprintf($this->Translate('%d messages read from ebusd. Find messages with EBM_FindMessages and activate them with EBM_SetMessageActive.'), count($ret));
+    }
+
+    /**
+     * Bindet eine Meldung ein (Variablen anlegen, Auswahl speichern) oder aus. Ausgeschaltet
+     * bleiben die Variablen samt Archiv erhalten; das Modul fragt sie nur nicht mehr ab.
+     * $pollPriority 0..9 (0 = keine eigene Poll-Priorität) wird an ebusd gesendet, wenn sie sich ändert.
+     */
+    public function SetMessageActive(string $messageName, bool $active, int $pollPriority): string
+    {
+        $variableList = $this->getStoredVariableListOrWarn();
+        if ($variableList === null) {
+            return '';
+        }
+
+        if ($pollPriority < 0 || $pollPriority > 9) {
+            trigger_error(
+                sprintf($this->Translate('Poll priority %d is not valid (allowed: 0 to 9, 0 = no own poll priority). Do not repeat with this value.'), $pollPriority),
+                E_USER_WARNING
+            );
+            return '';
+        }
+
+        $index = array_search($messageName, array_column($variableList, self::FORM_ELEMENT_MESSAGENAME), true);
+        if ($index === false) {
+            trigger_error(
+                sprintf($this->Translate('"%s" is not a message of this circuit. Find the message name with EBM_FindMessages.'), $messageName),
+                E_USER_WARNING
+            );
+            return '';
+        }
+
+        if ($active && ($variableList[$index][self::FORM_ELEMENT_READABLE] ?? '') !== self::OK_SIGN) {
+            trigger_error(
+                sprintf($this->Translate('The message "%s" is not readable and cannot be activated.'), $messageName),
+                E_USER_WARNING
+            );
+            return '';
+        }
+
+        $variableList[$index][self::FORM_ELEMENT_KEEP]         = $active;
+        $variableList[$index][self::FORM_ELEMENT_POLLPRIORITY] = $active ? $pollPriority : 0;
+
+        $oldPollPriorities = $this->readAttributeArray(self::ATTR_POLLPRIORITIES);
+        $newPollPriorities = $this->getPollPriorities($variableList);
+        if ($oldPollPriorities !== $newPollPriorities && !$this->HasActiveParent()) {
+            trigger_error(
+                sprintf(
+                    $this->Translate('"%s" was not changed: the new poll priority cannot be sent because the MQTT Server (parent instance) is not active. Check the MQTT Server instance and try again.'),
+                    $messageName
+                ),
+                E_USER_WARNING
+            );
+            return '';
+        }
+
+        $created = 0;
+        if ($active) {
+            $created = $this->RegisterVariablesOfMessage($this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES)[$messageName]);
+        }
+        if ($oldPollPriorities !== $newPollPriorities) {
+            $this->publishPollPriorities($oldPollPriorities, $newPollPriorities);
+            $this->writeAttributeArray(self::ATTR_POLLPRIORITIES, $newPollPriorities);
+        }
+        $this->SaveVariableList($this->getUpdatedVariableList($variableList));
+
+        if (!$active) {
+            return sprintf($this->Translate('The message "%s" is no longer active. Its variables and their archive data are kept; the module no longer requests them.'), $messageName);
+        }
+        return sprintf(
+            $this->Translate('The message "%s" is active: %d new variable(s), idents %s, poll priority %d.'),
+            $messageName,
+            $created,
+            $variableList[$index][self::FORM_ELEMENT_IDENTNAMES],
+            $pollPriority
+        );
+    }
+
+    /**
+     * Liest die aktuellen Werte lesbarer Meldungen bei ebusd (Knopf „Lese Werte") und liefert sie
+     * als JSON (Meldung => Werte durch "/" getrennt, null = kein Wert). ebusd fragt dafür ggf. den
+     * Bus ab, deshalb höchstens 20 Meldungen je Aufruf.
+     */
+    public function ReadMessageValues(string $search): string
+    {
+        $variableList = $this->getStoredVariableListOrWarn();
+        if ($variableList === null) {
+            return '';
+        }
+
+        $matches = array_filter(
+            $this->filterVariableList($variableList, $search),
+            static fn(array $item): bool => ($item[self::FORM_ELEMENT_READABLE] ?? '') === self::OK_SIGN
+        );
+        if ($matches === []) {
+            trigger_error(
+                sprintf($this->Translate('No readable message matches "%s". Find message names with EBM_FindMessages.'), $search),
+                E_USER_WARNING
+            );
+            return '';
+        }
+        if (count($matches) > self::MAX_MESSAGES_PER_READ) {
+            trigger_error(
+                sprintf(
+                    $this->Translate('The search "%s" matches %d readable messages; at most %d are read per call to spare the eBUS. Narrow the search.'),
+                    $search,
+                    count($matches),
+                    self::MAX_MESSAGES_PER_READ
+                ),
+                E_USER_WARNING
+            );
+            return '';
+        }
+
+        $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
+        $out         = [];
+        foreach ($matches as $item) {
+            $out[$item[self::FORM_ELEMENT_MESSAGENAME]] = $this->getCurrentValue($circuitName, $item[self::FORM_ELEMENT_MESSAGENAME]);
+        }
+        return json_encode($out, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    /** Gespeicherte Meldungsliste; leer = Konfiguration noch nicht eingelesen (dann Warnung, null) */
+    private function getStoredVariableListOrWarn(): ?array
+    {
+        $variableList = $this->readAttributeArray(self::ATTR_VARIABLELIST);
+        if ($variableList === []) {
+            trigger_error($this->Translate('The configuration has not been read from ebusd yet. Read it with EBM_UpdateConfiguration.'), E_USER_WARNING);
+            return null;
+        }
+        return $variableList;
+    }
+
+    private function filterVariableList(array $variableList, string $search): array
+    {
+        if ($search === '') {
+            return $variableList;
+        }
+        return array_values(array_filter(
+            $variableList,
+            static fn(array $item): bool => mb_stripos((string)$item[self::FORM_ELEMENT_MESSAGENAME], $search) !== false
+                                            || mb_stripos((string)($item[self::FORM_ELEMENT_VARIABLENAMES] ?? ''), $search) !== false
+        ));
+    }
+
     public function publish(string $topic, string $payload): void
     {
         // see https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
@@ -675,14 +953,19 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $this->writeAttributeArray(self::ATTR_VARIABLELIST, $cleanedList);
     }
 
-    private function ReadConfiguration(): ?array
+    /**
+     * Liest die Konfiguration des Schaltkreises von ebusd und speichert sie.
+     *
+     * @return array|string die aufbereiteten Meldungen, oder der Grund des Fehlschlags als Text
+     */
+    private function ReadConfiguration(): array|string
     {
         $host        = $this->ReadPropertyString(self::PROP_HOST);
         $port        = $this->ReadPropertyString(self::PROP_PORT);
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
         if ($host === '' || $circuitName === '') {
-            return null;
+            return $this->Translate('Host and circuit must be set and applied before the configuration can be read.');
         }
 
         $url    = sprintf('http://%s:%s/data/%s/?def&verbose&exact&write', $host, $port, $circuitName);
@@ -690,18 +973,23 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         if ($result === null) {
             $this->logDebug(__FUNCTION__, 'No response from ebusd URL: ' . $url);
-            return null;
+            return sprintf($this->Translate('ebusd does not answer at %s. Check host, port and the HTTP port of ebusd (--httpport).'), $url);
         }
 
         if (!isset($result[$circuitName]['messages'])) {
-            trigger_error(sprintf('Configuration for circuit \'%s\' not found (URL: %s)', $circuitName, $url));
-            return null;
+            return sprintf(
+                $this->Translate('ebusd has no configuration for the circuit "%s" (%s). Check the circuit with "Read Circuits".'),
+                $circuitName,
+                $url
+            );
         }
 
         $configurationMessages = $result[$circuitName]['messages'];
         if (count($configurationMessages) === 1) {
-            trigger_error('Unexpected count of messages: ' . count($configurationMessages));
-            return null;
+            return sprintf(
+                $this->Translate('ebusd returned only one message for the circuit "%s" - the configuration is probably still loading. Try again later.'),
+                $circuitName
+            );
         }
 
         //ebusd Konfiguration aufbereiten und als Attribut speichern

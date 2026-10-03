@@ -117,6 +117,41 @@ Schaltbar sind nur Variablen, deren Meldung ebusd schreiben lässt und die aus e
 
 ## 7. Funktionsreferenz
 
+Alles, was im Formular über Knöpfe geht, geht auch per Skript. Fehlschläge kommen als Warnung mit Grund und nächstem Schritt.
+
+```php
+EBM_RunSelfTest(int $InstanceID): string
+```
+Prüft ohne jede Wirkung auf die Instanz, ob alles funktioniert: MQTT Server aktiv, ebusd erreichbar, eBUS-Signal, Schaltkreis vorhanden, Konfiguration eingelesen, aktive Meldungen, letzte Aktualisierung. Liefert einen Text, jede Störung mit dem nächsten Schritt.
+
+```php
+EBM_FindMessages(int $InstanceID, string $search): string
+```
+Liefert die Meldungen des Schaltkreises als JSON – dieselbe Information wie die Liste im Formular: Meldung, Bezeichnungen, Idents, lesbar, schreibbar, aktiv, Poll-Priorität und die IDs bereits angelegter Variablen. `$search` filtert nach Meldungsname oder Bezeichnung (Groß-/Kleinschreibung egal), `''` liefert alle.
+
+```php
+EBM_UpdateConfiguration(int $InstanceID): string
+```
+Liest die Konfiguration des Schaltkreises von ebusd und speichert sie (wie der Knopf „Lese Konfiguration aus“). Liefert die Anzahl der gelesenen Meldungen.
+
+```php
+EBM_SetMessageActive(int $InstanceID, string $messageName, bool $active, int $pollPriority): string
+```
+Bindet eine Meldung ein (`true`: Variablen anlegen, Auswahl speichern) oder aus (`false`) – wie das Häkchen „Aktiv“ plus „Variablen anlegen/aktualisieren“. Ausgeschaltet bleiben die Variablen samt Archivdaten erhalten; das Modul fragt sie nur nicht mehr ab. `$pollPriority` 0 bis 9 (0 = keine eigene Poll-Priorität) wird an ebusd gesendet, wenn sie sich ändert.
+
+```php
+EBM_ReadMessageValues(int $InstanceID, string $search): string
+```
+Liest die aktuellen Werte der lesbaren Meldungen, die zu `$search` passen, bei ebusd (wie der Knopf „Lese Werte“) und liefert sie als JSON (Meldung → Werte durch „/“ getrennt, `null` = kein Wert). Weil ebusd dafür den Bus abfragen kann, höchstens 20 Meldungen je Aufruf.
+
+Beispiel: Vorlauftemperatur einbinden
+```php
+$id = 12345; // Instanz-ID des „ebusd MQTT Device“
+echo EBM_FindMessages($id, 'Vorlauf');           // Meldungsnamen suchen, z. B. Hc1FlowTemp
+echo EBM_ReadMessageValues($id, 'Hc1FlowTemp');  // aktuellen Wert ansehen
+echo EBM_SetMessageActive($id, 'Hc1FlowTemp', true, 0);
+```
+
 ```php
 EBM_publish(int $InstanceID, string $topic, string $payload): void
 ```
