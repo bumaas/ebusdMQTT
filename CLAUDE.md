@@ -66,6 +66,13 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   `EBM_SetMessageActive` (ausschalten lässt Variablen stehen), `EBM_ReadMessageValues`
   (höchstens 20 Meldungen). Knöpfe und Funktionen teilen sich die Logik
   (`ReadConfiguration` liefert bei Fehlschlag den Grund als Text).
+- `php tests/check-hints-debug.php` — Regel 6: jede öffentliche Funktion hat genau einen
+  unsichtbaren Formular-Hinweis (`visible: false`, am Ende von `actions`) mit Signatur und
+  Rückgabetyp; Regel 1: sichtbares Label zu „Aktiv“/Poll-Priorität; Regel 10: keine
+  Debug-Zeile ≥ 1000 Zeichen, ein Publish = eine Zeile; Selbsttest behauptet bei Störung
+  keine laufende Abfrage. **Neue öffentliche Funktion ⇒ Hinweis in `form.json` +
+  `locale.json` nachtragen.** `actions[1]` (Liste) und `actions[2]` (Knöpfe) nicht
+  verschieben — `GetConfigurationForm` greift per Index zu.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

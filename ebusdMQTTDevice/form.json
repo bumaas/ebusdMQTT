@@ -146,6 +146,10 @@
       ]
     },
     {
+      "type":    "Label",
+      "caption": "Active: the status variables of the message are created and requested in every update interval. Poll priority 0 to 9: 0 = no own poll priority, 1 = ebusd additionally polls the message in every poll cycle, 2 = in every second cycle, and so on. Only readable messages can be activated."
+    },
+    {
       "type":    "ProgressBar",
       "name":    "ProgressBar",
       "width":   "222px",
@@ -169,6 +173,41 @@
           }
         ]
       }
+    },
+    {
+      "type":    "Label",
+      "visible": false,
+      "caption": "For scripts and AI assistants: status variables with an action are written with RequestAction(VariableID, value). The value is checked against the eBUS definition first; an invalid value, a read-only message or an inactive MQTT Server is reported as an error with the allowed values or the next step, and nothing is sent."
+    },
+    {
+      "type":    "Label",
+      "visible": false,
+      "caption": "For scripts and AI assistants: EBM_RunSelfTest(int $InstanceID): string - checks MQTT Server, ebusd, eBUS signal, circuit, configuration and active messages without any effect on the instance and returns a text; every line marked with ✘ names the next step. Use it first when something does not work."
+    },
+    {
+      "type":    "Label",
+      "visible": false,
+      "caption": "For scripts and AI assistants: EBM_FindMessages(int $InstanceID, string $search): string - returns the messages of the circuit as JSON (message, labels, idents, readable, writable, active, pollPriority, variableIDs). $search filters by message name or label, case-insensitive; an empty string returns all messages. Without effect."
+    },
+    {
+      "type":    "Label",
+      "visible": false,
+      "caption": "For scripts and AI assistants: EBM_UpdateConfiguration(int $InstanceID): string - reads the configuration of the circuit from ebusd and stores it (button \"Read Configuration\"); returns the number of messages read. Needed once before messages can be activated."
+    },
+    {
+      "type":    "Label",
+      "visible": false,
+      "caption": "For scripts and AI assistants: EBM_SetMessageActive(int $InstanceID, string $messageName, bool $active, int $pollPriority): string - true creates the status variables of the message and requests it from then on; false stops requesting it but keeps the variables and their archive data. $messageName as returned by EBM_FindMessages, $pollPriority 0 to 9 (0 = none). Returns a text naming the created idents."
+    },
+    {
+      "type":    "Label",
+      "visible": false,
+      "caption": "For scripts and AI assistants: EBM_ReadMessageValues(int $InstanceID, string $search): string - reads the current values of the readable messages matching $search from ebusd and returns JSON (message => values separated by \"/\", null = no value). ebusd may query the bus for this, therefore at most 20 messages per call."
+    },
+    {
+      "type":    "Label",
+      "visible": false,
+      "caption": "For scripts and AI assistants: EBM_publish(int $InstanceID, string $topic, string $payload): void - sends $payload to the MQTT topic without any check, directly to the eBUS (e.g. topic ebusd/700/hwctimer.monday/set). Only for messages with several fields that cannot be written with RequestAction; a wrong value can change the heating. Returns nothing."
     }
   ],
   "status":   [

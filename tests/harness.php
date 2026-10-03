@@ -148,6 +148,15 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
         return parent::SetStatus($Status);
     }
 
+    /** @var list<array{0: string, 1: string}> Debug-Ausgaben (Message, Data) — getrennt von $recorded, damit die Golden-Dateien unberührt bleiben */
+    public array $debug = [];
+
+    protected function SendDebug(string $Message, string $Data, int $Format): bool
+    {
+        $this->debug[] = [$Message, $Data];
+        return parent::SendDebug($Message, $Data, $Format);
+    }
+
     protected function UpdateFormField(string $Field, string $Parameter, mixed $Value): bool
     {
         $this->formUpdates[] = [$Field, $Parameter, $Value];

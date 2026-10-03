@@ -225,7 +225,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     public function RequestAction(string $Ident, mixed $Value): void
     {
-        $this->logDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, json_encode($Value, JSON_THROW_ON_ERROR)));
+        $this->logDebug(__FUNCTION__, sprintf('Ident: %s, Value: %s', $Ident, $this->shortenForDebug(json_encode($Value, JSON_THROW_ON_ERROR))));
 
         // Hilfsfunktion für JSON-Decoding von $Value
         $decodeValue = static function () use ($Value) {
@@ -417,7 +417,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     public function ReceiveData(string $JSONString): string
     {
-        $this->logDebug(__FUNCTION__, $JSONString);
+        if ($this->trace) {
+            $this->logDebug(__FUNCTION__, $JSONString); // Rohpaket; Topic und Payload stehen unten dekodiert im Debug
+        }
 
         //wir prüfen, ob CircuitName vorhanden ist
         $mqttTopicLower = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
@@ -659,12 +661,17 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $good(sprintf($this->Translate('Status variables: %d, last update %s.'), $variableCount, date('d.m.Y H:i:s', $lastUpdate)));
         }
 
+        // Bei einer Störung hält checkConnection() den Abfrage-Timer an
         $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL);
-        $good(
-            $updateInterval > 0
-                ? sprintf($this->Translate('The active messages are requested every %d minute(s).'), $updateInterval)
-                : $this->Translate('Update interval 0: the module does not request values itself; they arrive only when ebusd publishes them.')
-        );
+        if ($this->GetStatus() !== IS_ACTIVE) {
+            $lines[] = '– ' . sprintf($this->Translate('While the instance status is %d, the module does not request any values.'), $this->GetStatus());
+        } else {
+            $good(
+                $updateInterval > 0
+                    ? sprintf($this->Translate('The active messages are requested every %d minute(s).'), $updateInterval)
+                    : $this->Translate('Update interval 0: the module does not request values itself; they arrive only when ebusd publishes them.')
+            );
+        }
 
         $lines[] = $problems === 0 ? $this->Translate('Result: OK') : sprintf($this->Translate('Result: %d problem(s)'), $problems);
         return implode("\n", $lines);
@@ -871,11 +878,15 @@ class ebusdMQTTDevice extends IPSModuleStrict
             'Payload'          => bin2hex($payload)
         ];
 
-        $DataJSON = json_encode($Data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
-        $this->logDebug(__FUNCTION__, sprintf('Call: %s', $DataJSON));
+        $ret = $this->SendDataToParent(json_encode($Data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+        $this->logDebug(__FUNCTION__, sprintf('%s = %s%s', $topic, $this->shortenForDebug($payload), $ret !== '' ? ' (return: ' . $ret . ')' : ''));
+    }
 
-        $ret = $this->SendDataToParent($DataJSON);
-        $this->logDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret));
+    /** Lange Werte (ganze Meldungslisten aus Formular-Knöpfen) im Debug kürzen */
+    private function shortenForDebug(string $text): string
+    {
+        $max = 200;
+        return strlen($text) <= $max ? $text : sprintf('%s… (%d characters)', substr($text, 0, $max), strlen($text));
     }
 
     private function UpdateCurrentValues(array $variableList): int
@@ -900,7 +911,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
         }
 
         $jsonFormField = json_encode($formField, JSON_THROW_ON_ERROR);
-        $this->logDebug(__FUNCTION__, 'formField: ' . $jsonFormField);
+        $this->logDebug(__FUNCTION__, sprintf('%d messages, %d readable values read', count($formField), $readCounter));
         $this->UpdateFormField('ProgressBar', 'visible', false);
         $this->UpdateFormField(self::FORM_LIST_VARIABLELIST, 'values', $jsonFormField);
         return $readCounter;
@@ -935,7 +946,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $this->writeAttributeArray(self::ATTR_POLLPRIORITIES, $newPollPriorities);
         }
 
-        $this->logDebug(__FUNCTION__, json_encode($variableList, JSON_THROW_ON_ERROR));
+        $this->logDebug(__FUNCTION__, sprintf('%d messages in the list, %d new variable(s)', count($variableList), $count));
 
         // Persistierung der Liste
         $this->SaveVariableList($updatedList);
@@ -995,7 +1006,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
         //ebusd Konfiguration aufbereiten und als Attribut speichern
         $configurationMessages = $this->selectAndPrepareConfigurationMessages($configurationMessages);
         ksort($configurationMessages);
-        $this->logDebug(__FUNCTION__, 'configurationMessages: ' . json_encode($configurationMessages, JSON_THROW_ON_ERROR));
+        $this->logDebug(__FUNCTION__, sprintf('%d messages read from %s', count($configurationMessages), $url));
         $this->WriteAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES, json_encode($configurationMessages, JSON_THROW_ON_ERROR));
 
         //Ausgabeliste aufbereiten und als Attribut speichern
