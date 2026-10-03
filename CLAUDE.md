@@ -64,7 +64,9 @@ Bei Änderungen an Formulartexten immer synchron halten:
 2. `locale.json` — deutscher Text unter exakt diesem Schlüssel
 3. `README.md` — falls die Stelle dort ebenfalls dokumentiert ist
 
-CI (`.github/workflows/check.yml`, PHP 8.4) prüft PHP-Syntax, JSON-Validität,
+CI (`.github/workflows/check.yml`, PHP 8.4) prüft PHP-Syntax, Code-Stil (php-cs-fixer
+`--dry-run` gegen das Regelwerk im Submodul `.style` = `bumaas/SymconStylePHP`, gepinnt;
+lokal per `modul_build.php`), JSON-Validität,
 Übersetzungs-Vollständigkeit, Darstellungsparameter (`check_presentations.php`), die
 Golden-Regressionstests und die Schaltkreis-Auswahl (`check_circuit_options.php`).
 

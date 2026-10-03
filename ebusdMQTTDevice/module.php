@@ -1,4 +1,6 @@
-<?php /** @noinspection AutoloadingIssuesInspection */
+<?php
+
+/** @noinspection AutoloadingIssuesInspection */
 
 declare(strict_types=1);
 
@@ -7,7 +9,6 @@ if (function_exists('IPSUtils_Include')) {
 }
 
 require_once __DIR__ . '/../libs/eBUS_MQTT_Helper.php';
-
 
 class ebusdMQTTDevice extends IPSModuleStrict
 {
@@ -76,7 +77,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $this->RegisterPropertyString(self::PROP_CIRCUITNAME, '');
         $this->RegisterPropertyInteger(self::PROP_UPDATEINTERVAL, 0);
         $this->RegisterPropertyBoolean(self::PROP_WRITEDEBUGINFORMATIONTOIPSLOGGER, false);
-
 
         $this->RegisterAttributeString(self::ATTR_VARIABLELIST, '[]');
         $this->RegisterAttributeString(self::ATTR_POLLPRIORITIES, '[]');
@@ -309,7 +309,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
             return '';
         }
 
-
         //wir prüfen, ob buffer korrektes JSON ist
         try {
             $data = json_decode($JSONString, true, 512, JSON_THROW_ON_ERROR);
@@ -330,7 +329,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
             return '';
         }
         $payloadJson = hex2bin($payloadHex);
-
 
         //Globale Meldungen werden extra behandelt
         if (str_starts_with($topic, MQTT_GROUP_TOPIC . '/global/')) {
@@ -414,7 +412,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         $isActive = ($this->GetStatus() === IS_ACTIVE);
 
-
         $Form                                                   =
             json_decode(file_get_contents(__DIR__ . '/form.json'), true, 512, JSON_THROW_ON_ERROR);
         $Form['elements'][0]['items'][1]['items'][0]['options'] = $this->withCircuitOption(
@@ -485,7 +482,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $ret = $this->SendDataToParent($DataJSON);
         $this->logDebug(__FUNCTION__, sprintf('Call: %s, Return: %s', $DataJSON, $ret));
     }
-
 
     private function UpdateCurrentValues(array $variableList): int
     {
@@ -623,7 +619,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
             }
         }
     }
-
 
     private function checkConnection(): void
     {
@@ -814,7 +809,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
         return implode('/', $values);
     }
 
-
     private function getFieldValue(
         string $messageId,
         array $fields,
@@ -892,7 +886,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         return $ret;
     }
-
 
     private function getVariableList(string $jsonConfigurationMessages): array
     {
@@ -1023,7 +1016,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
             // Action nur erlauben, wenn die Nachricht schreibbar ist UND nur ein Feld existiert (Symcon Standard-Verhalten für einfache Variablen)
             $variableHasAction = $isWritable && ($relevantFieldsCount === 1);
 
-
             // Vorbereitung der Präsentations-Daten
             $presentation = $this->getVariablePresentation($fielddef, $variableType, $variableHasAction);
 
@@ -1133,9 +1125,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
         if ($variableType === VARIABLETYPE_BOOLEAN) {
             $options = $this->getPresentationOptions($fielddef, $variableType);
             return array_filter([
-                                    'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-                                    'OPTIONS'      => $options ? json_encode($options, JSON_THROW_ON_ERROR) : null
-                                ]);
+                'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+                'OPTIONS'      => $options ? json_encode($options, JSON_THROW_ON_ERROR) : null
+            ]);
         }
 
         // 2. Zahlen (Integer / Float)
@@ -1195,9 +1187,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
         // 3. Fallback für Strings und Unbekanntes
         if (!$hasAction) {
             return array_filter([
-                                    'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-                                    'SUFFIX'       => $suffix
-                                ]);
+                'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+                'SUFFIX'       => $suffix
+            ]);
         }
 
         // Die Werteingabe kennt keine OPTIONS - mit fester Werteliste wird es eine Aufzählung.
@@ -1257,7 +1249,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
         return $ret;
     }
 
-
     private function getFieldValues(array $message, array $payload, bool $numericValues = false): array
     {
         $ret          = [];
@@ -1289,17 +1280,17 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 : [];
 
             if ($this->trace && $valueMap) {
-                    $this->logDebug(
-                        'Associations',
-                        sprintf(
-                            'Name: "EBM.%s.%s", Suffix: "%s", Assoziationen: %s',
-                            $message['name'],
-                            $fielddef['name'],
-                            $fielddef['unit'] ?? '',
-                            json_encode($valueMap, JSON_THROW_ON_ERROR)
-                        )
-                    );
-                }
+                $this->logDebug(
+                    'Associations',
+                    sprintf(
+                        'Name: "EBM.%s.%s", Suffix: "%s", Assoziationen: %s',
+                        $message['name'],
+                        $fielddef['name'],
+                        $fielddef['unit'] ?? '',
+                        json_encode($valueMap, JSON_THROW_ON_ERROR)
+                    )
+                );
+            }
 
             $value = $this->getFieldValue(
                 $message['name'],
@@ -1315,7 +1306,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         return $ret;
     }
-
 
     private function updateInstanceStatus(): void
     {
@@ -1355,7 +1345,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $this->applyStatus(IS_INACTIVE, 'invalid connection');
             return;
         }
-
 
         if (!array_key_exists($circuitName, $result)) {
             $this->applyStatus(self::STATUS_INST_TOPIC_IS_INVALID, 'invalid circuit name');

@@ -1,4 +1,6 @@
-<?php /** @noinspection AutoloadingIssuesInspection */
+<?php
+
+/** @noinspection AutoloadingIssuesInspection */
 
 declare(strict_types=1);
 const MQTT_GROUP_TOPIC = 'ebusd';
@@ -12,7 +14,6 @@ trait ebusd2MQTTHelper
     private const string DATA_ID_MQTT_SERVER_TX    = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
 
     private static array $ebusDataTypesDefinitionsCache = [];
-
 
     /**
      * Retrieves a list of supported eBUS data types and their corresponding configuration details.
@@ -156,7 +157,6 @@ trait ebusd2MQTTHelper
             trigger_error('Unsupported ebus type: ' . $fieldDef['type']);
             return '';
         }
-
 
         $dataTypeDef = $ebusTypes[$fieldDef['type']];
 
