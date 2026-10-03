@@ -67,6 +67,25 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
         $this->WriteAttributeString($Name, $Value);
     }
 
+    /** Private Modulmethode aufrufen (Registrierung, Ableitungen) */
+    public function privat(string $method, mixed ...$args): mixed
+    {
+        return (new ReflectionMethod(ebusdMQTTDevice::class, $method))->invoke($this, ...$args);
+    }
+
+    /** @return list<array{topic: string, payload: string}> per SendDataToParent publizierte Nachrichten */
+    public function publiziert(): array
+    {
+        $out = [];
+        foreach ($this->recorded as $r) {
+            if ($r[0] === 'SendDataToParent') {
+                $d     = json_decode($r[1], true, 512, JSON_THROW_ON_ERROR);
+                $out[] = ['topic' => $d['Topic'], 'payload' => hex2bin($d['Payload'])];
+            }
+        }
+        return $out;
+    }
+
     /* --- Außenverbindungen ------------------------------------------------- */
 
     protected function readURL(string $url): ?array
@@ -103,6 +122,12 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
     {
         $this->recorded[] = ['EnableAction', $Ident];
         return parent::EnableAction($Ident);
+    }
+
+    protected function MaintainAction(string $Ident, bool $Keep): bool
+    {
+        $this->recorded[] = ['MaintainAction', $Ident, $Keep];
+        return parent::MaintainAction($Ident, $Keep);
     }
 
     protected function SetValue(string $Ident, mixed $Value): bool

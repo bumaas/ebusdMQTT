@@ -54,6 +54,12 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   207 kein Schaltkreis), genau eine Warnung je Wechsel in einen Fehler, eine Meldung bei
   Behebung, kein Rauschen bei gleichbleibendem Zustand (`applyStatus`). Die CI führt alle
   `tests/check-*.php` aus.
+- `php tests/check-request-action.php` — RequestAction meldet jeden Fehlschlag per
+  `trigger_error` und publiziert dann nichts (Regel 8): Wert außerhalb Wertetabelle/Bereich,
+  nur lesbar, Mehrfeld-Meldung (→ `EBM_publish`), unbekannter Ident, Parent inaktiv (interne
+  Timer-Idents bleiben still). Dazu: Aktionen nur an schreibbaren Einfeld-Meldungen
+  (`MaintainAction` bei der Registrierung) und `UpdateInterval` < 0 → Status 208. Bei `--update` der Golden-Dateien: Registrierung
+  zeichnet `MaintainAction` statt `EnableAction` auf.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

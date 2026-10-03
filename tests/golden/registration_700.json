@@ -15,8 +15,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "AdaptHeatCurve"
+                "MaintainAction",
+                "AdaptHeatCurve",
+                true
             ]
         ]
     },
@@ -35,8 +36,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "BankHolidayEndPeriod"
+                "MaintainAction",
+                "BankHolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -55,8 +57,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "BankHolidayStartPeriod"
+                "MaintainAction",
+                "BankHolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -80,8 +83,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "ContinuosHeating"
+                "MaintainAction",
+                "ContinuosHeating",
+                true
             ]
         ]
     },
@@ -105,8 +109,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "CylinderChargeHyst"
+                "MaintainAction",
+                "CylinderChargeHyst",
+                true
             ]
         ]
     },
@@ -130,8 +135,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "CylinderChargeOffset"
+                "MaintainAction",
+                "CylinderChargeOffset",
+                true
             ]
         ]
     },
@@ -150,8 +156,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Date"
+                "MaintainAction",
+                "Date",
+                true
             ]
         ]
     },
@@ -170,6 +177,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "DisplayedOutsideTemp",
+                false
             ]
         ]
     },
@@ -193,8 +205,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "FrostOverRideTime"
+                "MaintainAction",
+                "FrostOverRideTime",
+                true
             ]
         ]
     },
@@ -213,6 +226,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc1ActualFlowTempDesired",
+                false
             ]
         ]
     },
@@ -232,8 +250,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1AutoOffMode"
+                "MaintainAction",
+                "Hc1AutoOffMode",
+                true
             ]
         ]
     },
@@ -252,6 +271,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc1CircuitType",
+                false
             ]
         ]
     },
@@ -275,8 +299,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1ExcessTemp"
+                "MaintainAction",
+                "Hc1ExcessTemp",
+                true
             ]
         ]
     },
@@ -295,6 +320,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc1FlowTemp",
+                false
             ]
         ]
     },
@@ -318,8 +348,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1HeatCurve"
+                "MaintainAction",
+                "Hc1HeatCurve",
+                true
             ]
         ]
     },
@@ -338,6 +369,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc1HeatCurveAdaption",
+                false
             ]
         ]
     },
@@ -361,8 +397,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1MaxFlowTempDesired"
+                "MaintainAction",
+                "Hc1MaxFlowTempDesired",
+                true
             ]
         ]
     },
@@ -386,8 +423,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1MinCoolingFlowTargetTemp"
+                "MaintainAction",
+                "Hc1MinCoolingFlowTargetTemp",
+                true
             ]
         ]
     },
@@ -411,8 +449,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1MinFlowTempDesired"
+                "MaintainAction",
+                "Hc1MinFlowTempDesired",
+                true
             ]
         ]
     },
@@ -431,6 +470,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc1MixerMovement",
+                false
             ]
         ]
     },
@@ -454,8 +498,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1PumpStatus"
+                "MaintainAction",
+                "Hc1PumpStatus",
+                true
             ]
         ]
     },
@@ -475,8 +520,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1RoomTempSwitchOn"
+                "MaintainAction",
+                "Hc1RoomTempSwitchOn",
+                true
             ]
         ]
     },
@@ -500,8 +546,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1Status"
+                "MaintainAction",
+                "Hc1Status",
+                true
             ]
         ]
     },
@@ -525,8 +572,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1SummerTempLimit"
+                "MaintainAction",
+                "Hc1SummerTempLimit",
+                true
             ]
         ]
     },
@@ -550,8 +598,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1Unknown04"
+                "MaintainAction",
+                "Hc1Unknown04",
+                true
             ]
         ]
     },
@@ -575,8 +624,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1Unknown09"
+                "MaintainAction",
+                "Hc1Unknown09",
+                true
             ]
         ]
     },
@@ -600,8 +650,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1Unknown0A"
+                "MaintainAction",
+                "Hc1Unknown0A",
+                true
             ]
         ]
     },
@@ -625,8 +676,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1Unknown0C"
+                "MaintainAction",
+                "Hc1Unknown0C",
+                true
             ]
         ]
     },
@@ -650,8 +702,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc1Unknown0D"
+                "MaintainAction",
+                "Hc1Unknown0D",
+                true
             ]
         ]
     },
@@ -670,6 +723,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc2ActualFlowTempDesired",
+                false
             ]
         ]
     },
@@ -689,8 +747,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2AutoOffMode"
+                "MaintainAction",
+                "Hc2AutoOffMode",
+                true
             ]
         ]
     },
@@ -709,6 +768,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc2CircuitType",
+                false
             ]
         ]
     },
@@ -732,8 +796,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2ExcessTemp"
+                "MaintainAction",
+                "Hc2ExcessTemp",
+                true
             ]
         ]
     },
@@ -752,6 +817,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc2FlowTemp",
+                false
             ]
         ]
     },
@@ -775,8 +845,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2HeatCurve"
+                "MaintainAction",
+                "Hc2HeatCurve",
+                true
             ]
         ]
     },
@@ -795,6 +866,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc2HeatCurveAdaption",
+                false
             ]
         ]
     },
@@ -818,8 +894,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2MaxFlowTempDesired"
+                "MaintainAction",
+                "Hc2MaxFlowTempDesired",
+                true
             ]
         ]
     },
@@ -843,8 +920,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2MinFlowTempDesired"
+                "MaintainAction",
+                "Hc2MinFlowTempDesired",
+                true
             ]
         ]
     },
@@ -863,6 +941,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc2MixerMovement",
+                false
             ]
         ]
     },
@@ -886,8 +969,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2PumpStatus"
+                "MaintainAction",
+                "Hc2PumpStatus",
+                true
             ]
         ]
     },
@@ -907,8 +991,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2RoomTempSwitchOn"
+                "MaintainAction",
+                "Hc2RoomTempSwitchOn",
+                true
             ]
         ]
     },
@@ -932,8 +1017,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2Status"
+                "MaintainAction",
+                "Hc2Status",
+                true
             ]
         ]
     },
@@ -957,8 +1043,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2SummerTempLimit"
+                "MaintainAction",
+                "Hc2SummerTempLimit",
+                true
             ]
         ]
     },
@@ -982,8 +1069,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2Unknown04"
+                "MaintainAction",
+                "Hc2Unknown04",
+                true
             ]
         ]
     },
@@ -1007,8 +1095,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2Unknown09"
+                "MaintainAction",
+                "Hc2Unknown09",
+                true
             ]
         ]
     },
@@ -1032,8 +1121,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2Unknown0c"
+                "MaintainAction",
+                "Hc2Unknown0c",
+                true
             ]
         ]
     },
@@ -1057,8 +1147,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2Unknown0d"
+                "MaintainAction",
+                "Hc2Unknown0d",
+                true
             ]
         ]
     },
@@ -1082,8 +1173,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc2Unknown11"
+                "MaintainAction",
+                "Hc2Unknown11",
+                true
             ]
         ]
     },
@@ -1102,6 +1194,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc3ActualFlowTempDesired",
+                false
             ]
         ]
     },
@@ -1121,8 +1218,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3AutoOffMode"
+                "MaintainAction",
+                "Hc3AutoOffMode",
+                true
             ]
         ]
     },
@@ -1141,6 +1239,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc3CircuitType",
+                false
             ]
         ]
     },
@@ -1164,8 +1267,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3ExcessTemp"
+                "MaintainAction",
+                "Hc3ExcessTemp",
+                true
             ]
         ]
     },
@@ -1184,6 +1288,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc3FlowTemp",
+                false
             ]
         ]
     },
@@ -1207,8 +1316,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3HeatCurve"
+                "MaintainAction",
+                "Hc3HeatCurve",
+                true
             ]
         ]
     },
@@ -1227,6 +1337,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc3HeatCurveAdaption",
+                false
             ]
         ]
     },
@@ -1250,8 +1365,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3MaxFlowTempDesired"
+                "MaintainAction",
+                "Hc3MaxFlowTempDesired",
+                true
             ]
         ]
     },
@@ -1275,8 +1391,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3MinFlowTempDesired"
+                "MaintainAction",
+                "Hc3MinFlowTempDesired",
+                true
             ]
         ]
     },
@@ -1295,6 +1412,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hc3MixerMovement",
+                false
             ]
         ]
     },
@@ -1318,8 +1440,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3PumpStatus"
+                "MaintainAction",
+                "Hc3PumpStatus",
+                true
             ]
         ]
     },
@@ -1339,8 +1462,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3RoomTempSwitchOn"
+                "MaintainAction",
+                "Hc3RoomTempSwitchOn",
+                true
             ]
         ]
     },
@@ -1364,8 +1488,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3Status"
+                "MaintainAction",
+                "Hc3Status",
+                true
             ]
         ]
     },
@@ -1389,8 +1514,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3SummerTempLimit"
+                "MaintainAction",
+                "Hc3SummerTempLimit",
+                true
             ]
         ]
     },
@@ -1414,8 +1540,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3Unknown04"
+                "MaintainAction",
+                "Hc3Unknown04",
+                true
             ]
         ]
     },
@@ -1439,8 +1566,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3Unknown09"
+                "MaintainAction",
+                "Hc3Unknown09",
+                true
             ]
         ]
     },
@@ -1464,8 +1592,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3Unknown0c"
+                "MaintainAction",
+                "Hc3Unknown0c",
+                true
             ]
         ]
     },
@@ -1489,8 +1618,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3Unknown0d"
+                "MaintainAction",
+                "Hc3Unknown0d",
+                true
             ]
         ]
     },
@@ -1514,8 +1644,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Hc3Unknown11"
+                "MaintainAction",
+                "Hc3Unknown11",
+                true
             ]
         ]
     },
@@ -1534,6 +1665,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HcStorageTempBottom",
+                false
             ]
         ]
     },
@@ -1552,6 +1688,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HcStorageTempTop",
+                false
             ]
         ]
     },
@@ -1570,8 +1711,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HolidayEndPeriod"
+                "MaintainAction",
+                "HolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -1590,8 +1732,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HolidayStartPeriod"
+                "MaintainAction",
+                "HolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -1615,8 +1758,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HolidayTemp"
+                "MaintainAction",
+                "HolidayTemp",
+                true
             ]
         ]
     },
@@ -1635,8 +1779,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcBankHolidayEndPeriod"
+                "MaintainAction",
+                "HwcBankHolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -1655,8 +1800,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcBankHolidayStartPeriod"
+                "MaintainAction",
+                "HwcBankHolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -1675,6 +1821,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HwcFlowTemp",
+                false
             ]
         ]
     },
@@ -1693,8 +1844,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcHolidayEndPeriod"
+                "MaintainAction",
+                "HwcHolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -1713,8 +1865,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcHolidayStartPeriod"
+                "MaintainAction",
+                "HwcHolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -1738,8 +1891,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcLockTime"
+                "MaintainAction",
+                "HwcLockTime",
+                true
             ]
         ]
     },
@@ -1763,8 +1917,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcMaxFlowTempDesired"
+                "MaintainAction",
+                "HwcMaxFlowTempDesired",
+                true
             ]
         ]
     },
@@ -1784,8 +1939,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcOpMode"
+                "MaintainAction",
+                "HwcOpMode",
+                true
             ]
         ]
     },
@@ -1805,8 +1961,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcParallelLoading"
+                "MaintainAction",
+                "HwcParallelLoading",
+                true
             ]
         ]
     },
@@ -1826,8 +1983,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcSFMode"
+                "MaintainAction",
+                "HwcSFMode",
+                true
             ]
         ]
     },
@@ -1846,6 +2004,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HwcStorageTemp",
+                false
             ]
         ]
     },
@@ -1864,6 +2027,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HwcStorageTempBottom",
+                false
             ]
         ]
     },
@@ -1882,6 +2050,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HwcStorageTempTop",
+                false
             ]
         ]
     },
@@ -1905,8 +2078,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HwcTempDesired"
+                "MaintainAction",
+                "HwcTempDesired",
+                true
             ]
         ]
     },
@@ -1930,8 +2104,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "HydraulicScheme"
+                "MaintainAction",
+                "HydraulicScheme",
+                true
             ]
         ]
     },
@@ -1950,8 +2125,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Installer1"
+                "MaintainAction",
+                "Installer1",
+                true
             ]
         ]
     },
@@ -1970,8 +2146,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Installer2"
+                "MaintainAction",
+                "Installer2",
+                true
             ]
         ]
     },
@@ -1995,8 +2172,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "KeyCodeforConfigMenu"
+                "MaintainAction",
+                "KeyCodeforConfigMenu",
+                true
             ]
         ]
     },
@@ -2015,8 +2193,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "MaintenanceDate"
+                "MaintainAction",
+                "MaintenanceDate",
+                true
             ]
         ]
     },
@@ -2035,6 +2214,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "MaintenanceDue",
+                false
             ]
         ]
     },
@@ -2058,8 +2242,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "MaxCylinderChargeTime"
+                "MaintainAction",
+                "MaxCylinderChargeTime",
+                true
             ]
         ]
     },
@@ -2083,8 +2268,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "MaxRoomHumidity"
+                "MaintainAction",
+                "MaxRoomHumidity",
+                true
             ]
         ]
     },
@@ -2104,8 +2290,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "MultiRelaySetting"
+                "MaintainAction",
+                "MultiRelaySetting",
+                true
             ]
         ]
     },
@@ -2125,8 +2312,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "OpMode"
+                "MaintainAction",
+                "OpMode",
+                true
             ]
         ]
     },
@@ -2146,8 +2334,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "OpModeEffect"
+                "MaintainAction",
+                "OpModeEffect",
+                true
             ]
         ]
     },
@@ -2171,8 +2360,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "OutsideTempAvg"
+                "MaintainAction",
+                "OutsideTempAvg",
+                true
             ]
         ]
     },
@@ -2191,8 +2381,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PhoneNumber1"
+                "MaintainAction",
+                "PhoneNumber1",
+                true
             ]
         ]
     },
@@ -2211,8 +2402,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PhoneNumber2"
+                "MaintainAction",
+                "PhoneNumber2",
+                true
             ]
         ]
     },
@@ -2232,8 +2424,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrEnergySum"
+                "MaintainAction",
+                "PrEnergySum",
+                true
             ]
         ]
     },
@@ -2253,8 +2446,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrEnergySumHc"
+                "MaintainAction",
+                "PrEnergySumHc",
+                true
             ]
         ]
     },
@@ -2274,8 +2468,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrEnergySumHcLastMonth"
+                "MaintainAction",
+                "PrEnergySumHcLastMonth",
+                true
             ]
         ]
     },
@@ -2295,8 +2490,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrEnergySumHcThisMonth"
+                "MaintainAction",
+                "PrEnergySumHcThisMonth",
+                true
             ]
         ]
     },
@@ -2316,8 +2512,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrEnergySumHwc"
+                "MaintainAction",
+                "PrEnergySumHwc",
+                true
             ]
         ]
     },
@@ -2337,8 +2534,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrEnergySumHwcLastMonth"
+                "MaintainAction",
+                "PrEnergySumHwcLastMonth",
+                true
             ]
         ]
     },
@@ -2358,8 +2556,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrEnergySumHwcThisMonth"
+                "MaintainAction",
+                "PrEnergySumHwcThisMonth",
+                true
             ]
         ]
     },
@@ -2379,8 +2578,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrFuelSum"
+                "MaintainAction",
+                "PrFuelSum",
+                true
             ]
         ]
     },
@@ -2400,8 +2600,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrFuelSumHc"
+                "MaintainAction",
+                "PrFuelSumHc",
+                true
             ]
         ]
     },
@@ -2421,8 +2622,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrFuelSumHcLastMonth"
+                "MaintainAction",
+                "PrFuelSumHcLastMonth",
+                true
             ]
         ]
     },
@@ -2442,8 +2644,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrFuelSumHcThisMonth"
+                "MaintainAction",
+                "PrFuelSumHcThisMonth",
+                true
             ]
         ]
     },
@@ -2463,8 +2666,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrFuelSumHwc"
+                "MaintainAction",
+                "PrFuelSumHwc",
+                true
             ]
         ]
     },
@@ -2484,8 +2688,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrFuelSumHwcLastMonth"
+                "MaintainAction",
+                "PrFuelSumHwcLastMonth",
+                true
             ]
         ]
     },
@@ -2505,8 +2710,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PrFuelSumHwcThisMonth"
+                "MaintainAction",
+                "PrFuelSumHwcThisMonth",
+                true
             ]
         ]
     },
@@ -2530,8 +2736,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "PumpAdditionalTime"
+                "MaintainAction",
+                "PumpAdditionalTime",
+                true
             ]
         ]
     },
@@ -2551,8 +2758,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "SFMode"
+                "MaintainAction",
+                "SFMode",
+                true
             ]
         ]
     },
@@ -2572,8 +2780,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "SolarYieldTotal"
+                "MaintainAction",
+                "SolarYieldTotal",
+                true
             ]
         ]
     },
@@ -2597,8 +2806,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "StartOTCooling"
+                "MaintainAction",
+                "StartOTCooling",
+                true
             ]
         ]
     },
@@ -2617,6 +2827,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SystemFlowTemp",
+                false
             ]
         ]
     },
@@ -2635,8 +2850,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Time"
+                "MaintainAction",
+                "Time",
+                true
             ]
         ]
     },
@@ -2660,8 +2876,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Unknown67"
+                "MaintainAction",
+                "Unknown67",
+                true
             ]
         ]
     },
@@ -2685,8 +2902,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Unknown68"
+                "MaintainAction",
+                "Unknown68",
+                true
             ]
         ]
     },
@@ -2710,8 +2928,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "Unknown85"
+                "MaintainAction",
+                "Unknown85",
+                true
             ]
         ]
     },
@@ -2730,6 +2949,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "WaterPressure",
+                false
             ]
         ]
     },
@@ -2749,8 +2973,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "YieldTotal"
+                "MaintainAction",
+                "YieldTotal",
+                true
             ]
         ]
     },
@@ -2769,6 +2994,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Friday_2",
                 "Zeitfenster Freitag 1 to",
@@ -2778,6 +3008,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2791,6 +3026,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Friday_4",
                 "Zeitfenster Freitag 2 to",
@@ -2800,6 +3040,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2813,6 +3058,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Friday_6",
                 "Zeitfenster Freitag 3 to",
@@ -2822,6 +3072,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Friday_6",
+                false
             ]
         ]
     },
@@ -2840,6 +3095,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Monday_2",
                 "Zeitfenster Montag 1 to",
@@ -2849,6 +3109,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2862,6 +3127,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Monday_4",
                 "Zeitfenster Montag 2 to",
@@ -2871,6 +3141,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2884,6 +3159,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Monday_6",
                 "Zeitfenster Montag 3 to",
@@ -2893,6 +3173,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Monday_6",
+                false
             ]
         ]
     },
@@ -2911,6 +3196,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Saturday_2",
                 "Zeitfenster Samstag 1 to",
@@ -2920,6 +3210,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2933,6 +3228,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Saturday_4",
                 "Zeitfenster Samstag 2 to",
@@ -2942,6 +3242,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2955,6 +3260,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Saturday_6",
                 "Zeitfenster Samstag 3 to",
@@ -2964,6 +3274,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Saturday_6",
+                false
             ]
         ]
     },
@@ -2982,6 +3297,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Sunday_2",
                 "Zeitfenster Sonntag 1 to",
@@ -2991,6 +3311,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3004,6 +3329,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Sunday_4",
                 "Zeitfenster Sonntag 2 to",
@@ -3013,6 +3343,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3026,6 +3361,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Sunday_6",
                 "Zeitfenster Sonntag 3 to",
@@ -3035,6 +3375,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Sunday_6",
+                false
             ]
         ]
     },
@@ -3053,6 +3398,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Thursday_2",
                 "Zeitfenster Donnerstag 1 to",
@@ -3062,6 +3412,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3075,6 +3430,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Thursday_4",
                 "Zeitfenster Donnerstag 2 to",
@@ -3084,6 +3444,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3097,6 +3462,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Thursday_6",
                 "Zeitfenster Donnerstag 3 to",
@@ -3106,6 +3476,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Thursday_6",
+                false
             ]
         ]
     },
@@ -3124,6 +3499,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Tuesday_2",
                 "Zeitfenster Dienstag 1 to",
@@ -3133,6 +3513,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3146,6 +3531,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Tuesday_4",
                 "Zeitfenster Dienstag 2 to",
@@ -3155,6 +3545,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3168,6 +3563,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Tuesday_6",
                 "Zeitfenster Dienstag 3 to",
@@ -3177,6 +3577,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -3195,6 +3600,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Wednesday_2",
                 "Zeitfenster Mittwoch 1 to",
@@ -3204,6 +3614,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3217,6 +3632,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Wednesday_4",
                 "Zeitfenster Mittwoch 2 to",
@@ -3226,6 +3646,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3239,6 +3664,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ccTimer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ccTimer_Wednesday_6",
                 "Zeitfenster Mittwoch 3 to",
@@ -3248,6 +3678,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ccTimer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -3267,8 +3702,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "clearerrorhistory"
+                "MaintainAction",
+                "clearerrorhistory",
+                true
             ]
         ]
     },
@@ -3289,6 +3725,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "currenterror_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "currenterror_1",
                 "Fehlernummer",
@@ -3300,6 +3741,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "currenterror_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3315,6 +3761,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "currenterror_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "currenterror_3",
                 "Fehlernummer",
@@ -3328,6 +3779,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "currenterror_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "currenterror_4",
                 "Fehlernummer",
@@ -3339,6 +3795,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "currenterror_4",
+                false
             ]
         ]
     },
@@ -3359,6 +3820,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "errorhistory_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "errorhistory_1",
                 "Status",
@@ -3372,6 +3838,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "errorhistory_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "errorhistory_2",
                 "Zeit",
@@ -3381,6 +3852,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "errorhistory_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3394,6 +3870,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "errorhistory_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "errorhistory_4",
                 "Fehlernummer",
@@ -3405,6 +3886,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "errorhistory_4",
+                false
             ]
         ]
     },
@@ -3423,6 +3909,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Friday_2",
                 "Zeitfenster WW Freitag 1 to",
@@ -3432,6 +3923,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3445,6 +3941,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Friday_4",
                 "Zeitfenster WW Freitag 2 to",
@@ -3454,6 +3955,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3467,6 +3973,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Friday_6",
                 "Zeitfenster WW Freitag 3 to",
@@ -3476,6 +3987,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Friday_6",
+                false
             ]
         ]
     },
@@ -3494,6 +4010,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Monday_2",
                 "Zeitfenster WW Montag 1 to",
@@ -3503,6 +4024,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3516,6 +4042,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Monday_4",
                 "Zeitfenster WW Montag 2 to",
@@ -3525,6 +4056,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3538,6 +4074,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Monday_6",
                 "Zeitfenster WW Montag 3 to",
@@ -3547,6 +4088,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Monday_6",
+                false
             ]
         ]
     },
@@ -3565,6 +4111,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Saturday_2",
                 "Zeitfenster WW Samstag 1 to",
@@ -3574,6 +4125,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3587,6 +4143,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Saturday_4",
                 "Zeitfenster WW Samstag 2 to",
@@ -3596,6 +4157,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3609,6 +4175,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Saturday_6",
                 "Zeitfenster WW Samstag 3 to",
@@ -3618,6 +4189,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Saturday_6",
+                false
             ]
         ]
     },
@@ -3636,6 +4212,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Sunday_2",
                 "Zeitfenster WW Sonntag 1 to",
@@ -3645,6 +4226,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3658,6 +4244,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Sunday_4",
                 "Zeitfenster WW Sonntag 2 to",
@@ -3667,6 +4258,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3680,6 +4276,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Sunday_6",
                 "Zeitfenster WW Sonntag 3 to",
@@ -3689,6 +4290,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Sunday_6",
+                false
             ]
         ]
     },
@@ -3707,6 +4313,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Thursday_2",
                 "Zeitfenster WW Donnerstag 1 to",
@@ -3716,6 +4327,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3729,6 +4345,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Thursday_4",
                 "Zeitfenster WW Donnerstag 2 to",
@@ -3738,6 +4359,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3751,6 +4377,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Thursday_6",
                 "Zeitfenster WW Donnerstag 3 to",
@@ -3760,6 +4391,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Thursday_6",
+                false
             ]
         ]
     },
@@ -3778,6 +4414,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Tuesday_2",
                 "Zeitfenster WW Dienstag 1 to",
@@ -3787,6 +4428,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3800,6 +4446,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Tuesday_4",
                 "Zeitfenster WW Dienstag 2 to",
@@ -3809,6 +4460,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3822,6 +4478,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Tuesday_6",
                 "Zeitfenster WW Dienstag 3 to",
@@ -3831,6 +4492,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -3849,6 +4515,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Wednesday_2",
                 "Zeitfenster WW Mittwoch 1 to",
@@ -3858,6 +4529,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3871,6 +4547,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Wednesday_4",
                 "Zeitfenster WW Mittwoch 2 to",
@@ -3880,6 +4561,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3893,6 +4579,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "hwcTimer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "hwcTimer_Wednesday_6",
                 "Zeitfenster WW Mittwoch 3 to",
@@ -3902,6 +4593,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "hwcTimer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -3920,6 +4616,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Friday_2",
                 "Zeitfenster Flüsterbetrieb Freitag 1 to",
@@ -3929,6 +4630,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3942,6 +4648,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Friday_4",
                 "Zeitfenster Flüsterbetrieb Freitag 2 to",
@@ -3951,6 +4662,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -3964,6 +4680,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Friday_6",
                 "Zeitfenster Flüsterbetrieb Freitag 3 to",
@@ -3973,6 +4694,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Friday_6",
+                false
             ]
         ]
     },
@@ -3991,6 +4717,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Monday_2",
                 "Zeitfenster Flüsterbetrieb Montag 1 to",
@@ -4000,6 +4731,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4013,6 +4749,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Monday_4",
                 "Zeitfenster Flüsterbetrieb Montag 2 to",
@@ -4022,6 +4763,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4035,6 +4781,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Monday_6",
                 "Zeitfenster Flüsterbetrieb Montag 3 to",
@@ -4044,6 +4795,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Monday_6",
+                false
             ]
         ]
     },
@@ -4062,6 +4818,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Saturday_2",
                 "Zeitfenster Flüsterbetrieb Samstag 1 to",
@@ -4071,6 +4832,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4084,6 +4850,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Saturday_4",
                 "Zeitfenster Flüsterbetrieb Samstag 2 to",
@@ -4093,6 +4864,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4106,6 +4882,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Saturday_6",
                 "Zeitfenster Flüsterbetrieb Samstag 3 to",
@@ -4115,6 +4896,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Saturday_6",
+                false
             ]
         ]
     },
@@ -4133,6 +4919,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Sunday_2",
                 "Zeitfenster Flüsterbetrieb Sonntag 1 to",
@@ -4142,6 +4933,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4155,6 +4951,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Sunday_4",
                 "Zeitfenster Flüsterbetrieb Sonntag 2 to",
@@ -4164,6 +4965,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4177,6 +4983,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Sunday_6",
                 "Zeitfenster Flüsterbetrieb Sonntag 3 to",
@@ -4186,6 +4997,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Sunday_6",
+                false
             ]
         ]
     },
@@ -4204,6 +5020,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Thursday_2",
                 "Zeitfenster Flüsterbetrieb Donnerstag 1 to",
@@ -4213,6 +5034,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4226,6 +5052,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Thursday_4",
                 "Zeitfenster Flüsterbetrieb Donnerstag 2 to",
@@ -4235,6 +5066,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4248,6 +5084,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Thursday_6",
                 "Zeitfenster Flüsterbetrieb Donnerstag 3 to",
@@ -4257,6 +5098,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Thursday_6",
+                false
             ]
         ]
     },
@@ -4275,6 +5121,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Tuesday_2",
                 "Zeitfenster Flüsterbetrieb Dienstag 1 to",
@@ -4284,6 +5135,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4297,6 +5153,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Tuesday_4",
                 "Zeitfenster Flüsterbetrieb Dienstag 2 to",
@@ -4306,6 +5167,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4319,6 +5185,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Tuesday_6",
                 "Zeitfenster Flüsterbetrieb Dienstag 3 to",
@@ -4328,6 +5199,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -4346,6 +5222,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Wednesday_2",
                 "Zeitfenster Flüsterbetrieb Mittwoch 1 to",
@@ -4355,6 +5236,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4368,6 +5254,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Wednesday_4",
                 "Zeitfenster Flüsterbetrieb Mittwoch 2 to",
@@ -4377,6 +5268,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4390,6 +5286,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "noiseReductionTimer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "noiseReductionTimer_Wednesday_6",
                 "Zeitfenster Flüsterbetrieb Mittwoch 3 to",
@@ -4399,6 +5300,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "noiseReductionTimer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -4417,6 +5323,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Friday_2",
                 "Zeitfenster Hochtarif Freitag 1 to",
@@ -4426,6 +5337,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4439,6 +5355,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Friday_4",
                 "Zeitfenster Hochtarif Freitag 2 to",
@@ -4448,6 +5369,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4461,6 +5387,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Friday_6",
                 "Zeitfenster Hochtarif Freitag 3 to",
@@ -4470,6 +5401,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Friday_6",
+                false
             ]
         ]
     },
@@ -4488,6 +5424,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Monday_2",
                 "Zeitfenster Hochtarif Montag 1 to",
@@ -4497,6 +5438,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4510,6 +5456,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Monday_4",
                 "Zeitfenster Hochtarif Montag 2 to",
@@ -4519,6 +5470,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4532,6 +5488,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Monday_6",
                 "Zeitfenster Hochtarif Montag 3 to",
@@ -4541,6 +5502,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Monday_6",
+                false
             ]
         ]
     },
@@ -4559,6 +5525,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Saturday_2",
                 "Zeitfenster Hochtarif Samstag 1 to",
@@ -4568,6 +5539,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4581,6 +5557,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Saturday_4",
                 "Zeitfenster Hochtarif Samstag 2 to",
@@ -4590,6 +5571,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4603,6 +5589,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Saturday_6",
                 "Zeitfenster Hochtarif Samstag 3 to",
@@ -4612,6 +5603,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Saturday_6",
+                false
             ]
         ]
     },
@@ -4630,6 +5626,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Sunday_2",
                 "Zeitfenster Hochtarif Sonntag 1 to",
@@ -4639,6 +5640,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4652,6 +5658,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Sunday_4",
                 "Zeitfenster Hochtarif Sonntag 2 to",
@@ -4661,6 +5672,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4674,6 +5690,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Sunday_6",
                 "Zeitfenster Hochtarif Sonntag 3 to",
@@ -4683,6 +5704,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Sunday_6",
+                false
             ]
         ]
     },
@@ -4701,6 +5727,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Thursday_2",
                 "Zeitfenster Hochtarif Donnerstag 1 to",
@@ -4710,6 +5741,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4723,6 +5759,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Thursday_4",
                 "Zeitfenster Hochtarif Donnerstag 2 to",
@@ -4732,6 +5773,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4745,6 +5791,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Thursday_6",
                 "Zeitfenster Hochtarif Donnerstag 3 to",
@@ -4754,6 +5805,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Thursday_6",
+                false
             ]
         ]
     },
@@ -4772,6 +5828,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Tuesday_2",
                 "Zeitfenster Hochtarif Dienstag 1 to",
@@ -4781,6 +5842,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4794,6 +5860,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Tuesday_4",
                 "Zeitfenster Hochtarif Dienstag 2 to",
@@ -4803,6 +5874,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4816,6 +5892,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Tuesday_6",
                 "Zeitfenster Hochtarif Dienstag 3 to",
@@ -4825,6 +5906,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -4843,6 +5929,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Wednesday_2",
                 "Zeitfenster Hochtarif Mittwoch 1 to",
@@ -4852,6 +5943,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4865,6 +5961,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Wednesday_4",
                 "Zeitfenster Hochtarif Mittwoch 2 to",
@@ -4874,6 +5975,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4887,6 +5993,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "tariffTimer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "tariffTimer_Wednesday_6",
                 "Zeitfenster Hochtarif Mittwoch 3 to",
@@ -4896,6 +6007,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "tariffTimer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -4914,6 +6030,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Friday_2",
                 "Zeitfenster Lüftung Freitag 1 to",
@@ -4923,6 +6044,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4936,6 +6062,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Friday_4",
                 "Zeitfenster Lüftung Freitag 2 to",
@@ -4945,6 +6076,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -4958,6 +6094,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Friday_6",
                 "Zeitfenster Lüftung Freitag 3 to",
@@ -4967,6 +6108,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Friday_6",
+                false
             ]
         ]
     },
@@ -4985,6 +6131,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Monday_2",
                 "Zeitfenster Lüftung Montag 1 to",
@@ -4994,6 +6145,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5007,6 +6163,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Monday_4",
                 "Zeitfenster Lüftung Montag 2 to",
@@ -5016,6 +6177,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5029,6 +6195,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Monday_6",
                 "Zeitfenster Lüftung Montag 3 to",
@@ -5038,6 +6209,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Monday_6",
+                false
             ]
         ]
     },
@@ -5056,6 +6232,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Saturday_2",
                 "Zeitfenster Lüftung Samstag 1 to",
@@ -5065,6 +6246,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5078,6 +6264,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Saturday_4",
                 "Zeitfenster Lüftung Samstag 2 to",
@@ -5087,6 +6278,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5100,6 +6296,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Saturday_6",
                 "Zeitfenster Lüftung Samstag 3 to",
@@ -5109,6 +6310,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Saturday_6",
+                false
             ]
         ]
     },
@@ -5127,6 +6333,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Sunday_2",
                 "Zeitfenster Lüftung Sonntag 1 to",
@@ -5136,6 +6347,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5149,6 +6365,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Sunday_4",
                 "Zeitfenster Lüftung Sonntag 2 to",
@@ -5158,6 +6379,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5171,6 +6397,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Sunday_6",
                 "Zeitfenster Lüftung Sonntag 3 to",
@@ -5180,6 +6411,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Sunday_6",
+                false
             ]
         ]
     },
@@ -5198,6 +6434,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Thursday_2",
                 "Zeitfenster Lüftung Donnerstag 1 to",
@@ -5207,6 +6448,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5220,6 +6466,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Thursday_4",
                 "Zeitfenster Lüftung Donnerstag 2 to",
@@ -5229,6 +6480,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5242,6 +6498,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Thursday_6",
                 "Zeitfenster Lüftung Donnerstag 3 to",
@@ -5251,6 +6512,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Thursday_6",
+                false
             ]
         ]
     },
@@ -5269,6 +6535,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Tuesday_2",
                 "Zeitfenster Lüftung Dienstag 1 to",
@@ -5278,6 +6549,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5291,6 +6567,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Tuesday_4",
                 "Zeitfenster Lüftung Dienstag 2 to",
@@ -5300,6 +6581,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5313,6 +6599,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Tuesday_6",
                 "Zeitfenster Lüftung Dienstag 3 to",
@@ -5322,6 +6613,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -5340,6 +6636,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Wednesday_2",
                 "Zeitfenster Lüftung Mittwoch 1 to",
@@ -5349,6 +6650,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5362,6 +6668,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Wednesday_4",
                 "Zeitfenster Lüftung Mittwoch 2 to",
@@ -5371,6 +6682,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5384,6 +6700,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ventilationTimer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ventilationTimer_Wednesday_6",
                 "Zeitfenster Lüftung Mittwoch 3 to",
@@ -5393,6 +6714,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ventilationTimer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -5416,8 +6742,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1ActualRoomTempDesired"
+                "MaintainAction",
+                "z1ActualRoomTempDesired",
+                true
             ]
         ]
     },
@@ -5436,8 +6763,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1BankHolidayEndPeriod"
+                "MaintainAction",
+                "z1BankHolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -5456,8 +6784,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1BankHolidayStartPeriod"
+                "MaintainAction",
+                "z1BankHolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -5481,8 +6810,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1CoolingTemp"
+                "MaintainAction",
+                "z1CoolingTemp",
+                true
             ]
         ]
     },
@@ -5506,8 +6836,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1CoolingTemp2"
+                "MaintainAction",
+                "z1CoolingTemp2",
+                true
             ]
         ]
     },
@@ -5526,6 +6857,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Friday_2",
                 "Zeitfenster Kühlen Freitag 1 to",
@@ -5535,6 +6871,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5548,6 +6889,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Friday_4",
                 "Zeitfenster Kühlen Freitag 2 to",
@@ -5557,6 +6903,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5570,6 +6921,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Friday_6",
                 "Zeitfenster Kühlen Freitag 3 to",
@@ -5579,6 +6935,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Friday_6",
+                false
             ]
         ]
     },
@@ -5597,6 +6958,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Monday_2",
                 "Zeitfenster Kühlen Montag 1 to",
@@ -5606,6 +6972,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5619,6 +6990,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Monday_4",
                 "Zeitfenster Kühlen Montag 2 to",
@@ -5628,6 +7004,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5641,6 +7022,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Monday_6",
                 "Zeitfenster Kühlen Montag 3 to",
@@ -5650,6 +7036,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Monday_6",
+                false
             ]
         ]
     },
@@ -5668,6 +7059,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Saturday_2",
                 "Zeitfenster Kühlen Samstag 1 to",
@@ -5677,6 +7073,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5690,6 +7091,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Saturday_4",
                 "Zeitfenster Kühlen Samstag 2 to",
@@ -5699,6 +7105,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5712,6 +7123,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Saturday_6",
                 "Zeitfenster Kühlen Samstag 3 to",
@@ -5721,6 +7137,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Saturday_6",
+                false
             ]
         ]
     },
@@ -5739,6 +7160,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Sunday_2",
                 "Zeitfenster Kühlen Sonntag 1 to",
@@ -5748,6 +7174,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5761,6 +7192,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Sunday_4",
                 "Zeitfenster Kühlen Sonntag 2 to",
@@ -5770,6 +7206,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5783,6 +7224,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Sunday_6",
                 "Zeitfenster Kühlen Sonntag 3 to",
@@ -5792,6 +7238,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Sunday_6",
+                false
             ]
         ]
     },
@@ -5810,6 +7261,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Thursday_2",
                 "Zeitfenster Kühlen Donnerstag 1 to",
@@ -5819,6 +7275,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5832,6 +7293,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Thursday_4",
                 "Zeitfenster Kühlen Donnerstag 2 to",
@@ -5841,6 +7307,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5854,6 +7325,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Thursday_6",
                 "Zeitfenster Kühlen Donnerstag 3 to",
@@ -5863,6 +7339,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Thursday_6",
+                false
             ]
         ]
     },
@@ -5881,6 +7362,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Tuesday_2",
                 "Zeitfenster Kühlen Dienstag 1 to",
@@ -5890,6 +7376,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5903,6 +7394,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Tuesday_4",
                 "Zeitfenster Kühlen Dienstag 2 to",
@@ -5912,6 +7408,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5925,6 +7426,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Tuesday_6",
                 "Zeitfenster Kühlen Dienstag 3 to",
@@ -5934,6 +7440,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -5952,6 +7463,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Wednesday_2",
                 "Zeitfenster Kühlen Mittwoch 1 to",
@@ -5961,6 +7477,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5974,6 +7495,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Wednesday_4",
                 "Zeitfenster Kühlen Mittwoch 2 to",
@@ -5983,6 +7509,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -5996,6 +7527,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1CoolingTimer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1CoolingTimer_Wednesday_6",
                 "Zeitfenster Kühlen Mittwoch 3 to",
@@ -6005,6 +7541,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1CoolingTimer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -6028,8 +7569,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1DayTemp"
+                "MaintainAction",
+                "z1DayTemp",
+                true
             ]
         ]
     },
@@ -6048,8 +7590,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1HolidayEndPeriod"
+                "MaintainAction",
+                "z1HolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -6068,8 +7611,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1HolidayStartPeriod"
+                "MaintainAction",
+                "z1HolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -6093,8 +7637,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1HolidayTemp"
+                "MaintainAction",
+                "z1HolidayTemp",
+                true
             ]
         ]
     },
@@ -6113,8 +7658,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1Name1"
+                "MaintainAction",
+                "z1Name1",
+                true
             ]
         ]
     },
@@ -6133,8 +7679,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1Name2"
+                "MaintainAction",
+                "z1Name2",
+                true
             ]
         ]
     },
@@ -6158,8 +7705,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1NightTemp"
+                "MaintainAction",
+                "z1NightTemp",
+                true
             ]
         ]
     },
@@ -6179,8 +7727,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1OpMode"
+                "MaintainAction",
+                "z1OpMode",
+                true
             ]
         ]
     },
@@ -6200,8 +7749,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1OpModeCooling"
+                "MaintainAction",
+                "z1OpModeCooling",
+                true
             ]
         ]
     },
@@ -6225,8 +7775,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1QuickVetoTemp"
+                "MaintainAction",
+                "z1QuickVetoTemp",
+                true
             ]
         ]
     },
@@ -6245,6 +7796,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1RoomTemp",
+                false
             ]
         ]
     },
@@ -6264,8 +7820,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1RoomZoneMapping"
+                "MaintainAction",
+                "z1RoomZoneMapping",
+                true
             ]
         ]
     },
@@ -6285,8 +7842,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1SFMode"
+                "MaintainAction",
+                "z1SFMode",
+                true
             ]
         ]
     },
@@ -6305,8 +7863,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1Shortname"
+                "MaintainAction",
+                "z1Shortname",
+                true
             ]
         ]
     },
@@ -6325,6 +7884,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Friday_2",
                 "Zeitfenster Heizen Freitag 1 to",
@@ -6334,6 +7898,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6347,6 +7916,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Friday_4",
                 "Zeitfenster Heizen Freitag 2 to",
@@ -6356,6 +7930,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6369,6 +7948,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Friday_6",
                 "Zeitfenster Heizen Freitag 3 to",
@@ -6378,6 +7962,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Friday_6",
+                false
             ]
         ]
     },
@@ -6396,6 +7985,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Monday_2",
                 "Zeitfenster Heizen Montag 1 to",
@@ -6405,6 +7999,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6418,6 +8017,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Monday_4",
                 "Zeitfenster Heizen Montag 2 to",
@@ -6427,6 +8031,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6440,6 +8049,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Monday_6",
                 "Zeitfenster Heizen Montag 3 to",
@@ -6449,6 +8063,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Monday_6",
+                false
             ]
         ]
     },
@@ -6467,6 +8086,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Saturday_2",
                 "Zeitfenster Heizen Samstag 1 to",
@@ -6476,6 +8100,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6489,6 +8118,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Saturday_4",
                 "Zeitfenster Heizen Samstag 2 to",
@@ -6498,6 +8132,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6511,6 +8150,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Saturday_6",
                 "Zeitfenster Heizen Samstag 3 to",
@@ -6520,6 +8164,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Saturday_6",
+                false
             ]
         ]
     },
@@ -6538,6 +8187,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Sunday_2",
                 "Zeitfenster Heizen Sonntag 1 to",
@@ -6547,6 +8201,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6560,6 +8219,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Sunday_4",
                 "Zeitfenster Heizen Sonntag 2 to",
@@ -6569,6 +8233,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6582,6 +8251,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Sunday_6",
                 "Zeitfenster Heizen Sonntag 3 to",
@@ -6591,6 +8265,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Sunday_6",
+                false
             ]
         ]
     },
@@ -6609,6 +8288,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Thursday_2",
                 "Zeitfenster Heizen Donnerstag 1 to",
@@ -6618,6 +8302,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6631,6 +8320,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Thursday_4",
                 "Zeitfenster Heizen Donnerstag 2 to",
@@ -6640,6 +8334,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6653,6 +8352,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Thursday_6",
                 "Zeitfenster Heizen Donnerstag 3 to",
@@ -6662,6 +8366,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Thursday_6",
+                false
             ]
         ]
     },
@@ -6680,6 +8389,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Tuesday_2",
                 "Zeitfenster Heizen Dienstag 1 to",
@@ -6689,6 +8403,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6702,6 +8421,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Tuesday_4",
                 "Zeitfenster Heizen Dienstag 2 to",
@@ -6711,6 +8435,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6724,6 +8453,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Tuesday_6",
                 "Zeitfenster Heizen Dienstag 3 to",
@@ -6733,6 +8467,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -6751,6 +8490,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Wednesday_2",
                 "Zeitfenster Heizen Mittwoch 1 to",
@@ -6760,6 +8504,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6773,6 +8522,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Wednesday_4",
                 "Zeitfenster Heizen Mittwoch 2 to",
@@ -6782,6 +8536,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -6795,6 +8554,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z1Timer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z1Timer_Wednesday_6",
                 "Zeitfenster Heizen Mittwoch 3 to",
@@ -6804,6 +8568,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Timer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -6822,6 +8591,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Unknown0A00",
+                false
             ]
         ]
     },
@@ -6840,6 +8614,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z1Unknown0B00",
+                false
             ]
         ]
     },
@@ -6863,8 +8642,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z1ValveStatus"
+                "MaintainAction",
+                "z1ValveStatus",
+                true
             ]
         ]
     },
@@ -6888,8 +8668,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2ActualRoomTempDesired"
+                "MaintainAction",
+                "z2ActualRoomTempDesired",
+                true
             ]
         ]
     },
@@ -6908,8 +8689,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2BankHolidayEndPeriod"
+                "MaintainAction",
+                "z2BankHolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -6928,8 +8710,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2BankHolidayStartPeriod"
+                "MaintainAction",
+                "z2BankHolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -6953,8 +8736,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2CoolingTemp"
+                "MaintainAction",
+                "z2CoolingTemp",
+                true
             ]
         ]
     },
@@ -6978,8 +8762,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2CoolingTemp2"
+                "MaintainAction",
+                "z2CoolingTemp2",
+                true
             ]
         ]
     },
@@ -6998,6 +8783,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Friday_2",
                 "Zeitfenster Kühlen Freitag 1 to",
@@ -7007,6 +8797,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7020,6 +8815,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Friday_4",
                 "Zeitfenster Kühlen Freitag 2 to",
@@ -7029,6 +8829,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7042,6 +8847,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Friday_6",
                 "Zeitfenster Kühlen Freitag 3 to",
@@ -7051,6 +8861,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Friday_6",
+                false
             ]
         ]
     },
@@ -7069,6 +8884,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Monday_2",
                 "Zeitfenster Kühlen Montag 1 to",
@@ -7078,6 +8898,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7091,6 +8916,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Monday_4",
                 "Zeitfenster Kühlen Montag 2 to",
@@ -7100,6 +8930,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7113,6 +8948,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Monday_6",
                 "Zeitfenster Kühlen Montag 3 to",
@@ -7122,6 +8962,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Monday_6",
+                false
             ]
         ]
     },
@@ -7140,6 +8985,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Saturday_2",
                 "Zeitfenster Kühlen Samstag 1 to",
@@ -7149,6 +8999,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7162,6 +9017,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Saturday_4",
                 "Zeitfenster Kühlen Samstag 2 to",
@@ -7171,6 +9031,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7184,6 +9049,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Saturday_6",
                 "Zeitfenster Kühlen Samstag 3 to",
@@ -7193,6 +9063,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Saturday_6",
+                false
             ]
         ]
     },
@@ -7211,6 +9086,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Sunday_2",
                 "Zeitfenster Kühlen Sonntag 1 to",
@@ -7220,6 +9100,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7233,6 +9118,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Sunday_4",
                 "Zeitfenster Kühlen Sonntag 2 to",
@@ -7242,6 +9132,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7255,6 +9150,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Sunday_6",
                 "Zeitfenster Kühlen Sonntag 3 to",
@@ -7264,6 +9164,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Sunday_6",
+                false
             ]
         ]
     },
@@ -7282,6 +9187,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Thursday_2",
                 "Zeitfenster Kühlen Donnerstag 1 to",
@@ -7291,6 +9201,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7304,6 +9219,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Thursday_4",
                 "Zeitfenster Kühlen Donnerstag 2 to",
@@ -7313,6 +9233,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7326,6 +9251,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Thursday_6",
                 "Zeitfenster Kühlen Donnerstag 3 to",
@@ -7335,6 +9265,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Thursday_6",
+                false
             ]
         ]
     },
@@ -7353,6 +9288,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Tuesday_2",
                 "Zeitfenster Kühlen Dienstag 1 to",
@@ -7362,6 +9302,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7375,6 +9320,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Tuesday_4",
                 "Zeitfenster Kühlen Dienstag 2 to",
@@ -7384,6 +9334,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7397,6 +9352,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Tuesday_6",
                 "Zeitfenster Kühlen Dienstag 3 to",
@@ -7406,6 +9366,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -7424,6 +9389,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Wednesday_2",
                 "Zeitfenster Kühlen Mittwoch 1 to",
@@ -7433,6 +9403,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7446,6 +9421,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Wednesday_4",
                 "Zeitfenster Kühlen Mittwoch 2 to",
@@ -7455,6 +9435,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7468,6 +9453,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2CoolingTimer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2CoolingTimer_Wednesday_6",
                 "Zeitfenster Kühlen Mittwoch 3 to",
@@ -7477,6 +9467,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2CoolingTimer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -7500,8 +9495,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2DayTemp"
+                "MaintainAction",
+                "z2DayTemp",
+                true
             ]
         ]
     },
@@ -7520,8 +9516,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2HolidayEndPeriod"
+                "MaintainAction",
+                "z2HolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -7540,8 +9537,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2HolidayStartPeriod"
+                "MaintainAction",
+                "z2HolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -7565,8 +9563,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2HolidayTemp"
+                "MaintainAction",
+                "z2HolidayTemp",
+                true
             ]
         ]
     },
@@ -7585,8 +9584,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2Name1"
+                "MaintainAction",
+                "z2Name1",
+                true
             ]
         ]
     },
@@ -7605,8 +9605,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2Name2"
+                "MaintainAction",
+                "z2Name2",
+                true
             ]
         ]
     },
@@ -7630,8 +9631,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2NightTemp"
+                "MaintainAction",
+                "z2NightTemp",
+                true
             ]
         ]
     },
@@ -7651,8 +9653,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2OpMode"
+                "MaintainAction",
+                "z2OpMode",
+                true
             ]
         ]
     },
@@ -7676,8 +9679,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2QuickVetoTemp"
+                "MaintainAction",
+                "z2QuickVetoTemp",
+                true
             ]
         ]
     },
@@ -7696,6 +9700,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2RoomTemp",
+                false
             ]
         ]
     },
@@ -7715,8 +9724,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2RoomZoneMapping"
+                "MaintainAction",
+                "z2RoomZoneMapping",
+                true
             ]
         ]
     },
@@ -7736,8 +9746,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2SFMode"
+                "MaintainAction",
+                "z2SFMode",
+                true
             ]
         ]
     },
@@ -7756,8 +9767,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2Shortname"
+                "MaintainAction",
+                "z2Shortname",
+                true
             ]
         ]
     },
@@ -7776,6 +9788,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Friday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Friday_2",
                 "Zeitfenster Heizen Freitag 1 to",
@@ -7785,6 +9802,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Friday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7798,6 +9820,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Friday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Friday_4",
                 "Zeitfenster Heizen Freitag 2 to",
@@ -7807,6 +9834,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Friday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7820,6 +9852,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Friday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Friday_6",
                 "Zeitfenster Heizen Freitag 3 to",
@@ -7829,6 +9866,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Friday_6",
+                false
             ]
         ]
     },
@@ -7847,6 +9889,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Monday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Monday_2",
                 "Zeitfenster Heizen Montag 1 to",
@@ -7856,6 +9903,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Monday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7869,6 +9921,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Monday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Monday_4",
                 "Zeitfenster Heizen Montag 2 to",
@@ -7878,6 +9935,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Monday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7891,6 +9953,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Monday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Monday_6",
                 "Zeitfenster Heizen Montag 3 to",
@@ -7900,6 +9967,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Monday_6",
+                false
             ]
         ]
     },
@@ -7918,6 +9990,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Saturday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Saturday_2",
                 "Zeitfenster Heizen Samstag 1 to",
@@ -7927,6 +10004,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Saturday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7940,6 +10022,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Saturday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Saturday_4",
                 "Zeitfenster Heizen Samstag 2 to",
@@ -7949,6 +10036,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Saturday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -7962,6 +10054,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Saturday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Saturday_6",
                 "Zeitfenster Heizen Samstag 3 to",
@@ -7971,6 +10068,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Saturday_6",
+                false
             ]
         ]
     },
@@ -7989,6 +10091,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Sunday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Sunday_2",
                 "Zeitfenster Heizen Sonntag 1 to",
@@ -7998,6 +10105,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Sunday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8011,6 +10123,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Sunday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Sunday_4",
                 "Zeitfenster Heizen Sonntag 2 to",
@@ -8020,6 +10137,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Sunday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8033,6 +10155,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Sunday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Sunday_6",
                 "Zeitfenster Heizen Sonntag 3 to",
@@ -8042,6 +10169,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Sunday_6",
+                false
             ]
         ]
     },
@@ -8060,6 +10192,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Thursday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Thursday_2",
                 "Zeitfenster Heizen Donnerstag 1 to",
@@ -8069,6 +10206,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Thursday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8082,6 +10224,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Thursday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Thursday_4",
                 "Zeitfenster Heizen Donnerstag 2 to",
@@ -8091,6 +10238,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Thursday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8104,6 +10256,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Thursday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Thursday_6",
                 "Zeitfenster Heizen Donnerstag 3 to",
@@ -8113,6 +10270,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Thursday_6",
+                false
             ]
         ]
     },
@@ -8131,6 +10293,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Tuesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Tuesday_2",
                 "Zeitfenster Heizen Dienstag 1 to",
@@ -8140,6 +10307,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Tuesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8153,6 +10325,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Tuesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Tuesday_4",
                 "Zeitfenster Heizen Dienstag 2 to",
@@ -8162,6 +10339,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Tuesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8175,6 +10357,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Tuesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Tuesday_6",
                 "Zeitfenster Heizen Dienstag 3 to",
@@ -8184,6 +10371,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Tuesday_6",
+                false
             ]
         ]
     },
@@ -8202,6 +10394,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Wednesday_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Wednesday_2",
                 "Zeitfenster Heizen Mittwoch 1 to",
@@ -8211,6 +10408,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Wednesday_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8224,6 +10426,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Wednesday_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Wednesday_4",
                 "Zeitfenster Heizen Mittwoch 2 to",
@@ -8233,6 +10440,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Wednesday_4",
+                false
             ],
             [
                 "MaintainVariable",
@@ -8246,6 +10458,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "z2Timer_Wednesday_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "z2Timer_Wednesday_6",
                 "Zeitfenster Heizen Mittwoch 3 to",
@@ -8255,6 +10472,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z2Timer_Wednesday_6",
+                false
             ]
         ]
     },
@@ -8278,8 +10500,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z2ValveStatus"
+                "MaintainAction",
+                "z2ValveStatus",
+                true
             ]
         ]
     },
@@ -8303,8 +10526,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3ActualRoomTempDesired"
+                "MaintainAction",
+                "z3ActualRoomTempDesired",
+                true
             ]
         ]
     },
@@ -8323,8 +10547,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3BankHolidayEndPeriod"
+                "MaintainAction",
+                "z3BankHolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -8343,8 +10568,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3BankHolidayStartPeriod"
+                "MaintainAction",
+                "z3BankHolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -8368,8 +10594,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3CoolingTemp2"
+                "MaintainAction",
+                "z3CoolingTemp2",
+                true
             ]
         ]
     },
@@ -8393,8 +10620,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3DayTemp"
+                "MaintainAction",
+                "z3DayTemp",
+                true
             ]
         ]
     },
@@ -8413,8 +10641,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3HolidayEndPeriod"
+                "MaintainAction",
+                "z3HolidayEndPeriod",
+                true
             ]
         ]
     },
@@ -8433,8 +10662,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3HolidayStartPeriod"
+                "MaintainAction",
+                "z3HolidayStartPeriod",
+                true
             ]
         ]
     },
@@ -8458,8 +10688,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3HolidayTemp"
+                "MaintainAction",
+                "z3HolidayTemp",
+                true
             ]
         ]
     },
@@ -8478,8 +10709,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3Name1"
+                "MaintainAction",
+                "z3Name1",
+                true
             ]
         ]
     },
@@ -8498,8 +10730,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3Name2"
+                "MaintainAction",
+                "z3Name2",
+                true
             ]
         ]
     },
@@ -8523,8 +10756,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3NightTemp"
+                "MaintainAction",
+                "z3NightTemp",
+                true
             ]
         ]
     },
@@ -8544,8 +10778,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3OpMode"
+                "MaintainAction",
+                "z3OpMode",
+                true
             ]
         ]
     },
@@ -8569,8 +10804,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3QuickVetoTemp"
+                "MaintainAction",
+                "z3QuickVetoTemp",
+                true
             ]
         ]
     },
@@ -8589,6 +10825,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "z3RoomTemp",
+                false
             ]
         ]
     },
@@ -8608,8 +10849,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3RoomZoneMapping"
+                "MaintainAction",
+                "z3RoomZoneMapping",
+                true
             ]
         ]
     },
@@ -8629,8 +10871,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3SFMode"
+                "MaintainAction",
+                "z3SFMode",
+                true
             ]
         ]
     },
@@ -8649,8 +10892,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3Shortname"
+                "MaintainAction",
+                "z3Shortname",
+                true
             ]
         ]
     },
@@ -8674,8 +10918,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "z3ValveStatus"
+                "MaintainAction",
+                "z3ValveStatus",
+                true
             ]
         ]
     }

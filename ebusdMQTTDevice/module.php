@@ -23,6 +23,10 @@ class ebusdMQTTDevice extends IPSModuleStrict
     private const int STATUS_INST_NOT_REACHABLE    = 205;
     private const int STATUS_INST_NO_SIGNAL        = 206;
     private const int STATUS_INST_NO_CIRCUIT       = 207;
+    private const int STATUS_INST_INTERVAL_INVALID = 208;
+
+    // RequestAction-Idents, die das Modul selbst auslöst (Timer) — ohne aktiven Parent still übergehen
+    private const array INTERNAL_IDENTS = ['timerCheckConnection', 'timerRefreshAllMessages', 'publishPollPriorities'];
 
     //property names
     private const string PROP_HOST                             = 'Host';
@@ -245,11 +249,32 @@ class ebusdMQTTDevice extends IPSModuleStrict
                     $this->MsgBox(sprintf($this->Translate('%s entries found'), count($ret)));
                 }
                 return;
+
+            case 'VariableList_onEdit':
+                $parameter = json_decode($Value, true, 512, JSON_THROW_ON_ERROR);
+                if ($parameter['readable'] !== self::OK_SIGN) {
+                    $this->MsgBox(
+                        sprintf(
+                            $this->Translate('The variable "%s" is not readable. The changes will not be saved.'),
+                            $parameter['messagename'] ?? $this->Translate('unknown')
+                        )
+                    );
+                }
+                return;
         }
 
         if (!$this->HasActiveParent()) {
             $this->checkConnection();
             $this->logDebug(__FUNCTION__, 'No active parent - ignored');
+            if (!in_array($Ident, self::INTERNAL_IDENTS, true)) {
+                trigger_error(
+                    sprintf(
+                        $this->Translate('"%s" was not executed: the MQTT Server (parent instance) is not active. Check the MQTT Server instance and try again.'),
+                        $Ident
+                    ),
+                    E_USER_WARNING
+                );
+            }
             return;
         }
 
@@ -283,27 +308,112 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 $this->publishPollPriorities($priorities['old'], $priorities['new']);
                 return;
 
-            case 'VariableList_onEdit':
-                $parameter = json_decode($Value, true, 512, JSON_THROW_ON_ERROR);
-                if ($parameter['readable'] !== self::OK_SIGN) {
-                    $this->MsgBox(
-                        sprintf(
-                            $this->Translate('The variable "%s" is not readable. The changes will not be saved.'),
-                            $parameter['messagename'] ?? $this->Translate('unknown')
-                        )
-                    );
-                }
-                return;
-
             default:
-                // Prüfen, ob die Variable zum Ident existiert bevor wir publishen
-                if ($this->GetIDForIdent($Ident) === 0) {
-                    $this->logDebug(__FUNCTION__, 'Unknown Ident: ' . $Ident);
-                    return;
+                $message = $this->getWritableMessage($Ident, $Value);
+                if ($message === null) {
+                    return; // Grund wurde bereits per trigger_error gemeldet
                 }
-                $payload = $this->getPayload($Ident, $Value);
-                $this->publish($this->buildTopic($Ident, 'set'), $payload);
+                $payload = $this->getPayload($message['name'], $Value);
+                $this->publish($this->buildTopic($message['name'], 'set'), $payload);
         }
+    }
+
+    /**
+     * Prüft einen Schreibwunsch aus RequestAction gegen die ebusd-Konfiguration und liefert die
+     * zugehörige Meldung. Jeder Grund für eine Ablehnung kommt als trigger_error beim Aufrufer an
+     * (Skript wie KI) — mit Art des Fehlers und nächstem Schritt, nichts wird publiziert.
+     */
+    private function getWritableMessage(string $ident, mixed $value): ?array
+    {
+        foreach ($this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES) as $message) {
+            foreach ($message['fielddefs'] ?? [] as $key => $fieldDef) {
+                if (($fieldDef['type'] ?? '') === 'IGN' || $this->getFieldIdentName($message, $key) !== $ident) {
+                    continue;
+                }
+
+                if (!($message['write'] ?? false)) {
+                    trigger_error(
+                        sprintf($this->Translate('"%s" is read-only: ebusd does not allow writing the message "%s".'), $ident, $message['name']),
+                        E_USER_WARNING
+                    );
+                    return null;
+                }
+                if ($this->countRelevantFieldDefs($message['fielddefs']) > 1) {
+                    trigger_error(
+                        sprintf(
+                            $this->Translate('"%s" is one field of the message "%s" with several fields and cannot be written on its own. Write the whole message with EBM_publish.'),
+                            $ident,
+                            $message['name']
+                        ),
+                        E_USER_WARNING
+                    );
+                    return null;
+                }
+
+                $allowed = $this->getDisallowedValueHint($fieldDef, $value);
+                if ($allowed !== '') {
+                    trigger_error(
+                        sprintf(
+                            $this->Translate('Value "%s" for "%s" is not allowed (allowed: %s). Do not repeat with this value.'),
+                            is_scalar($value) ? var_export($value, true) : json_encode($value),
+                            $ident,
+                            $allowed
+                        ),
+                        E_USER_WARNING
+                    );
+                    return null;
+                }
+                return $message;
+            }
+        }
+
+        trigger_error(
+            sprintf($this->Translate('"%s" is not a status variable of this instance. Use the ident of a writable status variable.'), $ident),
+            E_USER_WARNING
+        );
+        return null;
+    }
+
+    /** Leerer Text = Wert zulässig, sonst die Beschreibung der erlaubten Werte */
+    private function getDisallowedValueHint(array $fieldDef, mixed $value): string
+    {
+        $typeDef = $this->getEbusDataTypeDefinitions()[$fieldDef['type']] ?? null;
+        if ($typeDef === null) {
+            return sprintf($this->Translate('nothing, the eBUS type %s is not supported'), $fieldDef['type']);
+        }
+
+        switch ($typeDef['VariableType']) {
+            case VARIABLETYPE_BOOLEAN:
+                return (is_bool($value) || in_array($value, [0, 1, '0', '1'], true)) ? '' : 'true, false';
+
+            case VARIABLETYPE_STRING:
+                return is_scalar($value) ? '' : $this->Translate('a text');
+
+            case VARIABLETYPE_INTEGER:
+            case VARIABLETYPE_FLOAT:
+                if (!empty($fieldDef['values'])) {
+                    $choices = [];
+                    foreach ($fieldDef['values'] as $key => $caption) {
+                        $choices[] = $key . ' = ' . $caption;
+                    }
+                    $isChoice = is_numeric($value) && (float)$value === (float)(int)$value
+                                && array_key_exists((int)$value, $fieldDef['values']);
+                    return $isChoice ? '' : implode(', ', $choices);
+                }
+                if (!is_numeric($value)) {
+                    return $this->Translate('a number');
+                }
+                if (isset($typeDef['MinValue'], $typeDef['MaxValue']) && $typeDef['MinValue'] !== $typeDef['MaxValue']) {
+                    $div = max(1, $fieldDef['divisor'] ?? 0);
+                    $min = $typeDef['MinValue'] / $div;
+                    $max = $typeDef['MaxValue'] / $div;
+                    if ((float)$value < $min || (float)$value > $max) {
+                        return sprintf($this->Translate('%s to %s'), $min, $max);
+                    }
+                }
+                return '';
+        }
+        return '';
     }
 
     public function ReceiveData(string $JSONString): string
@@ -1029,9 +1139,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
             // Variablen-Registrierung
             $created = $this->MaintainVariable($ident, $objectName, $variableType, $presentation, 0, true);
 
-            if ($variableHasAction) {
-                $this->EnableAction($ident);
-            }
+            // MaintainAction statt EnableAction: nimmt eine Aktion auch zurück, wenn die Meldung nicht (mehr) schreibbar ist
+            $this->MaintainAction($ident, $variableHasAction);
 
             if ($created) {
                 $countOfVariables++;
@@ -1336,6 +1445,19 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 self::STATUS_INST_PORT_IS_INVALID,
                 'invalid Port',
                 sprintf($this->Translate('Port "%s" is not valid (allowed: 1 to 65535). Correct the port in the instance configuration.'), $portString)
+            );
+            return;
+        }
+
+        $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL);
+        if ($updateInterval < 0) {
+            $this->applyStatus(
+                self::STATUS_INST_INTERVAL_INVALID,
+                'invalid update interval',
+                sprintf(
+                    $this->Translate('Update interval %d is not valid (allowed: 0 = off, or a number of minutes). Correct the update interval in the instance configuration.'),
+                    $updateInterval
+                )
             );
             return;
         }

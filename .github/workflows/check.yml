@@ -22,6 +22,7 @@ jobs:
           php -l tests/check_presentations.php
           php -l tests/check_circuit_options.php
           php -l tests/check-status-log.php
+          php -l tests/check-request-action.php
       - name: Code-Stil (gemeinsames Regelwerk, Submodul .style)
         run: |
           wget -q https://cs.symfony.com/download/php-cs-fixer-v3.phar

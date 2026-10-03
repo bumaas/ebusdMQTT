@@ -14,6 +14,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "AirInletTemp",
+                false
             ]
         ]
     },
@@ -32,6 +37,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "AirInletTempSens",
+                false
             ]
         ]
     },
@@ -50,6 +60,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "BuildingCircuitPumpPower",
+                false
             ]
         ]
     },
@@ -68,6 +83,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "BuildingPumpHours",
+                false
             ]
         ]
     },
@@ -86,6 +106,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "BuildingPumpStarts",
+                false
             ]
         ]
     },
@@ -104,6 +129,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CircuitBuildingFlowRate",
+                false
             ]
         ]
     },
@@ -122,6 +152,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CircuitBuildingWaterPressure",
+                false
             ]
         ]
     },
@@ -140,6 +175,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CompressorHours",
+                false
             ]
         ]
     },
@@ -158,6 +198,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CompressorInletTemp",
+                false
             ]
         ]
     },
@@ -176,6 +221,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CompressorOutletTemp",
+                false
             ]
         ]
     },
@@ -194,6 +244,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CompressorSpeed",
+                false
             ]
         ]
     },
@@ -212,6 +267,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CompressorStarts",
+                false
             ]
         ]
     },
@@ -230,6 +290,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CondensateTrayHeater",
+                false
             ]
         ]
     },
@@ -248,6 +313,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CondensationTemp",
+                false
             ]
         ]
     },
@@ -266,6 +336,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CondenserOutletTemp",
+                false
             ]
         ]
     },
@@ -286,6 +361,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear1_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear1_3",
                 "energy",
@@ -297,6 +377,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear1_3",
+                false
             ]
         ]
     },
@@ -317,6 +402,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear10_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear10_3",
                 "energy",
@@ -328,6 +418,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear10_3",
+                false
             ]
         ]
     },
@@ -348,6 +443,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear11_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear11_3",
                 "energy",
@@ -359,6 +459,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear11_3",
+                false
             ]
         ]
     },
@@ -379,6 +484,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear12_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear12_3",
                 "energy",
@@ -390,6 +500,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear12_3",
+                false
             ]
         ]
     },
@@ -410,6 +525,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear2_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear2_3",
                 "energy",
@@ -421,6 +541,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear2_3",
+                false
             ]
         ]
     },
@@ -441,6 +566,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear3_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear3_3",
                 "energy",
@@ -452,6 +582,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear3_3",
+                false
             ]
         ]
     },
@@ -472,6 +607,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear4_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear4_3",
                 "energy",
@@ -483,6 +623,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear4_3",
+                false
             ]
         ]
     },
@@ -503,6 +648,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear5_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear5_3",
                 "energy",
@@ -514,6 +664,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear5_3",
+                false
             ]
         ]
     },
@@ -534,6 +689,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear6_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear6_3",
                 "energy",
@@ -545,6 +705,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear6_3",
+                false
             ]
         ]
     },
@@ -565,6 +730,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear7_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear7_3",
                 "energy",
@@ -576,6 +746,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear7_3",
+                false
             ]
         ]
     },
@@ -596,6 +771,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear8_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear8_3",
                 "energy",
@@ -607,6 +787,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear8_3",
+                false
             ]
         ]
     },
@@ -627,6 +812,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "ConsumptionThisYear9_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "ConsumptionThisYear9_3",
                 "energy",
@@ -638,6 +828,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionThisYear9_3",
+                false
             ]
         ]
     },
@@ -656,6 +851,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ConsumptionTotal",
+                false
             ]
         ]
     },
@@ -674,6 +874,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CurrentCompressorUtil",
+                false
             ]
         ]
     },
@@ -692,6 +897,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CurrentConsumedPower",
+                false
             ]
         ]
     },
@@ -710,6 +920,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CurrentYieldPower",
+                false
             ]
         ]
     },
@@ -728,6 +943,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "CylinderTemp",
+                false
             ]
         ]
     },
@@ -746,6 +966,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "DCFStatus",
+                false
             ]
         ]
     },
@@ -766,6 +991,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "DateTime_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "DateTime_1",
                 "Uhrzeit",
@@ -775,6 +1005,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "DateTime_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -788,6 +1023,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "DateTime_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "DateTime_3",
                 "Temperatur (temp2)",
@@ -799,6 +1039,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "DateTime_3",
+                false
             ]
         ]
     },
@@ -817,6 +1062,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EEVOutletTemp",
+                false
             ]
         ]
     },
@@ -835,6 +1085,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EEVSteps",
+                false
             ]
         ]
     },
@@ -853,6 +1108,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyConsumptionTotal",
+                false
             ]
         ]
     },
@@ -871,6 +1131,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyIntegral",
+                false
             ]
         ]
     },
@@ -889,6 +1154,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldCoolDay",
+                false
             ]
         ]
     },
@@ -907,6 +1177,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldCoolMonth",
+                false
             ]
         ]
     },
@@ -925,6 +1200,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldCoolTotal",
+                false
             ]
         ]
     },
@@ -943,6 +1223,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldHcDay",
+                false
             ]
         ]
     },
@@ -961,6 +1246,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldHcMonth",
+                false
             ]
         ]
     },
@@ -979,6 +1269,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldHwTotal",
+                false
             ]
         ]
     },
@@ -997,6 +1292,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldHwcDay",
+                false
             ]
         ]
     },
@@ -1015,6 +1315,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldHwcMonth",
+                false
             ]
         ]
     },
@@ -1033,6 +1338,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EnergyYieldHwcTotal",
+                false
             ]
         ]
     },
@@ -1051,6 +1361,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "EvaporationTemp",
+                false
             ]
         ]
     },
@@ -1069,6 +1384,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "F1e",
+                false
             ]
         ]
     },
@@ -1087,6 +1407,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "F1f",
+                false
             ]
         ]
     },
@@ -1105,6 +1430,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "F20",
+                false
             ]
         ]
     },
@@ -1123,6 +1453,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "F3c",
+                false
             ]
         ]
     },
@@ -1141,6 +1476,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "F3d",
+                false
             ]
         ]
     },
@@ -1159,6 +1499,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Fan1",
+                false
             ]
         ]
     },
@@ -1177,6 +1522,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Fan1Hours",
+                false
             ]
         ]
     },
@@ -1195,6 +1545,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Fan1Starts",
+                false
             ]
         ]
     },
@@ -1213,6 +1568,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "FlowTemp",
+                false
             ]
         ]
     },
@@ -1231,6 +1591,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "FlowTempImmersionHeater",
+                false
             ]
         ]
     },
@@ -1249,6 +1614,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "FourPortValve",
+                false
             ]
         ]
     },
@@ -1267,6 +1637,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "FourWayValveHours",
+                false
             ]
         ]
     },
@@ -1285,6 +1660,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "FourWayValveSwitchingOperations",
+                false
             ]
         ]
     },
@@ -1303,6 +1683,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HeatingCoilCompressor",
+                false
             ]
         ]
     },
@@ -1321,6 +1706,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HighPressure",
+                false
             ]
         ]
     },
@@ -1339,6 +1729,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HighPressureSwitch",
+                false
             ]
         ]
     },
@@ -1357,6 +1752,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Hours",
+                false
             ]
         ]
     },
@@ -1375,6 +1775,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HoursCool",
+                false
             ]
         ]
     },
@@ -1393,6 +1798,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "HoursHc",
+                false
             ]
         ]
     },
@@ -1411,6 +1821,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ImmersionHeaterSafetyCutOut",
+                false
             ]
         ]
     },
@@ -1429,6 +1844,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "LockoutContactS20",
+                false
             ]
         ]
     },
@@ -1447,6 +1867,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "LockoutContactS21",
+                false
             ]
         ]
     },
@@ -1465,6 +1890,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "LowPressure",
+                false
             ]
         ]
     },
@@ -1483,6 +1913,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "MA1Output",
+                false
             ]
         ]
     },
@@ -1501,6 +1936,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "MIInput",
+                false
             ]
         ]
     },
@@ -1519,6 +1959,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "MO2Output",
+                false
             ]
         ]
     },
@@ -1537,6 +1982,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "MO3Output",
+                false
             ]
         ]
     },
@@ -1555,6 +2005,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "OutdoorTemp",
+                false
             ]
         ]
     },
@@ -1573,6 +2028,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "OverheatingActualValue",
+                false
             ]
         ]
     },
@@ -1591,6 +2051,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "OverheatingTargetValue",
+                false
             ]
         ]
     },
@@ -1609,6 +2074,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "PositionEEV",
+                false
             ]
         ]
     },
@@ -1627,6 +2097,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "PrioritySwitchingValve",
+                false
             ]
         ]
     },
@@ -1645,6 +2120,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "ReturnTemp",
+                false
             ]
         ]
     },
@@ -1663,6 +2143,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SEERCoolMonth",
+                false
             ]
         ]
     },
@@ -1681,6 +2166,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SEERCoolTotal",
+                false
             ]
         ]
     },
@@ -1701,6 +2191,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "SetMode_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "SetMode_1",
                 "Temperatur (flowtempdesired)",
@@ -1712,6 +2207,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SetMode_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1727,6 +2227,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "SetMode_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "SetMode_3",
                 "Temperatur (hwcflowtempdesired)",
@@ -1738,6 +2243,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SetMode_3",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1752,6 +2262,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "SetMode_5",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "SetMode_6",
                 "disablehwctapping",
@@ -1762,6 +2277,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SetMode_6",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1776,6 +2296,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "SetMode_7",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "SetMode_9",
                 "remoteControlHcPump",
@@ -1786,6 +2311,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SetMode_9",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1800,6 +2330,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "SetMode_10",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "SetMode_11",
                 "releaseCooling",
@@ -1810,6 +2345,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SetMode_11",
+                false
             ]
         ]
     },
@@ -1830,6 +2370,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "State_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "State_1",
                 "Täglicher Energieertrag",
@@ -1841,6 +2386,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "State_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1856,6 +2406,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "State_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "State_3",
                 "state",
@@ -1867,6 +2422,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "State_3",
+                false
             ]
         ]
     },
@@ -1887,6 +2447,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status_1",
                 "Druck",
@@ -1898,6 +2463,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1913,6 +2483,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status_3",
                 "Boiler Modus",
@@ -1924,6 +2499,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status_3",
+                false
             ]
         ]
     },
@@ -1944,6 +2524,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status01_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status01_1",
                 "Rücklauftemperatur",
@@ -1955,6 +2540,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status01_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1970,6 +2560,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status01_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status01_3",
                 "WW Temperatur",
@@ -1981,6 +2576,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status01_3",
+                false
             ],
             [
                 "MaintainVariable",
@@ -1996,6 +2596,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status01_4",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status01_5",
                 "Pumpenstatus",
@@ -2007,6 +2612,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status01_5",
+                false
             ]
         ]
     },
@@ -2027,6 +2637,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status02_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status02_1",
                 "Maximaltemperatur",
@@ -2038,6 +2653,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status02_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2053,6 +2673,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status02_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status02_3",
                 "Maximaltemperatur",
@@ -2066,6 +2691,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "Status02_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "Status02_4",
                 "ReglerCurrentTemp",
@@ -2077,6 +2707,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status02_4",
+                false
             ]
         ]
     },
@@ -2095,6 +2730,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "Status16",
+                false
             ]
         ]
     },
@@ -2114,8 +2754,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "StatusCirPump"
+                "MaintainAction",
+                "StatusCirPump",
+                true
             ]
         ]
     },
@@ -2134,6 +2775,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SubcoolingActualValue",
+                false
             ]
         ]
     },
@@ -2152,6 +2798,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SubcoolingTargetValue",
+                false
             ]
         ]
     },
@@ -2170,6 +2821,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "SystemTemp",
+                false
             ]
         ]
     },
@@ -2188,6 +2844,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "TempSwitchCompressorOutlet",
+                false
             ]
         ]
     },
@@ -2206,6 +2867,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "WorkingFigureHcMonth",
+                false
             ]
         ]
     },
@@ -2224,6 +2890,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "WorkingFigureHcTotal",
+                false
             ]
         ]
     },
@@ -2242,6 +2913,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "WorkingFigureHwcMonth",
+                false
             ]
         ]
     },
@@ -2260,6 +2936,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "WorkingFigureHwcTotal",
+                false
             ]
         ]
     },
@@ -2280,6 +2961,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear1_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear1_3",
                 "energy",
@@ -2291,6 +2977,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear1_3",
+                false
             ]
         ]
     },
@@ -2311,6 +3002,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear10_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear10_3",
                 "energy",
@@ -2322,6 +3018,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear10_3",
+                false
             ]
         ]
     },
@@ -2342,6 +3043,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear11_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear11_3",
                 "energy",
@@ -2353,6 +3059,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear11_3",
+                false
             ]
         ]
     },
@@ -2373,6 +3084,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear12_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear12_3",
                 "energy",
@@ -2384,6 +3100,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear12_3",
+                false
             ]
         ]
     },
@@ -2404,6 +3125,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear2_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear2_3",
                 "energy",
@@ -2415,6 +3141,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear2_3",
+                false
             ]
         ]
     },
@@ -2435,6 +3166,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear3_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear3_3",
                 "energy",
@@ -2446,6 +3182,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear3_3",
+                false
             ]
         ]
     },
@@ -2466,6 +3207,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear4_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear4_3",
                 "energy",
@@ -2477,6 +3223,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear4_3",
+                false
             ]
         ]
     },
@@ -2497,6 +3248,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear5_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear5_3",
                 "energy",
@@ -2508,6 +3264,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear5_3",
+                false
             ]
         ]
     },
@@ -2528,6 +3289,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear6_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear6_3",
                 "energy",
@@ -2539,6 +3305,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear6_3",
+                false
             ]
         ]
     },
@@ -2559,6 +3330,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear7_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear7_3",
                 "energy",
@@ -2570,6 +3346,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear7_3",
+                false
             ]
         ]
     },
@@ -2590,6 +3371,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear8_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear8_3",
                 "energy",
@@ -2601,6 +3387,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear8_3",
+                false
             ]
         ]
     },
@@ -2621,6 +3412,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "YieldThisYear9_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "YieldThisYear9_3",
                 "energy",
@@ -2632,6 +3428,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldThisYear9_3",
+                false
             ]
         ]
     },
@@ -2650,6 +3451,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "YieldTotal",
+                false
             ]
         ]
     },
@@ -2669,8 +3475,9 @@
                 true
             ],
             [
-                "EnableAction",
-                "clearerrorhistory"
+                "MaintainAction",
+                "clearerrorhistory",
+                true
             ]
         ]
     },
@@ -2691,6 +3498,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "currenterror_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "currenterror_1",
                 "Fehlernummer",
@@ -2702,6 +3514,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "currenterror_1",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2717,6 +3534,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "currenterror_2",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "currenterror_3",
                 "Fehlernummer",
@@ -2730,6 +3552,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "currenterror_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "currenterror_4",
                 "Fehlernummer",
@@ -2741,6 +3568,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "currenterror_4",
+                false
             ]
         ]
     },
@@ -2761,6 +3593,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "errorhistory_0",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "errorhistory_1",
                 "Status",
@@ -2774,6 +3611,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "errorhistory_1",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "errorhistory_2",
                 "Zeit",
@@ -2783,6 +3625,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "errorhistory_2",
+                false
             ],
             [
                 "MaintainVariable",
@@ -2796,6 +3643,11 @@
                 true
             ],
             [
+                "MaintainAction",
+                "errorhistory_3",
+                false
+            ],
+            [
                 "MaintainVariable",
                 "errorhistory_4",
                 "Fehlernummer",
@@ -2807,6 +3659,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "errorhistory_4",
+                false
             ]
         ]
     },
@@ -2825,6 +3682,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "stat04",
+                false
             ]
         ]
     },
@@ -2843,6 +3705,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "stat05",
+                false
             ]
         ]
     },
@@ -2861,6 +3728,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "stat_unknown32",
+                false
             ]
         ]
     },
@@ -2879,6 +3751,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "stat_unknown33",
+                false
             ]
         ]
     },
@@ -2897,6 +3774,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "stat_unknown34",
+                false
             ]
         ]
     },
@@ -2915,6 +3797,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "stat_unknown35",
+                false
             ]
         ]
     },
@@ -2933,6 +3820,11 @@
                 },
                 0,
                 true
+            ],
+            [
+                "MaintainAction",
+                "stat_unknown36",
+                false
             ]
         ]
     }

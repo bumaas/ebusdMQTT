@@ -64,7 +64,7 @@ Portnummer auf dem der ebusd Dienst http-Anfragen entgegennimmt.
 Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit'). Beispiele sind 'bai', '700' etc. Über den Button "Ermittle Schaltkreis Namen" wird die Auswahl der zur verfügung stehenden Schaltkreise ermittelt.
 
 - Aktualisierungsintervall:<br>
-Intervall in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
+Intervall in Minuten, in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung, negative Werte sind unzulässig). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
 
 - Debug Informationen werden zusätzlich in das Logfile der IPSLibrary geschrieben:<br>
 Schreibt die Debug-Meldungen des Moduls zusätzlich in das Logfile der IPSLibrary (`IPSLogger`). Nur wirksam, wenn die IPSLibrary installiert ist; sonst ohne Funktion. Für die Fehlersuche genügt in der Regel die Debug-Ausgabe der Instanz.
@@ -83,6 +83,7 @@ Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal un
 | 205 | ebusd ist nicht erreichbar | Host, Port und HTTP-Port von ebusd (`--httpport`) prüfen |
 | 206 | ebusd meldet kein eBUS-Signal (z. B. Adapter getrennt) | eBUS-Adapter und Verbindung zum Bus prüfen |
 | 207 | Kein Schaltkreis ausgewählt | Schaltkreis auswählen |
+| 208 | Aktualisierungsintervall ungültig (negativ) | 0 (aus) oder eine Anzahl Minuten eintragen |
 
 Jeder Wechsel in eine Störung steht einmal als Warnung mit Ursache und nächstem Schritt im Meldungsprotokoll, die Behebung einmal als Meldung. Eine anhaltende Störung wiederholt sich dort nicht.
 
@@ -105,6 +106,14 @@ EBM_publish(47111, 'ebusd/700/hwctimer.monday/set', '07:00;22:00;00:00;00:00;00:
 
 ## 6. Schreiben von Werten
 Sofern die Statusvariablen ein Schreiben zulassen, können die Werte direkt über das Webfront oder per Skript über [RequestAction](https://www.symcon.de/service/dokumentation/befehlsreferenz/variablenzugriff/requestaction/) verändert werden.
+
+Schaltbar sind nur Variablen, deren Meldung ebusd schreiben lässt und die aus einem einzigen Feld besteht. Ein Schreibwunsch wird vor dem Senden geprüft und sonst mit einer Fehlermeldung abgelehnt, die Grund und nächsten Schritt nennt — es wird dann nichts auf den eBUS geschickt:
+
+- Wert außerhalb der Wertetabelle oder des Wertebereichs (die erlaubten Werte stehen in der Meldung),
+- nur lesbare Meldung,
+- Feld einer Meldung mit mehreren Feldern (diese schreibt man als Ganzes mit `EBM_publish`),
+- unbekannter Ident,
+- MQTT Server (übergeordnete Instanz) nicht aktiv.
 
 ## 7. Funktionsreferenz
 
