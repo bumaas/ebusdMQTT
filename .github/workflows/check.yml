@@ -6,7 +6,9 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          submodules: true # tests/stubs (Kernel-Stub, gepinnt)
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
@@ -15,7 +17,7 @@ jobs:
           php -l ebusdMQTTDevice/module.php
           php -l libs/eBUS_MQTT_Helper.php
           php -l tests/check_locale.php
-          php -l tests/symcon_stubs.php
+          php -l tests/harness.php
           php -l tests/golden_regression.php
           php -l tests/check_presentations.php
           php -l tests/check_circuit_options.php

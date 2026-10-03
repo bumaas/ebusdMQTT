@@ -19,44 +19,18 @@ declare(strict_types=1);
 
 $root = dirname(__DIR__);
 
-require_once __DIR__ . '/symcon_stubs.php';
-require_once $root . '/ebusdMQTTDevice/module.php';
+require_once __DIR__ . '/harness.php';
 
-final class CircuitOptionsHarness extends ebusdMQTTDevice
-{
-    /** @var array<string, array|null> URL => Antwort (null = nicht erreichbar) */
-    public array $responses = [];
-
-    /** @var list<string> abgefragte URLs */
-    public array $requestedUrls = [];
-
-    /** @var list<array{string, string, mixed}> UpdateFormField-Aufrufe */
-    public array $formUpdates = [];
-
-    protected function readURL(string $url): ?array
-    {
-        $this->requestedUrls[] = $url;
-        return $this->responses[$url] ?? null;
+// Warnungen und trigger_error() des Moduls brechen den Test ab, statt still durchzulaufen
+set_error_handler(static function (int $nr, string $text, string $datei, int $zeile): bool {
+    if (!(error_reporting() & $nr)) {
+        return false; // mit @ unterdrückt
     }
-
-    public bool $parentActive = true;
-
-    protected function HasActiveParent(): bool
-    {
-        return $this->parentActive;
+    if ($nr & (E_USER_ERROR | E_USER_WARNING | E_WARNING | E_NOTICE)) {
+        throw new ErrorException($text, 0, $nr, $datei, $zeile);
     }
-
-    protected function UpdateFormField(string $Field, string $Parameter, mixed $Value): bool
-    {
-        $this->formUpdates[] = [$Field, $Parameter, $Value];
-        return true;
-    }
-
-    public function attribute(string $Name): string
-    {
-        return $this->ReadAttributeString($Name);
-    }
-}
+    return false;
+});
 
 $checks = 0;
 $fails  = 0;
@@ -78,13 +52,10 @@ function optionValues(array $options): array
     return array_map(static fn(array $o): string => (string)$o['value'], $options);
 }
 
-function newHarness(string $host, string $port, string $circuit): CircuitOptionsHarness
+function newHarness(string $host, string $port, string $circuit): ebusdMQTTHarness
 {
-    $h = new CircuitOptionsHarness(0);
-    $h->Create();
-    $h->setPropertyForTest('Host', $host);
-    $h->setPropertyForTest('Port', $port);
-    $h->setPropertyForTest('CircuitName', $circuit);
+    $h               = neueInstanz(['Host' => $host, 'Port' => $port, 'CircuitName' => $circuit]);
+    $h->parentActive = true;
     return $h;
 }
 
@@ -114,7 +85,7 @@ check(optionValues($options) === ['', '700', 'hmu'], 'Liste enthält 700 und hmu
 echo "Nicht erreichbar:\n";
 $h      = newHarness('192.168.1.10', '8080', '700');
 $before = json_encode([['caption' => '-', 'value' => ''], ['caption' => '700', 'value' => '700'], ['caption' => 'hmu', 'value' => 'hmu']], JSON_THROW_ON_ERROR);
-$h->setAttributeForTest('CircuitOptionList', $before);
+$h->attributSetzen('CircuitOptionList', $before);
 $h->RequestAction('btnReadCircuits', clickPayload('10.1.254.12', '8081', '700'));
 check($h->attribute('CircuitOptionList') === $before, 'gespeicherte Auswahlliste bleibt unverändert');
 $optionUpdates = array_filter($h->formUpdates, static fn(array $u): bool => $u[0] === 'CircuitName');
@@ -155,7 +126,7 @@ check(is_array($messages) && count($messages) > 0, 'Konfiguration wird auch ohne
 // 5) Formular: gespeicherter Schaltkreis ist immer eine gültige Option
 echo "Formularaufbau:\n";
 $h = newHarness('192.168.1.10', '8080', '430');
-$h->setAttributeForTest('CircuitOptionList', json_encode([['caption' => '-', 'value' => '']], JSON_THROW_ON_ERROR));
+$h->attributSetzen('CircuitOptionList', json_encode([['caption' => '-', 'value' => '']], JSON_THROW_ON_ERROR));
 $formOut = json_decode($h->GetConfigurationForm(), true, 512, JSON_THROW_ON_ERROR);
 $values  = optionValues($formOut['elements'][0]['items'][1]['items'][0]['options']);
 check(in_array('430', $values, true), 'gespeicherter Schaltkreis steht in den Optionen');

@@ -39,7 +39,7 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   (read/write-Ableitung, Formularliste, Variablen-Registrierung samt Presentations,
   Werte-Dekodierung, Publish-Payloads) auf Basis echter ebusd-REST-Fixtures
   (`tests/fixtures/`, Schaltkreise hmu = Wärmepumpe, 700 = Regler VRC700).
-  Läuft ohne Kernel/Netz (`tests/symcon_stubs.php`). Bei **beabsichtigten**
+  Läuft ohne Netz auf dem Kernel-Stub (siehe unten). Bei **beabsichtigten**
   Verhaltensänderungen: `--update` und den Golden-Diff im Commit reviewen.
   Neue Fixtures einfangen: `http://<ebusd-host>:8081/data/<circuit>/?def&verbose&exact&write`.
 - `php tests/check_presentations.php` — jede Darstellung im Quelltext setzt nur Parameter,
@@ -48,7 +48,13 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
 - `php tests/check_circuit_options.php` — Knöpfe „Ermittle Schaltkreisnamen" und „Lese
   Konfiguration aus": fragen die eingetippte Adresse ab und laufen ohne aktiven MQTT-Parent
   (Anlass Forum `t/51854/459`; Fixture `tests/fixtures/data_all.json`, echte
-  `/data`-Antwort). Läuft ebenfalls auf `tests/symcon_stubs.php`.
+  `/data`-Antwort). Läuft ebenfalls auf dem Kernel-Stub.
+- **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
+  `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
+  `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet
+  `MaintainVariable`/`EnableAction`/`SetValue`/`SetStatus`/`LogMessage`/`SendDataToParent`
+  auf und ersetzt die Außenverbindungen: HTTP (`readURL` → `$responses`) und den
+  MQTT-Parent (`HasActiveParent` → `$parentActive`, `SendDataToParent` nur aufgezeichnet).
 
 ## Texte pflegen
 

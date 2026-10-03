@@ -18,7 +18,8 @@ declare(strict_types=1);
  *  - values:       Werte-Dekodierung (getFieldValues) mit den Live-Feldwerten
  *  - payloads:     Publish-Format (getPayload) für schreibbare Messages
  *
- * Läuft ohne IP-Symcon-Kernel und ohne Netzwerk (tests/symcon_stubs.php).
+ * Läuft auf dem offiziellen Kernel-Stub (tests/harness.php, Submodul tests/stubs),
+ * ohne Netzwerk.
  *
  * Aufruf:  php tests/golden_regression.php            -> Vergleich gegen tests/golden/ (CI)
  *          php tests/golden_regression.php --update   -> Golden-Dateien neu schreiben
@@ -28,8 +29,7 @@ $root      = dirname(__DIR__);
 $goldenDir = __DIR__ . '/golden';
 $update    = in_array('--update', $argv, true);
 
-require_once __DIR__ . '/symcon_stubs.php';
-require_once $root . '/ebusdMQTTDevice/module.php';
+require_once __DIR__ . '/harness.php';
 
 // trigger_error-Meldungen einsammeln statt ausgeben — der Fehlerkanal ist Teil
 // des eingefrorenen Verhaltens
@@ -66,7 +66,7 @@ function pretty(mixed $data): string
 
 function invokePrivate(object $obj, string $method, mixed ...$args): mixed
 {
-    $m = new ReflectionMethod($obj, $method);
+    $m = new ReflectionMethod(ebusdMQTTDevice::class, $method);
     $m->setAccessible(true);
     return $m->invoke($obj, ...$args);
 }
@@ -75,13 +75,9 @@ function invokePrivate(object $obj, string $method, mixed ...$args): mixed
 
 const CIRCUITS = ['hmu', '700'];
 
-function newHarness(string $circuit): ebusdMQTTDevice
+function newHarness(string $circuit): ebusdMQTTHarness
 {
-    $harness = new ebusdMQTTDevice(0);
-    $harness->Create();
-    $harness->setPropertyForTest('Host', 'ebusd.test');
-    $harness->setPropertyForTest('CircuitName', $circuit);
-    $harness->resetRecorded();
+    $harness = neueInstanz(['Host' => 'ebusd.test', 'CircuitName' => $circuit]);
     takeErrors();
     return $harness;
 }
@@ -119,7 +115,7 @@ function buildFiles(): array
 
         // Attribut wie im Betrieb setzen (getPayload liest daraus)
         $preparedJson = json_encode($prepared, JSON_THROW_ON_ERROR);
-        $harness->setAttributeForTest('ebusdConfigurationMessages', $preparedJson);
+        $harness->attributSetzen('ebusdConfigurationMessages', $preparedJson);
 
         // variablelist: Formularliste inkl. Ident-/Label-Ableitung
         takeErrors();
