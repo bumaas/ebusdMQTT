@@ -73,6 +73,13 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   keine laufende Abfrage. **Neue öffentliche Funktion ⇒ Hinweis in `form.json` +
   `locale.json` nachtragen.** `actions[1]` (Liste) und `actions[2]` (Knöpfe) nicht
   verschieben — `GetConfigurationForm` greift per Index zu.
+- `php tests/check-legacy.php` — Regel 14: schreibbare Zahlen ohne Wertetabelle bekommen
+  einen Schieberegler nur bei ≤ 1000 Schritten im Typbereich (`MAX_SLIDER_STEPS`), sonst ein
+  Eingabefeld mit Einheit (EXP ±3·10³⁸, UIN 0…65534 waren unbedienbar); der Selbsttest nennt
+  Variablen ohne Meldung in der Konfiguration und gleich benannte Variablen, ohne etwas
+  umzubenennen oder zu löschen. Erhebung am nuc 03.10.2026: die „Legacy-Darstellungen“ sind
+  fast alle **eigene** Darstellungen des Anwenders (`EBM.*_my`) über moderner
+  Modul-Darstellung — das Modul fasst `VariableCustomPresentation` nie an.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

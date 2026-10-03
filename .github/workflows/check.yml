@@ -25,6 +25,7 @@ jobs:
           php -l tests/check-request-action.php
           php -l tests/check-script-api.php
           php -l tests/check-hints-debug.php
+          php -l tests/check-legacy.php
       - name: Code-Stil (gemeinsames Regelwerk, Submodul .style)
         run: |
           wget -q https://cs.symfony.com/download/php-cs-fixer-v3.phar

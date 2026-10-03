@@ -92,7 +92,9 @@ Meldungen mit Priorität 1 werden in jedem Pollzyklus abgefragt, Meldungen mit P
 
 ## 5. Einbindung ins Webfront
 Alle Statusvariablen sind für eine Anzeige und (sofern vom ebusd ein Schreiben unterstützt wird) zum Ändern im Webfront vorbereitet. Sie haben alle eine Darstellung, die der ebusd Definition entspricht.
-Zur Verwendung in der Visu sollten sie jedoch überprüft werden. Insbesondere der Wertebereich (min/max) ist zu kontrollieren und auf reelle bzw. anlagenspezifische Werte zu setzen.
+Zur Verwendung in der Visu sollten sie jedoch überprüft werden. ebusd liefert keine fachlichen Grenzen, nur den technischen Bereich des eBUS-Datentyps. Schreibbare Zahlen bekommen deshalb nur dann einen Schieberegler, wenn dieser Bereich überschaubar ist (höchstens 1000 Schritte, z. B. 0 bis 100 %); sonst – etwa bei Temperaturen im Typ EXP mit ±3·10³⁸ – ein Eingabefeld mit Einheit. Wer einen Schieberegler mit anlagenspezifischen Grenzen möchte, legt dafür eine eigene Darstellung an; das Modul überschreibt sie nicht.
+
+Der Selbsttest (`EBM_RunSelfTest`) nennt außerdem Variablen, zu denen es in der ebusd-Konfiguration keine Meldung mehr gibt (vermutlich veraltet), und gleich benannte Variablen – ebusd beschreibt manche Werte in zwei Meldungen gleich. Das Modul benennt dabei nichts um und löscht nichts.
 
 Besonderheit:
 

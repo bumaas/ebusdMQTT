@@ -72,12 +72,8 @@
                 "Durchgehendes Heizen",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -98,12 +94,8 @@
                 "Hysterese Speicherladung",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " K",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " K"
                 },
                 0,
                 true
@@ -124,12 +116,8 @@
                 "Speicherladung Offset",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " K",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " K"
                 },
                 0,
                 true
@@ -194,12 +182,8 @@
                 "Frostschutz-Verzögerung",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " h",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " h"
                 },
                 0,
                 true
@@ -288,12 +272,8 @@
                 "ExcessTemp Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " K",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " K"
                 },
                 0,
                 true
@@ -337,12 +317,8 @@
                 "Heizkurve Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -386,12 +362,8 @@
                 "Maximaltemperatur Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -412,12 +384,8 @@
                 "Min.Vorlauf Sollwert Kühlen Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -438,12 +406,8 @@
                 "Minimaltemperatur Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -487,12 +451,8 @@
                 "Pumpenstatus Heizkreis 1",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -561,12 +521,8 @@
                 "AT-Abschaltgrenze Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -587,12 +543,8 @@
                 "(konstant 30) Temperatur Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -613,12 +565,8 @@
                 "(konstant 60) Temperatur",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -639,12 +587,8 @@
                 "(konstant 2) Temperatur Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -665,12 +609,8 @@
                 "(konstant 65) Temperatur Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -691,12 +631,8 @@
                 "(konstant 65) Temperatur Heizkreis 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -785,12 +721,8 @@
                 "ExcessTemp Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " K",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " K"
                 },
                 0,
                 true
@@ -834,12 +766,8 @@
                 "Heizkurve Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -883,12 +811,8 @@
                 "Maximaltemperatur Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -909,12 +833,8 @@
                 "Minimaltemperatur Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -958,12 +878,8 @@
                 "Pumpenstatus Heizkreis 2",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -1032,12 +948,8 @@
                 "AT-Abschaltgrenze Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1058,12 +970,8 @@
                 "(konstant 30) Temperatur Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1084,12 +992,8 @@
                 "(konstant 60) Temperatur",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1110,12 +1014,8 @@
                 "(konstant 65) Temperatur Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1136,12 +1036,8 @@
                 "(konstant 65) Temperatur Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1162,12 +1058,8 @@
                 "(konstant 20) Temperatur Heizkreis 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1256,12 +1148,8 @@
                 "ExcessTemp Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " K",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " K"
                 },
                 0,
                 true
@@ -1305,12 +1193,8 @@
                 "Heizkurve Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -1354,12 +1238,8 @@
                 "Maximaltemperatur Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1380,12 +1260,8 @@
                 "Minimaltemperatur Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1429,12 +1305,8 @@
                 "Pumpenstatus Heizkreis 3",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -1503,12 +1375,8 @@
                 "AT-Abschaltgrenze Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1529,12 +1397,8 @@
                 "(konstant 30) Temperatur Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1555,12 +1419,8 @@
                 "(konstant 60) Temperatur",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1581,12 +1441,8 @@
                 "(konstant 65) Temperatur Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1607,12 +1463,8 @@
                 "(konstant 65) Temperatur Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1633,12 +1485,8 @@
                 "(konstant 20) Temperatur Heizkreis 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1747,12 +1595,8 @@
                 "HolidayTemp",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -1880,12 +1724,8 @@
                 "Sperrzeit WW-Bedarf",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " min",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " min"
                 },
                 0,
                 true
@@ -1906,12 +1746,8 @@
                 "max.Vorl.solltemp.WW",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -2067,12 +1903,8 @@
                 "Speichersolltemperatur",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -2093,12 +1925,8 @@
                 "Systemschema",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -2161,12 +1989,8 @@
                 "Passwort für das Konfigurationsmenü",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -2231,12 +2055,8 @@
                 "maximale Speicherladezeit",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " min",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " min"
                 },
                 0,
                 true
@@ -2257,12 +2077,8 @@
                 "maxRoomHumidity",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": "",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": ""
                 },
                 0,
                 true
@@ -2349,12 +2165,8 @@
                 "mittlere Außentemperatur",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -2725,12 +2537,8 @@
                 "Ladepumpe Nachlaufzeit",
                 1,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " min",
-                    "DIGITS": 0,
-                    "MIN": 0,
-                    "MAX": 65534,
-                    "STEP_SIZE": 1
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " min"
                 },
                 0,
                 true
@@ -2795,12 +2603,8 @@
                 "AT Kühlen starten",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -2865,12 +2669,8 @@
                 "(VR70 konfig 1)",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -2891,12 +2691,8 @@
                 "(VR70 konfig 1)",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -2917,12 +2713,8 @@
                 "(konstant 0/inf)",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -6731,12 +6523,8 @@
                 "Raumsolltemperatur Zone 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -6799,12 +6587,8 @@
                 "Kühlsolltemperatur Zone 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -6825,12 +6609,8 @@
                 "Kühlsolltemperatur2 Zone 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -7558,12 +7338,8 @@
                 "Solltemperatur Zone 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -7626,12 +7402,8 @@
                 "Raumsollwert Ferienbetrieb Zone 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -7694,12 +7466,8 @@
                 "Absenktemperatur Zone 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -7764,12 +7532,8 @@
                 "Quick Veto Temperatur Zone 1",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -8657,12 +8421,8 @@
                 "Raumsolltemperatur Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -8725,12 +8485,8 @@
                 "Kühlsolltemperatur Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -8751,12 +8507,8 @@
                 "Kühlsolltemperatur2 Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -9484,12 +9236,8 @@
                 "Solltemperatur Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -9552,12 +9300,8 @@
                 "Raumsollwert Ferienbetrieb Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -9620,12 +9364,8 @@
                 "Absenktemperatur Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -9668,12 +9408,8 @@
                 "Quick Veto Temperatur Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -10515,12 +10251,8 @@
                 "Raumsolltemperatur Zone 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -10583,12 +10315,8 @@
                 "Kühlsolltemperatur2 Zone 2",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -10609,12 +10337,8 @@
                 "Solltemperatur Zone 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -10677,12 +10401,8 @@
                 "Raumsollwert Ferienbetrieb Zone 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -10745,12 +10465,8 @@
                 "Absenktemperatur Zone 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true
@@ -10793,12 +10509,8 @@
                 "Quick Veto Temperatur Zone 3",
                 2,
                 {
-                    "PRESENTATION": "{6B9CAEEC-5958-C223-30F7-BD36569FC57A}",
-                    "SUFFIX": " °C",
-                    "DIGITS": 3,
-                    "MIN": -3.0e+38,
-                    "MAX": 3.0e+38,
-                    "STEP_SIZE": 0.001
+                    "PRESENTATION": "{6F477326-1683-A2FD-D2E7-477F366ECB62}",
+                    "SUFFIX": " °C"
                 },
                 0,
                 true

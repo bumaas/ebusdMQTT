@@ -31,6 +31,12 @@ class ebusdMQTTDevice extends IPSModuleStrict
     // EBM_ReadMessageValues: ebusd fragt ggf. den Bus ab — Obergrenze je Aufruf
     private const int MAX_MESSAGES_PER_READ = 20;
 
+    // Schieberegler nur bis zu dieser Schrittzahl, sonst Eingabefeld
+    private const int MAX_SLIDER_STEPS = 1000;
+
+    // Selbsttest: so viele Einträge je Altlast-Hinweis, der Rest als „und N weitere"
+    private const int MAX_LISTED_ITEMS = 10;
+
     //property names
     private const string PROP_HOST                             = 'Host';
     private const string PROP_PORT                             = 'Port';
@@ -673,8 +679,73 @@ class ebusdMQTTDevice extends IPSModuleStrict
             );
         }
 
+        foreach ($this->getLegacyHints() as $hint) {
+            $lines[] = '– ' . $hint;
+        }
+
         $lines[] = $problems === 0 ? $this->Translate('Result: OK') : sprintf($this->Translate('Result: %d problem(s)'), $problems);
         return implode("\n", $lines);
+    }
+
+    /**
+     * Hinweise auf Altlasten für den Selbsttest — nur benennen, nichts umbenennen oder löschen:
+     * Variablen ohne Meldung in der ebusd-Konfiguration (z. B. Meldungen, die ebusd nicht mehr
+     * kennt) und gleich benannte Variablen (ebusd beschreibt manche Werte in zwei Meldungen gleich).
+     */
+    private function getLegacyHints(): array
+    {
+        $knownIdents = [];
+        $configurationMessages = $this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
+        foreach ($configurationMessages as $message) {
+            foreach ($message['fielddefs'] ?? [] as $key => $fieldDef) {
+                if (($fieldDef['type'] ?? '') !== 'IGN') {
+                    $knownIdents[$this->getFieldIdentName($message, $key)] = true;
+                }
+            }
+        }
+
+        $orphans = [];
+        $byName  = [];
+        foreach (IPS_GetChildrenIDs($this->InstanceID) as $childID) {
+            if (!IPS_VariableExists($childID)) {
+                continue;
+            }
+            $object = IPS_GetObject($childID);
+            $ident  = $object['ObjectIdent'];
+            $label  = $ident !== '' ? $ident : sprintf('#%d "%s"', $childID, $object['ObjectName']);
+
+            $byName[$object['ObjectName']][] = $label;
+            if ($configurationMessages !== [] && !isset($knownIdents[$ident])) {
+                $orphans[] = sprintf('%s (%s)', $label, date('d.m.Y', IPS_GetVariable($childID)['VariableUpdated']));
+            }
+        }
+
+        $hints = [];
+        if ($orphans !== []) {
+            $hints[] = sprintf(
+                $this->Translate('Variables without a message in the ebusd configuration, probably obsolete (last update): %s'),
+                $this->shortList($orphans)
+            );
+        }
+        $duplicates = [];
+        foreach ($byName as $name => $labels) {
+            if (count($labels) > 1) {
+                $duplicates[] = sprintf('"%s" (%s)', $name, implode(', ', $labels));
+            }
+        }
+        if ($duplicates !== []) {
+            $hints[] = sprintf($this->Translate('Variables with the same name: %s'), $this->shortList($duplicates));
+        }
+        return $hints;
+    }
+
+    private function shortList(array $items): string
+    {
+        $text = implode(', ', array_slice($items, 0, self::MAX_LISTED_ITEMS));
+        if (count($items) > self::MAX_LISTED_ITEMS) {
+            $text .= sprintf($this->Translate(' and %d more'), count($items) - self::MAX_LISTED_ITEMS);
+        }
+        return $text;
     }
 
     /**
@@ -1564,8 +1635,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
                     ];
                 }
 
-                // Eingabefeld oder Slider
-                if ($typeDef['MinValue'] === $typeDef['MaxValue']) {
+                // Eingabefeld oder Slider: ebusd liefert keine fachlichen Grenzen, nur den technischen
+                // Bereich des Datentyps. Bei EXP (±3·10³⁸) oder UIN (0 … 65534) ist ein Schieberegler
+                // unbedienbar — ein Schieberegler nur, wenn der Bereich überschaubar ist.
+                $steps = ($typeDef['MaxValue'] - $typeDef['MinValue']) / $typeDef['StepSize'];
+                if ($typeDef['MinValue'] === $typeDef['MaxValue'] || $steps > self::MAX_SLIDER_STEPS) {
                     return [
                         'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_INPUT,
                         'SUFFIX'       => $suffix,

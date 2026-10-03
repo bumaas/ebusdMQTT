@@ -67,6 +67,13 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
         $this->WriteAttributeString($Name, $Value);
     }
 
+    /** Variable unter der Instanz anlegen, die zu keiner ebusd-Meldung gehört (Altlast) */
+    public function fremdeVariable(string $Ident, string $Name): int
+    {
+        parent::MaintainVariable($Ident, $Name, VARIABLETYPE_INTEGER, ['PRESENTATION' => VARIABLE_PRESENTATION_VALUE_PRESENTATION], 0, true);
+        return IPS_GetObjectIDByIdent($Ident, $this->InstanceID);
+    }
+
     /** Private Modulmethode aufrufen (Registrierung, Ableitungen) */
     public function privat(string $method, mixed ...$args): mixed
     {
