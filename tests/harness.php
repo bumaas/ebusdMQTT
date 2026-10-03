@@ -38,6 +38,11 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
 
     public bool $parentActive = false;
 
+    public function id(): int
+    {
+        return $this->InstanceID;
+    }
+
     public function resetRecorded(): void
     {
         $this->recorded = [];

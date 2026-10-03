@@ -21,6 +21,7 @@ jobs:
           php -l tests/golden_regression.php
           php -l tests/check_presentations.php
           php -l tests/check_circuit_options.php
+          php -l tests/check-status-log.php
       - name: Code-Stil (gemeinsames Regelwerk, Submodul .style)
         run: |
           wget -q https://cs.symfony.com/download/php-cs-fixer-v3.phar
@@ -40,4 +41,4 @@ jobs:
         run: php tests/check_circuit_options.php
 
       - name: Modultests
-        run: for t in tests/check-readme.php; do echo "== $t"; php "$t" || exit 1; done
+        run: for t in tests/check-*.php; do echo "== $t"; php "$t" || exit 1; done

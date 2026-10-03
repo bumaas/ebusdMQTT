@@ -186,6 +186,21 @@
       "code":    204,
       "icon":    "error",
       "caption": "IP address is not valid."
+    },
+    {
+      "code":    205,
+      "icon":    "error",
+      "caption": "ebusd is not reachable (host, port, HTTP port of ebusd)."
+    },
+    {
+      "code":    206,
+      "icon":    "error",
+      "caption": "ebusd reports no eBUS signal (check the eBUS adapter)."
+    },
+    {
+      "code":    207,
+      "icon":    "error",
+      "caption": "No circuit selected."
     }
   ]
 }

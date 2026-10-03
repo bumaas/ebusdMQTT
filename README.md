@@ -72,7 +72,19 @@ Schreibt die Debug-Meldungen des Moduls zusätzlich in das Logfile der IPSLibrar
 Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden.
 In der Liste der Statusvariablen markiert ein **(A)** hinter dem Ident, dass für diese Variable die Archivierung im Query-Logger (Archive Handler) aktiv ist.
 
-Das Modul überwacht zudem das globale Signal des ebusd. Geht das Signal verloren (z.B. Hardware-Trennung), wird die Instanz automatisch auf *Inaktiv* gesetzt.
+Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal und prüft sie bei einer Störung automatisch erneut. Jede Störung hat einen eigenen Instanzstatus:
+
+| Status | Bedeutung | Was tun |
+|---|---|---|
+| 104 | Der MQTT Server (übergeordnete Instanz) ist nicht aktiv | MQTT-Server-Instanz prüfen |
+| 202 | Port ungültig | Port korrigieren (1 bis 65535) |
+| 203 | Schaltkreis ungültig oder bei ebusd nicht vorhanden | mit „Ermittle Schaltkreis Namen“ neu auswählen |
+| 204 | Host ungültig | Host korrigieren |
+| 205 | ebusd ist nicht erreichbar | Host, Port und HTTP-Port von ebusd (`--httpport`) prüfen |
+| 206 | ebusd meldet kein eBUS-Signal (z. B. Adapter getrennt) | eBUS-Adapter und Verbindung zum Bus prüfen |
+| 207 | Kein Schaltkreis ausgewählt | Schaltkreis auswählen |
+
+Jeder Wechsel in eine Störung steht einmal als Warnung mit Ursache und nächstem Schritt im Meldungsprotokoll, die Behebung einmal als Meldung. Eine anhaltende Störung wiederholt sich dort nicht.
 
 Bei Bedarf kann für eine Statusvariable eine Poll Priorität angegeben werden, die von ebusd verwendet werden soll. Die Poll Prioriät besagt, in welchem Intervallzyklus eine Meldung von ebusd gepollt werden soll.
 Meldungen mit Priorität 1 werden in jedem Pollzyklus abgefragt, Meldungen mit Priorität 2 werden in jedem zweiten Zyklus abgefragt usw.. Die Pollpriorität kann gesetzt werden, wenn das Abfrageintervall, das im Minutenbereich liegt, für einzelne Meldungen nicht fein genug ist.

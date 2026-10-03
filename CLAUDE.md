@@ -49,6 +49,11 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   Konfiguration aus": fragen die eingetippte Adresse ab und laufen ohne aktiven MQTT-Parent
   (Anlass Forum `t/51854/459`; Fixture `tests/fixtures/data_all.json`, echte
   `/data`-Antwort). Läuft ebenfalls auf dem Kernel-Stub.
+- `php tests/check-status-log.php` — Instanzstatus und Log-Klartexte (MCP-Tauglichkeit,
+  Regeln 3/4/16): eigener Code je Störung (205 nicht erreichbar, 206 kein Signal,
+  207 kein Schaltkreis), genau eine Warnung je Wechsel in einen Fehler, eine Meldung bei
+  Behebung, kein Rauschen bei gleichbleibendem Zustand (`applyStatus`). Die CI führt alle
+  `tests/check-*.php` aus.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

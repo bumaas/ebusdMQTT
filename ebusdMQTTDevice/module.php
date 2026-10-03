@@ -20,6 +20,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
     private const int STATUS_INST_PORT_IS_INVALID  = 202;
     private const int STATUS_INST_IP_IS_INVALID    = 204;
     private const int STATUS_INST_TOPIC_IS_INVALID = 203;
+    private const int STATUS_INST_NOT_REACHABLE    = 205;
+    private const int STATUS_INST_NO_SIGNAL        = 206;
+    private const int STATUS_INST_NO_CIRCUIT       = 207;
 
     //property names
     private const string PROP_HOST                             = 'Host';
@@ -104,7 +107,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
         // 1. Grundlegende Validierung der Eigenschaften
         $circuitName = $this->ReadPropertyString(self::PROP_CIRCUITNAME);
         if ($circuitName === '') {
-            $this->SetStatus(self::STATUS_INST_TOPIC_IS_INVALID);
+            $this->applyStatus(
+                self::STATUS_INST_NO_CIRCUIT,
+                'no circuit selected',
+                $this->Translate('No circuit selected. Determine the circuits with "Read Circuits" and select one.')
+            );
             $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, 0);
             return;
         }
@@ -1315,24 +1322,40 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
         if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
-            $this->applyStatus(self::STATUS_INST_IP_IS_INVALID, 'invalid IP');
+            $this->applyStatus(
+                self::STATUS_INST_IP_IS_INVALID,
+                'invalid IP',
+                sprintf($this->Translate('Host "%s" is not a valid IP address or host name. Correct the host in the instance configuration.'), $host)
+            );
             return;
         }
 
         //Port Prüfen
         if ($port < 1 || $port > 65535 || !filter_var($port, FILTER_VALIDATE_INT)) {
-            $this->applyStatus(self::STATUS_INST_PORT_IS_INVALID, 'invalid Port');
+            $this->applyStatus(
+                self::STATUS_INST_PORT_IS_INVALID,
+                'invalid Port',
+                sprintf($this->Translate('Port "%s" is not valid (allowed: 1 to 65535). Correct the port in the instance configuration.'), $portString)
+            );
             return;
         }
 
         //Circuit prüfen
         if ($circuitName === self::MODEL_GLOBAL_NAME) {
-            $this->applyStatus(self::STATUS_INST_TOPIC_IS_INVALID, 'Wrong Circuit name (global)');
+            $this->applyStatus(
+                self::STATUS_INST_TOPIC_IS_INVALID,
+                'Wrong Circuit name (global)',
+                $this->Translate('The circuit "global" cannot be used. Select the circuit of a device.')
+            );
             return;
         }
 
         if (!$this->HasActiveParent()) {
-            $this->applyStatus(IS_INACTIVE, 'Parent not active');
+            $this->applyStatus(
+                IS_INACTIVE,
+                'Parent not active',
+                $this->Translate('The MQTT Server (parent instance) is not active. The values of ebusd arrive via MQTT only - check the MQTT Server instance.')
+            );
             return;
         }
 
@@ -1340,29 +1363,85 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $url    = sprintf('http://%s:%d/data/%s', $host, $port, $circuitName);
         $result = $this->readURL($url);
 
-        if ($result === null || !isset($result[self::MODEL_GLOBAL_NAME]['signal'])
-            || !filter_var($result[self::MODEL_GLOBAL_NAME]['signal'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
-            $this->applyStatus(IS_INACTIVE, 'invalid connection');
+        if ($result === null || !isset($result[self::MODEL_GLOBAL_NAME]['signal'])) {
+            $this->applyStatus(
+                self::STATUS_INST_NOT_REACHABLE,
+                'invalid connection',
+                sprintf(
+                    $this->Translate('ebusd does not answer at %s. Check host and port and whether ebusd is running with its HTTP port enabled (--httpport). The connection is checked again automatically.'),
+                    $url
+                )
+            );
+            return;
+        }
+
+        $noSignalText = sprintf(
+            $this->Translate('ebusd at %s:%d reports no eBUS signal. Check the eBUS adapter and its connection to the bus. The connection is checked again automatically.'),
+            $host,
+            $port
+        );
+
+        if (!filter_var($result[self::MODEL_GLOBAL_NAME]['signal'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
+            $this->applyStatus(self::STATUS_INST_NO_SIGNAL, 'no signal (REST)', $noSignalText);
             return;
         }
 
         if (!array_key_exists($circuitName, $result)) {
-            $this->applyStatus(self::STATUS_INST_TOPIC_IS_INVALID, 'invalid circuit name');
+            $this->applyStatus(
+                self::STATUS_INST_TOPIC_IS_INVALID,
+                'invalid circuit name',
+                sprintf(
+                    $this->Translate('The circuit "%s" does not exist at ebusd %s:%d. Determine the available circuits with "Read Circuits".'),
+                    $circuitName,
+                    $host,
+                    $port
+                )
+            );
             return;
         }
 
         if (!$this->ReadAttributeBoolean(self::ATTR_SIGNAL)) {
-            $this->applyStatus(IS_INACTIVE, 'no signal');
+            $this->applyStatus(self::STATUS_INST_NO_SIGNAL, 'no signal (MQTT)', $noSignalText);
             return;
         }
 
         $this->applyStatus(IS_ACTIVE, 'active');
     }
 
-    private function applyStatus(int $status, string $reason): void
+    /**
+     * Setzt den Instanzstatus. Über MCP sieht eine KI nur die Statuszahl, nicht den Text aus der
+     * form.json — deshalb steht jeder Wechsel in einen Fehler einmal als Warnung mit Wert und
+     * nächstem Schritt im Log, die Rückkehr nach 102 einmal als Meldung. Ein unveränderter Status
+     * (die Verbindungsprüfung läuft zyklisch) schreibt nichts.
+     */
+    private function applyStatus(int $status, string $reason, string $logText = ''): void
     {
+        $previous = $this->GetStatus();
         $this->SetStatus($status);
         $this->logDebug('updateInstanceStatus', sprintf('Status: %s (%s)', $status, $reason));
+
+        if ($status === $previous) {
+            return;
+        }
+
+        if ($status === IS_ACTIVE) {
+            if ($previous >= IS_INACTIVE) {
+                $this->LogMessage(
+                    sprintf(
+                        $this->Translate('Connection to ebusd %s:%s (circuit "%s") is working again.'),
+                        $this->ReadPropertyString(self::PROP_HOST),
+                        $this->ReadPropertyString(self::PROP_PORT),
+                        $this->ReadPropertyString(self::PROP_CIRCUITNAME)
+                    ),
+                    KL_MESSAGE
+                );
+            }
+            return;
+        }
+
+        if ($logText !== '') {
+            $this->LogMessage($logText, KL_WARNING);
+        }
     }
 
     /**
