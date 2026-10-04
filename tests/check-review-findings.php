@@ -33,6 +33,10 @@ declare(strict_types=1);
  *  8. Der Selbsttest nannte bei Variablen ohne Meldung in der Konfiguration als letzte
  *     Aktualisierung „01.01.1970“, wenn die Variable nie einen Wert bekommen hatte
  *     (VariableUpdated = 0) — für eine KI ein scheinbar echtes Datum.
+ *  9. „Die Verbindung zu ebusd … funktioniert wieder“ kam bei jedem Wechsel von Status ≥ 104
+ *     nach 102, auch nach reinen Konfigurationsfehlern (202, 204, 207, 208), bei denen es nie
+ *     eine Verbindung gab — etwa bei jeder neuen Instanz nach der Wahl des Schaltkreises. Nur
+ *     nach Betriebsstörungen (104, 203, 205, 206) ist die Meldung richtig.
  *
  * Fixtures: tests/fixtures/config_700.json und data_all.json (echte ebusd-Antworten).
  * Zu 2: Ein Typ außerhalb der Tabelle kommt in keinem Mitschnitt vor (alle Schaltkreise des
@@ -289,6 +293,47 @@ $zeile = implode("\n", array_filter(explode("\n", $test), static fn(string $z): 
 check($zeile !== '', 'Selbsttest nennt die verwaiste Variable');
 check(!str_contains($zeile, '1970'), 'kein Datum 1970 (' . $zeile . ')');
 check(str_contains($zeile, 'Altlast (no value yet)'), 'stattdessen „no value yet“');
+
+// --- 9. „funktioniert wieder“ nur nach Betriebsstörungen -------------------------------
+
+echo "Meldung „funktioniert wieder“:\n";
+$wieder = static fn(ebusdMQTTHarness $h): int => count(array_filter(
+    logs($h),
+    static fn(array $l): bool => $l[2] === KL_MESSAGE && str_contains($l[1], 'is working again')
+));
+$gesund = ['Host' => HOST, 'Port' => '8081', 'CircuitName' => '700', 'UpdateInterval' => 10];
+$faelle = [
+    '207 kein Schaltkreis'  => [['CircuitName' => ''], 207, 0],
+    '204 Host ungültig'     => [['Host' => 'kein host!'], 204, 0],
+    '202 Port ungültig'     => [['Port' => '80801'], 202, 0],
+    '208 Intervall negativ' => [['UpdateInterval' => -5], 208, 0],
+];
+foreach ($faelle as $fall => [$fehler, $code, $erwartet]) {
+    $h = instanz();
+    $h->konfigurieren($fehler);
+    check(status($h) === $code, "$fall: Ausgangslage $code (" . status($h) . ')');
+    $h->resetRecorded();
+    $h->konfigurieren($gesund);
+    check(status($h) === IS_ACTIVE, "$fall: danach 102");
+    check($wieder($h) === $erwartet, "$fall → 102: keine Meldung „funktioniert wieder“ ({$wieder($h)})");
+}
+
+$h = instanz();
+unset($h->responses[STATUS_URL]);
+$h->RequestAction('timerCheckConnection', '');
+check(status($h) === 205, 'Gegenprobe 205: Ausgangslage');
+$h->resetRecorded();
+$h->responses[STATUS_URL] = ['global' => ['signal' => 1], '700' => []];
+$h->RequestAction('timerCheckConnection', '');
+check(status($h) === IS_ACTIVE && $wieder($h) === 1, 'Gegenprobe 205 → 102: genau eine Meldung');
+
+$h               = instanz();
+$h->parentActive = false;
+$h->RequestAction('timerCheckConnection', '');
+$h->resetRecorded();
+$h->parentActive = true;
+$h->RequestAction('timerCheckConnection', '');
+check(status($h) === IS_ACTIVE && $wieder($h) === 1, 'Gegenprobe 104 → 102: genau eine Meldung');
 
 echo "\n$checks Prüfungen, $fails Fehler\n";
 exit($fails === 0 ? 0 : 1);

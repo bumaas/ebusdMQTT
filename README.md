@@ -85,7 +85,7 @@ Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal un
 | 207 | Kein Schaltkreis ausgewählt | Schaltkreis auswählen |
 | 208 | Aktualisierungsintervall ungültig (negativ) | 0 (aus) oder eine Anzahl Minuten eintragen |
 
-Jeder Wechsel in eine Störung steht einmal als Warnung mit Ursache und nächstem Schritt im Meldungsprotokoll, die Behebung einmal als Meldung. Eine anhaltende Störung wiederholt sich dort nicht.
+Jeder Wechsel in eine Störung steht einmal als Warnung mit Ursache und nächstem Schritt im Meldungsprotokoll, die Behebung einer Betriebsstörung (104, 203, 205, 206) einmal als Meldung. Nach dem Korrigieren einer Einstellung (202, 204, 207, 208) erscheint keine solche Meldung. Eine anhaltende Störung wiederholt sich dort nicht.
 
 Bei Bedarf kann für eine Statusvariable eine Poll Priorität angegeben werden, die von ebusd verwendet werden soll. Die Poll Prioriät besagt, in welchem Intervallzyklus eine Meldung von ebusd gepollt werden soll.
 Meldungen mit Priorität 1 werden in jedem Pollzyklus abgefragt, Meldungen mit Priorität 2 werden in jedem zweiten Zyklus abgefragt usw.. Die Pollpriorität kann gesetzt werden, wenn das Abfrageintervall, das im Minutenbereich liegt, für einzelne Meldungen nicht fein genug ist.

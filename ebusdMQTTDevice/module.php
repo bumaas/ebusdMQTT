@@ -2059,7 +2059,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
         }
 
         if ($status === IS_ACTIVE) {
-            if ($previous >= IS_INACTIVE) {
+            // nur nach einer Störung im Betrieb — nach einem Eingabe- oder Einrichtungsfehler
+            // (202, 204, 207, 208) gab es keine Verbindung, die wieder funktionieren könnte
+            if (in_array($previous, [IS_INACTIVE, self::STATUS_INST_TOPIC_IS_INVALID, self::STATUS_INST_NOT_REACHABLE, self::STATUS_INST_NO_SIGNAL], true)) {
                 $this->LogMessage(
                     sprintf(
                         $this->Translate('Connection to ebusd %s:%s (circuit "%s") is working again.'),
