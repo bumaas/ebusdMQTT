@@ -69,7 +69,7 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
 - `php tests/check-hints-debug.php` — Regel 6: jede öffentliche Funktion hat genau einen
   unsichtbaren Formular-Hinweis (`visible: false`, am Ende von `actions`) mit Signatur und
   Rückgabetyp; Regel 1: sichtbares Label zu „Aktiv“/Poll-Priorität; Regel 10: keine
-  Debug-Zeile ≥ 1000 Zeichen, ein Publish = eine Zeile; Selbsttest behauptet bei Störung
+  Debug-Zeile ≥ 1000 Zeichen (auch nicht beim Empfang einer unbekannten Meldung), ein Publish = eine Zeile; Selbsttest behauptet bei Störung
   keine laufende Abfrage. **Neue öffentliche Funktion ⇒ Hinweis in `form.json` +
   `locale.json` nachtragen.** `actions[1]` (Liste) und `actions[2]` (Knöpfe) nicht
   verschieben — `GetConfigurationForm` greift per Index zu.

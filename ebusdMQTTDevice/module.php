@@ -498,9 +498,10 @@ class ebusdMQTTDevice extends IPSModuleStrict
         // ist die Konfiguration der Message bekannt?
         $configurationMessages = $this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
         if (!isset($configurationMessages[$messageId])) {
+            // nur die Meldung und die Größe der Konfiguration — nicht die ganze Konfiguration (bis 170 kB)
             $this->logDebug(
                 'MQTT messageId - not found',
-                sprintf('%s, %s', $messageId, $this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES))
+                sprintf('%s (configuration has %d messages)', $messageId, count($configurationMessages))
             );
 
             $this->LogMessage(sprintf($this->Translate('Message %s not found in configuration.'), $messageId), KL_ERROR);

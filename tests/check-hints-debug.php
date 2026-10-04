@@ -132,5 +132,20 @@ $zeilen = array_values(array_filter($h->debug, static fn(array $d): bool => $d[0
 check(count($zeilen) === 1, 'ein Publish ergibt genau eine Debug-Zeile (' . count($zeilen) . ')');
 check(isset($zeilen[0]) && str_contains($zeilen[0][1], 'ebusd/700/Test/set') && !str_contains($zeilen[0][1], 'DataID'), 'Debug-Zeile nennt Topic und Wert, nicht das Rohpaket');
 
+// Eingehende Meldung, die nicht in der Konfiguration steht: Das Modul schrieb dazu die ganze
+// gespeicherte Konfiguration (bis 170 kB) in eine Debug-Zeile (gefunden 03.10.2026)
+$h->debug = [];
+$paket    = json_encode([
+    'DataID'  => '{7F7632D9-FA40-4F38-8DEA-C83CD4325A32}',
+    'Topic'   => 'ebusd/700/GibtEsNicht',
+    'Payload' => bin2hex('{"0":{"value":1}}'),
+], JSON_THROW_ON_ERROR);
+set_error_handler(static fn(): bool => true); // ein LogMessage-Fehler o. Ä. soll den Debug-Test nicht abbrechen
+$h->ReceiveData($paket);
+restore_error_handler();
+$laengste = max(array_map(static fn(array $d): int => strlen($d[1]), $h->debug ?: [['', '']]));
+check($laengste < MAX_DEBUG, "unbekannte Meldung empfangen: längste Debug-Zeile $laengste Zeichen (< " . MAX_DEBUG . ')');
+check(count(array_filter($h->debug, static fn(array $d): bool => str_contains($d[1], 'GibtEsNicht'))) >= 1, 'Debug nennt die unbekannte Meldung');
+
 echo "\n$checks Prüfungen, $fails Fehler\n";
 exit($fails === 0 ? 0 : 1);
