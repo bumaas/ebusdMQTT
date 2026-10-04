@@ -11,6 +11,12 @@ declare(strict_types=1);
  *     ApplyChanges wieder 207: der Status pendelte.
  *  2. EBM_FindMessages endete mit einem TypeError, sobald die Konfiguration einen eBUS-Typ
  *     enthält, den die Typtabelle nicht kennt (getIPSVariableType liefert dann null).
+ *  3. EBM_ReadMessageValues prüfte weder Eigenschaften noch Erreichbarkeit: Antwortete ebusd
+ *     nicht, kam je Meldung {"value": null} ohne Warnung (nicht zu unterscheiden von „ebusd hat
+ *     keinen Wert“), und jede Meldung wartete einzeln auf die Zeitüberschreitung. Der Knopf
+ *     „Lese Werte“ fragte so sogar alle lesbaren Meldungen ab (beim 700 einige Hundert).
+ *     Fixture value_700_errorhistory.json: echte Antwort von ebusd (nuc, 04.10.2026) auf eine
+ *     bekannte Meldung ohne Wert, HTTP 200 mit nur dem global-Block.
  *  4. Schreibprüfung: Kommazahlen für ganzzahlige Typen ohne Divisor gingen unverändert
  *     auf den Bus ('21.7').
  *  5. UCH hatte als Höchstwert 256; gültig ist 0…254 (0xFF ist der Ersatzwert,
@@ -196,6 +202,48 @@ check(logs($h) === [], 'kein Log für …/set und …/get (' . json_encode(array
 $h->resetRecorded();
 $h->ReceiveData(paket('ebusd/700/GibtEsNicht', '{"0":{"value":1}}'));
 check(count(logs($h)) === 1 && str_contains(logs($h)[0][1], 'GibtEsNicht'), 'Gegenprobe: echte unbekannte Meldung warnt weiterhin');
+
+// --- 3. Werte lesen, wenn ebusd nicht antwortet --------------------------------------
+
+echo "EBM_ReadMessageValues ohne Antwort von ebusd:\n";
+$h = instanz(); // nur Status- und Konfigurations-URL beantwortet, Wertabfragen nicht
+$h->requestedUrls = [];
+$r = mitFehlern(static fn() => $h->ReadMessageValues('BankHoliday'));
+check(count($r['fehler']) === 1 && str_contains($r['fehler'][0], 'does not answer') && str_contains($r['fehler'][0], BASE . '/700/'), 'genau eine Warnung „antwortet nicht“ mit URL (' . json_encode($r['fehler'], JSON_UNESCAPED_UNICODE) . ')');
+check($r['ergebnis'] === '', 'liefert keinen Wert, sondern \'\' (' . json_encode($r['ergebnis']) . ')');
+check(count($h->requestedUrls) === 1, 'bricht nach der ersten Abfrage ab (' . count($h->requestedUrls) . ' Abfragen)');
+
+echo "EBM_ReadMessageValues bei ungültigem Port:\n";
+$h = instanz();
+$h->konfigurieren(['Port' => '80801']);
+$h->requestedUrls = [];
+$r                = mitFehlern(static fn() => $h->ReadMessageValues('AdaptHeatCurve'));
+check(count($r['fehler']) === 1 && str_contains($r['fehler'][0], '80801'), 'Warnung nennt den Port (' . json_encode($r['fehler'], JSON_UNESCAPED_UNICODE) . ')');
+check($h->requestedUrls === [], 'fragt ebusd nicht ab');
+
+echo "EBM_ReadMessageValues, ebusd antwortet ohne Wert (Gegenprobe):\n";
+$h       = instanz();
+$antwort = json_decode(file_get_contents(__DIR__ . '/fixtures/value_700_errorhistory.json'), true, 512, JSON_THROW_ON_ERROR);
+foreach (json_decode($h->FindMessages('errorhistory'), true, 512, JSON_THROW_ON_ERROR) as $m) {
+    $h->responses[BASE . '/700/' . $m['message'] . '?def&verbose&exact&required&maxage=600'] = $antwort;
+}
+$r     = mitFehlern(static fn() => $h->ReadMessageValues('errorhistory'));
+$werte = json_decode((string)$r['ergebnis'], true);
+check($r['fehler'] === [] && ($werte['errorhistory'] ?? false) === ['value' => null, 'lastUpdate' => null], 'kein Fehler, value null (' . json_encode([$r['fehler'], $werte], JSON_UNESCAPED_UNICODE) . ')');
+
+echo "Knopf „Lese Werte“ ohne Antwort von ebusd:\n";
+$h                = instanz();
+$h->requestedUrls = [];
+$h->formUpdates   = [];
+$liste            = $h->attribute('VariableList');
+$r                = mitFehlern(static fn() => $h->RequestAction('btnReadValues', $liste));
+check(count($h->requestedUrls) === 1, 'bricht nach der ersten Abfrage ab (' . count($h->requestedUrls) . ' Abfragen bei ' . count(json_decode($liste, true)) . ' Meldungen)');
+$msg = array_values(array_filter($h->formUpdates, static fn(array $u): bool => $u[0] === 'MsgText'));
+check(count($msg) === 1 && str_contains((string)$msg[0][2], 'does not answer'), 'Meldung „antwortet nicht“ (' . json_encode(array_column($msg, 2), JSON_UNESCAPED_UNICODE) . ')');
+$balken = array_values(array_filter($h->formUpdates, static fn(array $u): bool => $u[0] === 'ProgressBar' && $u[1] === 'visible'));
+check($balken !== [] && end($balken)[2] === false, 'Fortschrittsbalken wird wieder ausgeblendet');
+$listUpdates = array_values(array_filter($h->formUpdates, static fn(array $u): bool => $u[0] === 'VariableList'));
+check($listUpdates === [], 'Liste im Formular bleibt unverändert');
 
 echo "\n$checks Prüfungen, $fails Fehler\n";
 exit($fails === 0 ? 0 : 1);

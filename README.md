@@ -144,7 +144,7 @@ Bindet eine Meldung ein (`true`: Variablen anlegen, Auswahl speichern, aktuellen
 ```php
 EBM_ReadMessageValues(int $InstanceID, string $search): string
 ```
-Liest die aktuellen Werte der lesbaren Meldungen, die zu `$search` passen, bei ebusd (wie der Knopf „Lese Werte“) und liefert sie als JSON: Meldung → `value` (Werte durch „/“ getrennt, `null` = kein Wert) und `lastUpdate` (Zeitpunkt der letzten Aktualisierung bei ebusd, `null` = nie). Weil ebusd dafür den Bus abfragen kann, höchstens 20 Meldungen je Aufruf.
+Liest die aktuellen Werte der lesbaren Meldungen, die zu `$search` passen, bei ebusd (wie der Knopf „Lese Werte“) und liefert sie als JSON: Meldung → `value` (Werte durch „/“ getrennt, `null` = kein Wert) und `lastUpdate` (Zeitpunkt der letzten Aktualisierung bei ebusd, `null` = nie). Weil ebusd dafür den Bus abfragen kann, höchstens 20 Meldungen je Aufruf. Antwortet ebusd nicht, bricht die Funktion bei der ersten Meldung mit einer Warnung ab, die die abgefragte URL nennt, und liefert einen leeren Text; ebenso der Knopf „Lese Werte“, der dann die Liste unverändert lässt.
 
 Beispiel: Vorlauftemperatur einbinden
 ```php

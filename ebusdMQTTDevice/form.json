@@ -202,7 +202,7 @@
     {
       "type":    "Label",
       "visible": false,
-      "caption": "For scripts and AI assistants: EBM_ReadMessageValues(int $InstanceID, string $search): string - reads the current values of the readable messages matching $search from ebusd and returns JSON (message => {\"value\": values separated by \"/\" or null, \"lastUpdate\": time of the last update at ebusd or null = never}). ebusd may query the bus for this, therefore at most 20 messages per call."
+      "caption": "For scripts and AI assistants: EBM_ReadMessageValues(int $InstanceID, string $search): string - reads the current values of the readable messages matching $search from ebusd and returns JSON (message => {\"value\": values separated by \"/\" or null, \"lastUpdate\": time of the last update at ebusd or null = never}). ebusd may query the bus for this, therefore at most 20 messages per call. null means: ebusd answered without a value. If ebusd does not answer, a warning names the URL and the result is empty."
     },
     {
       "type":    "Label",

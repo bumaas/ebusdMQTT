@@ -1,0 +1,19 @@
+{
+ "global": {
+  "version": "23.3.23.3",
+  "updatecheck": "version 26.1 available, broadcast.csv: different version available, memory.csv: different version available, vaillant/08.hmu.csv: different version available, vaillant/15.700.csv: different version available, vaillant/broadcast.csv: different version available, vaillant/errors.inc: different version available, vaillant/general.csv: different version available, vaillant/hcmode.inc: different version available, vaillant/scan.csv: different version available",
+  "access": "*",
+  "signal": true,
+  "symbolrate": 23,
+  "maxsymbolrate": 395,
+  "minarbitrationmicros": 2,
+  "maxarbitrationmicros": 4981,
+  "minsymbollatency": 0,
+  "maxsymbollatency": 44,
+  "qq": 49,
+  "reconnects": 0,
+  "masters": 4,
+  "messages": 612,
+  "lastup": 0
+ }
+}

@@ -286,7 +286,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
         switch ($Ident) {
             case 'btnReadValues':
                 $ret = $this->UpdateCurrentValues($decodeValue());
-                $this->MsgBox(sprintf($this->Translate('%s values read'), $ret));
+                $this->MsgBox(is_string($ret) ? $ret : sprintf($this->Translate('%s values read'), $ret));
                 return;
 
             case 'btnCreateUpdateVariables':
@@ -952,6 +952,12 @@ class ebusdMQTTDevice extends IPSModuleStrict
      */
     public function ReadMessageValues(string $search): string
     {
+        $propertyError = $this->getPropertyError();
+        if ($propertyError !== null) {
+            trigger_error($propertyError[2], E_USER_WARNING); // ohne Abfrage — mit ungültiger Adresse käme nur ein irreführendes „antwortet nicht"
+            return '';
+        }
+
         $variableList = $this->getStoredVariableListOrWarn();
         if ($variableList === null) {
             return '';
@@ -984,7 +990,13 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
         $out         = [];
         foreach ($matches as $item) {
-            [$value, $lastUpdate]                       = $this->getCurrentValueAndTime($circuitName, $item[self::FORM_ELEMENT_MESSAGENAME]);
+            $current = $this->getCurrentValueAndTime($circuitName, $item[self::FORM_ELEMENT_MESSAGENAME]);
+            if ($current === null) {
+                // nicht weiterfragen: jede weitere Meldung wartete erneut auf die Zeitüberschreitung
+                trigger_error($this->getNoAnswerText($circuitName, $item[self::FORM_ELEMENT_MESSAGENAME]), E_USER_WARNING);
+                return '';
+            }
+            [$value, $lastUpdate]                       = $current;
             $out[$item[self::FORM_ELEMENT_MESSAGENAME]] = ['value' => $value, 'lastUpdate' => $lastUpdate > 0 ? date('Y-m-d H:i:s', $lastUpdate) : null];
         }
         return json_encode($out, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -1036,7 +1048,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
         return strlen($text) <= $max ? $text : sprintf('%s… (%d characters)', substr($text, 0, $max), strlen($text));
     }
 
-    private function UpdateCurrentValues(array $variableList): int
+    /** @return int|string Anzahl gelesener Werte, oder der Grund, wenn ebusd nicht antwortet (dann bleibt die Liste unverändert) */
+    private function UpdateCurrentValues(array $variableList): int|string
     {
         $mqttTopic = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
@@ -1051,8 +1064,13 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $this->UpdateFormField('ProgressBar', 'caption', $entry[self::FORM_ELEMENT_MESSAGENAME]);
             //alle lesbaren Werte holen
             if ($entry[self::FORM_ELEMENT_READABLE] === self::OK_SIGN) {
+                $current = $this->getCurrentValueAndTime($mqttTopic, $entry[self::FORM_ELEMENT_MESSAGENAME]);
+                if ($current === null) {
+                    $this->UpdateFormField('ProgressBar', 'visible', false);
+                    return $this->getNoAnswerText($mqttTopic, $entry[self::FORM_ELEMENT_MESSAGENAME]);
+                }
                 $readCounter++;
-                $entry[self::FORM_ELEMENT_READVALUES] = (string)$this->getCurrentValue($mqttTopic, $entry[self::FORM_ELEMENT_MESSAGENAME]);
+                $entry[self::FORM_ELEMENT_READVALUES] = (string)$current[0];
             }
             $formField[] = $entry;
         }
@@ -1341,26 +1359,40 @@ class ebusdMQTTDevice extends IPSModuleStrict
         }
     }
 
-    private function getCurrentValue(string $mqttTopic, string $messageId): ?string
+    private function getValueURL(string $mqttTopic, string $messageId): string
     {
-        return $this->getCurrentValueAndTime($mqttTopic, $messageId)[0];
-    }
-
-    /** @return array{0: ?string, 1: int} Werte durch "/" getrennt (null = keine Antwort) und ebusds Zeitpunkt der letzten Aktualisierung (0 = nie) */
-    private function getCurrentValueAndTime(string $mqttTopic, string $messageId): array
-    {
-        $url = sprintf(
+        return sprintf(
             'http://%s:%s/data/%s/%s?def&verbose&exact&required&maxage=600',
             $this->ReadPropertyString(self::PROP_HOST),
             $this->ReadPropertyString(self::PROP_PORT),
             $mqttTopic,
             $messageId
         );
+    }
 
+    private function getNoAnswerText(string $mqttTopic, string $messageId): string
+    {
+        return sprintf(
+            $this->Translate('ebusd does not answer at %s. Check host, port and the HTTP port of ebusd (--httpport).'),
+            $this->getValueURL($mqttTopic, $messageId)
+        );
+    }
+
+    /** @return array{0: ?string, 1: int} Werte durch "/" getrennt (null = keine Antwort) und ebusds Zeitpunkt der letzten Aktualisierung (0 = nie) */
+    /**
+     * @return array{0: ?string, 1: int}|null [Wert, letzte Aktualisierung] — [null, 0], wenn ebusd ohne Wert antwortet
+     *                                        (HTTP 200 mit nur dem global-Block); null, wenn ebusd gar nicht antwortet
+     */
+    private function getCurrentValueAndTime(string $mqttTopic, string $messageId): ?array
+    {
+        $url    = $this->getValueURL($mqttTopic, $messageId);
         $result = $this->readURL($url);
+        if ($result === null) {
+            return null;
+        }
 
-        // Prüfung, ob Ergebnis valide und die erwarteten Daten enthält
-        if ($result === null || !isset($result[$mqttTopic]['messages'][$messageId])) {
+        // Prüfung, ob Ergebnis die erwarteten Daten enthält
+        if (!isset($result[$mqttTopic]['messages'][$messageId])) {
             $this->logDebug(__FUNCTION__, sprintf('current values of message \'%s\' not found (URL: %s)', $messageId, $url));
             return [null, 0];
         }
