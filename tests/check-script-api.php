@@ -141,10 +141,10 @@ check(count($namen) < 20, 'Suche schränkt ein (' . count($namen) . ' Treffer)')
 $eintrag = $liste[array_search('AdaptHeatCurve', $namen, true)] ?? [];
 check(
     ($eintrag['readable'] ?? null) === true && ($eintrag['writable'] ?? null) === true && ($eintrag['active'] ?? null) === false
-    && ($eintrag['pollPriority'] ?? null) === 0 && ($eintrag['idents'] ?? null) === ['AdaptHeatCurve'] && ($eintrag['variableIDs'] ?? null) === [],
-    'Eintrag: lesbar/schreibbar/aktiv/Poll-Priorität/Idents/Variablen-IDs (' . json_encode($eintrag, JSON_UNESCAPED_UNICODE) . ')'
+    && ($eintrag['pollPriority'] ?? null) === 0 && ($eintrag['fields'][0]['ident'] ?? null) === 'AdaptHeatCurve' && !isset($eintrag['fields'][0]['variableID']),
+    'Eintrag: lesbar/schreibbar/aktiv/Poll-Priorität/Ident, noch ohne Variable (' . json_encode($eintrag, JSON_UNESCAPED_UNICODE) . ')'
 );
-check(isset($eintrag['labels']) && $eintrag['labels'] === ['Adaptive Heizkurve'], 'Eintrag trägt die Bezeichnung');
+check(($eintrag['fields'][0]['label'] ?? null) === 'Adaptive Heizkurve', 'Eintrag trägt die Bezeichnung');
 
 // --- SetMessageActive -------------------------------------------------------------
 
@@ -155,11 +155,11 @@ $vid = @IPS_GetObjectIDByIdent('Hc1FlowTemp', $h->id());
 check($vid !== false && $vid > 0, 'Variable Hc1FlowTemp ist angelegt');
 check(is_string($r['wert']) && str_contains($r['wert'], 'Hc1FlowTemp'), 'Rückgabe nennt die Meldung');
 $eintrag = json_decode((string)rufe($h, 'FindMessages', 'Hc1FlowTemp')['wert'], true)[0] ?? [];
-check(($eintrag['active'] ?? null) === true && ($eintrag['variableIDs'] ?? null) === [$vid], 'Meldungsliste zeigt die Meldung als aktiv mit Variablen-ID');
+check(($eintrag['active'] ?? null) === true && ($eintrag['fields'][0]['variableID'] ?? null) === $vid, 'Meldungsliste zeigt die Meldung als aktiv mit Variablen-ID');
 
 $h->resetRecorded();
 $r = rufe($h, 'SetMessageActive', 'Hc1FlowTemp', true, 3);
-check($r['fehler'] === [] && $h->publiziert() === [['topic' => 'ebusd/700/Hc1FlowTemp/get', 'payload' => '?3']], 'neue Poll-Priorität geht an ebusd (' . json_encode($h->publiziert()) . ')');
+check($r['fehler'] === [] && in_array(['topic' => 'ebusd/700/Hc1FlowTemp/get', 'payload' => '?3'], $h->publiziert(), true), 'neue Poll-Priorität geht an ebusd (' . json_encode($h->publiziert()) . ')');
 check(json_decode($h->attribute('PollPriorities'), true) === ['Hc1FlowTemp' => 3], 'Poll-Priorität ist gespeichert');
 
 $h->resetRecorded();

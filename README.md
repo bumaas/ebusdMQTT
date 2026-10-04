@@ -129,7 +129,7 @@ Prüft ohne jede Wirkung auf die Instanz, ob alles funktioniert: MQTT Server akt
 ```php
 EBM_FindMessages(int $InstanceID, string $search): string
 ```
-Liefert die Meldungen des Schaltkreises als JSON – dieselbe Information wie die Liste im Formular: Meldung, Bezeichnungen, Idents, lesbar, schreibbar, aktiv, Poll-Priorität und die IDs bereits angelegter Variablen. `$search` filtert nach Meldungsname oder Bezeichnung (Groß-/Kleinschreibung egal), `''` liefert alle.
+Liefert die Meldungen des Schaltkreises als JSON – dieselbe Information wie die Liste im Formular: Meldung, lesbar, schreibbar, aktiv, Poll-Priorität und je Feld Ident, Bezeichnung, Typ, Einheit, erlaubte Werte (`values`) bzw. Bereich (`min`/`max`, nur wo er sinnvoll ist) und die ID der Variable, falls sie schon angelegt ist. `$search` filtert nach Meldungsname oder Bezeichnung (Groß-/Kleinschreibung egal), `''` liefert alle.
 
 ```php
 EBM_UpdateConfiguration(int $InstanceID): string
@@ -139,12 +139,12 @@ Liest die Konfiguration des Schaltkreises von ebusd und speichert sie (wie der K
 ```php
 EBM_SetMessageActive(int $InstanceID, string $messageName, bool $active, int $pollPriority): string
 ```
-Bindet eine Meldung ein (`true`: Variablen anlegen, Auswahl speichern) oder aus (`false`) – wie das Häkchen „Aktiv“ plus „Variablen anlegen/aktualisieren“. Ausgeschaltet bleiben die Variablen samt Archivdaten erhalten; das Modul fragt sie nur nicht mehr ab. `$pollPriority` 0 bis 9 (0 = keine eigene Poll-Priorität) wird an ebusd gesendet, wenn sie sich ändert.
+Bindet eine Meldung ein (`true`: Variablen anlegen, Auswahl speichern, aktuellen Wert gleich bei ebusd anfordern) oder aus (`false`) – wie das Häkchen „Aktiv“ plus „Variablen anlegen/aktualisieren“. Ausgeschaltet bleiben die Variablen samt Archivdaten erhalten; das Modul fragt sie nur nicht mehr ab. `$pollPriority` 0 bis 9 (0 = keine eigene Poll-Priorität) wird an ebusd gesendet, wenn sie sich ändert.
 
 ```php
 EBM_ReadMessageValues(int $InstanceID, string $search): string
 ```
-Liest die aktuellen Werte der lesbaren Meldungen, die zu `$search` passen, bei ebusd (wie der Knopf „Lese Werte“) und liefert sie als JSON (Meldung → Werte durch „/“ getrennt, `null` = kein Wert). Weil ebusd dafür den Bus abfragen kann, höchstens 20 Meldungen je Aufruf.
+Liest die aktuellen Werte der lesbaren Meldungen, die zu `$search` passen, bei ebusd (wie der Knopf „Lese Werte“) und liefert sie als JSON: Meldung → `value` (Werte durch „/“ getrennt, `null` = kein Wert) und `lastUpdate` (Zeitpunkt der letzten Aktualisierung bei ebusd, `null` = nie). Weil ebusd dafür den Bus abfragen kann, höchstens 20 Meldungen je Aufruf.
 
 Beispiel: Vorlauftemperatur einbinden
 ```php

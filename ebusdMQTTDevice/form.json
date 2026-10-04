@@ -187,7 +187,7 @@
     {
       "type":    "Label",
       "visible": false,
-      "caption": "For scripts and AI assistants: EBM_FindMessages(int $InstanceID, string $search): string - returns the messages of the circuit as JSON (message, labels, idents, readable, writable, active, pollPriority, variableIDs). $search filters by message name or label, case-insensitive; an empty string returns all messages. Without effect."
+      "caption": "For scripts and AI assistants: EBM_FindMessages(int $InstanceID, string $search): string - returns the messages of the circuit as JSON: message, readable, writable, active, pollPriority and per field ident, label, type, unit, allowed values (\"values\") or range (\"min\"/\"max\", only where meaningful) and variableID if the variable exists. $search filters by message name or label, case-insensitive; an empty string returns all messages. Without effect."
     },
     {
       "type":    "Label",
@@ -202,7 +202,7 @@
     {
       "type":    "Label",
       "visible": false,
-      "caption": "For scripts and AI assistants: EBM_ReadMessageValues(int $InstanceID, string $search): string - reads the current values of the readable messages matching $search from ebusd and returns JSON (message => values separated by \"/\", null = no value). ebusd may query the bus for this, therefore at most 20 messages per call."
+      "caption": "For scripts and AI assistants: EBM_ReadMessageValues(int $InstanceID, string $search): string - reads the current values of the readable messages matching $search from ebusd and returns JSON (message => {\"value\": values separated by \"/\" or null, \"lastUpdate\": time of the last update at ebusd or null = never}). ebusd may query the bus for this, therefore at most 20 messages per call."
     },
     {
       "type":    "Label",

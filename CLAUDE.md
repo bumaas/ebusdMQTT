@@ -80,6 +80,14 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   umzubenennen oder zu löschen. Erhebung am nuc 03.10.2026: die „Legacy-Darstellungen“ sind
   fast alle **eigene** Darstellungen des Anwenders (`EBM.*_my`) über moderner
   Modul-Darstellung — das Modul fasst `VariableCustomPresentation` nie an.
+- `php tests/check-blindtest-findings.php` — Befunde des Blindtests vom 04.10.2026 (frischer
+  Agent nur über MCP, Bericht `E:\Desktop\Smart Home\Eigenes\nuc\checks\2026-10-04_ebusdmqtt-blindtest-ergebnis.md`):
+  Selbsttest prüft Eigenschaften vor der HTTP-Abfrage (`getPropertyError`, gemeinsam mit
+  dem Instanzstatus) und sagt „noch kein Wert“ statt 01.01.1970; `EBM_SetMessageActive`
+  fordert den Wert gleich an; unbekannte Meldung bei leerer Konfiguration kein Log, sonst
+  eine Warnung je Meldung (Buffer `ReportedUnknownMessages`, beim Einlesen geleert);
+  `EBM_FindMessages` mit `fields` (Typ, Einheit, `values`, `min`/`max` nur bei ≤ 1000
+  Schritten, `variableID`), `EBM_ReadMessageValues` mit `lastUpdate`.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

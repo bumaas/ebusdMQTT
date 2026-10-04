@@ -37,6 +37,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
     // Selbsttest: so viele Einträge je Altlast-Hinweis, der Rest als „und N weitere"
     private const int MAX_LISTED_ITEMS = 10;
 
+    // bereits per Log gemeldete Meldungen, die in der Konfiguration fehlen (je Laufzeit einmal)
+    private const string BUFFER_REPORTED_UNKNOWN = 'ReportedUnknownMessages';
+
     //property names
     private const string PROP_HOST                             = 'Host';
     private const string PROP_PORT                             = 'Port';
@@ -504,7 +507,22 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 sprintf('%s (configuration has %d messages)', $messageId, count($configurationMessages))
             );
 
-            $this->LogMessage(sprintf($this->Translate('Message %s not found in configuration.'), $messageId), KL_ERROR);
+            // Noch nicht eingelesen (Zeitfenster nach der Schaltkreiswahl): jede Meldung wäre „unbekannt" — kein Fehler.
+            // Fehlt eine Meldung in einer eingelesenen Konfiguration, einmal je Meldung warnen, nicht bei jedem Empfang.
+            if ($configurationMessages !== []) {
+                $reported = json_decode($this->GetBuffer(self::BUFFER_REPORTED_UNKNOWN) ?: '[]', true, 512, JSON_THROW_ON_ERROR);
+                if (!in_array($messageId, $reported, true)) {
+                    $reported[] = $messageId;
+                    $this->SetBuffer(self::BUFFER_REPORTED_UNKNOWN, json_encode($reported, JSON_THROW_ON_ERROR));
+                    $this->LogMessage(
+                        sprintf(
+                            $this->Translate('ebusd reports the message "%s", which is not in the stored configuration. Read the configuration again ("Read Configuration" or EBM_UpdateConfiguration).'),
+                            mb_substr($messageId, 0, 100)
+                        ),
+                        KL_WARNING
+                    );
+                }
+            }
             return '';
         }
 
@@ -619,8 +637,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $bad($this->Translate('The MQTT Server (parent instance) is not active. The values of ebusd arrive via MQTT only - check the MQTT Server instance.'));
         }
 
+        $propertyError = $this->getPropertyError();
         if ($circuitName === '') {
             $bad($this->Translate('No circuit selected. Determine the circuits with "Read Circuits" and select one.'));
+        } elseif ($propertyError !== null) {
+            $bad($propertyError[2]); // ohne Abfrage — mit ungültiger Adresse käme nur ein irreführendes „antwortet nicht"
         } else {
             $url    = sprintf('http://%s:%s/data/%s', $host, $port, $circuitName);
             $result = $this->readURL($url);
@@ -665,7 +686,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
             }
         }
         if ($variableCount > 0) {
-            $good(sprintf($this->Translate('Status variables: %d, last update %s.'), $variableCount, date('d.m.Y H:i:s', $lastUpdate)));
+            $good(
+                $lastUpdate > 0
+                    ? sprintf($this->Translate('Status variables: %d, last update %s.'), $variableCount, date('d.m.Y H:i:s', $lastUpdate))
+                    : sprintf($this->Translate('Status variables: %d, no value received yet.'), $variableCount)
+            );
         }
 
         // Bei einer Störung hält checkConnection() den Abfrage-Timer an
@@ -761,28 +786,62 @@ class ebusdMQTTDevice extends IPSModuleStrict
             return '';
         }
 
-        $out = [];
+        $configurationMessages = $this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
+        $out                   = [];
         foreach ($this->filterVariableList($variableList, $search) as $item) {
-            $idents      = ($item[self::FORM_ELEMENT_IDENTNAMES] ?? '') === '' ? [] : explode('/', $item[self::FORM_ELEMENT_IDENTNAMES]);
-            $variableIDs = [];
-            foreach ($idents as $ident) {
-                $variableID = @$this->GetIDForIdent($ident);
-                if ($variableID > 0) {
-                    $variableIDs[] = $variableID;
-                }
-            }
+            $name  = $item[self::FORM_ELEMENT_MESSAGENAME];
             $out[] = [
-                'message'      => $item[self::FORM_ELEMENT_MESSAGENAME],
-                'labels'       => explode('/', (string)($item[self::FORM_ELEMENT_VARIABLENAMES] ?? '')),
-                'idents'       => $idents,
+                'message'      => $name,
                 'readable'     => ($item[self::FORM_ELEMENT_READABLE] ?? '') === self::OK_SIGN,
                 'writable'     => ($item[self::FORM_ELEMENT_WRITABLE] ?? '') === self::OK_SIGN,
                 'active'       => (bool)($item[self::FORM_ELEMENT_KEEP] ?? false),
                 'pollPriority' => (int)($item[self::FORM_ELEMENT_POLLPRIORITY] ?? 0),
-                'variableIDs'  => $variableIDs
+                'fields'       => isset($configurationMessages[$name]) ? $this->describeFields($configurationMessages[$name]) : []
             ];
         }
         return json_encode($out, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    /**
+     * Je Feld einer Meldung: Ident, Bezeichnung, Typ, Einheit, erlaubte Werte (Wertetabelle) bzw.
+     * Bereich — der Bereich nur, wenn er überschaubar ist (sonst ist es der technische Bereich des
+     * eBUS-Typs, z. B. ±3·10³⁸) — und die ID der Variable, falls angelegt.
+     */
+    private function describeFields(array $message): array
+    {
+        $typeNames = [VARIABLETYPE_BOOLEAN => 'boolean', VARIABLETYPE_INTEGER => 'integer', VARIABLETYPE_FLOAT => 'float', VARIABLETYPE_STRING => 'string'];
+        $fields    = [];
+        foreach ($message['fielddefs'] ?? [] as $key => $fieldDef) {
+            if (($fieldDef['type'] ?? '') === 'IGN') {
+                continue;
+            }
+            $ident = $this->getFieldIdentName($message, $key);
+            $field = [
+                'ident' => $ident,
+                'label' => $this->getFieldLabel($message, $key),
+                'type'  => $typeNames[$this->getIPSVariableType($fieldDef)] ?? 'unknown',
+            ];
+            if (($fieldDef['unit'] ?? '') !== '') {
+                $field['unit'] = $fieldDef['unit'];
+            }
+            if (!empty($fieldDef['values'])) {
+                $field['values'] = (object)$fieldDef['values'];
+            } else {
+                $typeDef = $this->getEbusDataTypeDefinitions()[$fieldDef['type']] ?? [];
+                if (isset($typeDef['MinValue'], $typeDef['MaxValue']) && $typeDef['MinValue'] !== $typeDef['MaxValue']
+                    && ($typeDef['MaxValue'] - $typeDef['MinValue']) / $typeDef['StepSize'] <= self::MAX_SLIDER_STEPS) {
+                    $div          = max(1, $fieldDef['divisor'] ?? 0);
+                    $field['min'] = $typeDef['MinValue'] / $div;
+                    $field['max'] = $typeDef['MaxValue'] / $div;
+                }
+            }
+            $variableID = @$this->GetIDForIdent($ident);
+            if ($variableID > 0) {
+                $field['variableID'] = $variableID;
+            }
+            $fields[] = $field;
+        }
+        return $fields;
     }
 
     /** Liest die Konfiguration des Schaltkreises von ebusd und speichert sie (Knopf „Lese Konfiguration aus"). */
@@ -859,6 +918,13 @@ class ebusdMQTTDevice extends IPSModuleStrict
         }
         $this->SaveVariableList($this->getUpdatedVariableList($variableList));
 
+        // Wert gleich anfordern (nur lesend) — sonst steht die neue Variable bis zur nächsten
+        // Abfrage auf 0, und „Vorlauf 0 °C" sieht aus wie ein Messwert
+        $requested = $active && $this->HasActiveParent();
+        if ($requested) {
+            $this->publish($this->buildTopic($messageName, 'get'), '');
+        }
+
         if (!$active) {
             return sprintf($this->Translate('The message "%s" is no longer active. Its variables and their archive data are kept; the module no longer requests them.'), $messageName);
         }
@@ -868,7 +934,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $created,
             $variableList[$index][self::FORM_ELEMENT_IDENTNAMES],
             $pollPriority
-        );
+        ) . ' ' . ($requested
+                ? $this->Translate('The current value has been requested from ebusd and arrives within a few seconds.')
+                : $this->Translate('The value arrives with the next request, because the MQTT Server is not active.'));
     }
 
     /**
@@ -910,7 +978,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
         $out         = [];
         foreach ($matches as $item) {
-            $out[$item[self::FORM_ELEMENT_MESSAGENAME]] = $this->getCurrentValue($circuitName, $item[self::FORM_ELEMENT_MESSAGENAME]);
+            [$value, $lastUpdate]                       = $this->getCurrentValueAndTime($circuitName, $item[self::FORM_ELEMENT_MESSAGENAME]);
+            $out[$item[self::FORM_ELEMENT_MESSAGENAME]] = ['value' => $value, 'lastUpdate' => $lastUpdate > 0 ? date('Y-m-d H:i:s', $lastUpdate) : null];
         }
         return json_encode($out, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
@@ -1085,6 +1154,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $variableList = $this->getVariableList(json_encode($configurationMessages, JSON_THROW_ON_ERROR));
         $this->UpdateFormField(self::FORM_LIST_VARIABLELIST, 'values', json_encode($variableList, JSON_THROW_ON_ERROR, 3));
         $this->SaveVariableList($variableList);
+        $this->SetBuffer(self::BUFFER_REPORTED_UNKNOWN, '[]'); // neue Konfiguration: fehlende Meldungen wieder melden
 
         return $configurationMessages;
     }
@@ -1267,6 +1337,12 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     private function getCurrentValue(string $mqttTopic, string $messageId): ?string
     {
+        return $this->getCurrentValueAndTime($mqttTopic, $messageId)[0];
+    }
+
+    /** @return array{0: ?string, 1: int} Werte durch "/" getrennt (null = keine Antwort) und ebusds Zeitpunkt der letzten Aktualisierung (0 = nie) */
+    private function getCurrentValueAndTime(string $mqttTopic, string $messageId): array
+    {
         $url = sprintf(
             'http://%s:%s/data/%s/%s?def&verbose&exact&required&maxage=600',
             $this->ReadPropertyString(self::PROP_HOST),
@@ -1280,13 +1356,14 @@ class ebusdMQTTDevice extends IPSModuleStrict
         // Prüfung, ob Ergebnis valide und die erwarteten Daten enthält
         if ($result === null || !isset($result[$mqttTopic]['messages'][$messageId])) {
             $this->logDebug(__FUNCTION__, sprintf('current values of message \'%s\' not found (URL: %s)', $messageId, $url));
-            return null;
+            return [null, 0];
         }
 
-        $message = $result[$mqttTopic]['messages'][$messageId];
+        $message    = $result[$mqttTopic]['messages'][$messageId];
+        $lastUpdate = (int)($message['lastup'] ?? 0);
 
         if (!isset($message['fields']) || !is_array($message['fields'])) {
-            return '';
+            return ['', $lastUpdate];
         }
 
         $values = [];
@@ -1294,7 +1371,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $values[] = $field['value'];
         }
 
-        return implode('/', $values);
+        return [implode('/', $values), $lastUpdate];
     }
 
     private function getFieldValue(
@@ -1797,7 +1874,13 @@ class ebusdMQTTDevice extends IPSModuleStrict
         return $ret;
     }
 
-    private function updateInstanceStatus(): void
+    /**
+     * Prüft die Eigenschaften, die sich ohne Netz beurteilen lassen. Gemeinsam für Instanzstatus und
+     * Selbsttest, damit beide mit denselben Worten urteilen.
+     *
+     * @return array{0: int, 1: string, 2: string}|null [Statuscode, Debug-Grund, Text mit nächstem Schritt] oder null = in Ordnung
+     */
+    private function getPropertyError(): ?array
     {
         $host        = $this->ReadPropertyString(self::PROP_HOST);
         $portString  = $this->ReadPropertyString(self::PROP_PORT);
@@ -1805,44 +1888,52 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
 
         if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
-            $this->applyStatus(
+            return [
                 self::STATUS_INST_IP_IS_INVALID,
                 'invalid IP',
                 sprintf($this->Translate('Host "%s" is not a valid IP address or host name. Correct the host in the instance configuration.'), $host)
-            );
-            return;
+            ];
         }
 
-        //Port Prüfen
         if ($port < 1 || $port > 65535 || !filter_var($port, FILTER_VALIDATE_INT)) {
-            $this->applyStatus(
+            return [
                 self::STATUS_INST_PORT_IS_INVALID,
                 'invalid Port',
                 sprintf($this->Translate('Port "%s" is not valid (allowed: 1 to 65535). Correct the port in the instance configuration.'), $portString)
-            );
-            return;
+            ];
         }
 
         $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL);
         if ($updateInterval < 0) {
-            $this->applyStatus(
+            return [
                 self::STATUS_INST_INTERVAL_INVALID,
                 'invalid update interval',
                 sprintf(
                     $this->Translate('Update interval %d is not valid (allowed: 0 = off, or a number of minutes). Correct the update interval in the instance configuration.'),
                     $updateInterval
                 )
-            );
-            return;
+            ];
         }
 
-        //Circuit prüfen
         if ($circuitName === self::MODEL_GLOBAL_NAME) {
-            $this->applyStatus(
+            return [
                 self::STATUS_INST_TOPIC_IS_INVALID,
                 'Wrong Circuit name (global)',
                 $this->Translate('The circuit "global" cannot be used. Select the circuit of a device.')
-            );
+            ];
+        }
+        return null;
+    }
+
+    private function updateInstanceStatus(): void
+    {
+        $host        = $this->ReadPropertyString(self::PROP_HOST);
+        $port        = (int)$this->ReadPropertyString(self::PROP_PORT);
+        $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
+
+        $propertyError = $this->getPropertyError();
+        if ($propertyError !== null) {
+            $this->applyStatus(...$propertyError);
             return;
         }
 
