@@ -25,6 +25,12 @@ declare(strict_types=1);
  *     galten als unbekannte Meldung „<msg>/set" und lösten eine Warnung aus, die zum
  *     Neueinlesen der Konfiguration rät — was nichts hilft.
  *
+ *  7. Der Knopf „Lese Konfiguration aus“ war nur bei Status 102 bedienbar (GetConfigurationForm
+ *     und SetStatus), obwohl RequestAction ihn bewusst ohne MQTT-Parent ausführt und das Einlesen
+ *     nur HTTP braucht. Bei 104 (MQTT Server inaktiv) oder 206 (kein eBUS-Signal) kam man so
+ *     nicht über den ersten Einrichtungsschritt. „Lese Werte“ und „Erzeuge/Aktualisiere
+ *     Variablen“ brauchen den Parent und bleiben bei Störung gesperrt.
+ *
  * Fixtures: tests/fixtures/config_700.json und data_all.json (echte ebusd-Antworten).
  * Zu 2: Ein Typ außerhalb der Tabelle kommt in keinem Mitschnitt vor (alle Schaltkreise des
  * ebusd am nuc geprüft). Deshalb trägt die echte Meldung BankHolidayEndPeriod hier den Typ
@@ -244,6 +250,30 @@ $balken = array_values(array_filter($h->formUpdates, static fn(array $u): bool =
 check($balken !== [] && end($balken)[2] === false, 'Fortschrittsbalken wird wieder ausgeblendet');
 $listUpdates = array_values(array_filter($h->formUpdates, static fn(array $u): bool => $u[0] === 'VariableList'));
 check($listUpdates === [], 'Liste im Formular bleibt unverändert');
+
+// --- 7. „Lese Konfiguration aus“ ohne MQTT-Parent ---------------------------------------
+
+echo "Knopf „Lese Konfiguration aus“ bei Störung:\n";
+$h = instanz();
+$h->formUpdates  = [];
+$h->parentActive = false;
+$h->RequestAction('timerCheckConnection', ''); // Parent inaktiv: Status 104
+check(status($h) === 104, 'Ausgangslage: Status 104 (' . status($h) . ')');
+$live = static fn(string $feld): array => array_values(array_filter(
+    $h->formUpdates,
+    static fn(array $u): bool => $u[0] === $feld && $u[1] === 'enabled'
+));
+check(!in_array(false, array_column($live('BtnReadConfiguration'), 2), true), 'Statuswechsel sperrt „Lese Konfiguration aus“ nicht');
+check(in_array(false, array_column($live('BtnReadValues'), 2), true), 'Gegenprobe: „Lese Werte“ wird gesperrt');
+
+$knoepfe = json_decode($h->GetConfigurationForm(), true, 512, JSON_THROW_ON_ERROR)['actions'][2]['items'];
+check(($knoepfe[0]['name'] ?? '') === 'BtnReadConfiguration' && ($knoepfe[0]['enabled'] ?? true) === true, 'Formular bei 104: „Lese Konfiguration aus“ bedienbar');
+check(($knoepfe[1]['enabled'] ?? true) === false && ($knoepfe[2]['enabled'] ?? true) === false, 'Gegenprobe: „Lese Werte“ und „Erzeuge/Aktualisiere Variablen“ gesperrt');
+
+$h->responses[CONFIG_URL] = konfig700();
+$r                        = mitFehlern(static fn() => $h->RequestAction('btnReadConfiguration', ''));
+$msg                      = array_values(array_filter($h->formUpdates, static fn(array $u): bool => $u[0] === 'MsgText'));
+check($r['fehler'] === [] && str_contains((string)(end($msg)[2] ?? ''), 'entries found'), 'Einlesen funktioniert bei 104 (' . json_encode(array_column($msg, 2), JSON_UNESCAPED_UNICODE) . ')');
 
 echo "\n$checks Prüfungen, $fails Fehler\n";
 exit($fails === 0 ? 0 : 1);

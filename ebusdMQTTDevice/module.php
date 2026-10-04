@@ -571,7 +571,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $Form['actions'][1]['values']                           = $this->getUpdatedVariableList($variableList);
         $Form['actions'][1]['columns'][6]['edit']['enabled']    = $isActive;
         $Form['actions'][1]['columns'][7]['edit']['enabled']    = $isActive;
-        $Form['actions'][2]['items'][0]['enabled']              = $isActive;
         $Form['actions'][2]['items'][1]['enabled']              = $isActive;
         $Form['actions'][2]['items'][2]['enabled']              = $isActive;
         $Form['actions'][2]['items'][3]['visible']              = $this->testFunctionsActive;
@@ -603,7 +602,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
     protected function SetStatus(int $Status): bool
     {
         $isActive = ($Status === IS_ACTIVE);
-        $fields   = ['BtnReadConfiguration', 'BtnReadValues', 'BtnCreateUpdateVariables'];
+        $fields   = ['BtnReadValues', 'BtnCreateUpdateVariables']; // „Lese Konfiguration aus“ braucht nur HTTP und bleibt immer bedienbar
 
         foreach ($fields as $field) {
             $this->UpdateFormField($field, 'enabled', $isActive);

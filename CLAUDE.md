@@ -94,9 +94,11 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   Typtabelle als `unknown` statt mit TypeError abzubrechen; ganzzahlige Typen ohne Divisor
   lehnen Kommazahlen ab; UCH reicht bis 254 (0xFF = Ersatzwert, ebusd-Wiki 4.3); Topics mit
   Unterpfad (`…/<msg>/set`, `…/get`) werden still übersprungen; `EBM_ReadMessageValues` prüft
-  erst die Eigenschaften und bricht wie der Knopf „Lese Werte“ bei der ersten fehlenden
+  erst die Eigenschaften und bricht wie der Knopf „Lese aktuelle Werte“ bei der ersten fehlenden
   HTTP-Antwort mit Warnung ab (`getCurrentValueAndTime` liefert dann `null`, „antwortet ohne
-  Wert“ dagegen `[null, 0]` — echter Mitschnitt `fixtures/value_700_errorhistory.json`). **Die Typtabelle im Trait ist
+  Wert“ dagegen `[null, 0]` — echter Mitschnitt `fixtures/value_700_errorhistory.json`);
+  „Lese Konfiguration aus“ ist in jedem Status bedienbar (nur HTTP), die übrigen Knöpfe nur
+  bei 102 (`GetConfigurationForm` und `SetStatus`). **Die Typtabelle im Trait ist
   zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).

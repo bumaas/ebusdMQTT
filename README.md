@@ -69,7 +69,7 @@ Intervall in Minuten, in dem alle Statusvariablen durch Anfragen an den eBUS akt
 - Debug Informationen werden zusätzlich in das Logfile der IPSLibrary geschrieben:<br>
 Schreibt die Debug-Meldungen des Moduls zusätzlich in das Logfile der IPSLibrary (`IPSLogger`). Nur wirksam, wenn die IPSLibrary installiert ist; sonst ohne Funktion. Für die Fehlersuche genügt in der Regel die Debug-Ausgabe der Instanz.
 
-Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden.
+Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden. „Lese Konfiguration aus“ braucht nur die HTTP-Verbindung zu ebusd und ist deshalb auch bedienbar, wenn der MQTT Server noch nicht aktiv ist oder ebusd kein eBUS-Signal meldet; „Lese aktuelle Werte“ und „Speichere Änderungen“ erst bei aktiver Instanz.
 In der Liste der Statusvariablen markiert ein **(A)** hinter dem Ident, dass für diese Variable die Archivierung im Query-Logger (Archive Handler) aktiv ist.
 
 Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal und prüft sie bei einer Störung automatisch erneut. Jede Störung hat einen eigenen Instanzstatus:
@@ -144,7 +144,7 @@ Bindet eine Meldung ein (`true`: Variablen anlegen, Auswahl speichern, aktuellen
 ```php
 EBM_ReadMessageValues(int $InstanceID, string $search): string
 ```
-Liest die aktuellen Werte der lesbaren Meldungen, die zu `$search` passen, bei ebusd (wie der Knopf „Lese Werte“) und liefert sie als JSON: Meldung → `value` (Werte durch „/“ getrennt, `null` = kein Wert) und `lastUpdate` (Zeitpunkt der letzten Aktualisierung bei ebusd, `null` = nie). Weil ebusd dafür den Bus abfragen kann, höchstens 20 Meldungen je Aufruf. Antwortet ebusd nicht, bricht die Funktion bei der ersten Meldung mit einer Warnung ab, die die abgefragte URL nennt, und liefert einen leeren Text; ebenso der Knopf „Lese Werte“, der dann die Liste unverändert lässt.
+Liest die aktuellen Werte der lesbaren Meldungen, die zu `$search` passen, bei ebusd (wie der Knopf „Lese aktuelle Werte“) und liefert sie als JSON: Meldung → `value` (Werte durch „/“ getrennt, `null` = kein Wert) und `lastUpdate` (Zeitpunkt der letzten Aktualisierung bei ebusd, `null` = nie). Weil ebusd dafür den Bus abfragen kann, höchstens 20 Meldungen je Aufruf. Antwortet ebusd nicht, bricht die Funktion bei der ersten Meldung mit einer Warnung ab, die die abgefragte URL nennt, und liefert einen leeren Text; ebenso der Knopf „Lese aktuelle Werte“, der dann die Liste unverändert lässt.
 
 Beispiel: Vorlauftemperatur einbinden
 ```php
