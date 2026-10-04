@@ -30,6 +30,9 @@ declare(strict_types=1);
  *     nur HTTP braucht. Bei 104 (MQTT Server inaktiv) oder 206 (kein eBUS-Signal) kam man so
  *     nicht über den ersten Einrichtungsschritt. „Lese Werte“ und „Erzeuge/Aktualisiere
  *     Variablen“ brauchen den Parent und bleiben bei Störung gesperrt.
+ *  8. Der Selbsttest nannte bei Variablen ohne Meldung in der Konfiguration als letzte
+ *     Aktualisierung „01.01.1970“, wenn die Variable nie einen Wert bekommen hatte
+ *     (VariableUpdated = 0) — für eine KI ein scheinbar echtes Datum.
  *
  * Fixtures: tests/fixtures/config_700.json und data_all.json (echte ebusd-Antworten).
  * Zu 2: Ein Typ außerhalb der Tabelle kommt in keinem Mitschnitt vor (alle Schaltkreise des
@@ -274,6 +277,18 @@ $h->responses[CONFIG_URL] = konfig700();
 $r                        = mitFehlern(static fn() => $h->RequestAction('btnReadConfiguration', ''));
 $msg                      = array_values(array_filter($h->formUpdates, static fn(array $u): bool => $u[0] === 'MsgText'));
 check($r['fehler'] === [] && str_contains((string)(end($msg)[2] ?? ''), 'entries found'), 'Einlesen funktioniert bei 104 (' . json_encode(array_column($msg, 2), JSON_UNESCAPED_UNICODE) . ')');
+
+// --- 8. Selbsttest: verwaiste Variable ohne Wert ------------------------------------
+
+echo "Selbsttest, verwaiste Variable ohne Wert:\n";
+$h  = instanz();
+$id = $h->fremdeVariable('Altlast', 'Altlast');
+check(IPS_GetVariable($id)['VariableUpdated'] === 0, 'Ausgangslage: Variable nie aktualisiert');
+$test  = $h->RunSelfTest();
+$zeile = implode("\n", array_filter(explode("\n", $test), static fn(string $z): bool => str_contains($z, 'Altlast')));
+check($zeile !== '', 'Selbsttest nennt die verwaiste Variable');
+check(!str_contains($zeile, '1970'), 'kein Datum 1970 (' . $zeile . ')');
+check(str_contains($zeile, 'Altlast (no value yet)'), 'stattdessen „no value yet“');
 
 echo "\n$checks Prüfungen, $fails Fehler\n";
 exit($fails === 0 ? 0 : 1);

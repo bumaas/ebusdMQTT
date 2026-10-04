@@ -746,7 +746,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
             $byName[$object['ObjectName']][] = $label;
             if ($configurationMessages !== [] && !isset($knownIdents[$ident])) {
-                $orphans[] = sprintf('%s (%s)', $label, date('d.m.Y', IPS_GetVariable($childID)['VariableUpdated']));
+                $updated   = IPS_GetVariable($childID)['VariableUpdated'];
+                $orphans[] = sprintf('%s (%s)', $label, $updated > 0 ? date('d.m.Y', $updated) : $this->Translate('no value yet')); // 0 wäre „01.01.1970“
             }
         }
 

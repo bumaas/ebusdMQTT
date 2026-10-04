@@ -98,7 +98,8 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   HTTP-Antwort mit Warnung ab (`getCurrentValueAndTime` liefert dann `null`, „antwortet ohne
   Wert“ dagegen `[null, 0]` — echter Mitschnitt `fixtures/value_700_errorhistory.json`);
   „Lese Konfiguration aus“ ist in jedem Status bedienbar (nur HTTP), die übrigen Knöpfe nur
-  bei 102 (`GetConfigurationForm` und `SetStatus`). **Die Typtabelle im Trait ist
+  bei 102 (`GetConfigurationForm` und `SetStatus`). **Zeitstempel aus `VariableUpdated` nie
+  ungeprüft formatieren** — 0 heißt „noch kein Wert“, nicht 01.01.1970 (Selbsttest, beide Stellen). **Die Typtabelle im Trait ist
   zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
