@@ -101,7 +101,11 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   bei 102 (`GetConfigurationForm` und `SetStatus`). **Zeitstempel aus `VariableUpdated` nie
   ungeprüft formatieren** — 0 heißt „noch kein Wert“, nicht 01.01.1970 (Selbsttest, beide Stellen).
   „Verbindung funktioniert wieder“ (`applyStatus`) nur nach Betriebsstörungen 104/203/205/206,
-  nicht nach Eingabe-/Einrichtungsfehlern 202/204/207/208. **Die Typtabelle im Trait ist
+  nicht nach Eingabe-/Einrichtungsfehlern 202/204/207/208.
+- **Wertebereich eines Zahlenfeldes nur über `getValueRange()`** (Trait): Schreibprüfung,
+  `EBM_FindMessages` und Darstellung nutzen dieselbe Berechnung; die Grenze
+  `MAX_SLIDER_STEPS` wenden nur FindMessages und Darstellung an, die Schreibprüfung nie.
+  `getPayload()` bekommt die Felddefinition von `getWritableMessage()`, dekodiert also nicht neu. **Die Typtabelle im Trait ist
   zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).

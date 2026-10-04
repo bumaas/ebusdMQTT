@@ -113,7 +113,7 @@ function buildFiles(): array
             'errors' => takeErrors()
         ];
 
-        // Attribut wie im Betrieb setzen (getPayload liest daraus)
+        // Attribut wie im Betrieb setzen (wie im Betrieb; getPayload bekommt das Feld seit build 44 direkt)
         $preparedJson = json_encode($prepared, JSON_THROW_ON_ERROR);
         $harness->attributSetzen('ebusdConfigurationMessages', $preparedJson);
 
@@ -191,7 +191,7 @@ function buildFiles(): array
                 $variableType     = $fieldDef === null ? -1 : invokePrivate($harness, 'getIPSVariableType', $fieldDef);
                 $sample           = $samples[$variableType] ?? 'sample';
                 $entry['sample']  = $sample;
-                $entry['payload'] = invokePrivate($harness, 'getPayload', $name, $sample);
+                $entry['payload'] = invokePrivate($harness, 'getPayload', $fieldDef, $sample);
             } catch (Throwable $e) {
                 $entry['exception'] = get_class($e) . ': ' . $e->getMessage();
             }

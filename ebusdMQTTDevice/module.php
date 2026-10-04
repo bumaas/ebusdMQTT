@@ -314,12 +314,12 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 return;
 
             default:
-                $message = $this->getWritableMessage($Ident, $Value);
-                if ($message === null) {
+                $writable = $this->getWritableMessage($Ident, $Value);
+                if ($writable === null) {
                     return; // Grund wurde bereits per trigger_error gemeldet
                 }
-                $payload = $this->getPayload($message['name'], $Value);
-                $this->publish($this->buildTopic($message['name'], 'set'), $payload);
+                [$message, $fieldDef] = $writable;
+                $this->publish($this->buildTopic($message['name'], 'set'), $this->getPayload($fieldDef, $Value));
         }
     }
 
@@ -327,6 +327,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
      * Prüft einen Schreibwunsch aus RequestAction gegen die ebusd-Konfiguration und liefert die
      * zugehörige Meldung. Jeder Grund für eine Ablehnung kommt als trigger_error beim Aufrufer an
      * (Skript wie KI) — mit Art des Fehlers und nächstem Schritt, nichts wird publiziert.
+     *
+     * @return array{0: array, 1: array}|null [Meldung, Felddefinition des einzigen relevanten Feldes]
      */
     private function getWritableMessage(string $ident, mixed $value): ?array
     {
@@ -368,7 +370,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
                     );
                     return null;
                 }
-                return $message;
+                return [$message, $fieldDef];
             }
         }
 
@@ -412,13 +414,10 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 if ($this->getIPSVariableType($fieldDef) === VARIABLETYPE_INTEGER && (float)$value !== (float)(int)$value) {
                     return $this->Translate('a whole number');
                 }
-                if (isset($typeDef['MinValue'], $typeDef['MaxValue']) && $typeDef['MinValue'] !== $typeDef['MaxValue']) {
-                    $div = max(1, $fieldDef['divisor'] ?? 0);
-                    $min = $typeDef['MinValue'] / $div;
-                    $max = $typeDef['MaxValue'] / $div;
-                    if ((float)$value < $min || (float)$value > $max) {
-                        return sprintf($this->Translate('%s to %s'), $min, $max);
-                    }
+                // immer prüfen, auch bei unüberschaubar großem Bereich (EXP) — die Grenze für den Schieberegler gilt hier nicht
+                $range = $this->getValueRange($fieldDef);
+                if ($range !== null && ((float)$value < $range['min'] || (float)$value > $range['max'])) {
+                    return sprintf($this->Translate('%s to %s'), $range['min'], $range['max']);
                 }
                 return '';
         }
@@ -709,7 +708,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
             );
         }
 
-        foreach ($this->getLegacyHints() as $hint) {
+        foreach ($this->getLegacyHints($configurationMessages) as $hint) {
             $lines[] = '– ' . $hint;
         }
 
@@ -722,10 +721,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
      * Variablen ohne Meldung in der ebusd-Konfiguration (z. B. Meldungen, die ebusd nicht mehr
      * kennt) und gleich benannte Variablen (ebusd beschreibt manche Werte in zwei Meldungen gleich).
      */
-    private function getLegacyHints(): array
+    private function getLegacyHints(array $configurationMessages): array
     {
         $knownIdents = [];
-        $configurationMessages = $this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
         foreach ($configurationMessages as $message) {
             foreach ($message['fielddefs'] ?? [] as $key => $fieldDef) {
                 if (($fieldDef['type'] ?? '') !== 'IGN') {
@@ -833,12 +831,10 @@ class ebusdMQTTDevice extends IPSModuleStrict
             if (!empty($fieldDef['values'])) {
                 $field['values'] = (object)$fieldDef['values'];
             } else {
-                $typeDef = $this->getEbusDataTypeDefinitions()[$fieldDef['type']] ?? [];
-                if (isset($typeDef['MinValue'], $typeDef['MaxValue']) && $typeDef['MinValue'] !== $typeDef['MaxValue']
-                    && ($typeDef['MaxValue'] - $typeDef['MinValue']) / $typeDef['StepSize'] <= self::MAX_SLIDER_STEPS) {
-                    $div          = max(1, $fieldDef['divisor'] ?? 0);
-                    $field['min'] = $typeDef['MinValue'] / $div;
-                    $field['max'] = $typeDef['MaxValue'] / $div;
+                $range = $this->getValueRange($fieldDef);
+                if ($range !== null && $range['steps'] <= self::MAX_SLIDER_STEPS) {
+                    $field['min'] = $range['min'];
+                    $field['max'] = $range['max'];
                 }
             }
             $variableID = @$this->GetIDForIdent($ident);
@@ -1754,8 +1750,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 // Eingabefeld oder Slider: ebusd liefert keine fachlichen Grenzen, nur den technischen
                 // Bereich des Datentyps. Bei EXP (±3·10³⁸) oder UIN (0 … 65534) ist ein Schieberegler
                 // unbedienbar — ein Schieberegler nur, wenn der Bereich überschaubar ist.
-                $steps = ($typeDef['MaxValue'] - $typeDef['MinValue']) / $typeDef['StepSize'];
-                if ($typeDef['MinValue'] === $typeDef['MaxValue'] || $steps > self::MAX_SLIDER_STEPS) {
+                $range = $this->getValueRange($fielddef);
+                if ($range === null || $range['steps'] > self::MAX_SLIDER_STEPS) {
                     return [
                         'PRESENTATION' => VARIABLE_PRESENTATION_VALUE_INPUT,
                         'SUFFIX'       => $suffix,
@@ -1766,9 +1762,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
                     'PRESENTATION' => VARIABLE_PRESENTATION_SLIDER,
                     'SUFFIX'       => $suffix,
                     'DIGITS'       => $digits,
-                    'MIN'          => $typeDef['MinValue'] / $div,
-                    'MAX'          => $typeDef['MaxValue'] / $div,
-                    'STEP_SIZE'    => $typeDef['StepSize'] / $div,
+                    'MIN'          => $range['min'],
+                    'MAX'          => $range['max'],
+                    'STEP_SIZE'    => $range['step'],
                 ];
             }
 

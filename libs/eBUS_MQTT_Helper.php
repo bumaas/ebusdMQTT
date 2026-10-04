@@ -126,32 +126,9 @@ trait ebusd2MQTTHelper
         return ($instance['ConnectionID'] > 0) ? $instance['ConnectionID'] : 0;
     }
 
-    private function getPayload(string $messageId, mixed $Value): string
+    /** Payload für …/set aus dem Wert; $fieldDef ist das einzige relevante Feld der Meldung (aus getWritableMessage) */
+    private function getPayload(array $fieldDef, mixed $Value): string
     {
-        $configAttr            = $this->ReadAttributeString(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
-        $configurationMessages = json_decode($configAttr, true, 512, JSON_THROW_ON_ERROR);
-
-        if (!isset($configurationMessages[$messageId])) {
-            $this->logDebug(__FUNCTION__, 'Unexpected messageId: ' . $messageId);
-            throw new \RuntimeException('Unexpected messageId: ' . $messageId);
-        }
-        $messageDef = $configurationMessages[$messageId];
-
-        $fieldDef = null;
-
-        //Einige Messages (z. B. z1ActualRoomTempDesired) haben mehr als nur ein Feld, aber nur ein Feld ist relevant
-        foreach ($messageDef['fielddefs'] as $currentField) {
-            if ($currentField['type'] !== 'IGN') {
-                $fieldDef = $currentField;
-                break;
-            }
-        }
-
-        if ($fieldDef === null) {
-            trigger_error('no valid fielDef found');
-            return '';
-        }
-
         $ebusTypes = $this->getEbusDataTypeDefinitions();
         if (!isset($ebusTypes[$fieldDef['type']])) {
             trigger_error('Unsupported ebus type: ' . $fieldDef['type']);
@@ -232,6 +209,28 @@ trait ebusd2MQTTHelper
             }
         }
         return null;
+    }
+
+    /**
+     * Wertebereich eines Zahlenfeldes aus der Typtabelle, umgerechnet mit dem Divisor — gemeinsam für
+     * Schreibprüfung, EBM_FindMessages und Darstellung. 'steps' ist die Zahl der Schritte im Typbereich;
+     * ob ein Bereich überschaubar ist (MAX_SLIDER_STEPS), entscheidet der Aufrufer.
+     *
+     * @return array{min: int|float, max: int|float, step: int|float, steps: int|float}|null null = Typ unbekannt oder ohne Bereich (z. B. ULG)
+     */
+    protected function getValueRange(array $fieldDef): ?array
+    {
+        $typeDef = $this->getEbusDataTypeDefinitions()[$fieldDef['type'] ?? ''] ?? [];
+        if (!isset($typeDef['MinValue'], $typeDef['MaxValue']) || $typeDef['MinValue'] === $typeDef['MaxValue']) {
+            return null;
+        }
+        $div = max(1, $fieldDef['divisor'] ?? 0);
+        return [
+            'min'   => $typeDef['MinValue'] / $div,
+            'max'   => $typeDef['MaxValue'] / $div,
+            'step'  => $typeDef['StepSize'] / $div,
+            'steps' => ($typeDef['MaxValue'] - $typeDef['MinValue']) / $typeDef['StepSize'],
+        ];
     }
 
     protected function getIPSVariableType(array $fielddef): int
