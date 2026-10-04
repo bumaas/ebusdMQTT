@@ -499,7 +499,7 @@
                     "SUFFIX": "",
                     "DIGITS": 0,
                     "MIN": 0,
-                    "MAX": 256,
+                    "MAX": 254,
                     "STEP_SIZE": 1
                 },
                 0,
@@ -926,7 +926,7 @@
                     "SUFFIX": "",
                     "DIGITS": 0,
                     "MIN": 0,
-                    "MAX": 256,
+                    "MAX": 254,
                     "STEP_SIZE": 1
                 },
                 0,
@@ -1353,7 +1353,7 @@
                     "SUFFIX": "",
                     "DIGITS": 0,
                     "MIN": 0,
-                    "MAX": 256,
+                    "MAX": 254,
                     "STEP_SIZE": 1
                 },
                 0,
@@ -8399,7 +8399,7 @@
                     "SUFFIX": "",
                     "DIGITS": 0,
                     "MIN": 0,
-                    "MAX": 256,
+                    "MAX": 254,
                     "STEP_SIZE": 1
                 },
                 0,
@@ -10229,7 +10229,7 @@
                     "SUFFIX": "",
                     "DIGITS": 0,
                     "MIN": 0,
-                    "MAX": 256,
+                    "MAX": 254,
                     "STEP_SIZE": 1
                 },
                 0,
@@ -10623,7 +10623,7 @@
                     "SUFFIX": "",
                     "DIGITS": 0,
                     "MIN": 0,
-                    "MAX": 256,
+                    "MAX": 254,
                     "STEP_SIZE": 1
                 },
                 0,

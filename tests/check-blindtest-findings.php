@@ -143,7 +143,7 @@ check(($f['values'] ?? null) === ['0' => 'nein', '1' => 'ja'], 'Wertetabelle als
 $f = $liste['HwcTempDesired']['fields'][0] ?? [];
 check(($f['unit'] ?? '') === '°C' && !isset($f['min']) && !isset($f['max']), 'Einheit; kein Pseudo-Bereich bei EXP (' . json_encode($f, JSON_UNESCAPED_UNICODE) . ')');
 $f = $liste['Hc1Status']['fields'][0] ?? [];
-check(($f['min'] ?? null) === 0 && ($f['max'] ?? null) === 256, 'überschaubarer Bereich wird genannt (UCH 0 … 256)');
+check(($f['min'] ?? null) === 0 && ($f['max'] ?? null) === 254, 'überschaubarer Bereich wird genannt (UCH 0 … 254)');
 $f = $liste['Hc1FlowTemp']['fields'][0] ?? [];
 check(($f['variableID'] ?? 0) === IPS_GetObjectIDByIdent('Hc1FlowTemp', $h->id()), 'Feld nennt die ID der angelegten Variable');
 check(!isset($liste['DisplayedOutsideTemp']['fields'][0]['variableID']), 'ohne Variable keine ID');

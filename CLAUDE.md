@@ -88,6 +88,13 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   eine Warnung je Meldung (Buffer `ReportedUnknownMessages`, beim Einlesen geleert);
   `EBM_FindMessages` mit `fields` (Typ, Einheit, `values`, `min`/`max` nur bei ≤ 1000
   Schritten, `variableID`), `EBM_ReadMessageValues` mit `lastUpdate`.
+- `php tests/check-review-findings.php` — Befunde aus dem Code-Review vom 04.10.2026:
+  leerer Schaltkreis bleibt bei jeder Verbindungsprüfung 207 (steht in `getPropertyError`,
+  keine Abfrage von `/data/`); `EBM_FindMessages` meldet einen eBUS-Typ außerhalb der
+  Typtabelle als `unknown` statt mit TypeError abzubrechen; ganzzahlige Typen ohne Divisor
+  lehnen Kommazahlen ab; UCH reicht bis 254 (0xFF = Ersatzwert, ebusd-Wiki 4.3); Topics mit
+  Unterpfad (`…/<msg>/set`, `…/get`) werden still übersprungen. **Die Typtabelle im Trait ist
+  zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

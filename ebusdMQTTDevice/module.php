@@ -123,12 +123,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
         // 1. Grundlegende Validierung der Eigenschaften
         $circuitName = $this->ReadPropertyString(self::PROP_CIRCUITNAME);
         if ($circuitName === '') {
-            $this->applyStatus(
-                self::STATUS_INST_NO_CIRCUIT,
-                'no circuit selected',
-                $this->Translate('No circuit selected. Determine the circuits with "Read Circuits" and select one.')
-            );
+            $this->applyStatus(...$this->getPropertyError());
             $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, 0);
+            $this->SetTimerInterval(self::TIMER_CHECK_CONNECTION, 0); // ohne Schaltkreis gibt es nichts zu prüfen
             return;
         }
 
@@ -411,6 +408,10 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 if (!is_numeric($value)) {
                     return $this->Translate('a number');
                 }
+                // ohne Divisor ganzzahlig: ein Nachkommaanteil ginge unverändert auf den Bus
+                if ($this->getIPSVariableType($fieldDef) === VARIABLETYPE_INTEGER && (float)$value !== (float)(int)$value) {
+                    return $this->Translate('a whole number');
+                }
                 if (isset($typeDef['MinValue'], $typeDef['MaxValue']) && $typeDef['MinValue'] !== $typeDef['MaxValue']) {
                     $div = max(1, $fieldDef['divisor'] ?? 0);
                     $min = $typeDef['MinValue'] / $div;
@@ -496,6 +497,12 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $messageId = str_replace(MQTT_GROUP_TOPIC . '/' . $mqttTopicLower . '/', '', $topic);
         if ($this->trace) {
             $this->logDebug('MQTT messageId', $messageId);
+        }
+
+        // ebusd/<circuit>/<message>/set bzw. /get: Aufträge an ebusd (andere Clients oder das eigene Echo), keine Werte
+        if (str_contains($messageId, '/')) {
+            $this->logDebug('MQTT messageId - skip', 'not a value topic: ' . $messageId);
+            return '';
         }
 
         // ist die Konfiguration der Message bekannt?
@@ -638,9 +645,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
         }
 
         $propertyError = $this->getPropertyError();
-        if ($circuitName === '') {
-            $bad($this->Translate('No circuit selected. Determine the circuits with "Read Circuits" and select one.'));
-        } elseif ($propertyError !== null) {
+        if ($propertyError !== null) {
             $bad($propertyError[2]); // ohne Abfrage — mit ungültiger Adresse käme nur ein irreführendes „antwortet nicht"
         } else {
             $url    = sprintf('http://%s:%s/data/%s', $host, $port, $circuitName);
@@ -816,10 +821,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 continue;
             }
             $ident = $this->getFieldIdentName($message, $key);
+            $known = isset($this->getEbusDataTypeDefinitions()[$fieldDef['type'] ?? '']); // getIPSVariableType kennt nur Typen der Tabelle
             $field = [
                 'ident' => $ident,
                 'label' => $this->getFieldLabel($message, $key),
-                'type'  => $typeNames[$this->getIPSVariableType($fieldDef)] ?? 'unknown',
+                'type'  => $known ? ($typeNames[$this->getIPSVariableType($fieldDef)] ?? 'unknown') : 'unknown',
             ];
             if (($fieldDef['unit'] ?? '') !== '') {
                 $field['unit'] = $fieldDef['unit'];
@@ -1886,6 +1892,15 @@ class ebusdMQTTDevice extends IPSModuleStrict
         $portString  = $this->ReadPropertyString(self::PROP_PORT);
         $port        = is_numeric($portString) ? (int)$portString : 0;
         $circuitName = strtolower($this->ReadPropertyString(self::PROP_CIRCUITNAME));
+
+        // zuerst: ohne Schaltkreis fragt die Verbindungsprüfung sonst /data/ ab und meldet 203 „Schaltkreis "" gibt es nicht"
+        if ($circuitName === '') {
+            return [
+                self::STATUS_INST_NO_CIRCUIT,
+                'no circuit selected',
+                $this->Translate('No circuit selected. Determine the circuits with "Read Circuits" and select one.')
+            ];
+        }
 
         if (!filter_var($host, FILTER_VALIDATE_IP) && !filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
             return [

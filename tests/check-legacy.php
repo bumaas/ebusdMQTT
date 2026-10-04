@@ -71,7 +71,7 @@ $p = darstellung($h, 'FrostOverRideTime');
 check($p['PRESENTATION'] === VARIABLE_PRESENTATION_VALUE_INPUT && ($p['SUFFIX'] ?? '') === ' h', 'UIN (Frostschutz-Verzögerung): Eingabefeld mit „ h" statt 0 … 65534');
 check(darstellung($h, 'Hc1PumpStatus')['PRESENTATION'] === VARIABLE_PRESENTATION_VALUE_INPUT, 'UIN (Pumpenstatus): Eingabefeld');
 $p = darstellung($h, 'Hc1Status');
-check($p['PRESENTATION'] === VARIABLE_PRESENTATION_SLIDER && $p['MIN'] === 0 && $p['MAX'] === 256, 'UCH (0 … 256): Schieberegler bleibt');
+check($p['PRESENTATION'] === VARIABLE_PRESENTATION_SLIDER && $p['MIN'] === 0 && $p['MAX'] === 254, 'UCH (0 … 254): Schieberegler bleibt');
 check(darstellung($h, 'AdaptHeatCurve')['PRESENTATION'] === VARIABLE_PRESENTATION_ENUMERATION, 'Wertetabelle: Auswahl bleibt');
 check(darstellung($h, 'Hc1FlowTemp')['PRESENTATION'] === VARIABLE_PRESENTATION_VALUE_PRESENTATION, 'nur lesbar: Wertanzeige bleibt');
 
