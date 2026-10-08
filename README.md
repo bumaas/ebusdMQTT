@@ -71,6 +71,8 @@ Schreibt die Debug-Meldungen des Moduls zusätzlich in das Logfile der IPSLibrar
 
 Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden. „Lese Konfiguration aus“ braucht nur die HTTP-Verbindung zu ebusd und ist deshalb auch bedienbar, wenn der MQTT Server noch nicht aktiv ist oder ebusd kein eBUS-Signal meldet; „Lese aktuelle Werte“ und „Speichere Änderungen“ erst bei aktiver Instanz.
 
+In der Liste der Statusvariablen markiert ein **(A)** hinter dem Ident, dass für diese Variable die Archivierung im Query-Logger (Archive Handler) aktiv ist.
+
 ### So kommen die Daten herein
 
 Das Modul spricht auf zwei Wegen mit ebusd:
@@ -80,8 +82,9 @@ Das Modul spricht auf zwei Wegen mit ebusd:
 | HTTP | Schaltkreise ermitteln, Konfiguration lesen, „Lese aktuelle Werte“, Verbindungsprüfung | Host und Port der Instanz, bei ebusd `--httpport` |
 | MQTT | alle laufenden Werte: Anfragen des Aktualisierungsintervalls und die Antworten darauf, Poll-Prioritäten, Schreiben von Werten | MQTT Server Instanz in Symcon, bei ebusd `--mqtthost`, `--mqttport`, `--mqttuser`, `--mqttpass` |
 
-Zeigt „Lese aktuelle Werte“ die Werte, die Variablen bleiben aber stehen, funktioniert HTTP und MQTT nicht: ebusd erreicht den MQTT Server in Symcon nicht. Das Modul erkennt das selbst. Bleibt eine Anfrage des Intervalls bis zur nächsten unbeantwortet, geht die Instanz auf Status 209. Die Poll-Priorität hilft dabei nicht, auch sie läuft über MQTT.
-In der Liste der Statusvariablen markiert ein **(A)** hinter dem Ident, dass für diese Variable die Archivierung im Query-Logger (Archive Handler) aktiv ist.
+Erreicht ebusd den MQTT Server in Symcon nicht, zeigt „Lese aktuelle Werte“ die Werte trotzdem an, denn das läuft über HTTP. Die Variablen bekommen dann aber keine. Das erkennt das Modul selbst: Kommt zwischen zwei Anfragen des Intervalls nichts von ebusd per MQTT an, geht die Instanz auf Status 209. Die Poll-Priorität hilft dabei nicht, auch sie läuft über MQTT.
+
+Ob eine Variable Werte bekommt, zeigt ihre letzte Aktualisierung, die bei jeder Antwort von ebusd vorrückt. Die letzte Änderung bleibt dagegen stehen, solange der Wert gleich bleibt, etwa bei einer abgeschalteten Heizung im Sommer.
 
 Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal und prüft sie bei einer Störung automatisch erneut. Jede Störung hat einen eigenen Instanzstatus:
 
@@ -112,7 +115,8 @@ Die Stationen der Reihe nach, vom Bus bis zur Variable:
 | Status 206, der Adapter zeigt „eBUS signal“ nicht als „acquired“ | der Adapter hört den Bus nicht | Verkabelung zum eBUS |
 | Status 205 | ebusd antwortet nicht per HTTP | läuft ebusd (`systemctl status ebusd`)? Ist `--httpport` gesetzt und als Port in der Instanz eingetragen? |
 | „Ermittle Schaltkreis Namen“ bietet das Gerät nicht an | ebusd hat für das Gerät keine Konfiguration geladen | `ebusctl i` nach dem Ende des Scans: steht „loaded“ beim Gerät? |
-| Status 209, oder Variablen bleiben stehen, obwohl „Lese aktuelle Werte“ sie zeigt | ebusd erreicht den MQTT Server nicht | `grep mqtt /var/log/ebusd.log \| tail` muss `connection established` zeigen; `--mqtthost`, `--mqttport`, `--mqttuser`, `--mqttpass` mit Server Socket und MQTT Server Instanz abgleichen |
+| Status 209 | ebusd erreicht den MQTT Server nicht | `grep mqtt /var/log/ebusd.log \| tail` muss `connection established` zeigen; `--mqtthost`, `--mqttport`, `--mqttuser`, `--mqttpass` mit Server Socket und MQTT Server Instanz abgleichen |
+| Eine Variable zeigt eine alte letzte Änderung | der Wert hat sich seitdem nicht geändert, das ist kein Fehler | die letzte Aktualisierung der Variable ansehen, sie rückt bei jeder Antwort von ebusd vor |
 | Status 104 | der MQTT Server in Symcon ist nicht aktiv | MQTT Server Instanz und ihren Server Socket |
 
 Den aktuellen Stand fasst der Selbsttest zusammen (`EBM_RunSelfTest`, siehe [Funktionsreferenz](#7-funktionsreferenz)). Zeilen wie „received unknown MS cmd“ im ebusd-Log sind dagegen normal, siehe [Installationskurzanleitung, Überprüfen](docs/de/InstallEbusdREADME.md#4-überprüfen).

@@ -103,12 +103,17 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   „Verbindung funktioniert wieder“ (`applyStatus`) nur nach Betriebsstörungen 104/203/205/206/209,
   nicht nach Eingabe-/Einrichtungsfehlern 202/204/207/208.
 - `php tests/check-mqtt-rueckweg.php` — Status 209, wenn ebusd per HTTP antwortet, per MQTT aber
-  nichts zurückkommt (Anlass PN froema, Forum t/144582, 08.10.2026: Werte nur per Knopf, Variablen
-  standen still, Instanz auf 102). Buffer `MqttReplyState`: `requestAllValues` setzt `pending`,
+  nichts zurückkommt (Verdacht aus der PN froema, Forum t/144582, 08.10.2026; dort war die Ursache am
+  Ende der `SetValue`-Override, siehe unten, die Erkennung bleibt trotzdem sinnvoll). ebusd sendet
+  `ebusd/global/uptime` alle ~15 s, 209 heißt also „gar nichts von ebusd per MQTT“. Buffer `MqttReplyState`: `requestAllValues` setzt `pending`,
   findet die nächste Runde noch `pending`, wird es `silent` → 209 mit einer Warnung. Jede Meldung
   von ebusd (Wert oder `ebusd/global/…`) setzt zurück und stellt 102 her; das eigene Echo `…/get`
   zählt nicht. In 209 läuft das Intervall weiter (sonst käme nie wieder eine Antwort),
   `updateInstanceStatus` bleibt bei 209, solange `silent`. Bei Intervall 0 gibt es keine Erkennung.
+- `php tests/check-setvalue-update.php` — ein unveränderter Wert von ebusd rückt `VariableUpdated`
+  vor, `VariableChanged` bleibt. Das Modul hat **keinen eigenen `SetValue`-Override** mehr: Der alte
+  übersprang gleiche Werte, die Variablen sahen dann aus wie stehengeblieben (Anlass PN froema,
+  t/144582, 08.10.2026; die Werte kamen per MQTT, sie änderten sich nur nicht).
 - **Wertebereich eines Zahlenfeldes nur über `getValueRange()`** (Trait): Schreibprüfung,
   `EBM_FindMessages` und Darstellung nutzen dieselbe Berechnung; die Grenze
   `MAX_SLIDER_STEPS` wenden nur FindMessages und Darstellung an, die Schreibprüfung nie.

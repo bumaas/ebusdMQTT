@@ -5,10 +5,11 @@ declare(strict_types=1);
 /**
  * MQTT-Rückweg: ebusd antwortet per HTTP, aber per MQTT kommt nichts an.
  *
- * Anlass: PN froema (Forum t/144582, 08.10.2026). ebusd lief, „Lese aktuelle Werte“ (HTTP)
- * zeigte die Werte, die Instanz stand auf 102, aber die Variablen wurden nie aktualisiert:
- * Das Intervall fragt per MQTT an, und ebusd erreichte den MQTT Server nicht. Das Modul
- * meldete davon nichts.
+ * Anlass: Verdacht aus der PN froema (Forum t/144582, 08.10.2026). „Lese aktuelle Werte“ (HTTP)
+ * zeigte die Werte, die Variablen schienen still zu stehen, die Instanz stand auf 102. Ein
+ * fehlender MQTT-Rückweg war es dort am Ende nicht, die Werte kamen an und änderten sich nur
+ * nicht (siehe check-setvalue-update.php). Erreicht ebusd den MQTT Server aber wirklich nicht,
+ * fragt das Intervall ins Leere, und das Modul meldete davon nichts.
  *
  * Erwartet:
  *  - Bleibt nach einer Anfragerunde des Intervalls bis zur nächsten Runde jede Antwort per MQTT

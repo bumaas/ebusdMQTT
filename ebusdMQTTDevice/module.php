@@ -588,24 +588,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
         return json_encode($Form, JSON_THROW_ON_ERROR);
     }
 
-    protected function SetValue(string $Ident, mixed $Value): bool
-    {
-        $oldValue = $this->GetValue($Ident);
-
-        $id = $this->GetIDForIdent($Ident);
-
-        if (($oldValue === $Value) && (IPS_GetVariable($id)['VariableUpdated'] !== 0)) {
-            $this->logDebug(__FUNCTION__, sprintf('%s: %s - not changed', $Ident, $Value));
-            return true;
-        }
-
-        $this->logDebug(
-            __FUNCTION__,
-            sprintf('%s: old: %s (%s), new: %s (%s)', $Ident, $oldValue, gettype($oldValue), $Value, gettype($Value))
-        );
-        return parent::SetValue($Ident, $Value);
-    }
-
     protected function SetStatus(int $Status): bool
     {
         $isActive = ($Status === IS_ACTIVE);
