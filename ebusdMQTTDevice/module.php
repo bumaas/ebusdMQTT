@@ -24,6 +24,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
     private const int STATUS_INST_NO_SIGNAL        = 206;
     private const int STATUS_INST_NO_CIRCUIT       = 207;
     private const int STATUS_INST_INTERVAL_INVALID = 208;
+    private const int STATUS_INST_NO_MQTT_REPLY    = 209;
 
     // RequestAction-Idents, die das Modul selbst auslöst (Timer) — ohne aktiven Parent still übergehen
     private const array INTERNAL_IDENTS = ['timerCheckConnection', 'timerRefreshAllMessages', 'publishPollPriorities'];
@@ -39,6 +40,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     // bereits per Log gemeldete Meldungen, die in der Konfiguration fehlen (je Laufzeit einmal)
     private const string BUFFER_REPORTED_UNKNOWN = 'ReportedUnknownMessages';
+
+    // MQTT-Rückweg: '' = keine Anfrage offen, 'pending' = Anfragerunde gesendet, 'silent' = eine Runde blieb unbeantwortet
+    private const string BUFFER_MQTT_REPLY = 'MqttReplyState';
+    // Zeitpunkt der letzten Meldung von ebusd per MQTT (für den Selbsttest)
+    private const string BUFFER_LAST_MQTT_RECEIVE = 'LastMqttReceive';
 
     //property names
     private const string PROP_HOST                             = 'Host';
@@ -459,6 +465,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         //Globale Meldungen werden extra behandelt
         if (str_starts_with($topic, MQTT_GROUP_TOPIC . '/global/')) {
+            $this->mqttReplyReceived();
             $this->checkGlobalMessage($topic, $payloadJson);
             return '';
         }
@@ -503,6 +510,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $this->logDebug('MQTT messageId - skip', 'not a value topic: ' . $messageId);
             return '';
         }
+        $this->mqttReplyReceived();
 
         // ist die Konfiguration der Message bekannt?
         $configurationMessages = $this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
@@ -663,6 +671,12 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $bad($this->Translate('The last eBUS signal reported via MQTT (ebusd/global/signal) was "no signal".'));
         }
 
+        if ($this->GetBuffer(self::BUFFER_MQTT_REPLY) === 'silent') {
+            $bad($this->getNoMqttReplyText());
+        } elseif (($lastMqtt = (int)$this->GetBuffer(self::BUFFER_LAST_MQTT_RECEIVE)) > 0) {
+            $good(sprintf($this->Translate('Last message from ebusd via MQTT: %s.'), date('d.m.Y H:i:s', $lastMqtt)));
+        }
+
         $configurationMessages = $this->readAttributeArray(self::ATTR_EBUSD_CONFIGURATION_MESSAGES);
         if ($configurationMessages === []) {
             $bad($this->Translate('The configuration has not been read from ebusd yet. Read it with EBM_UpdateConfiguration.'));
@@ -698,7 +712,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         // Bei einer Störung hält checkConnection() den Abfrage-Timer an
         $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL);
-        if ($this->GetStatus() !== IS_ACTIVE) {
+        if (!in_array($this->GetStatus(), [IS_ACTIVE, self::STATUS_INST_NO_MQTT_REPLY], true)) {
             $lines[] = '– ' . sprintf($this->Translate('While the instance status is %d, the module does not request any values.'), $this->GetStatus());
         } else {
             $good(
@@ -1188,14 +1202,55 @@ class ebusdMQTTDevice extends IPSModuleStrict
             return;
         }
 
+        $topics = [];
         foreach ($variableList as $entry) {
             $keep     = $entry[self::FORM_ELEMENT_KEEP] ?? false;
             $readable = ($entry[self::FORM_ELEMENT_READABLE] ?? '') === self::OK_SIGN;
 
             if ($keep && $readable) {
-                $this->publish($this->buildTopic($entry[self::FORM_ELEMENT_MESSAGENAME], 'get'), '');
+                $topics[] = $this->buildTopic($entry[self::FORM_ELEMENT_MESSAGENAME], 'get');
             }
         }
+        if ($topics === []) {
+            return;
+        }
+
+        // Kam seit der letzten Runde nichts per MQTT zurück, erreicht ebusd den MQTT Server nicht.
+        // Weiter anfragen: nur so kommt nach der Behebung wieder eine Antwort.
+        $replyState = $this->GetBuffer(self::BUFFER_MQTT_REPLY);
+        if ($replyState === 'pending') {
+            $this->SetBuffer(self::BUFFER_MQTT_REPLY, 'silent');
+            $this->updateInstanceStatus();
+        } elseif ($replyState === '') {
+            $this->SetBuffer(self::BUFFER_MQTT_REPLY, 'pending');
+        }
+
+        foreach ($topics as $topic) {
+            $this->publish($topic, '');
+        }
+    }
+
+    /**
+     * Eine Meldung von ebusd kam per MQTT an. Nach einer unbeantworteten Runde (Status 209)
+     * stellt sie den Status wieder her.
+     */
+    private function mqttReplyReceived(): void
+    {
+        $this->SetBuffer(self::BUFFER_LAST_MQTT_RECEIVE, (string)time());
+        $wasSilent = $this->GetBuffer(self::BUFFER_MQTT_REPLY) === 'silent';
+        $this->SetBuffer(self::BUFFER_MQTT_REPLY, '');
+        if ($wasSilent && $this->GetStatus() === self::STATUS_INST_NO_MQTT_REPLY) {
+            $this->updateInstanceStatus();
+        }
+    }
+
+    private function getNoMqttReplyText(): string
+    {
+        return sprintf(
+            $this->Translate('ebusd %s:%s answers via HTTP, but sent nothing via MQTT since the last value request of the update interval. Check the MQTT options of ebusd (--mqtthost, --mqttport, --mqttuser, --mqttpass) against the Server Socket and the MQTT Server instance in Symcon.'),
+            $this->ReadPropertyString(self::PROP_HOST),
+            $this->ReadPropertyString(self::PROP_PORT)
+        );
     }
 
     private function checkConnection(): void
@@ -1207,16 +1262,16 @@ class ebusdMQTTDevice extends IPSModuleStrict
             $this->logDebug(__FUNCTION__, 'InstanceStatus: ' . $status);
         }
 
-        if ($status === IS_ACTIVE) {
-            // Wenn aktiv: Normalen Update-Timer setzen, Connection-Check-Timer stoppen
-            $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000;
-            $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, $updateInterval);
+        // Ohne MQTT-Antwort (209) weiter anfragen, sonst käme nach der Behebung nie wieder eine
+        $requestValues  = in_array($status, [IS_ACTIVE, self::STATUS_INST_NO_MQTT_REPLY], true);
+        $updateInterval = $this->ReadPropertyInteger(self::PROP_UPDATEINTERVAL) * 60 * 1000;
+        $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, $requestValues ? $updateInterval : 0);
 
+        if ($status === IS_ACTIVE) {
+            // Wenn aktiv: Connection-Check-Timer stoppen
             $checkConnectionTimer = 0;
         } else {
-            // Wenn inaktiv: Update-Timer stoppen, Connection-Check-Timer mit Backoff starten
-            $this->SetTimerInterval(self::TIMER_REQUEST_ALL_VALUES, 0);
-
+            // Bei einer Störung: Connection-Check-Timer mit Backoff starten
             $currentRetry = $this->ReadAttributeInteger(self::ATTR_CHECKCONNECTIONTIMER);
             // Startwert 5 Sek (falls 0), dann verdoppeln bis max 180 Sek (3 Min)
             $checkConnectionTimer = min(max($currentRetry * 2, 5), 180);
@@ -2035,6 +2090,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
             return;
         }
 
+        if ($this->GetBuffer(self::BUFFER_MQTT_REPLY) === 'silent') {
+            $this->applyStatus(self::STATUS_INST_NO_MQTT_REPLY, 'no reply via MQTT', $this->getNoMqttReplyText());
+            return;
+        }
+
         $this->applyStatus(IS_ACTIVE, 'active');
     }
 
@@ -2057,7 +2117,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
         if ($status === IS_ACTIVE) {
             // nur nach einer Störung im Betrieb — nach einem Eingabe- oder Einrichtungsfehler
             // (202, 204, 207, 208) gab es keine Verbindung, die wieder funktionieren könnte
-            if (in_array($previous, [IS_INACTIVE, self::STATUS_INST_TOPIC_IS_INVALID, self::STATUS_INST_NOT_REACHABLE, self::STATUS_INST_NO_SIGNAL], true)) {
+            if (in_array(
+                $previous,
+                [IS_INACTIVE, self::STATUS_INST_TOPIC_IS_INVALID, self::STATUS_INST_NOT_REACHABLE, self::STATUS_INST_NO_SIGNAL, self::STATUS_INST_NO_MQTT_REPLY],
+                true
+            )) {
                 $this->LogMessage(
                     sprintf(
                         $this->Translate('Connection to ebusd %s:%s (circuit "%s") is working again.'),

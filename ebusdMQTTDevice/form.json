@@ -245,6 +245,11 @@
       "code":    208,
       "icon":    "error",
       "caption": "Update interval is not valid (0 = off or minutes)."
+    },
+    {
+      "code":    209,
+      "icon":    "error",
+      "caption": "ebusd sends no values via MQTT (check the MQTT options of ebusd)."
     }
   ]
 }

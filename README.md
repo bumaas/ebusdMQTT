@@ -61,7 +61,7 @@ Adresse unter der der ebusd Dienst erreichbar ist. Hierbei kann es sich um eine 
 Portnummer auf dem der ebusd Dienst http-Anfragen entgegennimmt.
 
 - Schaltkreis Name:<br>
-Der Name des Schaltkreises unter dem das Gerät in ebusd geführt wird ('Circuit'). Beispiele sind 'bai', '700' etc. Über den Button "Ermittle Schaltkreis Namen" wird die Auswahl der zur verfügung stehenden Schaltkreise ermittelt.
+Der Name des Schaltkreises, unter dem das Gerät in ebusd geführt wird ('Circuit'), z. B. `bai` (Gasheizung), `700` (Regler VRC700), `hmu` (Wärmepumpe) oder `ctlv3` (Regler sensoCOMFORT). Der Button „Ermittle Schaltkreis Namen“ fragt die eingetragene Adresse ab und bietet die Schaltkreise zur Auswahl an. Werte liefern nur Schaltkreise, für die ebusd eine Konfiguration geladen hat: In `ebusctl i` steht bei ihnen „loaded“, nicht nur „scanned“ (siehe [Installationskurzanleitung, Gefundene Geräte](docs/de/InstallEbusdREADME.md#gefundene-geräte)). Neuere Geräte kennt ebusd mitunter noch nicht; dann gibt es für sie keine Werte.
 
 - Aktualisierungsintervall:<br>
 Intervall in Minuten, in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung, negative Werte sind unzulässig). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
@@ -70,6 +70,17 @@ Intervall in Minuten, in dem alle Statusvariablen durch Anfragen an den eBUS akt
 Schreibt die Debug-Meldungen des Moduls zusätzlich in das Logfile der IPSLibrary (`IPSLogger`). Nur wirksam, wenn die IPSLibrary installiert ist; sonst ohne Funktion. Für die Fehlersuche genügt in der Regel die Debug-Ausgabe der Instanz.
 
 Nachdem die Einstellungen gespeichert wurden, kann im Aktionsbereich die Konfiguration gelesen werden und die anzulegenden Statusvariablen können ausgewählt werden. „Lese Konfiguration aus“ braucht nur die HTTP-Verbindung zu ebusd und ist deshalb auch bedienbar, wenn der MQTT Server noch nicht aktiv ist oder ebusd kein eBUS-Signal meldet; „Lese aktuelle Werte“ und „Speichere Änderungen“ erst bei aktiver Instanz.
+
+### So kommen die Daten herein
+
+Das Modul spricht auf zwei Wegen mit ebusd:
+
+| Weg | wofür | Einstellung |
+|---|---|---|
+| HTTP | Schaltkreise ermitteln, Konfiguration lesen, „Lese aktuelle Werte“, Verbindungsprüfung | Host und Port der Instanz, bei ebusd `--httpport` |
+| MQTT | alle laufenden Werte: Anfragen des Aktualisierungsintervalls und die Antworten darauf, Poll-Prioritäten, Schreiben von Werten | MQTT Server Instanz in Symcon, bei ebusd `--mqtthost`, `--mqttport`, `--mqttuser`, `--mqttpass` |
+
+Zeigt „Lese aktuelle Werte“ die Werte, die Variablen bleiben aber stehen, funktioniert HTTP und MQTT nicht: ebusd erreicht den MQTT Server in Symcon nicht. Das Modul erkennt das selbst. Bleibt eine Anfrage des Intervalls bis zur nächsten unbeantwortet, geht die Instanz auf Status 209. Die Poll-Priorität hilft dabei nicht, auch sie läuft über MQTT.
 In der Liste der Statusvariablen markiert ein **(A)** hinter dem Ident, dass für diese Variable die Archivierung im Query-Logger (Archive Handler) aktiv ist.
 
 Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal und prüft sie bei einer Störung automatisch erneut. Jede Störung hat einen eigenen Instanzstatus:
@@ -84,11 +95,27 @@ Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal un
 | 206 | ebusd meldet kein eBUS-Signal (z. B. Adapter getrennt) | eBUS-Adapter und Verbindung zum Bus prüfen |
 | 207 | Kein Schaltkreis ausgewählt | Schaltkreis auswählen |
 | 208 | Aktualisierungsintervall ungültig (negativ) | 0 (aus) oder eine Anzahl Minuten eintragen |
+| 209 | ebusd antwortet per HTTP, sendet aber nichts per MQTT | MQTT-Optionen von ebusd mit Server Socket und MQTT Server Instanz abgleichen |
 
-Jeder Wechsel in eine Störung steht einmal als Warnung mit Ursache und nächstem Schritt im Meldungsprotokoll, die Behebung einer Betriebsstörung (104, 203, 205, 206) einmal als Meldung. Nach dem Korrigieren einer Einstellung (202, 204, 207, 208) erscheint keine solche Meldung. Eine anhaltende Störung wiederholt sich dort nicht.
+Jeder Wechsel in eine Störung steht einmal als Warnung mit Ursache und nächstem Schritt im Meldungsprotokoll, die Behebung einer Betriebsstörung (104, 203, 205, 206, 209) einmal als Meldung. Nach dem Korrigieren einer Einstellung (202, 204, 207, 208) erscheint keine solche Meldung. Eine anhaltende Störung wiederholt sich dort nicht.
 
 Bei Bedarf kann für eine Statusvariable eine Poll Priorität angegeben werden, die von ebusd verwendet werden soll. Die Poll Prioriät besagt, in welchem Intervallzyklus eine Meldung von ebusd gepollt werden soll.
 Meldungen mit Priorität 1 werden in jedem Pollzyklus abgefragt, Meldungen mit Priorität 2 werden in jedem zweiten Zyklus abgefragt usw.. Die Pollpriorität kann gesetzt werden, wenn das Abfrageintervall, das im Minutenbereich liegt, für einzelne Meldungen nicht fein genug ist.
+
+### Fehlersuche
+
+Die Stationen der Reihe nach, vom Bus bis zur Variable:
+
+| Symptom | Ursache | Prüfen |
+|---|---|---|
+| Status 206, die Weboberfläche des Adapters zeigt „ebusd connected: no“ | ebusd findet den Adapter nicht | Adresse hinter `-d` in `/etc/default/ebusd` mit dem „ebusd device string“ des Adapters vergleichen, danach `systemctl restart ebusd` |
+| Status 206, der Adapter zeigt „eBUS signal“ nicht als „acquired“ | der Adapter hört den Bus nicht | Verkabelung zum eBUS |
+| Status 205 | ebusd antwortet nicht per HTTP | läuft ebusd (`systemctl status ebusd`)? Ist `--httpport` gesetzt und als Port in der Instanz eingetragen? |
+| „Ermittle Schaltkreis Namen“ bietet das Gerät nicht an | ebusd hat für das Gerät keine Konfiguration geladen | `ebusctl i` nach dem Ende des Scans: steht „loaded“ beim Gerät? |
+| Status 209, oder Variablen bleiben stehen, obwohl „Lese aktuelle Werte“ sie zeigt | ebusd erreicht den MQTT Server nicht | `grep mqtt /var/log/ebusd.log \| tail` muss `connection established` zeigen; `--mqtthost`, `--mqttport`, `--mqttuser`, `--mqttpass` mit Server Socket und MQTT Server Instanz abgleichen |
+| Status 104 | der MQTT Server in Symcon ist nicht aktiv | MQTT Server Instanz und ihren Server Socket |
+
+Den aktuellen Stand fasst der Selbsttest zusammen (`EBM_RunSelfTest`, siehe [Funktionsreferenz](#7-funktionsreferenz)). Zeilen wie „received unknown MS cmd“ im ebusd-Log sind dagegen normal, siehe [Installationskurzanleitung, Überprüfen](docs/de/InstallEbusdREADME.md#4-überprüfen).
 
 ## 5. Einbindung ins Webfront
 Alle Statusvariablen sind für eine Anzeige und (sofern vom ebusd ein Schreiben unterstützt wird) zum Ändern im Webfront vorbereitet. Sie haben alle eine Darstellung, die der ebusd Definition entspricht.
@@ -124,7 +151,7 @@ Alles, was im Formular über Knöpfe geht, geht auch per Skript. Fehlschläge ko
 ```php
 EBM_RunSelfTest(int $InstanceID): string
 ```
-Prüft ohne jede Wirkung auf die Instanz, ob alles funktioniert: MQTT Server aktiv, ebusd erreichbar, eBUS-Signal, Schaltkreis vorhanden, Konfiguration eingelesen, aktive Meldungen, letzte Aktualisierung. Liefert einen Text, jede Störung mit dem nächsten Schritt.
+Prüft ohne jede Wirkung auf die Instanz, ob alles funktioniert: MQTT Server aktiv, ebusd erreichbar, eBUS-Signal, Antworten von ebusd per MQTT, Schaltkreis vorhanden, Konfiguration eingelesen, aktive Meldungen, letzte Aktualisierung. Liefert einen Text, jede Störung mit dem nächsten Schritt.
 
 ```php
 EBM_FindMessages(int $InstanceID, string $search): string

@@ -1,160 +1,148 @@
 # Installationskurzanleitung ebusd
- 
-   ## Inhaltverzeichnis
-   1. [Installation des richtigen Pakets](#1-installation-des-richtigen-pakets)
-   2. [Abschluss der Installation](#2-abschluss-der-installation)
-   3. [Überprüfung der Konfiguration](#3-überprüfung-der-konfiguration)
-   4. [Mit ebusctl Daten lesen und schreiben](#4-mit-ebusctl-daten-lesen-und-schreiben)
-   5. [Über http ebusd Daten abfragen](#5-über-http-ebusd-daten-abfragen)
-   6. [Symcon relevante Konfigurationsparameter](#6-symcon-relevante-konfigurationsparameter)
+
+## Inhaltsverzeichnis
+1. [Überblick](#1-überblick)
+2. [ebusd installieren](#2-ebusd-installieren)
+3. [ebusd einrichten](#3-ebusd-einrichten)
+4. [Überprüfen](#4-überprüfen)
+5. [Mit ebusctl Daten lesen und schreiben](#5-mit-ebusctl-daten-lesen-und-schreiben)
+6. [Über HTTP ebusd-Daten abfragen](#6-über-http-ebusd-daten-abfragen)
 
 > [!TIP]
-> Die detaillierte Installationsbeschreibung des eBUS Daemon ist im [ebusd Wiki](https://github.com/john30/ebusd/wiki) zu finden.
+> Die ausführliche Beschreibung von ebusd steht im [ebusd Wiki](https://github.com/john30/ebusd/wiki), alle Startoptionen im Kapitel [2. Run](https://github.com/john30/ebusd/wiki/2.-Run).
 
-Es gibt zahlreiche Wege, ebusd zu installieren. Da die Installation nicht ganz trivial ist, fasse ich hier einmal zusammen, wie sich ebusd auf einem Raspberry Pi 1 Mod.B unter Buster installieren lässt.
+## 1. Überblick
 
-## 1. Installation des richtigen Pakets
+Die Kette hat drei Glieder:
 
-Wähle das passende Paket für deine Hardware und OS-Version von der Seite [ebusd releases](https://github.com/john30/ebusd/releases).
+```
+eBUS ── Adapter ── ebusd ──┬── HTTP ──► Symcon (Konfiguration, Knöpfe)
+                           └── MQTT ──► MQTT Server in Symcon (laufende Werte)
+```
 
-**Tipp:** die Architektur (amd64, armhf oder i386) und die OS-Version findet man heraus mit 
+Der Adapter hängt am eBUS der Heizung. ebusd läuft auf einem Rechner im Netz (Raspberry Pi, Container, VM), spricht mit dem Adapter und stellt die Daten zweimal bereit: per HTTP für die Konfiguration und per MQTT für die laufenden Werte. Beide Wege müssen funktionieren, siehe [So kommen die Daten herein](../../README.md#so-kommen-die-daten-herein).
+
+Der Rechner mit ebusd braucht eine feste IP-Adresse (im Router zuweisen oder statisch einrichten), denn sie steht später als Host in der Symcon-Instanz.
+
+## 2. ebusd installieren
+
+Es braucht ein Paket **mit MQTT-Unterstützung**. Bei den Debian-Paketen erkennt man es an `_mqtt1` im Dateinamen.
+
+Das frühere apt-Repository von ebusd gibt es nicht mehr. Wer es noch eingetragen hat, entfernt den Eintrag, sonst scheitert jedes `apt update`:
+```bash
+sudo rm /etc/apt/sources.list.d/ebusd.list
+```
+
+### a) Debian-Paket (Raspberry Pi, Debian, VM)
+
+Auf der Seite [ebusd releases](https://github.com/john30/ebusd/releases) das passende Paket wählen. Der Name enthält Architektur und Debian-Version, z. B. `ebusd-26.1_amd64-trixie_mqtt1.deb`. Beides zeigen
 ```bash
 dpkg --print-architecture
 cat /etc/os-release
 ```
-
-Wichtig: es ist ein Paket mit **MQTT Support** zu wählen!
-
-Wenn das passende Paket (z.B. ebusd-22.4_armv7-buster_mqtt1.deb) gefunden ist, ist es herunterzuladen und zu installieren.:
+Dann herunterladen und installieren:
 ```bash
-wget https://github.com/john30/ebusd/releases/download/v22.4/ebusd-22.4_armv7-buster_mqtt1.deb
+wget https://github.com/john30/ebusd/releases/download/26.1/ebusd-26.1_amd64-trixie_mqtt1.deb
+sudo apt install ./ebusd-26.1_amd64-trixie_mqtt1.deb
+sudo systemctl enable ebusd
 ```
+`apt` zieht fehlende Abhängigkeiten wie `libmosquitto1` selbst nach. Ein Update geht genauso mit dem neueren Paket; die Konfiguration bleibt dabei erhalten.
+
+### b) Container auf Proxmox
+
+Die [Proxmox VE Community Scripts](https://community-scripts.org/scripts/ebusd) legen einen fertigen LXC-Container mit Debian und ebusd an. In der Shell des Proxmox-Hosts:
 ```bash
-sudo dpkg -i ebusd-22.4_armv7-buster_mqtt1.deb
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/ebusd.sh)"
 ```
-Falls es bei der Installation des ebusd Paketes zu einer Fehlermeldung kommen sollte wie:
+Die Standardeinstellungen (1 CPU, 512 MB RAM, 2 GB Platte) reichen. Der Container bekommt seine IP per DHCP; diese im Router fest zuweisen. Das Skript installiert das Paket mit MQTT und richtet den Dienst ein. Weiter geht es mit [3. ebusd einrichten](#3-ebusd-einrichten) im Container.
 
-```
-dpkg: Abhängigkeitsprobleme verhindern Konfiguration von ebusd:
-ebusd hängt ab von libmosquitto1; aber:
-Paket libmosquitto1 ist nicht installiert.
-```
+### c) Docker
 
-Dann ist vorab die passende libmosquitto[0/1] zu installieren:
+Das offizielle Image heißt `john30/ebusd` ([Docker Hub](https://hub.docker.com/r/john30/ebusd)). Die Optionen aus Abschnitt 3 gelten genauso. Den Container am besten mit Bridge und eigener IP erstellen, sonst gibt es leicht Portkonflikte (8080).
+
+## 3. ebusd einrichten
+
+Die Startoptionen stehen in `/etc/default/ebusd` in der Zeile `EBUSD_OPTS`. Für Symcon reicht diese Zeile:
+```
+EBUSD_OPTS="--scanconfig -d <Adapter> --accesslevel=* --pollinterval=5 --httpport=8080 --mqtthost=<IP> --mqttport=<Port> --mqttuser=<Benutzer> --mqttpass=<Passwort> --mqttjson"
+```
+Nach jeder Änderung den Dienst neu starten:
 ```bash
-sudo apt-get update
-sudo apt-get install libmosquitto1
+sudo systemctl restart ebusd
 ```
 
+<a id="6-symcon-relevante-konfigurationsparameter"></a>
+**Die Optionen im Einzelnen**
 
-## 2. Abschluss der Installation
+- `-d <Adapter>` sagt ebusd, wo der Adapter ist:
+  - Netzwerkadapter (eBUS Adapter v5, Adapter Shield C6 u. a. per WLAN oder Ethernet): `ens:<IP des Adapters>:9999`. Die Weboberfläche des Adapters zeigt diesen Eintrag unter „ebusd device string“ fertig an; am einfachsten von dort kopieren.
+  - Adapter am USB: `ens:/dev/ttyACM0` (Nummer je nach System)
+  - aufgesteckt auf den Raspberry Pi: `ens:/dev/ttyAMA0 --latency=50`
+  - LAN-Gateway von Esera: `<IP>:<Port>` (IP, Port und Betriebsart „TCP-Server“ im configtool setzen)
+- `--scanconfig` sucht beim Start die Geräte am Bus und lädt die passenden Konfigurationsdateien aus dem Netz. Ein `--configpath` ist dafür nicht nötig.
+- `--accesslevel=*` gibt alle Meldungen frei, auch die schreibbaren.
+- `--httpport=8080` schaltet die HTTP-Schnittstelle ein. Ohne diese Option hat ebusd keine, und die Symcon-Instanz meldet „nicht erreichbar“. Der Port gehört in die Instanz.
+- `--mqtthost` ist die IP-Adresse des Symcon-Systems, `--mqttport` der Port im Server Socket der MQTT Server Instanz, `--mqttuser` und `--mqttpass` Benutzer und Passwort aus der MQTT Server Instanz. Stimmt eines davon nicht, kommen keine laufenden Werte an.
+- `--mqttjson` schickt die Werte als JSON, so wie das Modul sie erwartet.
 
-Zum Abschluss der Installation erfolgen folgende Hinweise, die auszuführen sind:
+## 4. Überprüfen
 
-```text
-1. Edit /etc/default/ebusd
-   (especially if your device is not /dev/ttyUSB0)
-2. Start the daemon with 'systemctl start ebusd'
-3. Check the log file /var/log/ebusd.log
-4. Make the daemon autostart with 'systemctl enable ebusd'
-```
+### Verbindung zum Adapter
 
-zu 1.) Es empfiehlt sich mit nur vier Einstellungen zu beginnen:
-```
-EBUSD_OPTS="--device=/dev/ttyebus --scanconfig --configpath=http://ebusd.eu/config/ --accesslevel=*"
-```
+Bei Netzwerkadaptern zeigt die Weboberfläche des Adapters zwei Zeilen: „eBUS signal: acquired“ heißt, der Adapter hört den Bus. „ebusd connected: yes“ heißt, ebusd hat sich mit ihm verbunden. Steht dort „no“, stimmt meist die Adresse hinter `-d` nicht, oder ebusd wurde nach der Änderung nicht neu gestartet.
 
-Der erste Parameter besagt, um welchen Typen es sich beim Buskoppler handelt und wo er angeschlossen ist.
-Beispiele: 
+### Log
 
-- --device=/dev/ttyebus (aufgesteckt und über [ttyebus](https://github.com/ebus/ttyebus) Treiber angesprochen)
-- --device=192.168.2.20:5000 (über Ethernet und TCP verbunden - die Adresse ist ein Beispiel. Bei dem LAN-Gateway von Esera werden die Daten (Ip-Adresse, Port und Operation-Mode 'TCP-Server') im configtool gesetzt.)
-- --device=ens:/dev/ttyUSB0 (enhanced high speed Adapter an USB0)
-
-Der zweite Parameter besagt, dass beim Starten des Daemon der eBUS nach Geräten abgesucht werden soll.
-
-Der dritte Parameter beinhaltet den Pfad zu den Konfigurationsdeteien. Im Beispiel werden die aktuellen Konfigurationsdateien beim Start von der Webadresse http://ebusd.eu/config/ geholt.
-
-Der vierte Parameter besagt, dass es keine Zugriffsbeschränkungen geben soll.
-
-Alternativ bietet sich an, die benötigten Dateien lokal zu speichern und den Parameter auf den lokalen Pfad zu setzen.
-
-Dazu wählt man sich ein passendes Verzeichnis aus (z.B. /home/pi/) und führt in dem Verzeichnis den folgenden Befehl aus:
-```bash
-git clone https://github.com/john30/ebusd-configuration.git
-```
-Dadurch werden die Konfigurationsdateien im Unterverzeichnis /home/pi/ebusd-configuration gespeichert, so dass die Einstellung für configpath auf das lokale Verzeichnis umgestellt werden kann:
-```
---configpath=/home/pi/ebusd-configuration/ebusd-2.1.x/de
-```
-
-
-<br>
-
-<br>
-zu 3.)
-Im Logfile /var/log/ebusd.log muss erkennbar sein, dass der Adapter gefunden wurde und dass ein automatischer Scan durchgeführt wurde. Wenn es beim Scan zu Timeouts kommt, kann versucht werden, mit der zusätzlichen Option --receivetimeout=100000 das Limit zu erhöhen. 
-
-Ein erfolgreicher Star sieht so aus:
+ebusd schreibt nach `/var/log/ebusd.log`. Ein guter Start sieht so aus:
 ```text
 2022-11-11 17:08:44.010 [main notice] ebusd 22.4.v22.4 started with auto scan on device /dev/ttyebus
 2022-11-11 17:08:44.029 [bus notice] bus started with own address 31/36
 2022-11-11 17:08:44.033 [mqtt notice] connection established
 2022-11-11 17:08:44.040 [bus notice] signal acquired
 2022-11-11 17:08:46.003 [bus notice] new master 71, master count 2
-2022-11-11 17:08:46.062 [bus notice] new master 03, master count 3
 ```
-
-Tipp: wenn der Dienst neu gestartet werden soll, geht das am einfachsten über
+Fehlt `[mqtt notice] connection established`, erreicht ebusd den MQTT Server in Symcon nicht. Prüfen lässt sich das mit
 ```bash
-sudo systemctl restart ebusd
+grep mqtt /var/log/ebusd.log | tail
 ```
 
-### Installation als Docker Container
-
-Wenn man ebusd als Docker laufen lässt, empfiehlt es sich diesen mit Bridge und eigener IP zu erstellen, da sonst Port-Konflikte (8080) auftreten können.
-```bash
-ebusd -f --scanconfig --port=8888 --device=<IP LANGateway>:<Port LANGateway>
-```
-
-## 3. Überprüfung der Konfiguration
-Wenn diese Dinge geschafft sind, ist im nächsten Schritt zu prüfen, ob ebusd die angeschlossenen eBUS Geräte korrekt findet.
-
-Das wird überprüft mit 'ebusctl i'. Hier ein Auszug:
-
+In den ersten Minuten läuft der Scan der Geräte. Zeilen wie
 ```text
-version: ebusd 22.4.v22.4
-...
+[main notice] scan completed 3 time(s), check again
+[update notice] received unknown MS cmd: 1008b5110101 / 094a3f600eff6f0000ff
+```
+sind dabei normal. „unknown“ heißt nur, dass ebusd für dieses Telegramm keine Definition hat; die Daten anderer Geräte am Bus laufen ständig mit.
+
+### Gefundene Geräte
+
+Ist der Scan durch, zeigt `ebusctl i`, was ebusd gefunden hat (Auszug, Wärmepumpe mit Regler):
+```text
 signal: acquired
-...
-address 03: master #11
-address 08: slave #11, scanned "MF=Vaillant;ID=BAI00;SW=0603;HW=9102", loaded "vaillant/bai.0010015600.inc" ([PROD='0010014917']), "vaillant/08.bai.csv"
-address 10: master #2
-address 15: slave #2, scanned "MF=Vaillant;ID=70000;SW=0419;HW=4603", loaded "vaillant/15.700.csv"
-address 31: master #8, ebusd
-address 36: slave #8, ebusd
+scan: finished
+address 08: slave #11, scanned "MF=Vaillant;ID=HMUX0;SW=0406;HW=0504"
+address 15: slave #2, scanned "MF=Vaillant;ID=CTLV3;SW=0808;HW=8004", loaded "vaillant/15.ctlv3.csv"
+address 76: slave #9, scanned "MF=Vaillant;ID=VWZIO;SW=0500;HW=0504", loaded "vaillant/76.vwzio.csv"
 ```
-Man sieht, welche Version installiert ist, ob die Verbindung zum ebus Adapter steht ("acquired") und welche Geräte gefunden wurden. Dabei hat jedes Gerät einen Schaltkreis Namen (ID), dessen ersten drei Stellen relevant sind (hier: **BAI** und **700**).
+Wichtig ist das Wort **loaded**: Nur für diese Geräte hat ebusd eine Konfiguration, und nur sie liefern Werte. Der Name der geladenen Datei ergibt den Schaltkreis für die Symcon-Instanz (`vaillant/15.ctlv3.csv` → `ctlv3`). Für jeden Schaltkreis wird eine eigene Instanz angelegt.
 
-Auch wird angezeigt - ganz wichtig - welche Konfigurationsdateien geladen wurden (hier z.B. "vaillant/15.700.csv" für eine verbaute MultiMATIC VRC 700/4).
-
-Über den scan Befehl (z.B. ebusctl scan 15) lässt sich zusätzlich die Produkt ID des Gerätes anzeigen (hier: 0020218357):
-
+Steht bei einem Gerät nur **scanned**, kennt ebusd es nicht. Im Log steht dann z. B.
 ```text
-15;Vaillant;70000;0419;4603;21;17;09;0020218357;0082;015122;N7
+unable to load scan config 08: no file from vaillant with prefix 08 matches ID "hmux0", SW0406, HW0504
 ```
+Das betrifft vor allem neue Gerätegenerationen, etwa Wärmepumpen mit der Kennung `HMUX0`. Abhilfe kommt dann aus dem Projekt [ebusd-configuration](https://github.com/john30/ebusd-configuration/issues); im Modul lässt sich daran nichts ändern.
 
-## 4. Mit ebusctl Daten lesen und schreiben
-An dieser Stelle sollte man einen Blick in die Konfigurationsdatei werfen und dann versuchen, über ebusctl einen Wert auszulesen oder zu schreiben.
-Die Konfigurationsdatei findet sich unter https://github.com/john30/ebusd-configuration/tree/master/ebusd-2.1.x/de/vaillant 
+Über den scan-Befehl (z. B. `ebusctl scan 15`) lässt sich zusätzlich die Produkt-ID des Gerätes anzeigen.
 
-Darin findet man als Beispiel den Eintrag zur Heizkurve des ersten Heizkreises:
+## 5. Mit ebusctl Daten lesen und schreiben
+An dieser Stelle lohnt ein Blick in die Konfigurationsdatei. Sie findet sich unter https://github.com/john30/ebusd-configuration/tree/master/ebusd-2.1.x/de/vaillant
+
+Darin steht z. B. der Eintrag zur Heizkurve des ersten Heizkreises:
 ```text
 r;w,,Hc1HeatCurve,HeatCurve Heizkreis 1,,,,0F00,,,EXP,,,heating curve of Hc1
 ```
-Die wichtigsten Informationen daraus: r=lesbar, w=schreibbar, Hc1HeatCurve = Name des Parameters.
+Die wichtigsten Informationen daraus: r = lesbar, w = schreibbar, Hc1HeatCurve = Name des Parameters.
 
-Mit Hilfe dieser Informationen lassen sich die Daten über ebusctl auslesen bzw. schreiben
+Damit lassen sich die Daten über ebusctl lesen und schreiben:
 ```text
 pi@raspberrypi:~ $ ebusctl
 localhost: r -c 700 Hc1HeatCurve
@@ -166,17 +154,17 @@ done
 localhost: r -c 700 Hc1HeatCurve
 0.5
 ```
-Die Beschreibung aller Befehle findet sich im Kapitel [3.1 TCP client commands](https://github.com/john30/ebusd/wiki/3.1.-TCP-client-commands). 
+Die Beschreibung aller Befehle steht im Kapitel [3.1 TCP client commands](https://github.com/john30/ebusd/wiki/3.1.-TCP-client-commands).
 
-## 5. Über http ebusd Daten abfragen
+## 6. Über HTTP ebusd-Daten abfragen
 
-Als letztes sollte man prüfen, ob sich in einem Browser die ebusd Daten abfragen lassen:
+Zum Schluss im Browser prüfen, ob die HTTP-Schnittstelle antwortet (Port aus `--httpport`):
 
 ```http
-http://raspberrypi:8080/data
+http://<ebusd-Rechner>:8080/data
 ```
 
-Es sollten die Daten der erkannten Geräte geliefert werden:
+Es sollten die Daten der erkannten Geräte kommen:
 
 ```text
 {
@@ -200,31 +188,7 @@ Es sollten die Daten der erkannten Geräte geliefert werden:
     "fields": {
      "hto": {"value": "01.01.2015"}
     }
-   },
-   "BankHolidayStartPeriod": {
-    "name": "BankHolidayStartPeriod",
-    "passive": false,
-    "write": false,
-    "lastup": 1643318788,
-    "zz": 21,
-    "fields": {
-     "hfrom": {"value": "01.01.2015"}
-    }
    }, ...
 ```
 
-Standardmäßig horcht der ebusd Service auf den Port 8080. Ist der Port bereits anderweitig belegt, dann ist in der ebusd Konfiguration ein alternativer Port zu setzen.
-
-Soweit zur Installation und zum Einstieg in ebusd.
-
-## 6. Symcon relevante Konfigurationsparameter
-Für die Integration von ebusd in Symcon werden die Daten von ebusd über http und MQTT zur Vefügung gestellt. Dazu sind die Konfigurationsparameter in der _/etc/default/ebusd_ um folgende Optionen zu erweitern:
-```text
- --pollinterval 5  --accesslevel=* --httpport=8080 --mqtthost=<IP> --mqttport=<Port> --mqttuser=<USER> --mqttpass=<PASSWORT> --mqttjson
-```
-- \<IP> - IP-Adresse des Symcon Systems
-- \<PORT> - die im Server Socket der MQTT Server Instanz eingetragene Portnummer
-- \<USER> - der in der MQTT Server Instanz eingetragene Benutzername
-- \<PASSWORT> - das in der MQTT Server Instanz eingetragene Passwort
-
-Eine nähere Beschreibung der Optionen findet sich im Kapitel [2. Run](https://github.com/john30/ebusd/wiki/2.-Run) des Wikis. Die MQTT Parameter müssen den Werten entsprechen, die auf Symcon Seite in der MQTT Server Instanz gesetzt wurden. 
+Damit ist ebusd fertig eingerichtet; weiter geht es in Symcon mit der [Konfiguration der Instanz](../../README.md#4-konfiguration).

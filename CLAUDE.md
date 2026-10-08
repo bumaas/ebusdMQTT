@@ -100,8 +100,15 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   „Lese Konfiguration aus“ ist in jedem Status bedienbar (nur HTTP), die übrigen Knöpfe nur
   bei 102 (`GetConfigurationForm` und `SetStatus`). **Zeitstempel aus `VariableUpdated` nie
   ungeprüft formatieren** — 0 heißt „noch kein Wert“, nicht 01.01.1970 (Selbsttest, beide Stellen).
-  „Verbindung funktioniert wieder“ (`applyStatus`) nur nach Betriebsstörungen 104/203/205/206,
+  „Verbindung funktioniert wieder“ (`applyStatus`) nur nach Betriebsstörungen 104/203/205/206/209,
   nicht nach Eingabe-/Einrichtungsfehlern 202/204/207/208.
+- `php tests/check-mqtt-rueckweg.php` — Status 209, wenn ebusd per HTTP antwortet, per MQTT aber
+  nichts zurückkommt (Anlass PN froema, Forum t/144582, 08.10.2026: Werte nur per Knopf, Variablen
+  standen still, Instanz auf 102). Buffer `MqttReplyState`: `requestAllValues` setzt `pending`,
+  findet die nächste Runde noch `pending`, wird es `silent` → 209 mit einer Warnung. Jede Meldung
+  von ebusd (Wert oder `ebusd/global/…`) setzt zurück und stellt 102 her; das eigene Echo `…/get`
+  zählt nicht. In 209 läuft das Intervall weiter (sonst käme nie wieder eine Antwort),
+  `updateInstanceStatus` bleibt bei 209, solange `silent`. Bei Intervall 0 gibt es keine Erkennung.
 - **Wertebereich eines Zahlenfeldes nur über `getValueRange()`** (Trait): Schreibprüfung,
   `EBM_FindMessages` und Darstellung nutzen dieselbe Berechnung; die Grenze
   `MAX_SLIDER_STEPS` wenden nur FindMessages und Darstellung an, die Schreibprüfung nie.
