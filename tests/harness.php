@@ -38,6 +38,9 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
 
     public bool $parentActive = false;
 
+    /** Uhr des Moduls (now()); null = echte Zeit */
+    public ?int $uhr = null;
+
     public function id(): int
     {
         return $this->InstanceID;
@@ -106,6 +109,11 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
         return $this->parentActive;
     }
 
+    protected function now(): int
+    {
+        return $this->uhr ?? time();
+    }
+
     protected function SendDataToParent(string $Data): string
     {
         $this->recorded[] = ['SendDataToParent', $Data];
@@ -123,6 +131,12 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
     {
         $this->recorded[] = ['MaintainVariable', $Ident, $Name, $Type, $ProfileOrPresentation, $Position, $Keep];
         return parent::MaintainVariable($Ident, $Name, $Type, $ProfileOrPresentation, $Position, $Keep);
+    }
+
+    protected function SetTimerInterval(string $Ident, int $Milliseconds): bool
+    {
+        $this->recorded[] = ['SetTimerInterval', $Ident, $Milliseconds];
+        return parent::SetTimerInterval($Ident, $Milliseconds);
     }
 
     protected function EnableAction(string $Ident): bool

@@ -82,11 +82,11 @@ Das Modul spricht auf zwei Wegen mit ebusd:
 | HTTP | Schaltkreise ermitteln, Konfiguration lesen, „Lese aktuelle Werte“, Verbindungsprüfung | Host und Port der Instanz, bei ebusd `--httpport` |
 | MQTT | alle laufenden Werte: Anfragen des Aktualisierungsintervalls und die Antworten darauf, Poll-Prioritäten, Schreiben von Werten | MQTT Server Instanz in Symcon, bei ebusd `--mqtthost`, `--mqttport`, `--mqttuser`, `--mqttpass` |
 
-Erreicht ebusd den MQTT Server in Symcon nicht, zeigt „Lese aktuelle Werte“ die Werte trotzdem an, denn das läuft über HTTP. Die Variablen bekommen dann aber keine. Das erkennt das Modul selbst: Kommt zwischen zwei Anfragen des Intervalls nichts von ebusd per MQTT an, geht die Instanz auf Status 209. Die Poll-Priorität hilft dabei nicht, auch sie läuft über MQTT.
+Erreicht ebusd den MQTT Server in Symcon nicht, zeigt „Lese aktuelle Werte“ die Werte trotzdem an, denn das läuft über HTTP. Die Variablen bekommen dann aber keine. Das erkennt das Modul selbst. Solange ebusd mit dem MQTT Server verbunden ist, meldet es sich dort alle 15 Sekunden (`ebusd/global/uptime`). Kommt zwei Minuten lang nichts, geht die Instanz auf Status 209. Ohne diese Meldung, etwa bei einem eigenen Topic ohne `%name`, wartet das Modul zwei Aktualisierungsintervalle. Die Poll-Priorität hilft dabei nicht, auch sie läuft über MQTT.
 
 Ob eine Variable Werte bekommt, zeigt ihre letzte Aktualisierung, die bei jeder Antwort von ebusd vorrückt. Die letzte Änderung bleibt dagegen stehen, solange der Wert gleich bleibt, etwa bei einer abgeschalteten Heizung im Sommer.
 
-Das Modul überwacht zudem die Verbindung zu ebusd und dessen globales Signal und prüft sie bei einer Störung automatisch erneut. Jede Störung hat einen eigenen Instanzstatus:
+Das Modul prüft zudem jede Minute die Verbindung zu ebusd und dessen globales Signal, bei einer Störung zunächst öfter. Jede Störung hat einen eigenen Instanzstatus:
 
 | Status | Bedeutung | Was tun |
 |---|---|---|

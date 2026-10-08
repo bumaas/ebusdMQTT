@@ -105,11 +105,15 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
 - `php tests/check-mqtt-rueckweg.php` — Status 209, wenn ebusd per HTTP antwortet, per MQTT aber
   nichts zurückkommt (Verdacht aus der PN froema, Forum t/144582, 08.10.2026; dort war die Ursache am
   Ende der `SetValue`-Override, siehe unten, die Erkennung bleibt trotzdem sinnvoll). ebusd sendet
-  `ebusd/global/uptime` alle ~15 s, 209 heißt also „gar nichts von ebusd per MQTT“. Buffer `MqttReplyState`: `requestAllValues` setzt `pending`,
-  findet die nächste Runde noch `pending`, wird es `silent` → 209 mit einer Warnung. Jede Meldung
-  von ebusd (Wert oder `ebusd/global/…`) setzt zurück und stellt 102 her; das eigene Echo `…/get`
-  zählt nicht. In 209 läuft das Intervall weiter (sonst käme nie wieder eine Antwort),
-  `updateInstanceStatus` bleibt bei 209, solange `silent`. Bei Intervall 0 gibt es keine Erkennung.
+  `ebusd/global/uptime` alle ~15 s (`mqtthandler.cpp`), ein gescheitertes Lesen sendet nichts. 209
+  heißt deshalb Stille: nichts von ebusd länger als `MQTT_SILENCE_LIMIT` (120 s); kam von diesem Ziel
+  nie uptime (Topic ohne `%name`), gilt `max(120 s, 2 × Intervall)`, sonst spränge der Status. Buffer
+  `MqttWatch` (Ziel und Beginn der Beobachtung, neu nach jeder anderen Störung und bei Zielwechsel),
+  `LastMqttReceive`, `MqttUptimeTarget`. Uhr über `now()`, im Harness `$uhr`. Die Verbindungsprüfung
+  läuft in 102 alle 60 s mit HTTP (vorher stand sie in 102 still) und setzt Timer nur bei Änderung
+  (`setTimerIntervalIfChanged`): Ob `SetTimerInterval` mit gleichem Wert den Countdown neu startet,
+  sagt die Doku nicht. 205/206 gehen vor 209 (Heizung aus = 206, uptime läuft weiter). In 209 läuft
+  das Intervall weiter; das eigene Echo `…/get` zählt nicht als Meldung.
 - `php tests/check-setvalue-update.php` — ein unveränderter Wert von ebusd rückt `VariableUpdated`
   vor, `VariableChanged` bleibt. Das Modul hat **keinen eigenen `SetValue`-Override** mehr: Der alte
   übersprang gleiche Werte, die Variablen sahen dann aus wie stehengeblieben (Anlass PN froema,
