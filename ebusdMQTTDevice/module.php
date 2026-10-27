@@ -91,8 +91,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     //ok-Zeichen für die Auswahlliste (siehe https://www.compart.com/de/unicode/)
     private const string OK_SIGN = "\u{2714}";
-    //Leerzeichen für Profile mit % im Suffix
-    private const string ZERO_WIDTH_SPACE = "\u{200B}";
 
     //global
     private const string MODEL_GLOBAL_NAME  = 'global';
@@ -1821,11 +1819,8 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
     private function getVariablePresentation(array $fielddef, int $variableType, bool $hasAction): array
     {
-        $suffix = match ($fielddef['unit']) {
-            '%' => self::ZERO_WIDTH_SPACE . '%',
-            '' => '',
-            default => ' ' . $fielddef['unit']
-        };
+        // auch vor % ein normales Leerzeichen: nur Profile rechnen einen Suffix „%“ in einen Anteil am Bereich um, Darstellungen nicht
+        $suffix = $fielddef['unit'] === '' ? '' : ' ' . $fielddef['unit'];
 
         // 1. Boolean Sonderfall
         if ($variableType === VARIABLETYPE_BOOLEAN) {

@@ -137,6 +137,10 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   nuc). Anlass: 9.1 lehnte `ColorDisplay`/`ContentColorDisplay` in Intervallen und `Icon` in
   Aufzählungsoptionen ab („Entry in parameter INTERVALS includes unknown sub-parameters“), die neue
   Variable blieb ohne Darstellung. `check_presentations.php` sieht nur die oberste Ebene.
+- `php tests/check-suffix.php` — jede Einheit im `SUFFIX` mit normalem Leerzeichen davor, auch `%`. Bis build 53
+  stand vor `%` ein U+200B, weil Profile einen Suffix `%`/` %` als Anteil am Bereich darstellen (Gegenprobe nuc
+  27.10.2026: Profil 0…255, Wert 128 → „50 %“). Darstellungen (Wertanzeige, Schieberegler, Werteingabe) rechnen
+  nicht um („128 %“), das Modul legt nur noch Darstellungen an.
 - `php tests/check-ebus-types.php` — die Typtabelle enthält jeden eingebauten Typ von ebusd 26.1
   außer IGN (Liste aus `src/lib/ebus/datatype.cpp`, Tag 26.1; bei neuen ebusd-Versionen dort
   nachsehen und Liste wie Tabelle nachziehen). Bereiche der Typen ohne Ersatzwert (`U1L` … `S4B`,
