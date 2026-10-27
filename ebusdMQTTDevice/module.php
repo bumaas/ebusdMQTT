@@ -1776,7 +1776,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
                 $options[] = [
                     'Value'      => $key,
                     'Caption'    => $value . ($fielddef['unit'] !== '' ? ' ' . $fielddef['unit'] : ''),
-                    'Icon'       => '',
                     'Color'      => -1,
                     'IconActive' => false,
                     'IconValue'  => ''
@@ -1792,8 +1791,6 @@ class ebusdMQTTDevice extends IPSModuleStrict
         if (isset($fielddef['values'])) {
             foreach ($fielddef['values'] as $key => $value) {
                 $intervals[] = [
-                    'ColorDisplay'        => -1,
-                    'ContentColorDisplay' => -1,
                     'IntervalMinValue'    => $key,
                     'IntervalMaxValue'    => $key + 1,
                     'ConstantActive'      => true,

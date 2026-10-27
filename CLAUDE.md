@@ -123,6 +123,11 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   `MAX_SLIDER_STEPS` wenden nur FindMessages und Darstellung an, die Schreibprüfung nie.
   `getPayload()` bekommt die Felddefinition von `getWritableMessage()`, dekodiert also nicht neu. **Die Typtabelle im Trait ist
   zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
+- `php tests/check-presentation-subparams.php` — Einträge in `INTERVALS` (Wertanzeige) und `OPTIONS`
+  (Wertanzeige, Aufzählung) setzen nur Felder, die `IPS_GetPresentation` kennt (Stand 27.10.2026,
+  nuc). Anlass: 9.1 lehnte `ColorDisplay`/`ContentColorDisplay` in Intervallen und `Icon` in
+  Aufzählungsoptionen ab („Entry in parameter INTERVALS includes unknown sub-parameters“), die neue
+  Variable blieb ohne Darstellung. `check_presentations.php` sieht nur die oberste Ebene.
 - `php tests/check-ebus-types.php` — die Typtabelle enthält jeden eingebauten Typ von ebusd 26.1
   außer IGN (Liste aus `src/lib/ebus/datatype.cpp`, Tag 26.1; bei neuen ebusd-Versionen dort
   nachsehen und Liste wie Tabelle nachziehen). Bereiche der Typen ohne Ersatzwert (`U1L` … `S4B`,

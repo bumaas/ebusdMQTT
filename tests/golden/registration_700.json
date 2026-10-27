@@ -9,7 +9,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"nein\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ja\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"nein\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ja\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -228,7 +228,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"Eco\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Nacht\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"Eco\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Nacht\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -250,7 +250,7 @@
                 1,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"inaktiv\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"Heizen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"Festwert\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"WW\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":4,\"IntervalMaxValue\":5,\"ConstantActive\":true,\"ConstantValue\":\"R\\u00fcckl.anh.\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":5,\"IntervalMaxValue\":6,\"ConstantActive\":true,\"ConstantValue\":\"Pool\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS": "[{\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"inaktiv\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"Heizen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"Festwert\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"WW\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":4,\"IntervalMaxValue\":5,\"ConstantActive\":true,\"ConstantValue\":\"R\\u00fcckl.anh.\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":5,\"IntervalMaxValue\":6,\"ConstantActive\":true,\"ConstantValue\":\"Pool\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
                     "INTERVALS_ACTIVE": true
                 },
                 0,
@@ -474,7 +474,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"keine\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Aufschaltung\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"Thermostat\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"keine\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Aufschaltung\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"Thermostat\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -677,7 +677,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"Eco\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Nacht\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"Eco\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Nacht\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -699,7 +699,7 @@
                 1,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"inaktiv\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"Heizen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"Festwert\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"WW\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":4,\"IntervalMaxValue\":5,\"ConstantActive\":true,\"ConstantValue\":\"R\\u00fcckl.anh.\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":5,\"IntervalMaxValue\":6,\"ConstantActive\":true,\"ConstantValue\":\"Pool\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS": "[{\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"inaktiv\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"Heizen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"Festwert\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"WW\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":4,\"IntervalMaxValue\":5,\"ConstantActive\":true,\"ConstantValue\":\"R\\u00fcckl.anh.\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":5,\"IntervalMaxValue\":6,\"ConstantActive\":true,\"ConstantValue\":\"Pool\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
                     "INTERVALS_ACTIVE": true
                 },
                 0,
@@ -901,7 +901,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"keine\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Aufschaltung\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"Thermostat\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"keine\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Aufschaltung\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"Thermostat\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -1104,7 +1104,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"Eco\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Nacht\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"Eco\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Nacht\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -1126,7 +1126,7 @@
                 1,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"inaktiv\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"Heizen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"Festwert\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"WW\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":4,\"IntervalMaxValue\":5,\"ConstantActive\":true,\"ConstantValue\":\"R\\u00fcckl.anh.\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":5,\"IntervalMaxValue\":6,\"ConstantActive\":true,\"ConstantValue\":\"Pool\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS": "[{\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"inaktiv\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"Heizen\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":2,\"IntervalMaxValue\":3,\"ConstantActive\":true,\"ConstantValue\":\"Festwert\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":3,\"IntervalMaxValue\":4,\"ConstantActive\":true,\"ConstantValue\":\"WW\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":4,\"IntervalMaxValue\":5,\"ConstantActive\":true,\"ConstantValue\":\"R\\u00fcckl.anh.\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":5,\"IntervalMaxValue\":6,\"ConstantActive\":true,\"ConstantValue\":\"Pool\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
                     "INTERVALS_ACTIVE": true
                 },
                 0,
@@ -1328,7 +1328,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"keine\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Aufschaltung\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"Thermostat\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"keine\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"Aufschaltung\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"Thermostat\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -1769,7 +1769,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -1791,7 +1791,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"aus\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ein\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"aus\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ein\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -1813,7 +1813,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -2033,7 +2033,7 @@
                 1,
                 {
                     "PRESENTATION": "{3319437D-7CDE-699D-750A-3C6A3841FA75}",
-                    "INTERVALS": "[{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"nein\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"ColorDisplay\":-1,\"ContentColorDisplay\":-1,\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"ja\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
+                    "INTERVALS": "[{\"IntervalMinValue\":0,\"IntervalMaxValue\":1,\"ConstantActive\":true,\"ConstantValue\":\"nein\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1},{\"IntervalMinValue\":1,\"IntervalMaxValue\":2,\"ConstantActive\":true,\"ConstantValue\":\"ja\",\"ConversionFactor\":1,\"IconActive\":false,\"IconValue\":\"\",\"PrefixActive\":false,\"PrefixValue\":\"\",\"SuffixActive\":false,\"SuffixValue\":\"\",\"DigitsActive\":false,\"DigitsValue\":0,\"ColorActive\":false,\"ColorValue\":-1,\"ContentColorActive\":false,\"ContentColorValue\":-1}]",
                     "INTERVALS_ACTIVE": true
                 },
                 0,
@@ -2100,7 +2100,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"circulation\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"dryer\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"zone\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"legiopump\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"circulation\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"dryer\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"zone\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"legiopump\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -2122,7 +2122,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -2144,7 +2144,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"alle\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"1\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"2\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"3\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"4\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":5,\"Caption\":\"5\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"6\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"alle\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"1\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"2\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"3\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"4\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":5,\"Caption\":\"5\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"6\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -2560,7 +2560,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -3488,7 +3488,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"nein\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ja\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"nein\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ja\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -7489,7 +7489,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -7511,7 +7511,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -7578,7 +7578,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"none\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"VRC700\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"VR91.1\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"VR91.2\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"VR91.3\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"none\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"VRC700\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"VR91.1\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"VR91.2\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"VR91.3\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -7600,7 +7600,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -9387,7 +9387,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -9454,7 +9454,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"none\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"VRC700\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"VR91.1\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"VR91.2\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"VR91.3\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"none\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"VRC700\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"VR91.1\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"VR91.2\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"VR91.3\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -9476,7 +9476,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -10488,7 +10488,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"off\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"day\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"night\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -10555,7 +10555,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"none\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"VRC700\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"VR91.1\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"VR91.2\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"VR91.3\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"none\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"VRC700\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"VR91.1\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"VR91.2\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":4,\"Caption\":\"VR91.3\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
@@ -10577,7 +10577,7 @@
                 1,
                 {
                     "PRESENTATION": "{52D9E126-D7D2-2CBB-5E62-4CF7BA7C5D82}",
-                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Icon\":\"\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
+                    "OPTIONS": "[{\"Value\":0,\"Caption\":\"auto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":1,\"Caption\":\"ventilation\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":2,\"Caption\":\"party\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":3,\"Caption\":\"veto\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"},{\"Value\":6,\"Caption\":\"load\",\"Color\":-1,\"IconActive\":false,\"IconValue\":\"\"}]"
                 },
                 0,
                 true
