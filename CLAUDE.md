@@ -123,6 +123,10 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   `MAX_SLIDER_STEPS` wenden nur FindMessages und Darstellung an, die Schreibprüfung nie.
   `getPayload()` bekommt die Felddefinition von `getWritableMessage()`, dekodiert also nicht neu. **Die Typtabelle im Trait ist
   zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
+- `php tests/check-circuit-case.php` — „Ermittle Schaltkreisnamen“ mit der neuen ebusd-Standardkonfiguration
+  (ebus.github.io): Sie schreibt die gemeinsamen Schaltkreise groß (`Broadcast`, `Scan.08` neben ebusds eigenem
+  `scan.08`), der Filter für global/broadcast/scan.* vergleicht deshalb klein. Fixture
+  `fixtures/data_all_2026-10-27.json` (echte `/data`-Antwort, ebusd 26.1); erwartet 700, hmu, vwzio.
 - `php tests/check-created-count.php` — „neu angelegt“ zählt nur Variablen, die es vorher nicht gab
   (`GetIDForIdent` vor `MaintainVariable`). Der Kernel 9.1 rust-796c023 liefert aus `MaintainVariable`
   auch für bestehende Variablen `true`, mit und ohne Darstellung (Doku: „ob die Variable erstellt

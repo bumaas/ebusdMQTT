@@ -1377,12 +1377,14 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         foreach ($result as $name => $circuit) {
             $name = (string)$name;
+            // die Standardkonfiguration (ebus.github.io) schreibt Broadcast und Scan.xx groß, die alte klein
+            $klein = strtolower($name);
 
-            if (in_array($name, self::EXCLUDED_CIRCUIT_NAMES, true)) {
+            if (in_array($klein, self::EXCLUDED_CIRCUIT_NAMES, true)) {
                 continue;
             }
 
-            if (str_starts_with($name, self::SCANNER_PREFIX)) {
+            if (str_starts_with($klein, self::SCANNER_PREFIX)) {
                 continue;
             }
 
