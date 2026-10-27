@@ -123,6 +123,12 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   `MAX_SLIDER_STEPS` wenden nur FindMessages und Darstellung an, die Schreibprüfung nie.
   `getPayload()` bekommt die Felddefinition von `getWritableMessage()`, dekodiert also nicht neu. **Die Typtabelle im Trait ist
   zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
+- `php tests/check-ebus-types.php` — die Typtabelle enthält jeden eingebauten Typ von ebusd 26.1
+  außer IGN (Liste aus `src/lib/ebus/datatype.cpp`, Tag 26.1; bei neuen ebusd-Versionen dort
+  nachsehen und Liste wie Tabelle nachziehen). Bereiche der Typen ohne Ersatzwert (`U1L` … `S4B`,
+  ab ebusd 25.1) reichen bis zur Grenze; `U4L/U4B` wie `ULG` ohne Bereich. Ein Typ außerhalb der
+  Tabelle: `getIPSVariableType()` liefert `null`, die Registrierung überspringt das Feld mit einer
+  Warnung, `getFieldValues()` still (vorher `TypeError`, der Registrierung und Empfang abbrach).
 - **Kernel-Stub:** offizieller `symcon/SymconStubs` als Submodul `tests/stubs`, gepinnt auf
   `bf2950f` (nie `submodule update --remote`; nach dem Klonen `git submodule update --init`).
   `tests/harness.php` bindet das Modul daran (`neueInstanz()`), zeichnet

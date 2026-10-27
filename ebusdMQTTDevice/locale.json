@@ -88,6 +88,7 @@
       "Value \"%s\" for \"%s\" is not allowed (allowed: %s). Do not repeat with this value.": "Der Wert „%s“ ist für „%s“ nicht zulässig (erlaubt: %s). Nicht mit diesem Wert wiederholen.",
       "\"%s\" is not a status variable of this instance. Use the ident of a writable status variable.": "„%s“ ist keine Statusvariable dieser Instanz. Den Ident einer schreibbaren Statusvariable verwenden.",
       "nothing, the eBUS type %s is not supported": "nichts, der eBUS-Typ %s wird nicht unterstützt",
+      "The field \"%s\" of the message \"%s\" has the eBUS type %s, which this module does not know. The field was skipped. Update the module or report the type in the Symcon forum.": "Das Feld „%s“ der Meldung „%s“ hat den eBUS-Typ %s, den dieses Modul nicht kennt. Das Feld wurde übersprungen. Aktualisieren Sie das Modul oder melden Sie den Typ im Symcon-Forum.",
       "a text": "ein Text",
       "a number": "eine Zahl",
       "a whole number": "eine ganze Zahl",

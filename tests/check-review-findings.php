@@ -41,8 +41,8 @@ declare(strict_types=1);
  * Fixtures: tests/fixtures/config_700.json und data_all.json (echte ebusd-Antworten).
  * Zu 2: Ein Typ außerhalb der Tabelle kommt in keinem Mitschnitt vor (alle Schaltkreise des
  * ebusd am nuc geprüft). Deshalb trägt die echte Meldung BankHolidayEndPeriod hier den Typ
- * BDZ (BCD-Datum mit Wochentag, laut ebusd-Wiki ein eingebauter Typ) statt HDA:3 — sonst
- * ist sie unverändert.
+ * „XYZ“ statt HDA:3, sonst ist sie unverändert. Bis 1.6 build 48 stand hier BDZ; seit build 49
+ * kennt die Typtabelle alle eingebauten Typen von ebusd 26.1 (tests/check-ebus-types.php).
  *
  * Aufruf: php tests/check-review-findings.php
  */
@@ -162,7 +162,7 @@ echo "Unbekannter eBUS-Typ:\n";
 $konfig = konfig700();
 foreach ($konfig['700']['messages']['BankHolidayEndPeriod']['fielddefs'] as $i => $fd) {
     if ($fd['type'] === 'HDA:3') {
-        $konfig['700']['messages']['BankHolidayEndPeriod']['fielddefs'][$i]['type'] = 'BDZ';
+        $konfig['700']['messages']['BankHolidayEndPeriod']['fielddefs'][$i]['type'] = 'XYZ';
     }
 }
 $h = instanz($konfig);
@@ -170,7 +170,7 @@ $r = mitFehlern(static fn() => $h->FindMessages('BankHolidayEndPeriod'));
 check($r['fehler'] === [], 'kein Fehler beim Aufrufer (' . json_encode($r['fehler'], JSON_UNESCAPED_UNICODE) . ')');
 $treffer = is_string($r['ergebnis']) ? json_decode($r['ergebnis'], true) : null;
 $felder  = array_merge(...array_column($treffer ?? [], 'fields'));
-check($felder !== [] && in_array('unknown', array_column($felder, 'type'), true), 'Feld mit Typ BDZ erscheint als type "unknown"');
+check($felder !== [] && in_array('unknown', array_column($felder, 'type'), true), 'Feld mit Typ XYZ erscheint als type "unknown"');
 $r = mitFehlern(static fn() => $h->FindMessages(''));
 check($r['fehler'] === [] && is_array(json_decode((string)$r['ergebnis'], true)), 'Suche über alle Meldungen liefert JSON');
 

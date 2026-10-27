@@ -50,10 +50,12 @@ trait ebusd2MQTTHelper
             'BCD:2' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
             'BCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
             'BCD:4' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
+            'BCD:1' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99, 'StepSize' => 1],
             'HCD'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
             'HCD:1' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99, 'StepSize' => 1],
             'HCD:2' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
             'HCD:3' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 999999, 'StepSize' => 1],
+            'HCD:4' => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 99999999, 'StepSize' => 1],
             'PIN'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 9999, 'StepSize' => 1],
             'UCH'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 254, 'StepSize' => 1], // 0xFF ist der Ersatzwert
             'SCH'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -127, 'MaxValue' => 127, 'StepSize' => 1],
@@ -70,6 +72,21 @@ trait ebusd2MQTTHelper
             'ULR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967294 ist zu groß
             'SLG'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2_147_483_647, 'MaxValue' => 2_147_483_647, 'StepSize' => 1],
             'SLR'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2_147_483_647, 'MaxValue' => 2_147_483_647, 'StepSize' => 1],
+            // ab ebusd 25.1: ohne Ersatzwert, der Bereich reicht bis zur Grenze (L = little endian, B = big endian)
+            'U1L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 255, 'StepSize' => 1],
+            'S1L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -128, 'MaxValue' => 127, 'StepSize' => 1],
+            'U2L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65535, 'StepSize' => 1],
+            'U2B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 65535, 'StepSize' => 1],
+            'S2L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -32768, 'MaxValue' => 32767, 'StepSize' => 1],
+            'S2B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -32768, 'MaxValue' => 32767, 'StepSize' => 1],
+            'U3L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 16_777_215, 'StepSize' => 1],
+            'U3B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 16_777_215, 'StepSize' => 1],
+            'S3L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -8_388_608, 'MaxValue' => 8_388_607, 'StepSize' => 1],
+            'S3B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -8_388_608, 'MaxValue' => 8_388_607, 'StepSize' => 1],
+            'U4L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967295 ist zu groß
+            'U4B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => 0, 'MaxValue' => 0, 'StepSize' => 1], //MaxValue 4294967295 ist zu groß
+            'S4L'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2_147_483_648, 'MaxValue' => 2_147_483_647, 'StepSize' => 1],
+            'S4B'   => ['VariableType' => VARIABLETYPE_INTEGER, 'MinValue' => -2_147_483_648, 'MaxValue' => 2_147_483_647, 'StepSize' => 1],
             // VARIABLETYPE_FLOAT
             'D1C'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => 0, 'MaxValue' => 100, 'StepSize' => 0.5, 'Digits' => 1],
             'D2B'   => ['VariableType' => VARIABLETYPE_FLOAT, 'MinValue' => -127.99, 'MaxValue' => 127.99, 'StepSize' => 0.01, 'Digits' => 2],
@@ -84,6 +101,9 @@ trait ebusd2MQTTHelper
             'HEX'   => ['VariableType' => VARIABLETYPE_STRING],
             'BDA'   => ['VariableType' => VARIABLETYPE_STRING],
             'BDA:3' => ['VariableType' => VARIABLETYPE_STRING],
+            'BDA:4' => ['VariableType' => VARIABLETYPE_STRING],
+            'BDZ'   => ['VariableType' => VARIABLETYPE_STRING],
+            'DTM'   => ['VariableType' => VARIABLETYPE_STRING],
             'HDA'   => ['VariableType' => VARIABLETYPE_STRING],
             'HDA:3' => ['VariableType' => VARIABLETYPE_STRING],
             'DAY'   => ['VariableType' => VARIABLETYPE_STRING],
@@ -233,12 +253,13 @@ trait ebusd2MQTTHelper
         ];
     }
 
-    protected function getIPSVariableType(array $fielddef): int
+    /** null = eBUS-Typ steht nicht in der Typtabelle; der Aufrufer überspringt das Feld */
+    protected function getIPSVariableType(array $fielddef): ?int
     {
         $type = $fielddef['type'] ?? '';
 
         if (!isset($this->getEbusDataTypeDefinitions()[$type])) {
-            trigger_error('Unsupported type: ' . $type);
+            return null;
         }
 
         // Ein Divisor erzwingt in der IPS-Logik immer einen Float,

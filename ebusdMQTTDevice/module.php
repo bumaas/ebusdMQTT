@@ -1706,6 +1706,18 @@ class ebusdMQTTDevice extends IPSModuleStrict
             }
 
             $variableType = $this->getIPSVariableType($fielddef);
+            if ($variableType === null) {
+                $this->LogMessage(
+                    sprintf(
+                        $this->Translate('The field "%s" of the message "%s" has the eBUS type %s, which this module does not know. The field was skipped. Update the module or report the type in the Symcon forum.'),
+                        ($fielddef['name'] ?? '') !== '' ? $fielddef['name'] : $ident,
+                        $configurationMessage['name'],
+                        $fielddef['type'] ?? ''
+                    ),
+                    KL_WARNING
+                );
+                continue;
+            }
             // Action nur erlauben, wenn die Nachricht schreibbar ist UND nur ein Feld existiert (Symcon Standard-Verhalten für einfache Variablen)
             $variableHasAction = $isWritable && ($relevantFieldsCount === 1);
 
@@ -1824,7 +1836,7 @@ class ebusdMQTTDevice extends IPSModuleStrict
 
         // 2. Zahlen (Integer / Float)
         if ($variableType === VARIABLETYPE_INTEGER || $variableType === VARIABLETYPE_FLOAT) {
-            $typeDef = $this->getEbusDataTypeDefinitions()[$fielddef['type']];
+            $typeDef = $this->getEbusDataTypeDefinitions()[$fielddef['type']] ?? [];
             $div     = max(1, $fielddef['divisor'] ?? 0);
             $digits  = ($variableType === VARIABLETYPE_FLOAT && $div > 1)
                 ? (int)round(log10($div))
@@ -1969,6 +1981,9 @@ class ebusdMQTTDevice extends IPSModuleStrict
             }
 
             $variableType = $this->getIPSVariableType($fielddef);
+            if ($variableType === null) {
+                continue; // unbekannter eBUS-Typ: die Registrierung hat schon gewarnt
+            }
 
             $valueMap = isset($fielddef['values'])
                 ? array_map(null, array_keys($fielddef['values']), $fielddef['values'])

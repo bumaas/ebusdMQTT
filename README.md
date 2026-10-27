@@ -118,6 +118,7 @@ Die Stationen der Reihe nach, vom Bus bis zur Variable:
 | Status 209 | ebusd erreicht den MQTT Server nicht | `grep mqtt /var/log/ebusd.log \| tail` muss `connection established` zeigen; `--mqtthost`, `--mqttport`, `--mqttuser`, `--mqttpass` mit Server Socket und MQTT Server Instanz abgleichen |
 | Eine Variable zeigt eine alte letzte Änderung | der Wert hat sich seitdem nicht geändert, das ist kein Fehler | die letzte Aktualisierung der Variable ansehen, sie rückt bei jeder Antwort von ebusd vor |
 | Status 104 | der MQTT Server in Symcon ist nicht aktiv | MQTT Server Instanz und ihren Server Socket |
+| Einem Feld fehlt die Variable, im Log steht „… hat den eBUS-Typ …, den dieses Modul nicht kennt“ | die ebusd-Konfiguration verwendet einen Datentyp, den das Modul noch nicht kennt; die übrigen Felder der Meldung werden trotzdem angelegt und aktualisiert | Modul aktualisieren; kennt auch die neueste Version den Typ nicht, ihn im Forum melden |
 
 Den aktuellen Stand fasst der Selbsttest zusammen (`EBM_RunSelfTest`, siehe [Funktionsreferenz](#7-funktionsreferenz)). Zeilen wie „received unknown MS cmd“ im ebusd-Log sind dagegen normal, siehe [Installationskurzanleitung, Überprüfen](docs/de/InstallEbusdREADME.md#4-überprüfen).
 
