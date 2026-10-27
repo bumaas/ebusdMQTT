@@ -41,6 +41,12 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
     /** Uhr des Moduls (now()); null = echte Zeit */
     public ?int $uhr = null;
 
+    /**
+     * true = MaintainVariable meldet wie der Kernel am nuc (9.1 rust-796c023, 27.10.2026) auch für eine
+     * bestehende Variable true; der Stub folgt der Doku (true nur, wenn neu erstellt)
+     */
+    public bool $maintainVariableImmerTrue = false;
+
     public function id(): int
     {
         return $this->InstanceID;
@@ -130,7 +136,8 @@ final class ebusdMQTTHarness extends ebusdMQTTDevice
     protected function MaintainVariable(string $Ident, string $Name, int $Type, string|array $ProfileOrPresentation, int $Position, bool $Keep): bool
     {
         $this->recorded[] = ['MaintainVariable', $Ident, $Name, $Type, $ProfileOrPresentation, $Position, $Keep];
-        return parent::MaintainVariable($Ident, $Name, $Type, $ProfileOrPresentation, $Position, $Keep);
+        $result = parent::MaintainVariable($Ident, $Name, $Type, $ProfileOrPresentation, $Position, $Keep);
+        return ($this->maintainVariableImmerTrue && $Keep) ? true : $result;
     }
 
     protected function SetTimerInterval(string $Ident, int $Milliseconds): bool

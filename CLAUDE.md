@@ -123,6 +123,11 @@ Heizungs-/Lüftungs-/Solaranlagen, z. B. Vaillant) über den Symcon-eigenen MQTT
   `MAX_SLIDER_STEPS` wenden nur FindMessages und Darstellung an, die Schreibprüfung nie.
   `getPayload()` bekommt die Felddefinition von `getWritableMessage()`, dekodiert also nicht neu. **Die Typtabelle im Trait ist
   zugleich Schreibprüfung** — Grenzen dort aus dem ebusd-Wiki übernehmen, nicht schätzen.
+- `php tests/check-created-count.php` — „neu angelegt“ zählt nur Variablen, die es vorher nicht gab
+  (`GetIDForIdent` vor `MaintainVariable`). Der Kernel 9.1 rust-796c023 liefert aus `MaintainVariable`
+  auch für bestehende Variablen `true`, mit und ohne Darstellung (Doku: „ob die Variable erstellt
+  wurde“); `RegisterVariable*` verhält sich korrekt (Testmodul am nuc, 27.10.2026). Harness-Schalter
+  `maintainVariableImmerTrue` stellt das nach. Anlass: „79 Variablen neu angelegt“ bei 2 neuen.
 - `php tests/check-presentation-subparams.php` — Einträge in `INTERVALS` (Wertanzeige) und `OPTIONS`
   (Wertanzeige, Aufzählung) setzen nur Felder, die `IPS_GetPresentation` kennt (Stand 27.10.2026,
   nuc). Anlass: 9.1 lehnte `ColorDisplay`/`ContentColorDisplay` in Intervallen und `Icon` in

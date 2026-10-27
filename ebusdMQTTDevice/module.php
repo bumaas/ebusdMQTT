@@ -1724,8 +1724,11 @@ class ebusdMQTTDevice extends IPSModuleStrict
             // Vorbereitung der Präsentations-Daten
             $presentation = $this->getVariablePresentation($fielddef, $variableType, $variableHasAction);
 
-            // Variablen-Registrierung
-            $created = $this->MaintainVariable($ident, $objectName, $variableType, $presentation, 0, true);
+            // Variablen-Registrierung. Ob sie neu ist, selbst prüfen: MaintainVariable liefert am Kernel 9.1
+            // (Rust) auch für eine bestehende Variable true, die Doku verspricht „ob die Variable erstellt wurde“
+            $existingID = @$this->GetIDForIdent($ident);
+            $created    = !is_int($existingID) || $existingID <= 0;
+            $this->MaintainVariable($ident, $objectName, $variableType, $presentation, 0, true);
 
             // MaintainAction statt EnableAction: nimmt eine Aktion auch zurück, wenn die Meldung nicht (mehr) schreibbar ist
             $this->MaintainAction($ident, $variableHasAction);
