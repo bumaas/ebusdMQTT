@@ -46,7 +46,7 @@ wget https://github.com/john30/ebusd/releases/download/26.1/ebusd-26.1_amd64-tri
 sudo apt install ./ebusd-26.1_amd64-trixie_mqtt1.deb
 sudo systemctl enable ebusd
 ```
-`apt` zieht fehlende Abhängigkeiten wie `libmosquitto1` selbst nach. Ein Update geht genauso mit dem neueren Paket; die Konfiguration bleibt dabei erhalten.
+`apt` zieht fehlende Abhängigkeiten wie `libmosquitto1` selbst nach. Ein Update geht genauso mit dem neueren Paket. Fragt `apt` dabei, ob `/etc/default/ebusd` durch die Fassung aus dem Paket ersetzt werden soll, mit `N` die eigene behalten, sonst sind die eigenen Startoptionen weg.
 
 ### b) Container auf Proxmox
 
@@ -79,7 +79,7 @@ sudo systemctl restart ebusd
   - Adapter am USB: `ens:/dev/ttyACM0` (Nummer je nach System)
   - aufgesteckt auf den Raspberry Pi: `ens:/dev/ttyAMA0 --latency=50`
   - LAN-Gateway von Esera: `<IP>:<Port>` (IP, Port und Betriebsart „TCP-Server“ im configtool setzen)
-- `--scanconfig` sucht beim Start die Geräte am Bus und lädt die passenden Konfigurationsdateien aus dem Netz. Ein `--configpath` ist dafür nicht nötig.
+- `--scanconfig` sucht beim Start die Geräte am Bus und lädt die passenden Konfigurationsdateien aus dem Netz. Ein `--configpath` ist dafür nicht nötig. Seit ebusd 24.1 kommen sie von [ebus.github.io](https://github.com/eBUS/ebus.github.io), und viele Meldungen heißen dort anders als früher. Wer von einer älteren Version kommt, liest vorher [Wechsel der ebusd-Konfiguration](../../README.md#wechsel-der-ebusd-konfiguration).
 - `--accesslevel=*` gibt alle Meldungen frei, auch die schreibbaren.
 - `--httpport=8080` schaltet die HTTP-Schnittstelle ein. Ohne diese Option hat ebusd keine, und die Symcon-Instanz meldet „nicht erreichbar“. Der Port gehört in die Instanz.
 - `--mqtthost` ist die IP-Adresse des Symcon-Systems, `--mqttport` der Port im Server Socket der MQTT Server Instanz, `--mqttuser` und `--mqttpass` Benutzer und Passwort aus der MQTT Server Instanz. Stimmt eines davon nicht, kommen keine laufenden Werte an.
@@ -123,7 +123,9 @@ address 08: slave #11, scanned "MF=Vaillant;ID=HMUX0;SW=0406;HW=0504"
 address 15: slave #2, scanned "MF=Vaillant;ID=CTLV3;SW=0808;HW=8004", loaded "vaillant/15.ctlv3.csv"
 address 76: slave #9, scanned "MF=Vaillant;ID=VWZIO;SW=0500;HW=0504", loaded "vaillant/76.vwzio.csv"
 ```
-Wichtig ist das Wort **loaded**: Nur für diese Geräte hat ebusd eine Konfiguration, und nur sie liefern Werte. Der Name der geladenen Datei ergibt den Schaltkreis für die Symcon-Instanz (`vaillant/15.ctlv3.csv` → `ctlv3`). Für jeden Schaltkreis wird eine eigene Instanz angelegt.
+Wichtig ist das Wort **loaded**: Nur für diese Geräte hat ebusd eine Konfiguration, und nur sie liefern Werte. Der Name der geladenen Datei ergibt den Schaltkreis für die Symcon-Instanz (`vaillant/15.ctlv3.csv` → `ctlv3`). Dateien für eine bestimmte Hardware wie `vaillant/08.hmu.HW5103.csv` ergeben ebenfalls nur `hmu`. Für jeden Schaltkreis wird eine eigene Instanz angelegt.
+
+Daneben führt ebusd die gemeinsamen Schaltkreise `Broadcast` (Rundsendungen, etwa Datum und Außentemperatur vom Regler) und `scan.xx` bzw. `Scan.xx` (Typenschilddaten je Gerät). Für sie braucht es keine Instanz, „Ermittle Schaltkreis Namen“ bietet sie nicht an.
 
 Steht bei einem Gerät nur **scanned**, kennt ebusd es nicht. Im Log steht dann z. B.
 ```text
@@ -134,13 +136,14 @@ Das betrifft vor allem neue Gerätegenerationen, etwa Wärmepumpen mit der Kennu
 Über den scan-Befehl (z. B. `ebusctl scan 15`) lässt sich zusätzlich die Produkt-ID des Gerätes anzeigen.
 
 ## 5. Mit ebusctl Daten lesen und schreiben
-An dieser Stelle lohnt ein Blick in die Konfigurationsdatei. Sie findet sich unter https://github.com/john30/ebusd-configuration/tree/master/ebusd-2.1.x/de/vaillant
+An dieser Stelle lohnt ein Blick in die Konfigurationsdatei. Die aktuellen Dateien finden sich unter https://github.com/eBUS/ebus.github.io/tree/main/de/vaillant (die früheren unter `ebusd-2.1.x` im Projekt ebusd-configuration sind nur noch archiviert).
 
-Darin steht z. B. der Eintrag zur Heizkurve des ersten Heizkreises:
+Darin stehen z. B. die Einträge zur Heizkurve des ersten Heizkreises in `15.700.csv`:
 ```text
-r;w,,Hc1HeatCurve,HeatCurve Heizkreis 1,,,,0F00,,,EXP,,,heating curve of Hc1
+r,,,Hc1HeatCurve,Heizkurve Heizkreis 1,,,b524,020002000f00,ign,,IGN:4,,,,value,,EXP,,,heating curve of Hc1
+w,,,Hc1HeatCurve,Heizkurve Heizkreis 1,,,b524,020102000f00,value,,EXP,,,heating curve of Hc1
 ```
-Die wichtigsten Informationen daraus: r = lesbar, w = schreibbar, Hc1HeatCurve = Name des Parameters.
+Die wichtigsten Informationen daraus: `r` = lesbar, `w` = schreibbar (je eine Zeile), `Hc1HeatCurve` = Name der Meldung.
 
 Damit lassen sich die Daten über ebusctl lesen und schreiben:
 ```text
@@ -173,22 +176,13 @@ Es sollten die Daten der erkannten Geräte kommen:
     "name": "AdaptHeatCurve",
     "passive": false,
     "write": false,
-    "lastup": 1646136520,
+    "lastup": 1793105347,
     "zz": 21,
     "fields": {
-     "yesno": {"value": "nein"}
-    }
-   },
-   "BankHolidayEndPeriod": {
-    "name": "BankHolidayEndPeriod",
-    "passive": false,
-    "write": false,
-    "lastup": 1643318788,
-    "zz": 21,
-    "fields": {
-     "hto": {"value": "01.01.2015"}
+     "value": {"value": "no"}
     }
    }, ...
 ```
+Meldungen ohne `fields` und mit `"lastup": 0` hat ebusd noch nicht gelesen. Die Texte der Werte (`no`, `yes`, `heating` …) sind in der Standardkonfiguration englisch, auch in der deutschen Fassung.
 
 Damit ist ebusd fertig eingerichtet; weiter geht es in Symcon mit der [Konfiguration der Instanz](../../README.md#4-konfiguration).

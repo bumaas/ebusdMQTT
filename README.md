@@ -1,5 +1,5 @@
 [![Version](https://img.shields.io/badge/Symcon-PHPModul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-![Version](https://img.shields.io/badge/Symcon%20Version-5.3%20%3E-blue.svg)
+![Version](https://img.shields.io/badge/Symcon%20Version-8.1%20%3E-blue.svg)
 [![Donate](https://img.shields.io/badge/Donate-Paypal-009cde.svg)](https://www.paypal.me/bumaas)
 [![Checks](https://github.com/bumaas/ebusdMQTT/actions/workflows/check.yml/badge.svg)](https://github.com/bumaas/ebusdMQTT/actions/workflows/check.yml)
 
@@ -31,9 +31,9 @@ Die Anbindung erfolgt über den Kommunikationsdienst **ebusd** in Verbindung mit
 ## 2. Voraussetzungen
 
 * Hardware Adapter zur Verbindung mit dem eBUS
-* lauffähiger eBUS Daemon (ebusd (ab V3.4)) mit entsprechender Hardwareanbindung (siehe auch [Installationskurzanleitung ebusd](docs/de/InstallEbusdREADME.md))
-* mindestens IPS Version 5.3
-* MQTT Server (IPS built-in Modul) 
+* lauffähiger eBUS Daemon (ebusd) mit MQTT-Unterstützung und entsprechender Hardwareanbindung (siehe auch [Installationskurzanleitung ebusd](docs/de/InstallEbusdREADME.md)), erprobt mit ebusd 23.3 und 26.1
+* mindestens Symcon 8.1
+* MQTT Server (in Symcon enthalten)
 
 
 ## 3. Installation
@@ -61,7 +61,7 @@ Adresse unter der der ebusd Dienst erreichbar ist. Hierbei kann es sich um eine 
 Portnummer auf dem der ebusd Dienst http-Anfragen entgegennimmt.
 
 - Schaltkreis Name:<br>
-Der Name des Schaltkreises, unter dem das Gerät in ebusd geführt wird ('Circuit'), z. B. `bai` (Gasheizung), `700` (Regler VRC700), `hmu` (Wärmepumpe) oder `ctlv3` (Regler sensoCOMFORT). Der Button „Ermittle Schaltkreis Namen“ fragt die eingetragene Adresse ab und bietet die Schaltkreise zur Auswahl an. Werte liefern nur Schaltkreise, für die ebusd eine Konfiguration geladen hat: In `ebusctl i` steht bei ihnen „loaded“, nicht nur „scanned“ (siehe [Installationskurzanleitung, Gefundene Geräte](docs/de/InstallEbusdREADME.md#gefundene-geräte)). Neuere Geräte kennt ebusd mitunter noch nicht; dann gibt es für sie keine Werte.
+Der Name des Schaltkreises, unter dem das Gerät in ebusd geführt wird ('Circuit'), z. B. `bai` (Gasheizung), `700` (Regler VRC700), `hmu` (Wärmepumpe) oder `ctlv3` (Regler sensoCOMFORT). Der Button „Ermittle Schaltkreis Namen“ fragt die eingetragene Adresse ab und bietet die Schaltkreise zur Auswahl an. Werte liefern nur Schaltkreise, für die ebusd eine Konfiguration geladen hat: In `ebusctl i` steht bei ihnen „loaded“, nicht nur „scanned“ (siehe [Installationskurzanleitung, Gefundene Geräte](docs/de/InstallEbusdREADME.md#gefundene-geräte)). Neuere Geräte kennt ebusd mitunter noch nicht; dann gibt es für sie keine Werte. Die gemeinsamen Schaltkreise `Broadcast`, `global` und `scan.xx` bzw. `Scan.xx` (Rundsendungen und Typenschilddaten) bietet die Liste nicht an.
 
 - Aktualisierungsintervall:<br>
 Intervall in Minuten, in dem alle Statusvariablen durch Anfragen an den eBUS aktualisiert werden (0 = keine Aktualisierung, negative Werte sind unzulässig). Je nach Anzahl der Statusvariablen kann die Abfrage den eBUS erheblich belasten. Das Intervall sollte nicht zu klein gewählt werden.
@@ -105,6 +105,12 @@ Jeder Wechsel in eine Störung steht einmal als Warnung mit Ursache und nächste
 Bei Bedarf kann für eine Statusvariable eine Poll Priorität angegeben werden, die von ebusd verwendet werden soll. Die Poll Prioriät besagt, in welchem Intervallzyklus eine Meldung von ebusd gepollt werden soll.
 Meldungen mit Priorität 1 werden in jedem Pollzyklus abgefragt, Meldungen mit Priorität 2 werden in jedem zweiten Zyklus abgefragt usw.. Die Pollpriorität kann gesetzt werden, wenn das Abfrageintervall, das im Minutenbereich liegt, für einzelne Meldungen nicht fein genug ist.
 
+### Wechsel der ebusd-Konfiguration
+
+Seit ebusd 24.1 lädt `--scanconfig` die Standardkonfiguration von [ebus.github.io](https://github.com/eBUS/ebus.github.io). Darin heißen viele Meldungen anders als in der früheren Konfiguration. Beim Regler ändert sich meist nur die Schreibweise (`z1DayTemp` wird `Z1DayTemp`, `hwcTimer.Monday` wird `HwcTimer_Monday`), bei der Wärmepumpe liest ebusd viele Werte über andere Meldungen. Nach „Lese Konfiguration aus“ sind die neuen Meldungen noch nicht aktiv, und wer sie aktiviert, bekommt neue Variablen. Die alten bleiben mit ihrem Archiv stehen, bekommen aber keine Werte mehr. Der Selbsttest nennt sie unter „Variablen ohne Meldung“.
+
+Wer die Archive weiterführen will, gibt den alten Variablen vor dem Aktivieren den Ident der neuen Meldung (`IPS_SetIdent`). Das Modul übernimmt die Variable dann samt Archiv, Name und eigener Darstellung. Den Ident einer Meldung zeigt `EBM_FindMessages`. Ändert sich dabei der Typ, etwa von ganzzahlig auf Kommazahl, darf man nicht umbenennen: Das Modul löscht eine Variable mit falschem Typ und legt sie neu an, ihr Archiv ist dann nicht mehr erreichbar. In diesem Fall die neue Meldung unter ihrem eigenen Ident aktivieren und das Archiv der alten Variable mit `AC_ChangeVariableID` übertragen, bevor die neue selbst archiviert wird.
+
 ### Fehlersuche
 
 Die Stationen der Reihe nach, vom Bus bis zur Variable:
@@ -124,24 +130,24 @@ Den aktuellen Stand fasst der Selbsttest zusammen (`EBM_RunSelfTest`, siehe [Fun
 
 ## 5. Einbindung ins Webfront
 Alle Statusvariablen sind für eine Anzeige und (sofern vom ebusd ein Schreiben unterstützt wird) zum Ändern im Webfront vorbereitet. Sie haben alle eine Darstellung, die der ebusd Definition entspricht.
-Zur Verwendung in der Visu sollten sie jedoch überprüft werden. ebusd liefert keine fachlichen Grenzen, nur den technischen Bereich des eBUS-Datentyps. Schreibbare Zahlen bekommen deshalb nur dann einen Schieberegler, wenn dieser Bereich überschaubar ist (höchstens 1000 Schritte, z. B. 0 bis 100 %); sonst – etwa bei Temperaturen im Typ EXP mit ±3·10³⁸ – ein Eingabefeld mit Einheit. Wer einen Schieberegler mit anlagenspezifischen Grenzen möchte, legt dafür eine eigene Darstellung an; das Modul überschreibt sie nicht.
+Zur Verwendung in der Visu sollten sie jedoch überprüft werden. ebusd liefert keine fachlichen Grenzen, nur den technischen Bereich des eBUS-Datentyps. Schreibbare Zahlen bekommen deshalb nur dann einen Schieberegler, wenn dieser Bereich überschaubar ist (höchstens 1000 Schritte, z. B. 0 bis 100 %). Sonst gibt es ein Eingabefeld mit Einheit, etwa bei Temperaturen im Typ EXP mit ±3·10³⁸. Wer einen Schieberegler mit anlagenspezifischen Grenzen möchte, legt dafür eine eigene Darstellung an; das Modul überschreibt sie nicht.
 
-Der Selbsttest (`EBM_RunSelfTest`) nennt außerdem Variablen, zu denen es in der ebusd-Konfiguration keine Meldung mehr gibt (vermutlich veraltet), und gleich benannte Variablen – ebusd beschreibt manche Werte in zwei Meldungen gleich. Das Modul benennt dabei nichts um und löscht nichts.
+Der Selbsttest (`EBM_RunSelfTest`) nennt außerdem Variablen, zu denen es in der ebusd-Konfiguration keine Meldung mehr gibt (vermutlich veraltet), und gleich benannte Variablen, denn ebusd beschreibt manche Werte in zwei Meldungen gleich. Das Modul benennt dabei nichts um und löscht nichts.
 
 Besonderheit:
 
 Schreibbare Mehrfachfelder können nicht direkt aus der Visu heraus geändert werden. Sie lassen sich aber über EBM_publish schreiben.
 
-Beispiel:
+Beispiel (Meldungsname wie in der Konfiguration von ebusd, in der früheren Konfiguration `hwcTimer.Monday`):
 ```php
-EBM_publish(47111, 'ebusd/700/hwctimer.monday/set', '07:00;22:00;00:00;00:00;00:00;00:00');
+EBM_publish(47111, 'ebusd/700/HwcTimer_Monday/set', '07:00;22:00;00:00;00:00;00:00;00:00');
 ```
  
 
 ## 6. Schreiben von Werten
 Sofern die Statusvariablen ein Schreiben zulassen, können die Werte direkt über das Webfront oder per Skript über [RequestAction](https://www.symcon.de/service/dokumentation/befehlsreferenz/variablenzugriff/requestaction/) verändert werden.
 
-Schaltbar sind nur Variablen, deren Meldung ebusd schreiben lässt und die aus einem einzigen Feld besteht. Ein Schreibwunsch wird vor dem Senden geprüft und sonst mit einer Fehlermeldung abgelehnt, die Grund und nächsten Schritt nennt — es wird dann nichts auf den eBUS geschickt:
+Schaltbar sind nur Variablen, deren Meldung ebusd schreiben lässt und die aus einem einzigen Feld besteht. Ein Schreibwunsch wird vor dem Senden geprüft und sonst mit einer Fehlermeldung abgelehnt, die Grund und nächsten Schritt nennt. Auf den eBUS geht dann nichts. Abgelehnt werden:
 
 - Wert außerhalb der Wertetabelle oder des Wertebereichs (die erlaubten Werte stehen in der Meldung),
 - nur lesbare Meldung,
@@ -161,7 +167,7 @@ Prüft ohne jede Wirkung auf die Instanz, ob alles funktioniert: MQTT Server akt
 ```php
 EBM_FindMessages(int $InstanceID, string $search): string
 ```
-Liefert die Meldungen des Schaltkreises als JSON – dieselbe Information wie die Liste im Formular: Meldung, lesbar, schreibbar, aktiv, Poll-Priorität und je Feld Ident, Bezeichnung, Typ, Einheit, erlaubte Werte (`values`) bzw. Bereich (`min`/`max`, nur wo er sinnvoll ist) und die ID der Variable, falls sie schon angelegt ist. `$search` filtert nach Meldungsname oder Bezeichnung (Groß-/Kleinschreibung egal), `''` liefert alle.
+Liefert die Meldungen des Schaltkreises als JSON, also dieselbe Information wie die Liste im Formular: Meldung, lesbar, schreibbar, aktiv, Poll-Priorität und je Feld Ident, Bezeichnung, Typ, Einheit, erlaubte Werte (`values`) bzw. Bereich (`min`/`max`, nur wo er sinnvoll ist) und die ID der Variable, falls sie schon angelegt ist. `$search` filtert nach Meldungsname oder Bezeichnung (Groß-/Kleinschreibung egal), `''` liefert alle.
 
 ```php
 EBM_UpdateConfiguration(int $InstanceID): string
@@ -171,7 +177,7 @@ Liest die Konfiguration des Schaltkreises von ebusd und speichert sie (wie der K
 ```php
 EBM_SetMessageActive(int $InstanceID, string $messageName, bool $active, int $pollPriority): string
 ```
-Bindet eine Meldung ein (`true`: Variablen anlegen, Auswahl speichern, aktuellen Wert gleich bei ebusd anfordern) oder aus (`false`) – wie das Häkchen „Aktiv“ plus „Variablen anlegen/aktualisieren“. Ausgeschaltet bleiben die Variablen samt Archivdaten erhalten; das Modul fragt sie nur nicht mehr ab. `$pollPriority` 0 bis 9 (0 = keine eigene Poll-Priorität) wird an ebusd gesendet, wenn sie sich ändert.
+Bindet eine Meldung ein (`true`: Variablen anlegen, Auswahl speichern, aktuellen Wert gleich bei ebusd anfordern) oder aus (`false`), wie das Häkchen „Aktiv“ plus „Variablen anlegen/aktualisieren“. Ausgeschaltet bleiben die Variablen samt Archivdaten erhalten; das Modul fragt sie nur nicht mehr ab. `$pollPriority` 0 bis 9 (0 = keine eigene Poll-Priorität) wird an ebusd gesendet, wenn sie sich ändert.
 
 ```php
 EBM_ReadMessageValues(int $InstanceID, string $search): string
